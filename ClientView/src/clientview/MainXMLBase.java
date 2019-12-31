@@ -188,7 +188,8 @@ public class MainXMLBase extends BorderPane {
                 todoName.setGraphic(imgView);
                 todoName.paddingProperty();
                 todoName.setPadding(new Insets(15));
-                
+                todoName.setPrefSize(200,200);
+                todoName.setStyle("-fx-background-color:POWDERBLUE");
                 jFXMasonryPane.getChildren().add(todoName);
                // temp.getChildren().add(todoName);
           //      listViewTodos.getItems().add(todoName);  
