@@ -19,12 +19,12 @@ public class ClientView extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-       // Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("loginXML.fxml"));
         String [] name= {"Ebrahim 1","Manar 2","yehia 3"};
-        MainXMLBase root =new MainXMLBase(name);
+       // MainXMLBase root =new MainXMLBase(name);
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

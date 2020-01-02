@@ -1,0 +1,6 @@
+class name
+function name
+Object  parsedObject
+
+
+String getJSon()
