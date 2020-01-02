@@ -21,4 +21,17 @@ public class Validation {
         System.out.println(email +" : "+ matcher.matches());
         return matcher.matches();
     }
+    public static boolean checkString(String str){
+        if(!str.isEmpty() && !str.equals("")){
+            return true;
+        }
+        return false;
+    }
+    public static boolean checkUsernameRegex(String username){
+        String regex = "[a-zA-Z0-9\\._\\-]{3,}"; 
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(username);
+        System.out.println(username +" : "+ matcher.matches());
+        return matcher.matches();
+    }
 }

@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="637.0" prefWidth="692.0" style="-fx-background-color: #c38d9e #c38d9e #c38d9e;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="clientview.RegisterXMLController">
+<AnchorPane id="AnchorPane" prefHeight="637.0" prefWidth="692.0" style="-fx-background-color: #c38d9e #c38d9e #c38d9e;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.RegisterXMLController">
    <children>
       <AnchorPane layoutX="69.0" layoutY="63.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="534.0" prefWidth="555.0" style="-fx-background-color: #97CAEF;">
          <children>
@@ -24,17 +23,17 @@
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </JFXTextField>
-            <JFXButton buttonType="RAISED" layoutX="68.0" layoutY="395.0" prefHeight="45.0" prefWidth="425.0" ripplerFill="#c38d9e" style="-fx-background-color: #c38d9e;" text="Sign Up">
+            <JFXButton fx:id="signUpButton" buttonType="RAISED" layoutX="68.0" layoutY="395.0" onAction="#signUpAction" prefHeight="45.0" prefWidth="425.0" ripplerFill="#c38d9e" style="-fx-background-color: #c38d9e;" text="Sign Up">
                <font>
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </JFXButton>
-            <ImageView fitHeight="85.0" fitWidth="90.0" layoutX="449.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="85.0" fitWidth="90.0" layoutX="456.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/signup.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="138.0" fitWidth="182.0" layoutX="190.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="138.0" fitWidth="182.0" layoutX="202.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/todo.jpg" />
                </image>

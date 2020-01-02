@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import Model.RequestCreator;
 import Model.Validation;
+import com.jfoenix.controls.JFXButton;
+import javafx.event.ActionEvent;
 
 /**
  * FXML Controller class
@@ -26,6 +28,10 @@ public class LoginXMLController implements Initializable {
     JFXTextField userNameTextField; 
     @FXML
     JFXPasswordField passwordPasswordField;
+    @FXML
+    private JFXButton loginButton;
+    @FXML
+    private JFXButton signUpButton;
     /**
      * Initializes the controller class.
      */
@@ -33,16 +39,23 @@ public class LoginXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    @FXML
     public void loginAction(){
-        if(!userNameTextField.getText().isEmpty() && !passwordPasswordField.getText().isEmpty()){
-            if(Validation.checkEmailRegex(userNameTextField.getText())){
+        if(Validation.checkString(userNameTextField.getText()) && Validation.checkString(passwordPasswordField.getText())){
+            if(Validation.checkUsernameRegex(userNameTextField.getText())){
                 UserEntity loginUser= new UserEntity();
                 loginUser.setUsername(userNameTextField.getText());
                 loginUser.setPassword(passwordPasswordField.getText());
+                loginUser.setOnlineFlag(1);
                 RequestCreator newRequest = new RequestCreator("UserDBOperations","login",loginUser);
                 String newRequestJson= newRequest.getJsonObject();
                 System.out.println(newRequestJson);
             }            
         }
+    }
+
+    @FXML
+    private void signUpAction(ActionEvent event) {
+        
     }
 }

@@ -55,8 +55,7 @@ public class RequestCreator {
     }
     
     public String getJsonObject(){
-        Gson json = new Gson();
-        return json.toJson(this);
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
-
 }
