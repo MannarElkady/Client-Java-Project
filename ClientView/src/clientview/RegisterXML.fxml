@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="637.0" prefWidth="692.0" style="-fx-background-color: #c38d9e #c38d9e #c38d9e;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="clientview.RegisterXMLController">
+   <children>
+      <AnchorPane layoutX="69.0" layoutY="63.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="534.0" prefWidth="555.0" style="-fx-background-color: #97CAEF;">
+         <children>
+            <JFXTextField fx:id="emailTextField" layoutX="189.0" layoutY="211.0" prefHeight="34.0" prefWidth="302.0" promptText="Your Email">
+               <font>
+                  <Font name="Times New Roman" size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="usernameTextField" layoutX="189.0" layoutY="267.0" prefHeight="34.0" prefWidth="302.0" promptText="Your Username">
+               <font>
+                  <Font name="Times New Roman" size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXButton buttonType="RAISED" layoutX="68.0" layoutY="395.0" prefHeight="45.0" prefWidth="425.0" ripplerFill="#c38d9e" style="-fx-background-color: #c38d9e;" text="Sign Up">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="85.0" fitWidth="90.0" layoutX="449.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/signup.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="138.0" fitWidth="182.0" layoutX="190.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/todo.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="68.0" layoutY="219.0" prefHeight="34.0" prefWidth="85.0" text="Email">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="68.0" layoutY="277.0" prefHeight="34.0" prefWidth="85.0" text="Username">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="68.0" layoutY="331.0" prefHeight="34.0" prefWidth="85.0" text="Password">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font>
+            </Label>
+            <JFXPasswordField fx:id="passwordPasswordField" layoutX="189.0" layoutY="331.0" prefHeight="34.0" prefWidth="302.0" promptText="Your Password">
+               <font>
+                  <Font name="Times New Roman" size="14.0" />
+               </font>
+            </JFXPasswordField>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

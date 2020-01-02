@@ -5,13 +5,15 @@
  */
 package Model;
 
+import com.google.gson.Gson;
+
 /**
  *
  * @author DELL
  */
 public class RequestCreator {
-    private String operation;
     private String className;
+    private String operation;
     private Object entity;
     
     
@@ -21,7 +23,7 @@ public class RequestCreator {
         this.entity = null;
     }
     
-    public RequestCreator(String operation, String className, Object entity) {
+    public RequestCreator(String className ,String operation, Object entity) {
         this.operation = operation;
         this.className = className;
         this.entity = entity;
@@ -50,6 +52,11 @@ public class RequestCreator {
 
     public void setEntity(Object entity) {
         this.entity = entity;
+    }
+    
+    public String getJsonObject(){
+        Gson json = new Gson();
+        return json.toJson(this);
     }
 
 }

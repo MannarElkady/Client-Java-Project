@@ -5,11 +5,13 @@
  */
 package clientview;
 
+import Model.RequestCreator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import Model.entities.UserEntity;
 
 /**
  *
@@ -19,7 +21,7 @@ public class ClientView extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("loginXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("RegisterXML.fxml"));
         String [] name= {"Ebrahim 1","Manar 2","yehia 3"};
        // MainXMLBase root =new MainXMLBase(name);
         Scene scene = new Scene(root);
@@ -33,6 +35,7 @@ public class ClientView extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        
     }
     
 }

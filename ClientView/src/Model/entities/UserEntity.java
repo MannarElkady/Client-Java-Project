@@ -1,4 +1,4 @@
-package todolistserver.model.entities;
+package Model.entities;
 
 public class UserEntity {
     

@@ -1,4 +1,4 @@
-package todolistserver.model.entities;
+package entities;
 
 /**
  * @author Ibrahim
