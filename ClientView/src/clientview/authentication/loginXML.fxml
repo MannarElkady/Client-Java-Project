@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="700.0" style="-fx-background-color: #97CAEF;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.LoginXMLController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="700.0" style="-fx-background-color: #97CAEF;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.authentication.LoginXMLController">
     <stylesheets>
         <URL value="@loginxml.css" />
     </stylesheets>
@@ -43,13 +43,13 @@
             </JFXButton>
             <ImageView fitHeight="91.0" fitWidth="130.0" layoutX="29.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@resources/todo.jpg" />
+                  <Image url="@../resources/todo.jpg" />
                </image>
             </ImageView>
          </children></AnchorPane>
       <ImageView fitHeight="181.0" fitWidth="283.0" layoutX="14.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@login.jpg" />
+            <Image url="@../resources/login.jpg" />
          </image>
          <viewport>
             <Rectangle2D />
