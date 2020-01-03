@@ -28,7 +28,7 @@ public class Validation {
         return false;
     }
     public static boolean checkUsernameRegex(String username){
-        String regex = "[a-zA-Z0-9\\._\\-]{3,}"; 
+        String regex = "[a-zA-Z0-9\\._\\-]{5,}"; 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(username);
         System.out.println(username +" : "+ matcher.matches());
