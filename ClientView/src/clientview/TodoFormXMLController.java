@@ -22,6 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * FXML Controller class
@@ -86,8 +88,10 @@ public class TodoFormXMLController implements Initializable {
                     newItemEntity.setDescription(childText.getText());
                     Label newItem = new Label(childText.getText());
                     newItem.setPadding(new Insets(20,20,20,20));
+                    newItem.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
                     newBorder.setCenter(newItem);    
                     flagPressed= false;
+                    newBorder.setRight(null);
                     RequestCreator newRequest = new RequestCreator("ItemDBOperations","addItem",newItemEntity);
                     String newRequestJson= newRequest.getJsonObject();
                     System.out.println(newRequestJson);
