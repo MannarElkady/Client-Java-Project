@@ -37,7 +37,7 @@ public class SocketConnection extends Thread {
         th.start();
 
     }
-    public void closeSocketConnection() throws IOException{
+    public void closeSocketConnection() throws IOException{       
         printStream.close();
         dataInputStream.close();
         socket.close();
@@ -74,8 +74,7 @@ public class SocketConnection extends Thread {
 
             }
         } catch (IOException e) {
-            serverClosed = true;
-            e.printStackTrace();
+            serverClosed = true;            
 
         }
     }

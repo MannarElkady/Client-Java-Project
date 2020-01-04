@@ -6,7 +6,7 @@
 package clientview;
 
 import Model.RequestCreator;
-import Model.Validation;
+import Utility.Validation;
 import Model.entities.ItemEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;

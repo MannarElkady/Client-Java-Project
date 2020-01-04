@@ -35,12 +35,7 @@ public class ClientView extends Application {
      //   stage.setResizable(false);
         stage.show();
         
-          stage.setOnCloseRequest((WindowEvent event) -> {   
-            try {
-                object.closeSocketConnection();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+          stage.setOnCloseRequest((WindowEvent event) -> {              
             Platform.exit();
             System.exit(0);
         });
