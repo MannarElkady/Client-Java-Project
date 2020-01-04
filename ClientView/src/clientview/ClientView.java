@@ -33,18 +33,23 @@ public class ClientView extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
         String [] name= {"Ebrahim 1","Manar 2","yehia 3"};
-        MainXMLBase root =new MainXMLBase(name);
+        //MainXMLBase root =new MainXMLBase(name);
         Scene scene = new Scene(root);
         stage.setScene(scene);
      //   stage.setResizable(false);
         stage.show();
         
-          stage.setOnCloseRequest((WindowEvent event) -> {              
+          stage.setOnCloseRequest((WindowEvent event) -> { 
+            try {
+                SocketConnection.getInstance().closeSocketConnection();
+            } catch (IOException ex) {
+                Logger.getLogger(ClientView.class.getName()).log(Level.SEVERE, null, ex);
+            }
             Platform.exit();
             System.exit(0);
         });
-        
-      object= new SocketConnection();
+        SocketConnection.getInstance();
+      
     }
 
     /**

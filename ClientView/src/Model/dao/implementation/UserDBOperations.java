@@ -28,7 +28,7 @@ public class UserDBOperations {
         user.setUsername(username);
         user.setPassword(password);
         RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "login", user);
-        SocketConnection.getPrintStreamInstance().println(GsonParser.parseToJson(request));        
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));        
     }
 
     public void loginResponse(Object object){
