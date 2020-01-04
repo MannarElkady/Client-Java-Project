@@ -6,7 +6,7 @@
 package clientview;
 
 import Model.RequestCreator;
-import Model.Validation;
+import Utility.Validation;
 import Model.entities.ItemEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -58,12 +58,12 @@ public class TodoFormXMLController implements Initializable {
     }    
 
     @FXML
-    private void addFriendAction(ActionEvent event) {
+    private void addFriendAction() {
     }
 
     
     @FXML
-    private void addItemAction(ActionEvent event) {
+    private void addItemAction() {
         
         if(!flagPressed){
             flagPressed = true;
