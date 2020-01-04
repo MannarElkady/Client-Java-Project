@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientview;
+package clientview.authentication;
 
 import Model.RequestCreator;
-import Model.Validation;
+import Utility.Validation;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;

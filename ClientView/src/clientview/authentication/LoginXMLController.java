@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientview;
+package clientview.authentication;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -13,8 +13,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import Model.RequestCreator;
-import Model.Validation;
+import Model.dao.implementation.UserDBOperations;
+import Utility.Validation;
 import com.jfoenix.controls.JFXButton;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 
 /**
@@ -40,16 +42,18 @@ public class LoginXMLController implements Initializable {
         // TODO
     }    
     @FXML
-    public void loginAction(){
-        if(Validation.checkString(userNameTextField.getText()) && Validation.checkString(passwordPasswordField.getText())){
-            if(Validation.checkUsernameRegex(userNameTextField.getText())){
-                UserEntity loginUser= new UserEntity();
+    public void loginAction() {
+        String username=userNameTextField.getText(),password=passwordPasswordField.getText();
+        if(Validation.checkString(username) && Validation.checkString(password)){
+            if(Validation.checkUsernameRegex(username)){
+               /* UserEntity loginUser= new UserEntity();
                 loginUser.setUsername(userNameTextField.getText());
                 loginUser.setPassword(passwordPasswordField.getText());
                 loginUser.setOnlineFlag(1);
                 RequestCreator newRequest = new RequestCreator("UserDBOperations","login",loginUser);
                 String newRequestJson= newRequest.getJsonObject();
-                System.out.println(newRequestJson);
+                System.out.println(newRequestJson);*/
+                UserDBOperations.login(username, password);
             }            
         }
     }
