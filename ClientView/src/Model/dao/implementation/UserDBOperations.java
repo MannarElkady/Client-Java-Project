@@ -9,11 +9,6 @@ import Model.GsonParser;
 import Model.RequestEntity;
 import Model.SocketConnection;
 import Model.entities.UserEntity;
-import com.google.gson.Gson;
-import java.sql.DriverManager;
-import java.util.ArrayList;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  *
