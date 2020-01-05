@@ -5,45 +5,44 @@
  */
 package clientview;
 
-
-import Model.RequestCreator;
 import Model.SocketConnection;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import Model.entities.UserEntity;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.stage.WindowEvent;
 
-
 /**
  *
  * @author DELL
  */
 public class ClientView extends Application {
+
     SocketConnection object;
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
-      //  MainXMLBase root =new MainXMLBase(name);
         Scene scene = new Scene(root);
         stage.setScene(scene);
-     //   stage.setResizable(false);
+        //   stage.setResizable(false);
         stage.show();
-        
-          stage.setOnCloseRequest((WindowEvent event) -> {              
+
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            try {
+                SocketConnection.getInstance().closeSocketConnection();
+            } catch (IOException ex) {
+                Logger.getLogger(ClientView.class.getName()).log(Level.SEVERE, null, ex);
+            }
             Platform.exit();
             System.exit(0);
         });
-        
-      object= new SocketConnection();
+        SocketConnection.getInstance();
     }
 
     /**
@@ -51,7 +50,7 @@ public class ClientView extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-        
+
     }
-    
+
 }

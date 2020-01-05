@@ -58,12 +58,12 @@ public class TodoFormXMLController implements Initializable {
     }    
 
     @FXML
-    private void addFriendAction(ActionEvent event) {
+    private void addFriendAction() {
     }
 
     
     @FXML
-    private void addItemAction(ActionEvent event) {
+    private void addItemAction() {
         
         if(!flagPressed){
             flagPressed = true;

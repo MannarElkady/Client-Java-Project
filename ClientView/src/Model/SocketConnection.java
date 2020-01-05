@@ -15,14 +15,15 @@ import java.net.Socket;
  * @author dell
  */
 public class SocketConnection extends Thread {
-
+    
+    private static SocketConnection instance = null;
     private Socket socket;
-    private static PrintStream printStream;
-    boolean serverClosed = false;
+    private PrintStream printStream;
+    private boolean serverClosed = false;
     DataInputStream dataInputStream;
     Thread th;
 
-    public SocketConnection() {
+    private SocketConnection() {
 
         try {
 
@@ -37,13 +38,28 @@ public class SocketConnection extends Thread {
         th.start();
 
     }
+
+    public boolean isServerClosed() {
+        return serverClosed;
+    }
+    
+    public static SocketConnection getInstance(){
+        if(instance == null){
+            synchronized(SocketConnection.class){
+                if(instance == null){
+                    instance = new SocketConnection();
+                }
+            }
+        }
+        return instance;
+    }
     public void closeSocketConnection() throws IOException{       
         printStream.close();
         dataInputStream.close();
         socket.close();
     }
 
-    public static PrintStream getPrintStreamInstance() {
+    public PrintStream getPrintStreamInstance() {
         return printStream;
     }
 
@@ -71,6 +87,7 @@ public class SocketConnection extends Thread {
                         Handler.handle(replyMsg);
                     }
                 }
+               
 
             }
         } catch (IOException e) {

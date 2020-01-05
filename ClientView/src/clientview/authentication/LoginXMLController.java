@@ -13,11 +13,13 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import Model.RequestCreator;
+import Model.SocketConnection;
 import Model.dao.implementation.UserDBOperations;
 import Utility.Validation;
 import com.jfoenix.controls.JFXButton;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 
 /**
  * FXML Controller class
@@ -27,39 +29,50 @@ import javafx.event.ActionEvent;
 public class LoginXMLController implements Initializable {
 
     @FXML
-    JFXTextField userNameTextField; 
+    JFXTextField userNameTextField;
     @FXML
     JFXPasswordField passwordPasswordField;
     @FXML
     private JFXButton loginButton;
     @FXML
     private JFXButton signUpButton;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+
     @FXML
     public void loginAction() {
-        String username=userNameTextField.getText(),password=passwordPasswordField.getText();
-        if(Validation.checkString(username) && Validation.checkString(password)){
-            if(Validation.checkUsernameRegex(username)){
-               /* UserEntity loginUser= new UserEntity();
+        if (!SocketConnection.getInstance().isServerClosed()) {
+            String username = userNameTextField.getText(), password = passwordPasswordField.getText();
+            if (Validation.checkString(username) && Validation.checkString(password)) {
+                if (Validation.checkUsernameRegex(username)) {
+                    /* UserEntity loginUser= new UserEntity();
                 loginUser.setUsername(userNameTextField.getText());
                 loginUser.setPassword(passwordPasswordField.getText());
                 loginUser.setOnlineFlag(1);
                 RequestCreator newRequest = new RequestCreator("UserDBOperations","login",loginUser);
                 String newRequestJson= newRequest.getJsonObject();
                 System.out.println(newRequestJson);*/
-                UserDBOperations.login(username, password);
-            }            
+                    UserDBOperations.login(username, password);
+                }
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ERROR");
+            alert.setHeaderText(null);
+            alert.setContentText("The  server is closed!");
+            alert.showAndWait();
         }
     }
 
     @FXML
     private void signUpAction(ActionEvent event) {
-        
+
     }
 }
