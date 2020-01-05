@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXScrollPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -30,7 +32,7 @@
          <children>
             <JFXButton fx:id="addItem" buttonType="RAISED" onAction="#addItemAction" text="   " GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="addNewItem" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@resources/add.png" />
                      </image>
@@ -48,7 +50,7 @@
                </image></ImageView>
             <JFXButton fx:id="addFriend" buttonType="RAISED" onAction="#addFriendAction" text="  " GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="addNewFriend" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@resources/addFriend.png" />
                      </image>
@@ -62,9 +64,17 @@
       </GridPane>
    </top>
    <center>
-      <VBox fx:id="vBoxPane" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #97CAEF;" BorderPane.alignment="CENTER">
-         <children>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" />
-         </children></VBox>
+      <VBox fx:id="vBoxPane" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #97CAEF;" BorderPane.alignment="CENTER" />
    </center>
+   <left>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <JFXScrollPane BorderPane.alignment="CENTER">
+               <children>
+                  <JFXListView fx:id="collaboratorsList" />
+               </children>
+            </JFXScrollPane>
+         </center>
+      </BorderPane>
+   </left>
 </BorderPane>

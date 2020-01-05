@@ -53,7 +53,8 @@ public class SocketConnection extends Thread {
         }
         return instance;
     }
-    public void closeSocketConnection() throws IOException{       
+    public void closeSocketConnection() throws IOException{   
+        printStream.println("clientClosed");
         printStream.close();
         dataInputStream.close();
         socket.close();

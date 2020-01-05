@@ -9,11 +9,7 @@ import Model.GsonParser;
 import Model.RequestEntity;
 import Model.SocketConnection;
 import Model.entities.UserEntity;
-import com.google.gson.Gson;
-import java.sql.DriverManager;
 import java.util.ArrayList;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  *
@@ -21,17 +17,28 @@ import java.sql.SQLException;
  */
 public class UserDBOperations {
 
-    public static void login(String username, String password) {
+
+    public static void login(String  username,String password) {
 
         UserEntity user = new UserEntity();
+        ArrayList<UserEntity> users = new ArrayList<>();
         user.setUsername(username);
         user.setPassword(password);
+
         RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "login", user);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
     }
 
     public void loginResponse(Object object) {
         if (object == null) {
+
+        users.add(user);
+        RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "login", users);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));        
+    }
+
+    public void loginResponse(ArrayList<Object> object){
+        if(object == null){
             System.out.println("login failed");
         } else {
             System.out.println("login success");

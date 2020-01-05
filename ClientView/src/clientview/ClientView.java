@@ -5,41 +5,41 @@
  */
 package clientview;
 
-
-import Model.RequestCreator;
 import Model.SocketConnection;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import Model.entities.UserEntity;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.stage.WindowEvent;
 
-
 /**
  *
  * @author DELL
  */
 public class ClientView extends Application {
+
     SocketConnection object;
+    
+    public static Stage mainStage;
     @Override
     public void start(Stage stage) throws Exception {
+        mainStage = stage;
         Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
         String [] name= {"Ebrahim 1","Manar 2","yehia 3"};
         //MainXMLBase root =new MainXMLBase(name);
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
-     //   stage.setResizable(false);
+        //   stage.setResizable(false);
         stage.show();
-        
-          stage.setOnCloseRequest((WindowEvent event) -> { 
+       // AssignFriendTodoEntity friend = new AssignFriendTodoEntity("ibrahim", 1, 2);
+      //  TodoListDBOperations.assignTodoRequest(friend);
+        stage.setOnCloseRequest((WindowEvent event) -> {
             try {
                 SocketConnection.getInstance().closeSocketConnection();
             } catch (IOException ex) {
@@ -49,7 +49,6 @@ public class ClientView extends Application {
             System.exit(0);
         });
         SocketConnection.getInstance();
-      
     }
 
     /**
@@ -57,7 +56,7 @@ public class ClientView extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-        
+
     }
-    
+
 }
