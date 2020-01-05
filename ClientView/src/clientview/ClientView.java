@@ -27,7 +27,7 @@ public class ClientView extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         //   stage.setResizable(false);
