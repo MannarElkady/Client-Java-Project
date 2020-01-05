@@ -1,5 +1,6 @@
 package Model;
 
+import Model.entities.AssignFriendTodoEntity;
 import Model.entities.ItemEntity;
 import Model.entities.NotificationEntity;
 import Model.entities.TodoEntity;
@@ -18,7 +19,7 @@ public class GsonParser {
     public static RequestEntity parseFromJson(String request){
         Gson gson = new Gson();        
         Type requestType = null;
-        System.out.println(request);
+        System.out.println(request);       
         switch(request.charAt(14)){
             case 'U':
                  requestType = new TypeToken<RequestEntity<UserEntity>>(){}.getType();
@@ -30,7 +31,10 @@ public class GsonParser {
                 requestType = new TypeToken<RequestEntity<NotificationEntity>>(){}.getType();
                 break;
             case 'T':
-                requestType = new TypeToken<RequestEntity<TodoEntity>>(){}.getType();
+                if(request.contains("assignTodoResponse"))
+                    requestType = new TypeToken<RequestEntity<Integer>>(){}.getType();
+                else
+                    requestType = new TypeToken<RequestEntity<TodoEntity>>(){}.getType();
                 break;
         }
         

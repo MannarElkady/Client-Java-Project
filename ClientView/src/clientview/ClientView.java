@@ -6,6 +6,8 @@
 package clientview;
 
 import Model.SocketConnection;
+import Model.dao.implementation.TodoListDBOperations;
+import Model.entities.AssignFriendTodoEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,7 +26,7 @@ import javafx.stage.WindowEvent;
 public class ClientView extends Application {
 
     SocketConnection object;
-
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
@@ -34,7 +36,8 @@ public class ClientView extends Application {
         stage.setScene(scene);
         //   stage.setResizable(false);
         stage.show();
-
+       // AssignFriendTodoEntity friend = new AssignFriendTodoEntity("ibrahim", 1, 2);
+      //  TodoListDBOperations.assignTodoRequest(friend);
         stage.setOnCloseRequest((WindowEvent event) -> {
             try {
                 SocketConnection.getInstance().closeSocketConnection();

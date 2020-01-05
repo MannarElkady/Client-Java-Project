@@ -9,6 +9,7 @@ import Model.GsonParser;
 import Model.RequestEntity;
 import Model.SocketConnection;
 import Model.entities.UserEntity;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,15 +19,16 @@ public class UserDBOperations {
     
 
     public static void login(String  username,String password) {
-
         UserEntity user = new UserEntity();
+        ArrayList<UserEntity> users = new ArrayList<>();
         user.setUsername(username);
         user.setPassword(password);
-        RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "login", user);
+        users.add(user);
+        RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "login", users);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));        
     }
 
-    public void loginResponse(Object object){
+    public void loginResponse(ArrayList<Object> object){
         if(object == null){
             System.out.println("login failed");
         }
