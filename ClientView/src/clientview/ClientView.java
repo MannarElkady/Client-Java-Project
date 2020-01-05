@@ -29,8 +29,11 @@ import javafx.stage.WindowEvent;
  */
 public class ClientView extends Application {
     SocketConnection object;
+    
+    public static Stage mainStage;
     @Override
     public void start(Stage stage) throws Exception {
+        mainStage = stage;
         Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
         String [] name= {"Ebrahim 1","Manar 2","yehia 3"};
         //MainXMLBase root =new MainXMLBase(name);
