@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author dell
@@ -14,6 +16,7 @@ public class Handler {
     public static void handle(String str) {
 
         RequestEntity response = GsonParser.parseFromJson(str);
+        ArrayList test = response.getEntity();
         RequestEntity returnValue = (RequestEntity) ReflectionClass.getObject(response.getClassName(), response.getOperation(), response.getEntity());      
 
     }

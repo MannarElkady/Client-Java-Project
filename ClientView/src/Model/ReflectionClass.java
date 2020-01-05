@@ -5,7 +5,9 @@
  */
 package Model;
 
+import Model.entities.UserEntity;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 
 
@@ -25,7 +27,7 @@ public class ReflectionClass {
             objectClass = Class.forName(objectClassName); // convert string classname to class
             Object object = objectClass.newInstance(); // invoke empty constructor
             
-            Class<?>[] paramTypes = {Object.class}; //params types 
+            Class<?>[] paramTypes = {ArrayList.class}; //params types 
             Method printObjectMethod = object.getClass().getMethod(methodName, paramTypes);
             returnValue = printObjectMethod.invoke(object, obj); // invoke the method.
             
@@ -35,5 +37,4 @@ public class ReflectionClass {
         }
         return returnValue;
     }
-
 }

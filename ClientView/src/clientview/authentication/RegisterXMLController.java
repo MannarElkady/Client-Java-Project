@@ -6,6 +6,7 @@
 package clientview.authentication;
 
 import Model.RequestCreator;
+import Model.RequestEntity;
 import Utility.Validation;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
@@ -16,6 +17,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import Model.dao.implementation.UserDBOperations;
 
 /**
  * FXML Controller class
@@ -43,16 +45,16 @@ public class RegisterXMLController implements Initializable {
 
     @FXML
     private void signUpAction(ActionEvent event) {
-        if(Validation.checkString(usernameTextField.getText()) && Validation.checkString(passwordPasswordField.getText())
-                    && Validation.checkString(emailTextField.getText())){
-            if(Validation.checkEmailRegex(emailTextField.getText())&&Validation.checkUsernameRegex(usernameTextField.getText())){
+        String email=emailTextField.getText(),password=passwordPasswordField.getText(),username=usernameTextField.getText();
+        if(Validation.checkString(username) && Validation.checkString(password)
+                    && Validation.checkString(email)){
+            if(Validation.checkEmailRegex(email)&&Validation.checkUsernameRegex(username)){
                 UserEntity newUser= new UserEntity();
-                newUser.setUsername(usernameTextField.getText());
-                newUser.setPassword(passwordPasswordField.getText());
-                newUser.setEmail(emailTextField.getText());
-                RequestCreator newRequest = new RequestCreator("UserDBOperations","register",newUser);
-                String newRequestJson= newRequest.getJsonObject();
-                System.out.println(newRequestJson);
+                newUser.setUsername(username);
+                newUser.setPassword(password);
+                newUser.setEmail(email);
+                newUser.setOnlineFlag(0);
+                UserDBOperations.register(newUser);
             }            
         }
     }

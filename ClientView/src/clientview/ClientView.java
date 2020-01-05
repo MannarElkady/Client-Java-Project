@@ -38,9 +38,9 @@ public class ClientView extends Application {
         stage.setScene(scene);
         //   stage.setResizable(false);
         stage.show();
+
         NotificationDBOperations.receiveNotifications(1);
         
-
         stage.setOnCloseRequest((WindowEvent event) -> {
             try {
                 SocketConnection.getInstance().closeSocketConnection();

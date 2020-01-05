@@ -86,7 +86,7 @@ public class MainXMLBase extends BorderPane {
   //      gridPane.setFitToWidth(true);
         ImageView homeImg= null;
         try {
-           homeImg= new ImageView(new Image(new FileInputStream("F:\\ITI life\\Java\\projectJava\\ProjectJavaRegisterReal\\src\\projectjavaregisterreal\\home.jpg")));
+           homeImg= new ImageView(new Image(new FileInputStream("~./resources/home.jpg")));
            homeImg.setFitHeight(30.0);
            homeImg.setFitWidth(50.0);
         } catch (FileNotFoundException ex) {
@@ -99,7 +99,7 @@ public class MainXMLBase extends BorderPane {
         GridPane.setValignment(addFriendBtn, javafx.geometry.VPos.CENTER);
         ImageView imgAddFriend=null;
         try {
-           imgAddFriend= new ImageView(new Image(new FileInputStream("F:\\ITI life\\Java\\projectJava\\ProjectJavaRegisterReal\\src\\projectjavaregisterreal\\addFriend.png")));
+           imgAddFriend= new ImageView(new Image(new FileInputStream("@../resources/addFriend.png")));
            imgAddFriend.setFitHeight(30.0);
            imgAddFriend.setFitWidth(50.0);
         } catch (FileNotFoundException ex) {
@@ -115,7 +115,7 @@ public class MainXMLBase extends BorderPane {
         appLogo.setPickOnBounds(true);
         appLogo.setPreserveRatio(true);
         try {
-            appLogo.setImage(new Image(new FileInputStream("F:\\ITI life\\Java\\projectJava\\ProjectJavaRegisterReal\\src\\projectjavaregisterreal\\appLogo.png")));
+            appLogo.setImage(new Image(new FileInputStream("@../resources/appLogo.png")));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainXMLBase.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -125,7 +125,7 @@ public class MainXMLBase extends BorderPane {
         GridPane.setValignment(addTodo, javafx.geometry.VPos.CENTER);
         ImageView imgAdd=null;
         try {
-           imgAdd= new ImageView(new Image(new FileInputStream("F:\\ITI life\\Java\\projectJava\\ProjectJavaRegisterReal\\src\\projectjavaregisterreal\\add.png")));
+           imgAdd= new ImageView(new Image(new FileInputStream("@../resources/add.png")));
            imgAdd.setFitHeight(30.0);
            imgAdd.setFitWidth(50.0);
         } catch (FileNotFoundException ex) {
@@ -142,7 +142,7 @@ public class MainXMLBase extends BorderPane {
         userImg.setPickOnBounds(true);
         userImg.setPreserveRatio(true);
         try {
-            userImg.setImage(new Image(new FileInputStream("F:\\ITI life\\Java\\projectJava\\ProjectJavaRegisterReal\\src\\projectjavaregisterreal\\m.png")));
+            userImg.setImage(new Image(new FileInputStream("@../resources/m.png")));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainXMLBase.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -174,7 +174,7 @@ public class MainXMLBase extends BorderPane {
         for(int i=0;i<todoNames.length;i++){
             try {
             
-            img= new Image(new FileInputStream("F:\\ITI life\\Java\\projectJava\\ProjectJavaRegisterReal\\src\\projectjavaregisterreal/todoIcon.png"));
+            img= new Image(new FileInputStream("@../resources/todoIcon.png"));
             imgView=new ImageView(img);
             imgView.setFitHeight(50.0);
             imgView.setFitWidth(50.0);

@@ -30,12 +30,12 @@
             </JFXButton>
             <ImageView fitHeight="85.0" fitWidth="90.0" layoutX="456.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@resources/signup.jpg" />
+                  <Image url="@../resources/signup.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="138.0" fitWidth="182.0" layoutX="202.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@resources/todo.jpg" />
+                  <Image url="@../resources/todo.jpg" />
                </image>
             </ImageView>
             <Label layoutX="68.0" layoutY="219.0" prefHeight="34.0" prefWidth="85.0" text="Email">
