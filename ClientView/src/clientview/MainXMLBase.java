@@ -86,7 +86,7 @@ public class MainXMLBase extends BorderPane {
   //      gridPane.setFitToWidth(true);
         ImageView homeImg= null;
         try {
-           homeImg= new ImageView(new Image(new FileInputStream("resources/home.jpg")));
+           homeImg= new ImageView(new Image(new FileInputStream("~./resources/home.jpg")));
            homeImg.setFitHeight(30.0);
            homeImg.setFitWidth(50.0);
         } catch (FileNotFoundException ex) {
