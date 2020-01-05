@@ -6,6 +6,7 @@
 package clientview;
 
 import Model.SocketConnection;
+import Model.dao.implementation.NotificationDBOperations;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,6 +38,8 @@ public class ClientView extends Application {
         stage.setScene(scene);
         //   stage.setResizable(false);
         stage.show();
+        NotificationDBOperations.receiveNotifications(1);
+        
 
         stage.setOnCloseRequest((WindowEvent event) -> {
             try {
