@@ -6,8 +6,6 @@
 package clientview;
 
 import Model.SocketConnection;
-import Model.dao.implementation.TodoListDBOperations;
-import Model.entities.AssignFriendTodoEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,11 +25,14 @@ public class ClientView extends Application {
 
     SocketConnection object;
     
+    public static Stage mainStage;
     @Override
     public void start(Stage stage) throws Exception {
+        mainStage = stage;
         Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
-        String[] name = {"Ebrahim 1", "Manar 2", "yehia 3"};
+        String [] name= {"Ebrahim 1","Manar 2","yehia 3"};
         //MainXMLBase root =new MainXMLBase(name);
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         //   stage.setResizable(false);
