@@ -10,6 +10,7 @@ import Model.RequestEntity;
 import Model.entities.ItemEntity;
 import java.util.ArrayList;
 import Model.SocketConnection;
+import Model.entities.TodoEntity;
 
 /**
  *
@@ -24,7 +25,7 @@ public class ItemDBOperations {
         System.out.println(GsonParser.parseToJson(addRequest));
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
     }
-
+       
     public void addItemResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
             //to connect by Controller of ui

@@ -45,7 +45,6 @@ import clientview.ClientView;
 public class NotificationDBOperations {
 
     public static void receiveNotifications(ArrayList<Integer> userID) {
-
         UserEntity user = new UserEntity();
         user.setId(userID.get(0));
         ArrayList<UserEntity> list = new ArrayList<>();

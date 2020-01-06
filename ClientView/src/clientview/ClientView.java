@@ -7,6 +7,7 @@ package clientview;
 
 import Model.SocketConnection;
 import Model.dao.implementation.NotificationDBOperations;
+import Model.entities.TodoEntity;
 import com.jfoenix.controls.JFXListView;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -32,6 +33,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import Model.dao.implementation.TodoListDBOperations;
+import java.io.IOException;
+import java.util.logging.Level;
+import javafx.application.Platform;
 
 /**
  *
@@ -53,11 +58,9 @@ public class ClientView extends Application {
         stage.setScene(scene);
         //   stage.setResizable(false);
        
-        
         stage.show();
-    /*    ArrayList<Integer> data = new ArrayList<>();
-        data.add(1);
-        NotificationDBOperations.receiveNotifications(data);
+        TodoEntity data = new TodoEntity("todo1", "description",1, 1, "", null, null);
+        TodoListDBOperations.getAllItems(data);
         
         stage.setOnCloseRequest((WindowEvent event) -> {
             try {
@@ -68,8 +71,8 @@ public class ClientView extends Application {
             Platform.exit();
             System.exit(0);
         });
-        SocketConnection.getInstance();*/
-    }
+        SocketConnection.getInstance();
+}
 
     /**
      * @param args the command line arguments

@@ -29,9 +29,9 @@ public class TodoListDBOperations {
         RequestEntity<AssignFriendTodoEntity> request = new RequestEntity("TodoListDBOperations", "assignTodo", assignedFriendList);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request)); 
     }
-    public void assignTodoResponse(Object value){
+    public void assignTodoResponse(ArrayList<Object> value){
         if(value != null){
-            int data =(int) value;
+            int data =(int) value.get(0);
             if(data > 0) 
                 System.out.println("user assigned");
             else
@@ -55,5 +55,20 @@ public class TodoListDBOperations {
             System.out.println("Todo not added successfully");
         }
 
+    }
+     
+    public static void getAllItems(TodoEntity todo){
+        ArrayList<TodoEntity> list = new ArrayList<>();
+        list.add(todo);
+        RequestEntity<TodoEntity> addRequest = new RequestEntity("TodoListDBOperations", "getAllItems", list);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+    }
+    
+    public void getAllItemsResonse(ArrayList<Object> items){
+        if(items.size() == 0){
+            System.out.println("No Items");
+        }else{
+            System.out.println("We have items" + items.size());
+        }
     }
 }
