@@ -5,7 +5,6 @@
  */
 package clientview;
 
-import Model.entities.ItemEntity;
 import Utility.Validation;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
@@ -22,10 +21,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.dao.implementation.ItemDBOperations;
+import Model.dao.implementation.ItemDBOperations;
+import Model.entities.ItemEntity;
 
 /**
  * FXML Controller class
@@ -47,7 +48,9 @@ public class InsertItemXMLController implements Initializable {
     @FXML
     private JFXDatePicker dateDateField;
 
-    private ItemEntity newItemEntity;
+    private ItemEntity newItemEntity=null;
+    @FXML
+    private JFXButton backButton;
 
     /**
      * Initializes the controller class.
@@ -59,7 +62,10 @@ public class InsertItemXMLController implements Initializable {
 
     @FXML
     private void addPaneActionESC(KeyEvent event) {
-        
+         KeyCode key = event.getCode();
+            if (key == KeyCode.ESCAPE){
+               ((Stage)mainBorderPane.getScene().getWindow()).close();
+            }
     }
 
     @FXML
@@ -71,7 +77,7 @@ public class InsertItemXMLController implements Initializable {
                 newItemEntity.setTitle(titleTextField.getText());
                 newItemEntity.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));
                 ItemDBOperations.addItem(newItemEntity);
-                returnToTodolistForm();                
+                ((Stage)mainBorderPane.getScene().getWindow()).close();                
             }
         }
     }
@@ -97,6 +103,11 @@ public class InsertItemXMLController implements Initializable {
         titleTextField.clear();
         descriptionTextArea.clear();
         dateDateField.setValue(null);
+    }
+
+    @FXML
+    private void backButtonAction(ActionEvent event) {
+        ((Stage)mainBorderPane.getScene().getWindow()).close();
     }
 
 }

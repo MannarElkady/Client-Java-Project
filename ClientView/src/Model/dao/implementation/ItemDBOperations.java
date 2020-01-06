@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dao.implementation;
+package Model.dao.implementation;
 
-import Model.RequestEntity;
 import Model.GsonParser;
+import Model.RequestEntity;
 import Model.entities.ItemEntity;
 import java.util.ArrayList;
 import Model.SocketConnection;
@@ -21,6 +21,7 @@ public class ItemDBOperations {
         ArrayList<ItemEntity> list = new ArrayList<>();
         list.add(item);
         RequestEntity<ItemEntity> addRequest = new RequestEntity("ItemDBOperations", "addItem", list);
+        System.out.println(GsonParser.parseToJson(addRequest));
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
     }
 

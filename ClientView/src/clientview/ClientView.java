@@ -15,11 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -72,8 +68,7 @@ public class ClientView extends Application {
             Platform.exit();
             System.exit(0);
         });
-        SocketConnection.getInstance();
-        */
+        SocketConnection.getInstance();*/
     }
 
     /**
