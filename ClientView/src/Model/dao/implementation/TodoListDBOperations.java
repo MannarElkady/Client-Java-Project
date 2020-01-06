@@ -10,7 +10,6 @@ package Model.dao.implementation;
 import Model.GsonParser;
 import Model.RequestEntity;
 import Model.SocketConnection;
-<<<<<<< HEAD
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 
@@ -41,7 +40,7 @@ public class TodoListDBOperations {
         }
     }
 
-}
+
 
 
     public static void addTodo(TodoEntity todo) {

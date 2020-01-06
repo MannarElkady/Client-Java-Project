@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class NotificationDBOperations {
 
-    public static void receiveNotifications(int userID) {
+    public static void receiveNotifications(ArrayList<Integer> userID) {
 
         RequestEntity<Integer> request = new RequestEntity("NotificationDBOperations", "receiveNotifications", userID);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));

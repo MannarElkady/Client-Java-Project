@@ -35,15 +35,15 @@ public class UserDBOperations {
         users.add(user);
         RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "login", users);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));        
-    }
+    }}
 
-    public void loginResponse(ArrayList<Object> object){
-        if(object == null){
-            System.out.println("login failed");
-        } else {
-            System.out.println("login success");
-        }
-    }
+//    public void loginResponse(ArrayList<Object> object){
+//        if(object == null){
+//            System.out.println("login failed");
+//        } else {
+//            System.out.println("login success");
+//        }
+//    }
 
     public static void register(UserEntity user) {
 
