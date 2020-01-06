@@ -27,17 +27,14 @@ public class SocketConnection extends Thread {
     private SocketConnection() {
 
         try {
-
             socket = new Socket("127.0.0.1", 5005);
-
             dataInputStream = new DataInputStream(socket.getInputStream());
             printStream = new PrintStream(socket.getOutputStream());
+            th = new Thread(this);
+            th.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        th = new Thread(this);
-        th.start();
-
     }
 
     public boolean isServerClosed() {

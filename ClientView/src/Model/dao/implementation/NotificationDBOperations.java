@@ -40,21 +40,22 @@ public class NotificationDBOperations {
             NotificationGUI.loadNotificationMenu(notificationsList);
         }
     }
-    
-    public static void sendNotification(ArrayList<Object> value){
-    
-        if(value!=null){
-             NotificationEntity notification = (NotificationEntity)value.get(0);
-            
+
+    public static void sendNotification(ArrayList<Object> value) {
+
+        if (value != null) {
+            NotificationEntity notification = (NotificationEntity) value.get(0);
+
             ArrayList<NotificationEntity> notificationsList = new ArrayList<>();
             notificationsList.add(notification);
             RequestEntity<Integer> request = new RequestEntity("NotificationDBOperations", "sendNotification", notificationsList);
             SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
         }
-        
+
     }
-    public static void addNotificationResponse(ArrayList<Object> value){
-        if(value!=null){
+
+    public static void addNotificationResponse(ArrayList<Object> value) {
+        if (value != null) {
             NotificationGUI.receiveNotificationTray();
         }
     }

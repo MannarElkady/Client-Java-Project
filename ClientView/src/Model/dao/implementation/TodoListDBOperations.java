@@ -10,9 +10,7 @@ package Model.dao.implementation;
 import Model.GsonParser;
 import Model.RequestEntity;
 import Model.SocketConnection;
-
 import Model.entities.TodoEntity;
-import Model.entities.UserEntity;
 
 /**
  *
@@ -31,18 +29,15 @@ public class TodoListDBOperations {
         RequestEntity<AssignFriendTodoEntity> request = new RequestEntity("TodoListDBOperations", "assignTodo", assignedFriendList);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request)); 
     }
-    public void assignTodoResponse(Object value){
+    public void assignTodoResponse(ArrayList<Object> value){
         if(value != null){
-            int data =(int) value;
+            int data =(int) value.get(0);
             if(data > 0) 
                 System.out.println("user assigned");
             else
                 System.out.println("user not assigned");
         }
     }
-
-
-
 
     public static void addTodo(TodoEntity todo) {
 
@@ -52,13 +47,28 @@ public class TodoListDBOperations {
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
     }
  
-     public void addTodoResponse(Object object) {
-        if (object != null) {
-
+     public void addTodoResponse(ArrayList<Object> arrayObjects) {
+        if (arrayObjects != null) {
+            
             System.out.println("Todo Added  successfully");
         } else {
-            System.out.println("error happened  when add this toDo !");
+            System.out.println("Todo not added successfully");
         }
 
+    }
+     
+    public static void getAllItems(TodoEntity todo){
+        ArrayList<TodoEntity> list = new ArrayList<>();
+        list.add(todo);
+        RequestEntity<TodoEntity> addRequest = new RequestEntity("TodoListDBOperations", "getAllItems", list);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+    }
+    
+    public void getAllItemsResonse(ArrayList<Object> items){
+        if(items.size() == 0){
+            System.out.println("No Items");
+        }else{
+            System.out.println("We have items" + items.size());
+        }
     }
 }

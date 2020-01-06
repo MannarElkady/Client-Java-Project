@@ -34,6 +34,8 @@ public class RegisterXMLController implements Initializable {
     private JFXButton signUpButton;
     @FXML
     private JFXPasswordField passwordPasswordField;
+    @FXML
+    private JFXButton loginButton;
 
     /**
      * Initializes the controller class.
@@ -57,6 +59,10 @@ public class RegisterXMLController implements Initializable {
                 UserDBOperations.register(newUser);
             }            
         }
+    }
+
+    @FXML
+    private void loginButtonAction(ActionEvent event) {
     }
     
 }
