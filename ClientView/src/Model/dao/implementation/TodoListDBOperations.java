@@ -45,7 +45,9 @@ public class TodoListDBOperations {
 
     public static void addTodo(TodoEntity todo) {
 
-        RequestEntity<TodoEntity> request = new RequestEntity("TodoListDBOperations", "addTodo", todo);
+        ArrayList<TodoEntity> list = new ArrayList<>();
+        list.add(todo);
+        RequestEntity<TodoEntity> request = new RequestEntity("TodoListDBOperations", "addTodo", list);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
     }
  
