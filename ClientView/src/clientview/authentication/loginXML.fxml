@@ -31,9 +31,9 @@
                   <Font name="Times New Roman Bold" size="18.0" />
                </font>
             </JFXButton>
-            <Label layoutX="130.0" layoutY="40.0" prefHeight="53.0" prefWidth="120.0" text="Sign In" textAlignment="CENTER">
+            <Label layoutX="130.0" layoutY="40.0" prefHeight="53.0" prefWidth="148.0" text="   Sign In" textAlignment="CENTER">
                <font>
-                  <Font name="Times New Roman" size="36.0" />
+                  <Font name="Agency FB Bold" size="36.0" />
                </font>
             </Label>
             <JFXButton fx:id="signUpButton" buttonType="RAISED" layoutX="41.0" layoutY="356.0" onAction="#signUpAction" prefHeight="36.0" prefWidth="297.0" style="-fx-background-color: #b55e7d; -fx-background-radius : 30; -fx-border-radius : 30;" text="Sign Up" textAlignment="CENTER" textFill="#ebebeb">

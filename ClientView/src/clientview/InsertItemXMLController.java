@@ -5,12 +5,27 @@
  */
 package clientview;
 
+import Model.entities.ItemEntity;
+import Utility.Validation;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import model.dao.implementation.ItemDBOperations;
 
 /**
  * FXML Controller class
@@ -21,6 +36,18 @@ public class InsertItemXMLController implements Initializable {
 
     @FXML
     private BorderPane mainBorderPane;
+    @FXML
+    private JFXButton submitNewItemButton;
+    @FXML
+    private JFXButton resetItemFormButton;
+    @FXML
+    private JFXTextField titleTextField;
+    @FXML
+    private JFXTextArea descriptionTextArea;
+    @FXML
+    private JFXDatePicker dateDateField;
+
+    private ItemEntity newItemEntity;
 
     /**
      * Initializes the controller class.
@@ -28,10 +55,48 @@ public class InsertItemXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void addPaneActionESC(KeyEvent event) {
+        
     }
-    
+
+    @FXML
+    private void submitNewItemButtonAction(ActionEvent event) {
+        if (Validation.checkString(titleTextField.getText()) && (Validation.checkString(descriptionTextArea.getText()))) {
+            if (dateDateField.getValue() != null) {
+                newItemEntity = new ItemEntity();
+                newItemEntity.setDescription(descriptionTextArea.getText());
+                newItemEntity.setTitle(titleTextField.getText());
+                newItemEntity.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));
+                ItemDBOperations.addItem(newItemEntity);
+                returnToTodolistForm();                
+            }
+        }
+    }
+    private ItemEntity getNewItem(){
+        return newItemEntity;
+    }
+
+    private void returnToTodolistForm() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("TodoFormXML.fxml"));
+            Parent mainCallWindowFXML = loader.load();
+            Stage stage = (Stage) mainBorderPane.getScene().getWindow();
+            Scene mainCallWindow = new Scene(mainCallWindowFXML);
+            stage.setScene(mainCallWindow);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(InsertItemXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void resetItemFormButtonAction(ActionEvent event) {
+        titleTextField.clear();
+        descriptionTextArea.clear();
+        dateDateField.setValue(null);
+    }
+
 }

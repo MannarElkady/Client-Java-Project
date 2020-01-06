@@ -33,7 +33,7 @@ public class ItemDBOperations {
         }
     }
 
-    public void updateItem(ItemEntity itemToUpdate) {
+    public static void updateItem(ItemEntity itemToUpdate) {
         ArrayList<ItemEntity> list = new ArrayList<>();
         list.add(itemToUpdate);
         RequestEntity<ItemEntity> updateRequest = new RequestEntity("ItemDBOperations", "updateItem", list);
@@ -48,5 +48,4 @@ public class ItemDBOperations {
             System.out.println("Item not updated successfully");
         }
     }
-
 }

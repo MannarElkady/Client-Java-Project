@@ -5,9 +5,6 @@
  */
 package clientview;
 
-import Model.RequestCreator;
-import Utility.Validation;
-import Model.entities.ItemEntity;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
@@ -15,6 +12,7 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -22,20 +20,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -59,28 +56,29 @@ public class TodoFormXMLController implements Initializable {
 
     JFXButton submit;
     BorderPane newBorder;
-    boolean flagPressed= false;
+    boolean flagPressed = false;
     JFXTextField childText;
-    
-    private Image img=null;
-    private ImageView imgView=null;
-    private Label todoName=null;
-    private Label userLabel=null;
 
-    
+    private Image img = null;
+    private ImageView imgView = null;
+    private Label todoName = null;
+    private Label userLabel = null;
+
     // for Dummy Testing
-    ArrayList <TodoEntity>test=new ArrayList();
-    ArrayList <UserEntity>test2=new ArrayList();
-    ArrayList <HBox> hBoxPane =new ArrayList();
-    HBox child=null;
-    
-    
+    ArrayList<TodoEntity> test = new ArrayList();
+    ArrayList<UserEntity> test2 = new ArrayList();
+    ArrayList<HBox> hBoxPane = new ArrayList();
+    HBox child = null;
+
     @FXML
     private JFXListView<HBox> collaboratorsList;
     @FXML
     private ImageView addNewItem;
     @FXML
     private ImageView addNewFriend;
+    @FXML
+    private BorderPane rootPane;
+
     /**
      * Initializes the controller class.
      */
@@ -89,36 +87,36 @@ public class TodoFormXMLController implements Initializable {
         setCollaboratorsDummy();
         setCollaboratorsPanes(test2);
         generateCollaboratorListUI();
-        
-    }    
+
+    }
 
     @FXML
     private void addFriendAction() {
     }
-    
-    
-    public void setCollaboratorsDummy(){
-        UserEntity useraya= new UserEntity();
+
+    public void setCollaboratorsDummy() {
+        UserEntity useraya = new UserEntity();
         useraya.setUsername("Userayaa");
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
-        
+
     }
-    public void setCollaboratorsPanes(ArrayList <UserEntity> collaboratorsList){
-        for(UserEntity useraya: collaboratorsList){
+
+    public void setCollaboratorsPanes(ArrayList<UserEntity> collaboratorsList) {
+        for (UserEntity useraya : collaboratorsList) {
             try {
                 child = new HBox();
-                img= new Image(new FileInputStream(System.getProperty("user.dir")+"/src/clientview/resources/m.png"));
-                imgView=new ImageView(img);
+                img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/m.png"));
+                imgView = new ImageView(img);
                 imgView.setFitHeight(10.0);
                 imgView.setFitWidth(10.0);
-                userLabel=new Label(useraya.getUsername());
+                userLabel = new Label(useraya.getUsername());
                 userLabel.setGraphic(imgView);
                 userLabel.paddingProperty();
-                userLabel.setPrefSize(100,30);
+                userLabel.setPrefSize(100, 30);
                 child.getChildren().add(userLabel);
                 hBoxPane.add(child);
             } catch (FileNotFoundException ex) {
@@ -126,51 +124,41 @@ public class TodoFormXMLController implements Initializable {
             }
         }
     }
-    
-    
-     public void generateCollaboratorListUI(){
-            ObservableList<HBox> items =FXCollections.observableArrayList(hBoxPane);
-            collaboratorsList.setItems(items);
-  
+
+    public void generateCollaboratorListUI() {
+        ObservableList<HBox> items = FXCollections.observableArrayList(hBoxPane);
+        collaboratorsList.setItems(items);
+
     }
-    
+
     @FXML
     private void addItemAction() {
-        
-        if(!flagPressed){
-            flagPressed = true;
-            newBorder= new BorderPane();
-            childText = new JFXTextField();
-            childText.setPromptText("Write Here Your Item");
-            submit = new JFXButton();
-            submit.setText("Submit");
-            submit.setButtonType(JFXButton.ButtonType.RAISED);
-            newBorder.setAlignment(childText, Pos.CENTER);
-            BorderPane.setMargin(childText, new Insets(20,20,20,20));
-            newBorder.setCenter(childText);
-            BorderPane.setMargin(submit, new Insets(20,20,20,20));
-            newBorder.setRight(submit);
-            vBoxPane.getChildren().add(newBorder);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertItemXML.fxml"));
+            Parent insertItemWindow = loader.load();
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner((Stage)rootPane.getScene().getWindow());
+            Scene dialogScene = new Scene(insertItemWindow);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        } catch (IOException ex) {
+            Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        submit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(Validation.checkString(childText.getText())){
-                    ItemEntity newItemEntity= new ItemEntity();
-                    newItemEntity.setDescription(childText.getText());
-                    Label newItem = new Label(childText.getText());
-                    newItem.setPadding(new Insets(20,20,20,20));
-                    newItem.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
-                    newBorder.setCenter(newItem);    
-                    flagPressed= false;
-                    newBorder.setRight(null);
-                    RequestCreator newRequest = new RequestCreator("ItemDBOperations","addItem",newItemEntity);
-                    String newRequestJson= newRequest.getJsonObject();
-                    System.out.println(newRequestJson);
-                }
-            }
-        });
+
+        
     }
     
-    
+    private void addNewItemLabel(){
+       /* ItemEntity newItemEntity = 
+        Label newItemTitle = new Label(newItemEntity.getTitle());
+        newItemTitle.setPadding(new Insets(10, 10, 10, 10));
+        newItemTitle.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
+        Label newItemDescr = new Label(newItemEntity.getTitle());
+        newItemDescr.setPadding(new Insets(10, 10, 10, 10));
+        newItemDescr.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
+        newBorder.setLeft(newItemTitle);
+        newBorder.setCenter(newItemDescr);
+*/
+    }
 }
