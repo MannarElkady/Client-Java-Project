@@ -20,8 +20,8 @@ public class NotificationDBOperations {
 
     public static void receiveNotifications(int userID) {
 
-        RequestEntity<Integer> request = new RequestEntity("NotificationDBOperations", "receiveNotifications", userID);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+//        RequestEntity<Integer> request = new RequestEntity("NotificationDBOperations", "receiveNotifications", userID);
+//        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
     }
      public static void receiveNotificationsResponse(Object value) {
          

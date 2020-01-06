@@ -16,9 +16,9 @@ public class TodoListDBOperations {
         RequestEntity<AssignFriendTodoEntity> request = new RequestEntity("TodoListDBOperations", "assignTodo", assignedFriendList);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request)); 
     }
-    public void assignTodoResponse(Object value){
+    public void assignTodoResponse(ArrayList<Object> value){
         if(value != null){
-            int data =(int) value;
+            int data =(int) value.get(0);
             if(data > 0) 
                 System.out.println("user assigned");
             else

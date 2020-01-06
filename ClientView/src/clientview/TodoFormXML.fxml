@@ -48,7 +48,7 @@
                <image>
                   <Image url="@resources/todo.jpg" />
                </image></ImageView>
-            <JFXButton fx:id="addFriend" buttonType="RAISED" onAction="#addFriendAction" text="  " GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <JFXButton fx:id="addFriend" buttonType="RAISED" onAction="#addColaboratorEvent" text="  " GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fx:id="addNewFriend" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
