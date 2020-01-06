@@ -36,6 +36,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import clientview.ClientView;
 
 /**
  *
@@ -43,27 +44,28 @@ import javafx.stage.StageStyle;
  */
 public class NotificationDBOperations {
 
-    public static void receiveNotifications(int userID) {
+    public static void receiveNotifications(ArrayList<Integer> userID) {
 
         UserEntity user = new UserEntity();
-        user.setId(userID);
+        user.setId(userID.get(0));
         ArrayList<UserEntity> list = new ArrayList<>();
         list.add(user);
         RequestEntity<Integer> request = new RequestEntity("NotificationDBOperations", "receiveNotifications", list);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
     }
-     public static void receiveNotificationsResponse(Object value) {
-         
-         ArrayList<NotificationEntity> notifications =  (ArrayList<NotificationEntity>)value;
-        try {
-            test(notifications);
-        } catch (IOException ex) {
-            Logger.getLogger(NotificationDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+
+    public static void receiveNotificationsResponse(ArrayList<Object> value) {
+
+        if (value != null) {
+            ArrayList<NotificationEntity> notificationsList = new ArrayList<>();
+            for (int i = 0; i < value.size(); i++) {
+                notificationsList.add((NotificationEntity) value.get(i));
+            }
+            new ClientView().test();
         }
-                
-     }
-     
-     private static void test(ArrayList<NotificationEntity> testList) throws IOException{
+    }
+
+    private static void test(ArrayList<NotificationEntity> testList) throws IOException {
         // Parent root = FXMLLoader.load(getClass().getResource("scene_2.fxml"));
         VBox root = new VBox();
         Stage stage = new Stage(StageStyle.DECORATED);
@@ -78,23 +80,23 @@ public class NotificationDBOperations {
             BorderPane border = new BorderPane();
             VBox box = new VBox();
             box.getChildren().add(text1);
-            
-            if(i==5 || i==3){
-               
+
+            if (i == 5 || i == 3) {
+
                 box.setAlignment(Pos.CENTER_LEFT);
                 text1 = new Label("body");
                 box.getChildren().add(text1);
-                
+
                 border.setCenter(box);
-                borderPanes.add(border);                
+                borderPanes.add(border);
                 continue;
             }
             border.setLeft(text1);
-            
+
             Button b1 = new Button("accept");
             Button b2 = new Button("reject");
-            b1.setId("button"+(i+1)+"accept");
-            b2.setId("button"+(i+1)+"reject");
+            b1.setId("button" + (i + 1) + "accept");
+            b2.setId("button" + (i + 1) + "reject");
             b1.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
             b2.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
             HBox horizontal = new HBox();
@@ -105,7 +107,7 @@ public class NotificationDBOperations {
 
         }
         ObservableList<BorderPane> myObservableList = FXCollections.observableList(borderPanes);
-      
+
         parentPane.setItems(myObservableList);
 
         Scene scene = new Scene(parentPane, 600, 600);
@@ -115,16 +117,16 @@ public class NotificationDBOperations {
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
-     
-     }
-    
+
+    }
 
 }
-class MyEventHandler implements EventHandler<Event>{
+
+class MyEventHandler implements EventHandler<Event> {
 
     @Override
     public void handle(Event event) {
-        System.out.println(((Control)event.getSource()).getId());
+        System.out.println(((Control) event.getSource()).getId());
     }
 
 }
