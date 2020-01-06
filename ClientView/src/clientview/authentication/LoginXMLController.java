@@ -14,10 +14,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import Model.RequestCreator;
 import Model.SocketConnection;
+import Model.dao.implementation.NotificationDBOperations;
 import Model.dao.implementation.UserDBOperations;
+import Model.entities.NotificationEntity;
 import Utility.Validation;
 import com.jfoenix.controls.JFXButton;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 
@@ -77,5 +80,16 @@ public class LoginXMLController implements Initializable {
         
         
         
+    }
+    
+      public void buttonAction(){
+             ArrayList<Object> data = new ArrayList<>();
+        NotificationEntity notification = new NotificationEntity();
+        notification.setHeader("test Header");
+        notification.setText("test Text");
+        notification.setNotificationType("test Notification");
+        notification.setSenderID(2);     
+        data.add(notification);
+        NotificationDBOperations.sendNotification(data);
     }
 }

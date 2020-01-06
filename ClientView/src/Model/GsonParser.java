@@ -11,40 +11,49 @@ import java.lang.reflect.Type;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  * @author Ibrahim
  */
 public class GsonParser {
-    public static RequestEntity parseFromJson(String request){
-        Gson gson = new Gson();        
+
+    public static RequestEntity parseFromJson(String request) {
+
+        Gson gson = new Gson();
         Type requestType = null;
-        System.out.println(request);       
-        switch(request.charAt(14)){
-            case 'U':
-                 requestType = new TypeToken<RequestEntity<UserEntity>>(){}.getType();
-                 break;
-            case 'I':
-                requestType = new TypeToken<RequestEntity<ItemEntity>>(){}.getType();
-                break;
-            case 'N':
-                requestType = new TypeToken<RequestEntity<NotificationEntity>>(){}.getType();
-                break;
-            case 'T':
-                if(request.contains("assignTodoResponse"))
-                    requestType = new TypeToken<RequestEntity<Integer>>(){}.getType();
-                else
-                    requestType = new TypeToken<RequestEntity<TodoEntity>>(){}.getType();
-                break;
+        if (request != null  && !request.equals("null")) {
+            
+            System.out.println(request);
+            switch (request.charAt(14)) {
+                case 'U':
+                    requestType = new TypeToken<RequestEntity<UserEntity>>() {
+                    }.getType();
+                    break;
+                case 'I':
+                    requestType = new TypeToken<RequestEntity<ItemEntity>>() {
+                    }.getType();
+                    break;
+                case 'N':
+                    requestType = new TypeToken<RequestEntity<NotificationEntity>>() {
+                    }.getType();
+                    break;
+                case 'T':
+                    if (request.contains("assignTodoResponse")) {
+                        requestType = new TypeToken<RequestEntity<Integer>>() {
+                        }.getType();
+                    } else {
+                        requestType = new TypeToken<RequestEntity<TodoEntity>>() {
+                        }.getType();
+                    }
+                    break;
+            }
         }
-        
-        
-        
-       return gson.fromJson(request, requestType);
-     
+
+        return gson.fromJson(request, requestType);
+
     }
-    public static String parseToJson(RequestEntity req){
-        
+
+    public static String parseToJson(RequestEntity req) {
+
         Gson gson = new Gson();
         return gson.toJson(req);
     }

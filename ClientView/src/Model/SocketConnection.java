@@ -5,6 +5,7 @@
  */
 package Model;
 
+import clientview.NotificationGUI;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -15,7 +16,7 @@ import java.net.Socket;
  * @author dell
  */
 public class SocketConnection extends Thread {
-    
+
     private static SocketConnection instance = null;
     private Socket socket;
     private PrintStream printStream;
@@ -42,18 +43,19 @@ public class SocketConnection extends Thread {
     public boolean isServerClosed() {
         return serverClosed;
     }
-    
-    public static SocketConnection getInstance(){
-        if(instance == null){
-            synchronized(SocketConnection.class){
-                if(instance == null){
+
+    public static SocketConnection getInstance() {
+        if (instance == null) {
+            synchronized (SocketConnection.class) {
+                if (instance == null) {
                     instance = new SocketConnection();
                 }
             }
         }
         return instance;
     }
-    public void closeSocketConnection() throws IOException{   
+
+    public void closeSocketConnection() throws IOException {
         printStream.println("clientClosed");
         printStream.close();
         dataInputStream.close();
@@ -74,25 +76,23 @@ public class SocketConnection extends Thread {
                 String replyMsg = dataInputStream.readLine();
                 if (replyMsg != null) {
 
-                    if (replyMsg.equals("closed")) {
+                    if (replyMsg.equals("notification received")) {
+                        NotificationGUI.receiveNotificationTray();
+                    } else if (replyMsg.equals("closed")) {
                         System.out.println(replyMsg);
                         serverClosed = true;
 
-                    }
-                    if (replyMsg.equals("opened")) {
+                    } else if (replyMsg.equals("opened")) {
                         serverClosed = false;
                         System.out.println("opened");
-                    }
-
-                    if (!replyMsg.equals("opened") && !replyMsg.equals("closed")) {
+                    } else if (!replyMsg.equals("opened") && !replyMsg.equals("closed") && !replyMsg.equals("notification received")) {
                         Handler.handle(replyMsg);
                     }
                 }
-               
 
             }
         } catch (IOException e) {
-            serverClosed = true;            
+            serverClosed = true;
 
         }
     }

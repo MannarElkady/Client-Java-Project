@@ -15,9 +15,10 @@ public class Handler {
 
     public static void handle(String str) {
 
-        RequestEntity response = GsonParser.parseFromJson(str);
-        ArrayList test = response.getEntity();
-        RequestEntity returnValue = (RequestEntity) ReflectionClass.getObject(response.getClassName(), response.getOperation(), response.getEntity());      
-
+        if (str != null && !str.equals("null")) {
+            RequestEntity response = GsonParser.parseFromJson(str);
+            ArrayList test = response.getEntity();
+            RequestEntity returnValue = (RequestEntity) ReflectionClass.getObject(response.getClassName(), response.getOperation(), response.getEntity());
+        }
     }
 }
