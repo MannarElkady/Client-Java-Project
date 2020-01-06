@@ -16,28 +16,43 @@ import java.util.ArrayList;
  * @author dell
  */
 public class UserDBOperations {
-    
 
-    public static void login(String  username,String password) {
+    public static void login(String username, String password) {
+
         UserEntity user = new UserEntity();
         ArrayList<UserEntity> users = new ArrayList<>();
         user.setUsername(username);
         user.setPassword(password);
         users.add(user);
         RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "login", users);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));        
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
     }
 
-    public void loginResponse(ArrayList<Object> object){
-        if(object == null){
+
+    public void loginResponse(ArrayList<Object> object) {
+        if (object == null) {
             System.out.println("login failed");
-        }
-        else{   
+        } else {
             System.out.println("login success");
         }
     }
-    public int register(Object user) {
 
-        return -1;
+    public static void register(UserEntity user) {
+
+          ArrayList<UserEntity> users = new ArrayList<>();
+          users.add(user);
+        RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "register", users);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
     }
+
+    public void registerResponse(Object object) {
+        if (object != null) {
+
+            System.out.println("registered successfully");
+        } else {
+            System.out.println("error happened in registeration");
+        }
+
+    }
+
 }

@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="637.0" prefWidth="692.0" style="-fx-background-color: #c38d9e #c38d9e #c38d9e;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.authentication.RegisterXMLController">
    <children>
-      <AnchorPane layoutX="69.0" layoutY="63.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="534.0" prefWidth="555.0" style="-fx-background-color: #97CAEF;">
+      <AnchorPane layoutX="69.0" layoutY="63.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="534.0" prefWidth="555.0" style="-fx-background-color: #97CAEF; -fx-background-radius : 30; -fx-border-radius : 30;">
          <children>
             <JFXTextField fx:id="emailTextField" layoutX="189.0" layoutY="211.0" prefHeight="34.0" prefWidth="302.0" promptText="Your Email">
                <font>
@@ -23,19 +23,14 @@
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </JFXTextField>
-            <JFXButton fx:id="signUpButton" buttonType="RAISED" layoutX="68.0" layoutY="395.0" onAction="#signUpAction" prefHeight="45.0" prefWidth="425.0" ripplerFill="#c38d9e" style="-fx-background-color: #c38d9e;" text="Sign Up">
+            <JFXButton fx:id="signUpButton" buttonType="RAISED" layoutX="68.0" layoutY="395.0" onAction="#signUpAction" prefHeight="45.0" prefWidth="425.0" ripplerFill="#c38d9e" style="-fx-background-color: #c38d9e; -fx-background-radius : 30; -fx-border-radius : 30;" text="Sign Up">
                <font>
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </JFXButton>
-            <ImageView fitHeight="85.0" fitWidth="90.0" layoutX="456.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="120.0" fitWidth="85.0" layoutX="147.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@resources/signup.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="138.0" fitWidth="182.0" layoutX="202.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@resources/todo.jpg" />
+                  <Image url="@../resources/todo.jpg" />
                </image>
             </ImageView>
             <Label layoutX="68.0" layoutY="219.0" prefHeight="34.0" prefWidth="85.0" text="Email">
@@ -58,6 +53,16 @@
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </JFXPasswordField>
+            <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="65.0" layoutY="451.0" onAction="#loginButtonAction" prefHeight="45.0" prefWidth="425.0" ripplerFill="#97b4ed" style="-fx-background-color: #97b4ed; -fx-background-radius: 30; -fx-border-radius: 30;" text="Already Have An Account?">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="243.0" layoutY="69.0" prefHeight="39.0" prefWidth="98.0" text="Sign Up">
+               <font>
+                  <Font name="Agency FB Bold" size="36.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

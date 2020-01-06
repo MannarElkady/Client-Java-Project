@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.TodoFormXMLController">
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.TodoFormXMLController">
    <top>
       <GridPane style="-fx-background-color: #c38d9e #c38d9e #c38d9e;" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -75,6 +75,13 @@
                </children>
             </JFXScrollPane>
          </center>
+         <top>
+            <Label text="Online Collaborators" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Agency FB" size="18.0" />
+               </font>
+            </Label>
+         </top>
       </BorderPane>
    </left>
 </BorderPane>
