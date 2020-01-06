@@ -1,6 +1,5 @@
 package Model;
 
-import Model.entities.AssignFriendTodoEntity;
 import Model.entities.ItemEntity;
 import Model.entities.NotificationEntity;
 import Model.entities.TodoEntity;
@@ -8,8 +7,6 @@ import Model.entities.UserEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**

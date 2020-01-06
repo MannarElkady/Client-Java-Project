@@ -12,7 +12,6 @@ import Model.RequestEntity;
 import Model.SocketConnection;
 
 import Model.entities.TodoEntity;
-import Model.entities.UserEntity;
 
 /**
  *
@@ -41,9 +40,6 @@ public class TodoListDBOperations {
         }
     }
 
-
-
-
     public static void addTodo(TodoEntity todo) {
 
         ArrayList<TodoEntity> list = new ArrayList<>();
@@ -52,12 +48,12 @@ public class TodoListDBOperations {
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
     }
  
-     public void addTodoResponse(Object object) {
-        if (object != null) {
-
+     public void addTodoResponse(ArrayList<Object> arrayObjects) {
+        if (arrayObjects != null) {
+            
             System.out.println("Todo Added  successfully");
         } else {
-            System.out.println("error happened  when add this toDo !");
+            System.out.println("Todo not added successfully");
         }
 
     }
