@@ -56,4 +56,19 @@ public class TodoListDBOperations {
         }
 
     }
+     
+    public static void getAllItems(TodoEntity todo){
+        ArrayList<TodoEntity> list = new ArrayList<>();
+        list.add(todo);
+        RequestEntity<TodoEntity> addRequest = new RequestEntity("TodoListDBOperations", "getAllItems", list);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+    }
+    
+    public void getAllItemsResonse(ArrayList<Object> items){
+        if(items.size() == 0){
+            System.out.println("No Items");
+        }else{
+            System.out.println("We have items" + items.size());
+        }
+    }
 }

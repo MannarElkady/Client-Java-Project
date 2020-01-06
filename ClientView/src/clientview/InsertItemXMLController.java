@@ -25,7 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.dao.implementation.ItemDBOperations;
+import Model.dao.implementation.ItemDBOperations;
 
 /**
  * FXML Controller class
