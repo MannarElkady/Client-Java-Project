@@ -75,6 +75,13 @@
                </children>
             </JFXScrollPane>
          </center>
+         <top>
+            <Label text="Online Collaborators" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Agency FB" size="18.0" />
+               </font>
+            </Label>
+         </top>
       </BorderPane>
    </left>
 </BorderPane>

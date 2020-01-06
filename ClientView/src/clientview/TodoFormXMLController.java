@@ -77,6 +77,10 @@ public class TodoFormXMLController implements Initializable {
     
     @FXML
     private JFXListView<HBox> collaboratorsList;
+    @FXML
+    private ImageView addNewItem;
+    @FXML
+    private ImageView addNewFriend;
     /**
      * Initializes the controller class.
      */

@@ -49,7 +49,7 @@ public class ClientView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         mainStage = stage;
-        Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("TodoFormXML.fxml"));
         String [] name= {"Ebrahim 1","Manar 2","yehia 3"};
         //MainXMLBase root =new MainXMLBase(name);
 
@@ -59,7 +59,7 @@ public class ClientView extends Application {
        
         
         stage.show();
-        ArrayList<Integer> data = new ArrayList<>();
+    /*    ArrayList<Integer> data = new ArrayList<>();
         data.add(1);
         NotificationDBOperations.receiveNotifications(data);
         
@@ -73,6 +73,7 @@ public class ClientView extends Application {
             System.exit(0);
         });
         SocketConnection.getInstance();
+        */
     }
 
     /**
