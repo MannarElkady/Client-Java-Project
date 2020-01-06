@@ -10,7 +10,6 @@ package Model.dao.implementation;
 import Model.GsonParser;
 import Model.RequestEntity;
 import Model.SocketConnection;
-
 import Model.entities.TodoEntity;
 
 /**
