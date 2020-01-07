@@ -5,6 +5,7 @@
  */
 package clientview;
 
+import Model.dao.implementation.TodoListDBOperations;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
@@ -79,15 +80,19 @@ public class TodoFormXMLController implements Initializable {
     private ImageView addNewFriend;
     @FXML
     private BorderPane rootPane;
+    TodoEntity todo= new TodoEntity();
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        todo.setId(0);
         setCollaboratorsDummy();
         setCollaboratorsPanes(test2);
         generateCollaboratorListUI();
+        TodoListDBOperations.getAllItems(todo);
 
     }
 

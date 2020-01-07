@@ -36,6 +36,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.util.Duration;
 import clientview.ClientView;
+
 /**
  * FXML Controller class
  *
@@ -76,8 +77,7 @@ public class LoginXMLController implements Initializable {
                     UserDBOperations.login(username, password);
                 }
             }
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ERROR");
             alert.setHeaderText(null);
@@ -88,35 +88,35 @@ public class LoginXMLController implements Initializable {
 
     @FXML
     private void signUpAction(ActionEvent event) {
-     
-          try {
+
+        try {
+
+            Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/RegisterXML.fxml"));
+            Scene scene = ClientView.mainStage.getScene();
+            root.translateYProperty().set(scene.getHeight());
+            ClientView.mainStage.setWidth(629);
+            ClientView.mainStage.setHeight(637);
             
-                Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/RegisterXML.fxml"));
-                Scene scene = ClientView.mainStage.getScene();                  
-                root.translateYProperty().set(scene.getHeight());
-                
-                scene.setRoot(root);                            
-                Timeline timeLine = new Timeline();
-                KeyValue kv = new KeyValue(root.translateYProperty(),0,Interpolator.EASE_IN);
-                KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
-                timeLine.getKeyFrames().add(kf);
-                timeLine.play();
-                
-                
-            } catch (IOException ex) {
-                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-        
+            scene.setRoot(root);
+            Timeline timeLine = new Timeline();
+            KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+            KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+            timeLine.getKeyFrames().add(kf);
+            timeLine.play();
+
+        } catch (IOException ex) {
+            Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
-    
-      public void buttonAction(){
-             ArrayList<Object> data = new ArrayList<>();
+
+    public void buttonAction() {
+        ArrayList<Object> data = new ArrayList<>();
         NotificationEntity notification = new NotificationEntity();
         notification.setHeader("test Header");
         notification.setText("test Text");
         notification.setNotificationType("test Notification");
-        notification.setSenderID(2);     
+        notification.setSenderID(2);
         data.add(notification);
         NotificationDBOperations.sendNotification(data);
     }

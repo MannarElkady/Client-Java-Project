@@ -50,7 +50,7 @@ public class UserDBOperations {
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
                 Scene scene = ClientView.mainStage.getScene();
                 root.translateYProperty().set(scene.getHeight());
-                 ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
+                ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
                 ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
                 scene.setRoot(root);  
                 
