@@ -141,7 +141,6 @@ public class MainXMLController implements Initializable {
     public void generateFriendListUI(){
             ObservableList<HBox> items =FXCollections.observableArrayList(hBoxPane);
             friendListPane.setItems(items);
-  
     }
     
     @Override

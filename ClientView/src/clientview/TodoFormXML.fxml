@@ -29,7 +29,7 @@
             <RowConstraints minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXButton fx:id="addItem" buttonType="RAISED" onAction="#addItemAction" text="   " GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <JFXButton fx:id="addItem" buttonType="RAISED" onAction="#addItemAction" text="Add New Item" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <graphic>
                   <ImageView fx:id="addNewItem" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -37,6 +37,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
             </JFXButton>
             <Label fx:id="todoNameLabel" text="TodoName" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <font>
@@ -51,10 +54,6 @@
                      </image>
                   </ImageView>
                </graphic></JFXButton>
-            <ImageView fx:id="userImg" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <image>
-                  <Image url="@resources/m.png" />
-               </image></ImageView>
             <JFXButton fx:id="homeButton" buttonType="RAISED" onAction="#homeButtonAction" text="  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
