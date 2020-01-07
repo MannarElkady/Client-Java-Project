@@ -7,21 +7,17 @@ package clientview.authentication;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import Model.entities.UserEntity;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import Model.RequestCreator;
 import Model.SocketConnection;
 import Model.dao.implementation.NotificationDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.NotificationEntity;
 import Utility.Validation;
-import clientview.ClientView;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,7 +69,7 @@ public class LoginXMLController implements Initializable {
                 RequestCreator newRequest = new RequestCreator("UserDBOperations","login",loginUser);
                 String newRequestJson= newRequest.getJsonObject();
                 System.out.println(newRequestJson);*/
-                    UserDBOperations.login(username, password);
+                UserDBOperations.login(username, password);
                 }
             }
         }

@@ -9,9 +9,10 @@ import Model.GsonParser;
 import Model.RequestEntity;
 import Model.SocketConnection;
 import Model.entities.UserEntity;
-import java.util.ArrayList;
 import clientview.ClientView;
+import clientview.MainXMLController;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.Interpolator;
@@ -41,17 +42,16 @@ public class UserDBOperations {
     }
 
     public void loginResponse(ArrayList<Object> object) {
-        if (object == null) {
+        if (object == null || object.size() == 0) {
             System.out.println("login failed");
         } else {
-
-            /*try {
-                Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
+             try {                
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));                
                 Scene scene = ClientView.mainStage.getScene();
                 root.translateYProperty().set(scene.getHeight());
 
                 scene.setRoot(root);
-
+                //new MainXMLController().generateTodosUI2(items);
                 Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
@@ -60,7 +60,7 @@ public class UserDBOperations {
 
             } catch (IOException ex) {
                 Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+            }
         }
     }
 
@@ -80,6 +80,21 @@ public class UserDBOperations {
             System.out.println("error happened in registeration");
         }
 
+    }
+    
+    public static void getAllTodos(UserEntity userID){
+        ArrayList<UserEntity> list = new ArrayList<>();
+        list.add(userID);
+        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getAllTodos", list);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+    }
+    
+    public void getAllTodosResonse(ArrayList<Object> items){
+        if(items.size() == 0){
+            System.out.println("No Items");
+        }else{
+            new MainXMLController().generateTodosUI(items);
+        }
     }
 
 }
