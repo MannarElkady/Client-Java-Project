@@ -5,6 +5,7 @@
  */
 package clientview;
 
+import Model.RequestCreator;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
@@ -66,7 +67,7 @@ public class MainXMLController implements Initializable {
     
     // for Dummy Testing
     ArrayList <TodoEntity>test=new ArrayList();
-    ArrayList <UserEntity>test2=new ArrayList();
+   public static ArrayList <UserEntity>test2=new ArrayList();
     ArrayList <HBox> hBoxPane =new ArrayList();
     HBox child=null;
     @FXML
@@ -79,7 +80,7 @@ public class MainXMLController implements Initializable {
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
-        
+              
     }
     public void setFriendListPanes(ArrayList <UserEntity> friendList){
         for(UserEntity useraya: friendList){
@@ -108,6 +109,8 @@ public class MainXMLController implements Initializable {
         test.add(todo);
         test.add(todo);
         test.add(todo);
+        
+
     }
     /**
      * Initializes the controller class.
@@ -148,11 +151,15 @@ public class MainXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //setTodoDummy();
-        setFriendListDummy();
+        //setFriendListDummy();
         setFriendListPanes(test2);
         getAllTodos();
         //generateTodosUI(test);
         generateFriendListUI();
+        UserEntity user = new UserEntity();
+         user.setId(1);
+        UserDBOperations.getFrinds(user);
+
     }
 
     @FXML
@@ -184,5 +191,18 @@ public class MainXMLController implements Initializable {
         UserEntity user = new UserEntity();
         user.setId(1);
         UserDBOperations.getAllTodos(user);
+    }
+    
+    
+    
+      public static void  setFriendList(ArrayList<UserEntity> a){
+          System.out.println("clientview.MainXMLController.setFriendList()"+a.size());
+          for(int i=0;i<a.size();i++)
+          {
+              System.out.println("name"+a.get(i).getUsername());
+              test2.add(a.get(i));
+          }
+         
+              
     }
 }    

@@ -114,5 +114,25 @@ public class UserDBOperations {
             new MainXMLController().generateTodosUI(items);
         }
     }
+    
+    
+      public static void getFrinds(UserEntity userID){
+        ArrayList<UserEntity> list = new ArrayList<>();
+        list.add(userID);
+        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getFrinds", list);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+    }
+    
+    public void getFrindsResonse(ArrayList<UserEntity> items){
+        for(int i=0;i<items.size();i++)
+        {
+            System.out.println("hh"+items.get(i).getUsername());
+        
+        }
+        
+      MainXMLController.setFriendList(items);
+    }
+    
+    
 
 }
