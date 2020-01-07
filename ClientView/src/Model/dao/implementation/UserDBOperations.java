@@ -47,11 +47,14 @@ public class UserDBOperations {
         } else {
              try {                
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));                
+                System.out.println(((UserEntity)object.get(0)).getId());
+                ClientView.currentUser.setId(((UserEntity)object.get(0)).getId());
                 Scene scene = ClientView.mainStage.getScene();
                 root.translateYProperty().set(scene.getHeight());
-
-                scene.setRoot(root);
-                //new MainXMLController().generateTodosUI2(items);
+                ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
+                ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                scene.setRoot(root);  
+                
                 Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);

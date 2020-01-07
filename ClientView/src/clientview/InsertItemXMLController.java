@@ -43,7 +43,6 @@ public class InsertItemXMLController implements Initializable {
     private JFXButton resetItemFormButton;
     @FXML
     private JFXTextField titleTextField;
-    @FXML
     private JFXTextArea descriptionTextArea;
     @FXML
     private JFXDatePicker dateDateField;
@@ -85,6 +84,7 @@ public class InsertItemXMLController implements Initializable {
         return newItemEntity;
     }
 
+    /*
     private void returnToTodolistForm() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("TodoFormXML.fxml"));
@@ -97,6 +97,7 @@ public class InsertItemXMLController implements Initializable {
             Logger.getLogger(InsertItemXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+*/
 
     @FXML
     private void resetItemFormButtonAction(ActionEvent event) {

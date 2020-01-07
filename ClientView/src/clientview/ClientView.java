@@ -6,6 +6,7 @@
 package clientview;
 
 import Model.SocketConnection;
+import Model.entities.UserEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,10 +27,13 @@ public class ClientView extends Application {
     SocketConnection object;
     
     public static Stage mainStage;
+    public static UserEntity currentUser;
     @Override
     public void start(Stage stage) throws Exception {
         mainStage = stage;
-        Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
+        currentUser= new UserEntity();
+    //  Parent root = FXMLLoader.load(getClass().getResource("mainXML.fxml"));
+      Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
         String [] name= {"Ebrahim 1","Manar 2","yehia 3"};
         //MainXMLBase root =new MainXMLBase(name);
 
