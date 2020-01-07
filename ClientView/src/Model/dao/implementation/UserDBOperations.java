@@ -21,6 +21,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.util.Duration;
 
 /**
@@ -45,7 +46,7 @@ public class UserDBOperations {
             System.out.println("login failed");
         } else {
 
-            /*try {
+            try {
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
                 Scene scene = ClientView.mainStage.getScene();
                 root.translateYProperty().set(scene.getHeight());
@@ -60,7 +61,7 @@ public class UserDBOperations {
 
             } catch (IOException ex) {
                 Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+            }
         }
     }
 
@@ -72,14 +73,28 @@ public class UserDBOperations {
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
     }
 
-    public void registerResponse(Object object) {
-        if (object != null) {
+    public void registerResponse(ArrayList<Object> object) {
+          if (object== null|| object.isEmpty()) {
+              System.out.println("registration field");      
+          } else {
 
-            System.out.println("registered successfully");
-        } else {
-            System.out.println("error happened in registeration");
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
+                Scene scene = ClientView.mainStage.getScene();
+                root.translateYProperty().set(scene.getHeight());
+                scene.setRoot(root);
+                Timeline timeLine = new Timeline();
+                KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+                KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+                timeLine.getKeyFrames().add(kf);
+                timeLine.play();
+
+            } catch (IOException ex) {
+                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
-    }
+}
+
 
 }

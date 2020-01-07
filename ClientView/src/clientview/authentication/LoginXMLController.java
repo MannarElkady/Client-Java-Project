@@ -66,13 +66,13 @@ public class LoginXMLController implements Initializable {
             String username = userNameTextField.getText(), password = passwordPasswordField.getText();
             if (Validation.checkString(username) && Validation.checkString(password)) {
                 if (Validation.checkUsernameRegex(username)) {
-                    /* UserEntity loginUser= new UserEntity();
+                    UserEntity loginUser= new UserEntity();
                 loginUser.setUsername(userNameTextField.getText());
                 loginUser.setPassword(passwordPasswordField.getText());
                 loginUser.setOnlineFlag(1);
                 RequestCreator newRequest = new RequestCreator("UserDBOperations","login",loginUser);
                 String newRequestJson= newRequest.getJsonObject();
-                System.out.println(newRequestJson);*/
+                System.out.println(newRequestJson);
                     UserDBOperations.login(username, password);
                 }
             }
