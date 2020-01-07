@@ -10,7 +10,18 @@ import Model.RequestEntity;
 import Model.SocketConnection;
 import Model.entities.UserEntity;
 import java.util.ArrayList;
-
+import clientview.ClientView;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.util.Duration;
 /**
  *
  * @author dell
@@ -33,7 +44,25 @@ public class UserDBOperations {
         if (object == null) {
             System.out.println("login failed");
         } else {
-            System.out.println("login success");
+            
+            
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
+                Scene scene = ClientView.mainStage.getScene();
+                root.translateYProperty().set(scene.getHeight());
+                 ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
+                ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                scene.setRoot(root);  
+                
+                Timeline timeLine = new Timeline();
+                KeyValue kv = new KeyValue(root.translateYProperty(),0,Interpolator.EASE_IN);
+                KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
+                timeLine.getKeyFrames().add(kf);
+                timeLine.play();
+                
+            } catch (IOException ex) {
+                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

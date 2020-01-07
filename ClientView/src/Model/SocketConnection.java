@@ -17,6 +17,7 @@ import java.net.Socket;
  */
 public class SocketConnection extends Thread {
 
+    boolean checkFirstTime = true;
     private static SocketConnection instance = null;
     private Socket socket;
     private PrintStream printStream;
@@ -33,7 +34,9 @@ public class SocketConnection extends Thread {
             th = new Thread(this);
             th.start();
         } catch (IOException e) {
-            e.printStackTrace();
+           // e.printStackTrace();
+           serverClosed=true;
+            checkFirstTime = false;
         }
     }
 
@@ -53,12 +56,13 @@ public class SocketConnection extends Thread {
     }
 
     public void closeSocketConnection() throws IOException {
-        printStream.println("clientClosed");
-        printStream.close();
-        dataInputStream.close();
-        socket.close();
+        if (printStream != null && dataInputStream != null && socket != null) {
+            printStream.println("clientClosed");
+            printStream.close();
+            dataInputStream.close();
+            socket.close();
+        }
     }
-
     public PrintStream getPrintStreamInstance() {
         return printStream;
     }
@@ -69,7 +73,7 @@ public class SocketConnection extends Thread {
 
         try {
 
-            while (true) {
+            while (checkFirstTime) {
                 String replyMsg = dataInputStream.readLine();
                 if (replyMsg != null) {
 
