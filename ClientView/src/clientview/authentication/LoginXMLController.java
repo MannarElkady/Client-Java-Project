@@ -92,6 +92,8 @@ public class LoginXMLController implements Initializable {
           try {
             
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/RegisterXML.fxml"));
+                ClientView.mainStage.setWidth(692);            
+                ClientView.mainStage.setHeight(637);
                 Scene scene = ClientView.mainStage.getScene();                  
                 root.translateYProperty().set(scene.getHeight());
                 
@@ -111,7 +113,7 @@ public class LoginXMLController implements Initializable {
     }
     
       public void buttonAction(){
-             ArrayList<Object> data = new ArrayList<>();
+        ArrayList<Object> data = new ArrayList<>();
         NotificationEntity notification = new NotificationEntity();
         notification.setHeader("test Header");
         notification.setText("test Text");

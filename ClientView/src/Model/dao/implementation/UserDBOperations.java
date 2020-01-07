@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.util.Duration;
+
 /**
  *
  * @author dell
@@ -39,37 +40,34 @@ public class UserDBOperations {
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
     }
 
-
     public void loginResponse(ArrayList<Object> object) {
         if (object == null) {
             System.out.println("login failed");
         } else {
-            
-            
-            try {
+
+            /*try {
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
                 Scene scene = ClientView.mainStage.getScene();
                 root.translateYProperty().set(scene.getHeight());
-                 ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
-                ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
-                scene.setRoot(root);  
-                
+
+                scene.setRoot(root);
+
                 Timeline timeLine = new Timeline();
-                KeyValue kv = new KeyValue(root.translateYProperty(),0,Interpolator.EASE_IN);
-                KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
+                KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+                KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
                 timeLine.getKeyFrames().add(kf);
                 timeLine.play();
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
         }
     }
 
     public static void register(UserEntity user) {
 
-          ArrayList<UserEntity> users = new ArrayList<>();
-          users.add(user);
+        ArrayList<UserEntity> users = new ArrayList<>();
+        users.add(user);
         RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "register", users);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
     }
