@@ -43,10 +43,6 @@
                   <Font name="Times New Roman Bold" size="30.0" />
                </font>
             </Label>
-            <ImageView fx:id="appLogo" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <image>
-                  <Image url="@resources/todo.jpg" />
-               </image></ImageView>
             <JFXButton fx:id="addFriend" buttonType="RAISED" onAction="#addColaboratorEvent" text="  " textFill="#d3d3d3" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fx:id="addNewFriend" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -59,6 +55,15 @@
                <image>
                   <Image url="@resources/m.png" />
                </image></ImageView>
+            <JFXButton fx:id="homeButton" buttonType="RAISED" onAction="#homeButtonAction" text="  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="80.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/home.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
          </children>
       </GridPane>
    </top>

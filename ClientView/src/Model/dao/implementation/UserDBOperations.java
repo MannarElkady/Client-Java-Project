@@ -44,9 +44,10 @@ public class UserDBOperations {
         if (object == null) {
             System.out.println("login failed");
         } else {
-
-            /*try {
-                Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
+            System.out.println(((UserEntity)object.get(0)).getId());
+                 ClientView.currentUser.setId(((UserEntity)object.get(0)).getId());
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
                 Scene scene = ClientView.mainStage.getScene();
                 root.translateYProperty().set(scene.getHeight());
                 ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
@@ -64,7 +65,7 @@ public class UserDBOperations {
 
             } catch (IOException ex) {
                 Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+            }
         }
     }
 
