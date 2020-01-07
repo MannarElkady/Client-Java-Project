@@ -97,6 +97,7 @@ public class LoginXMLController implements Initializable {
             ClientView.mainStage.setWidth(629);
             ClientView.mainStage.setHeight(637);
             
+<<<<<<< HEAD
             scene.setRoot(root);
             Timeline timeLine = new Timeline();
             KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
@@ -111,6 +112,30 @@ public class LoginXMLController implements Initializable {
     }
 
     public void buttonAction() {
+=======
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/RegisterXML.fxml"));
+                ClientView.mainStage.setWidth(692);            
+                ClientView.mainStage.setHeight(637);
+                Scene scene = ClientView.mainStage.getScene();                  
+                root.translateYProperty().set(scene.getHeight());
+                
+                scene.setRoot(root);                            
+                Timeline timeLine = new Timeline();
+                KeyValue kv = new KeyValue(root.translateYProperty(),0,Interpolator.EASE_IN);
+                KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
+                timeLine.getKeyFrames().add(kf);
+                timeLine.play();
+                
+                
+            } catch (IOException ex) {
+                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
+    }
+    
+      public void buttonAction(){
+>>>>>>> e4af8605128a519fb5bd679f84325d1350d6a18c
         ArrayList<Object> data = new ArrayList<>();
         NotificationEntity notification = new NotificationEntity();
         notification.setHeader("test Header");

@@ -10,6 +10,8 @@ import Model.entities.NotificationEntity;
 import com.jfoenix.controls.JFXListView;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -23,10 +25,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  *
@@ -62,7 +69,7 @@ public class NotificationGUI {
 
                         border.setCenter(box);
                         borderPanes.add(border);
-                          
+
                     } else {
                         Button b1 = new Button("accept");
                         Button b2 = new Button("reject");
@@ -77,7 +84,6 @@ public class NotificationGUI {
                         border.setLeft(text1);
                         borderPanes.add(border);
                     }
-                  
 
                 }
                 ObservableList<BorderPane> myObservableList = FXCollections.observableList(borderPanes);
@@ -91,16 +97,38 @@ public class NotificationGUI {
                 stage.setScene(scene);
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.show();
-                
-                
+
             }
         });
 
     }
-    
-    
-    public static void receiveNotificationTray(){
-    
+
+    public static void receiveNotificationTray() throws FileNotFoundException {
+
         System.out.println("notification received");
+
+        Platform.runLater(new Runnable() {
+
+          
+            @Override
+            public void run() {
+                Image img = null;
+                try {
+                    img = new Image(new FileInputStream(System.getProperty("user.dir")+"/src/clientview/resources/notification_icon.jpg"));
+                } catch (FileNotFoundException ex) {
+                   ex.printStackTrace();
+                }
+                Notifications notificationBuilder = Notifications.create()
+                        .title("notification received")
+                        .text("You received a new notification")
+                        .graphic(new ImageView(img))
+                        .hideAfter(Duration.seconds(5))
+                        .position(Pos.BOTTOM_RIGHT);
+                
+                notificationBuilder.darkStyle();
+                notificationBuilder.showConfirm();
+            }
+        });
+
     }
 }

@@ -10,6 +10,7 @@ import Model.RequestEntity;
 import Model.entities.ItemEntity;
 import java.util.ArrayList;
 import Model.SocketConnection;
+import Model.entities.AssignFriendTodoEntity;
 import Model.entities.TodoEntity;
 
 /**
@@ -49,6 +50,20 @@ public class ItemDBOperations {
             System.out.println("Item Updated  successfully");
         } else {
             System.out.println("Item not updated successfully");
+        }
+    }
+    
+    public static void assignItem(ArrayList<AssignFriendTodoEntity> assignedFriendList){
+        RequestEntity<AssignFriendTodoEntity> request = new RequestEntity("ItemDBOperations", "assignItem", assignedFriendList);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request)); 
+    }
+    
+    public void assignItemResponse(ArrayList<Object>isAssigned){
+        if (isAssigned != null) {
+            //to connect by Controller of ui
+            System.out.println("Item assigned  successfully");
+        } else {
+            System.out.println("Item not assigned successfully");
         }
     }
 }

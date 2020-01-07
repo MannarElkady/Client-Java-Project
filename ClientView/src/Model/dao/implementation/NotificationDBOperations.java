@@ -12,6 +12,7 @@ import Model.entities.NotificationEntity;
 import Model.entities.UserEntity;
 import java.util.ArrayList;
 import clientview.NotificationGUI;
+import java.io.FileNotFoundException;
 
 /**
  *
@@ -54,7 +55,7 @@ public class NotificationDBOperations {
 
     }
 
-    public static void addNotificationResponse(ArrayList<Object> value) {
+    public static void addNotificationResponse(ArrayList<Object> value) throws FileNotFoundException {
         if (value != null) {
             NotificationGUI.receiveNotificationTray();
         }
