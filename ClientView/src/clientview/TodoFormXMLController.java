@@ -174,5 +174,17 @@ public class TodoFormXMLController implements Initializable {
 
     @FXML
     private void homeButtonAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("mainXML.fxml"));
+            Parent toHome= loader.load();
+            Stage stage = (Stage) rootPane.getScene().getWindow();
+            Scene newScene=new Scene(toHome);
+            stage.setScene(newScene);
+            stage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }
