@@ -15,14 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.util.Duration;
 
 /**
  *
@@ -45,25 +40,10 @@ public class UserDBOperations {
         if (object == null || object.size() == 0) {
             System.out.println("login failed");
         } else {
-             try {                
-                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));                
-                System.out.println(((UserEntity)object.get(0)).getId());
-                ClientView.currentUser.setId(((UserEntity)object.get(0)).getId());
-                Scene scene = ClientView.mainStage.getScene();
-                root.translateYProperty().set(scene.getHeight());
-                ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
-                ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
-                scene.setRoot(root);  
-                
-                Timeline timeLine = new Timeline();
-                KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
-                KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
-                timeLine.getKeyFrames().add(kf);
-                timeLine.play();
-
-            } catch (IOException ex) {
-                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
+            System.out.println(((UserEntity)object.get(0)).getId());
+            ClientView.currentUser = (UserEntity)object.get(0);
+            getAllTodos(ClientView.currentUser);
         }
     }
 
@@ -96,7 +76,26 @@ public class UserDBOperations {
         if(items.size() == 0){
             System.out.println("No Items");
         }else{
-            new MainXMLController().generateTodosUI(items);
+            try {
+                MainXMLController.setTodos(items);
+                
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));                
+                Scene scene = ClientView.mainStage.getScene();
+                //root.translateYProperty().set(scene.getHeight());
+                //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
+               // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                scene.setRoot(root);  
+                
+                /*Timeline timeLine = new Timeline();
+                KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+                KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+                timeLine.getKeyFrames().add(kf);
+                timeLine.play();*/
+                
+            } catch (IOException ex) {
+                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }
 

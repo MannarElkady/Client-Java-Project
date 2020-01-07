@@ -5,7 +5,8 @@
  */
 package clientview;
 
-import Model.dao.implementation.TodoListDBOperations;
+import Model.dao.implementation.UserDBOperations;
+import Model.entities.ItemEntity;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
@@ -80,20 +81,31 @@ public class TodoFormXMLController implements Initializable {
     private ImageView addNewFriend;
     @FXML
     private BorderPane rootPane;
-    TodoEntity todo= new TodoEntity();
+    static TodoEntity todo= new TodoEntity();
     
-
+    static ArrayList<Object>itemList = new ArrayList<>();
+    
+    public static void setItems(ArrayList<Object> list){
+        itemList = list;
+    }
+    public static void clearItemsList(){
+        itemList.clear();
+    }
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        todo.setId(0);
+    public void initialize(URL url, ResourceBundle rb) {        
+        todoNameLabel.setText(todo.getTitle());
         setCollaboratorsDummy();
         setCollaboratorsPanes(test2);
         generateCollaboratorListUI();
-        TodoListDBOperations.getAllItems(todo);
+        loadItems();
+        //TodoListDBOperations.getAllItems(todo);
 
+    }
+    public static void setToDoData(TodoEntity todoData){
+        todo = todoData;
     }
 
     @FXML
@@ -140,7 +152,6 @@ public class TodoFormXMLController implements Initializable {
     public void generateCollaboratorListUI() {
         ObservableList<HBox> items = FXCollections.observableArrayList(hBoxPane);
         collaboratorsList.setItems(items);
-
     }
 
     @FXML
@@ -172,5 +183,21 @@ public class TodoFormXMLController implements Initializable {
         newBorder.setLeft(newItemTitle);
         newBorder.setCenter(newItemDescr);
 */
+    }
+    @FXML
+    private void homeButtonAction() throws IOException{
+        UserDBOperations.getAllTodos(ClientView.currentUser);      
+    }
+    
+    private void loadItems(){
+        
+        Label itemText = null;
+        for(int i=0;i<itemList.size();i++){
+        
+            itemText = new Label(((ItemEntity)itemList.get(i)).getTitle()); 
+            vBoxPane.getChildren().add(itemText);
+            //wait).
+            
+        }
     }
 }
