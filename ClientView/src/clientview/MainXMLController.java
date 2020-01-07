@@ -85,8 +85,8 @@ public class MainXMLController implements Initializable {
         test2.add(useraya);
               
     }
-    public void setFriendListPanes(ArrayList <UserEntity> friendList){
-        for(UserEntity useraya: friendList){
+    public void setFriendListPanes(){
+        for(UserEntity useraya: test2){
             try {
                 child = new HBox();
                 img= new Image(new FileInputStream(System.getProperty("user.dir")+"/src/clientview/resources/m.png"));
@@ -162,12 +162,10 @@ public class MainXMLController implements Initializable {
         // TODO
         //setTodoDummy();
         //setFriendListDummy();
-        setFriendListPanes(test2);
+        setFriendListPanes();
         generateTodosUI(new ArrayList<Object>());
         generateFriendListUI();
-        UserEntity user = new UserEntity();
-         user.setId(1);
-        UserDBOperations.getFrinds(user);
+      
 
     }
 
@@ -214,15 +212,8 @@ public class MainXMLController implements Initializable {
     
     
     
-      public static void  setFriendList(ArrayList<UserEntity> a){
-          System.out.println("clientview.MainXMLController.setFriendList()"+a.size());
-          for(int i=0;i<a.size();i++)
-          {
-              System.out.println("name"+a.get(i).getUsername());
-              test2.add(a.get(i));
-          }
-         
-              
+    public static void  setFriendList(ArrayList<UserEntity> a){         
+           test2=a;   
     }
 
 }    
