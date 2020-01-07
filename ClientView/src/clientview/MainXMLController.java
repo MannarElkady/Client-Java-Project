@@ -5,7 +5,8 @@
  */
 package clientview;
 
-import Model.RequestCreator;
+
+import Model.MainFormHandler;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
@@ -32,10 +33,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -64,7 +67,7 @@ public class MainXMLController implements Initializable {
     private Label todoName=null;
     private Label userLabel=null;
 
-    
+    public static ArrayList<Object> data;
     // for Dummy Testing
     ArrayList <TodoEntity>test=new ArrayList();
    public static ArrayList <UserEntity>test2=new ArrayList();
@@ -112,13 +115,18 @@ public class MainXMLController implements Initializable {
         
 
     }
+    public static void setTodos(ArrayList<Object> list){
+        data = list;
+    }
     /**
      * Initializes the controller class.
      */
     public void generateTodosUI(ArrayList <Object> todoNames){
-        for(int i = 0 ;i< todoNames.size();i++){
+        System.out.println("TEST 2");
+        for(int i = 0 ;i< data.size();i++){
+            TodoEntity todo=null;
         try {
-            TodoEntity todo = (TodoEntity)todoNames.get(i);
+             todo = (TodoEntity)data.get(i);
             todoName = new Label(todo.getTitle());
             System.out.println("Working Directory = " +
               System.getProperty("user.dir"));  
@@ -137,6 +145,8 @@ public class MainXMLController implements Initializable {
                 todoName.setPadding(new Insets(15));
                 todoName.setPrefSize(100,100);
                 todoName.setStyle("-fx-background-color:POWDERBLUE");
+                todoName.setId(String.valueOf(todo.getId()));
+                todoName.addEventFilter(MouseEvent.MOUSE_CLICKED, new MainFormHandler());
                 jMasonaryPane.getChildren().add(todoName);
         }
     }
@@ -153,8 +163,7 @@ public class MainXMLController implements Initializable {
         //setTodoDummy();
         //setFriendListDummy();
         setFriendListPanes(test2);
-        getAllTodos();
-        //generateTodosUI(test);
+        generateTodosUI(new ArrayList<Object>());
         generateFriendListUI();
         UserEntity user = new UserEntity();
          user.setId(1);
@@ -168,6 +177,16 @@ public class MainXMLController implements Initializable {
 
     @FXML
     private void addFriendBtnAction(ActionEvent event) {
+        try{
+        Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddCollaboratorTodoFXML.fxml"));
+        Stage stage = new Stage(StageStyle.DECORATED);
+        Scene scene = new Scene(root, 600, 600);
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
     }
 
     @FXML
@@ -205,4 +224,5 @@ public class MainXMLController implements Initializable {
          
               
     }
+
 }    

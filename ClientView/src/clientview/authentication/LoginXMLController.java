@@ -101,14 +101,13 @@ public class LoginXMLController implements Initializable {
             KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
             timeLine.getKeyFrames().add(kf);
             timeLine.play();
-
         } catch (IOException ex) {
             Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    
+  
       public void buttonAction(){
         ArrayList<Object> data = new ArrayList<>();
         NotificationEntity notification = new NotificationEntity();
