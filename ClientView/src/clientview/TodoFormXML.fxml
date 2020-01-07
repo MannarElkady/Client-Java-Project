@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
-<?import com.jfoenix.controls.JFXScrollPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -30,7 +29,7 @@
             <RowConstraints minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXButton fx:id="addItem" buttonType="RAISED" onAction="#addItemAction" text="   " GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <JFXButton fx:id="addItem" buttonType="RAISED" onAction="#addItemAction" text="Add New Item" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <graphic>
                   <ImageView fx:id="addNewItem" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,17 +37,16 @@
                      </image>
                   </ImageView>
                </graphic>
-            </JFXButton>
-            <Label fx:id="todoNameLabel" text="TodoName" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="Times New Roman" size="30.0" />
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <Label fx:id="todoNameLabel" text="TodoName" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font name="Times New Roman Bold" size="30.0" />
                </font>
             </Label>
-            <ImageView fx:id="appLogo" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <image>
-                  <Image url="@resources/todo.jpg" />
-               </image></ImageView>
-            <JFXButton fx:id="addFriend" buttonType="RAISED" onAction="#addColaboratorEvent" text="  " GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <JFXButton fx:id="addFriend" buttonType="RAISED" onAction="#addColaboratorEvent" text="  " textFill="#d3d3d3" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fx:id="addNewFriend" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -56,32 +54,33 @@
                      </image>
                   </ImageView>
                </graphic></JFXButton>
-            <ImageView fx:id="userImg" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <image>
-                  <Image url="@resources/m.png" />
-               </image></ImageView>
+            <JFXButton fx:id="homeButton" buttonType="RAISED" onAction="#homeButtonAction" text="  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="80.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/home.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
          </children>
       </GridPane>
    </top>
    <center>
-      <VBox fx:id="vBoxPane" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #97CAEF;" BorderPane.alignment="CENTER" />
+      <VBox fx:id="vBoxPane" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #D1E8E2;" BorderPane.alignment="CENTER" />
    </center>
    <left>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <center>
-            <JFXScrollPane BorderPane.alignment="CENTER">
-               <children>
-                  <JFXListView fx:id="collaboratorsList" />
-               </children>
-            </JFXScrollPane>
-         </center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #97CAEF;" BorderPane.alignment="CENTER">
          <top>
-            <Label text="Online Collaborators" BorderPane.alignment="CENTER">
+            <Label style="-fx-background-color: #97CAEF;" text="Online Collaborators" BorderPane.alignment="CENTER">
                <font>
-                  <Font name="Agency FB" size="18.0" />
+                  <Font name="Agency FB" size="22.0" />
                </font>
             </Label>
          </top>
+         <center>
+            <JFXListView fx:id="collaboratorsList" style="-fx-background-color: #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
    </left>
 </BorderPane>

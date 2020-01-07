@@ -5,6 +5,7 @@
  */
 package clientview;
 
+import Model.dao.implementation.UserDBOperations;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
@@ -12,6 +13,7 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXMasonryPane;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -21,13 +23,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -62,6 +69,8 @@ public class MainXMLController implements Initializable {
     ArrayList <UserEntity>test2=new ArrayList();
     ArrayList <HBox> hBoxPane =new ArrayList();
     HBox child=null;
+    @FXML
+    private BorderPane mainBorderPane;
     public void setFriendListDummy(){
         UserEntity useraya= new UserEntity();
         useraya.setUsername("Userayaa");
@@ -103,9 +112,10 @@ public class MainXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    public void generateTodosUI(ArrayList <TodoEntity> todoNames){
-        for(TodoEntity todo: todoNames){
+    public void generateTodosUI(ArrayList <Object> todoNames){
+        for(int i = 0 ;i< todoNames.size();i++){
         try {
+            TodoEntity todo = (TodoEntity)todoNames.get(i);
             todoName = new Label(todo.getTitle());
             System.out.println("Working Directory = " +
               System.getProperty("user.dir"));  
@@ -132,16 +142,16 @@ public class MainXMLController implements Initializable {
     public void generateFriendListUI(){
             ObservableList<HBox> items =FXCollections.observableArrayList(hBoxPane);
             friendListPane.setItems(items);
-  
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        setTodoDummy();
+        //setTodoDummy();
         setFriendListDummy();
         setFriendListPanes(test2);
-        generateTodosUI(test);
+        getAllTodos();
+        //generateTodosUI(test);
         generateFriendListUI();
     }
 
@@ -155,5 +165,24 @@ public class MainXMLController implements Initializable {
 
     @FXML
     private void addTodoAction(ActionEvent event) {
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertTodoXML.fxml"));
+            Parent insertItemWindow = loader.load();
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner((Stage)mainBorderPane.getScene().getWindow());
+            Scene dialogScene = new Scene(insertItemWindow);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        } catch (IOException ex) {
+            Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void getAllTodos() {
+        UserEntity user = new UserEntity();
+        user.setId(1);
+        UserDBOperations.getAllTodos(user);
     }
 }    

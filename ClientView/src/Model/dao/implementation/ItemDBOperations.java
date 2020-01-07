@@ -46,6 +46,7 @@ public class ItemDBOperations {
     public void updateItemResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
             //to connect by Controller of ui
+            
             System.out.println("Item Updated  successfully");
         } else {
             System.out.println("Item not updated successfully");

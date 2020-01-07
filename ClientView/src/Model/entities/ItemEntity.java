@@ -22,7 +22,7 @@ public class ItemEntity {
         this.itemID = itemID;
     }
 
-    public String getTitle() {
+    public String getTitle(){
         return title;
     }
 

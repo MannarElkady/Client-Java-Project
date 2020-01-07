@@ -22,8 +22,13 @@ public class GsonParser {
             System.out.println(request);
             switch (request.charAt(14)) {
                 case 'U':
-                    requestType = new TypeToken<RequestEntity<UserEntity>>() {
-                    }.getType();
+                    if(request.contains("getAllTodosResonse")){
+                        requestType = new TypeToken<RequestEntity<TodoEntity>>() {
+                        }.getType();
+                    }else{
+                        requestType = new TypeToken<RequestEntity<UserEntity>>() {
+                        }.getType();
+                    }
                     break;
                 case 'I':
                     requestType = new TypeToken<RequestEntity<ItemEntity>>() {

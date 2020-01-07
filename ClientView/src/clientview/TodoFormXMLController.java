@@ -5,6 +5,7 @@
  */
 package clientview;
 
+import Model.dao.implementation.TodoListDBOperations;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
@@ -20,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -45,11 +47,7 @@ public class TodoFormXMLController implements Initializable {
     @FXML
     private Label todoNameLabel;
     @FXML
-    private ImageView appLogo;
-    @FXML
     private JFXButton addFriend;
-    @FXML
-    private ImageView userImg;
     @FXML
     private VBox vBoxPane;
     @FXML
@@ -79,18 +77,23 @@ public class TodoFormXMLController implements Initializable {
     private ImageView addNewFriend;
     @FXML
     private BorderPane rootPane;
+    TodoEntity todo;
+    @FXML
+    private JFXButton homeButton;
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        todo= new TodoEntity();
         setCollaboratorsDummy();
         setCollaboratorsPanes(test2);
         generateCollaboratorListUI();
-
+        TodoListDBOperations.getAllItems(todo);
     }
-
+    
     @FXML
     private void addColaboratorEvent() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("AddCollaboratorTodoFXML.fxml"));
@@ -103,7 +106,7 @@ public class TodoFormXMLController implements Initializable {
 
     public void setCollaboratorsDummy() {
         UserEntity useraya = new UserEntity();
-        useraya.setUsername("Userayaa");
+        useraya.setUsername("colaborayaa");
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
@@ -111,7 +114,7 @@ public class TodoFormXMLController implements Initializable {
         test2.add(useraya);
 
     }
-
+    
     public void setCollaboratorsPanes(ArrayList<UserEntity> collaboratorsList) {
         for (UserEntity useraya : collaboratorsList) {
             try {
@@ -167,5 +170,21 @@ public class TodoFormXMLController implements Initializable {
         newBorder.setLeft(newItemTitle);
         newBorder.setCenter(newItemDescr);
 */
+    }
+
+    @FXML
+    private void homeButtonAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("mainXML.fxml"));
+            Parent toHome= loader.load();
+            Stage stage = (Stage) rootPane.getScene().getWindow();
+            Scene newScene=new Scene(toHome);
+            stage.setScene(newScene);
+            stage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

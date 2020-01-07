@@ -49,7 +49,7 @@ public class TodoListDBOperations {
  
      public void addTodoResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
-            
+            System.out.println("************"+((TodoEntity)arrayObjects.get(0)).getId());
             System.out.println("Todo Added  successfully");
         } else {
             System.out.println("Todo not added successfully");
@@ -68,7 +68,7 @@ public class TodoListDBOperations {
         if(items.size() == 0){
             System.out.println("No Items");
         }else{
-            System.out.println("We have items" + items.size());
+            
         }
     }
 }
