@@ -47,11 +47,7 @@ public class TodoFormXMLController implements Initializable {
     @FXML
     private Label todoNameLabel;
     @FXML
-    private ImageView appLogo;
-    @FXML
     private JFXButton addFriend;
-    @FXML
-    private ImageView userImg;
     @FXML
     private VBox vBoxPane;
     @FXML
@@ -81,7 +77,11 @@ public class TodoFormXMLController implements Initializable {
     private ImageView addNewFriend;
     @FXML
     private BorderPane rootPane;
+    
     static TodoEntity todo= new TodoEntity();
+
+    @FXML
+    private JFXButton homeButton;
     
     static ArrayList<Object>itemList = new ArrayList<>();
     
@@ -95,6 +95,7 @@ public class TodoFormXMLController implements Initializable {
      * Initializes the controller class.
      */
     @Override
+
     public void initialize(URL url, ResourceBundle rb) {        
         todoNameLabel.setText(todo.getTitle());
         setCollaboratorsDummy();
@@ -120,7 +121,7 @@ public class TodoFormXMLController implements Initializable {
 
     public void setCollaboratorsDummy() {
         UserEntity useraya = new UserEntity();
-        useraya.setUsername("Userayaa");
+        useraya.setUsername("colaborayaa");
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
@@ -128,7 +129,7 @@ public class TodoFormXMLController implements Initializable {
         test2.add(useraya);
 
     }
-
+    
     public void setCollaboratorsPanes(ArrayList<UserEntity> collaboratorsList) {
         for (UserEntity useraya : collaboratorsList) {
             try {
@@ -184,6 +185,7 @@ public class TodoFormXMLController implements Initializable {
         newBorder.setCenter(newItemDescr);
 */
     }
+    
     @FXML
     private void homeButtonAction() throws IOException{
         UserDBOperations.getAllTodos(ClientView.currentUser);      
@@ -199,5 +201,6 @@ public class TodoFormXMLController implements Initializable {
             //wait).
             
         }
+
     }
 }

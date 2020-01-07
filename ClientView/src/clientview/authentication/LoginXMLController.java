@@ -5,6 +5,7 @@
  */
 package clientview.authentication;
 
+import Model.RequestCreator;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -15,6 +16,7 @@ import Model.SocketConnection;
 import Model.dao.implementation.NotificationDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.NotificationEntity;
+import Model.entities.UserEntity;
 import Utility.Validation;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -63,14 +65,15 @@ public class LoginXMLController implements Initializable {
             String username = userNameTextField.getText(), password = passwordPasswordField.getText();
             if (Validation.checkString(username) && Validation.checkString(password)) {
                 if (Validation.checkUsernameRegex(username)) {
-                    /* UserEntity loginUser= new UserEntity();
+                UserEntity loginUser= new UserEntity();
                 loginUser.setUsername(userNameTextField.getText());
                 loginUser.setPassword(passwordPasswordField.getText());
                 loginUser.setOnlineFlag(1);
                 RequestCreator newRequest = new RequestCreator("UserDBOperations","login",loginUser);
                 String newRequestJson= newRequest.getJsonObject();
-                System.out.println(newRequestJson);*/
-                UserDBOperations.login(username, password);
+                System.out.println(newRequestJson);
+                    UserDBOperations.login(username, password);
+
                 }
             }
         } else {

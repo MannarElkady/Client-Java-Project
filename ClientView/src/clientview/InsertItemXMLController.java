@@ -74,6 +74,7 @@ public class InsertItemXMLController implements Initializable {
                 newItemEntity = new ItemEntity();
                 newItemEntity.setDescription(descriptionTextArea.getText());
                 newItemEntity.setTitle(titleTextField.getText());
+                newItemEntity.setCreatorID(ClientView.currentUser.getId());
                 newItemEntity.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));
                 ItemDBOperations.addItem(newItemEntity);
                 ((Stage)mainBorderPane.getScene().getWindow()).close();                
