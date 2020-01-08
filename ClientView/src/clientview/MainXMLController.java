@@ -95,9 +95,11 @@ public class MainXMLController implements Initializable {
                 imgView.setFitWidth(10.0);
                 userLabel=new Label(useraya.getUsername());
                 userLabel.setGraphic(imgView);
+                userLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 userLabel.paddingProperty();
                 userLabel.setPrefSize(100,30);
                 child.getChildren().add(userLabel);
+                child.setStyle("-fx-background-color:POWDERBLUE;-fx-background-radius:30;-fx-border-radius:30;");
                 hBoxPane.add(child);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(MainXMLController.class.getName()).log(Level.SEVERE, null, ex);
@@ -143,8 +145,8 @@ public class MainXMLController implements Initializable {
                 todoName.setGraphic(imgView);
                 todoName.paddingProperty();
                 todoName.setPadding(new Insets(15));
-                todoName.setPrefSize(100,100);
-                todoName.setStyle("-fx-background-color:POWDERBLUE");
+                todoName.setPrefSize(200,100);
+                todoName.setStyle("-fx-background-color:POWDERBLUE;-fx-background-radius:30;-fx-border-radius:30;");
                 todoName.setId(String.valueOf(todo.getId()));
                 todoName.addEventFilter(MouseEvent.MOUSE_CLICKED, new MainFormHandler());
                 jMasonaryPane.getChildren().add(todoName);
@@ -154,6 +156,7 @@ public class MainXMLController implements Initializable {
     
     public void generateFriendListUI(){
             ObservableList<HBox> items =FXCollections.observableArrayList(hBoxPane);
+            friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
             friendListPane.setItems(items);
     }
     

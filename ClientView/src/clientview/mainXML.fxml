@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXMasonryPane?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -64,6 +65,16 @@
          <center>
             <JFXMasonryPane fx:id="jMasonaryPane" BorderPane.alignment="CENTER" />
          </center>
+         <top>
+            <Label style="-fx-background-color: #d3d3d3; -fx-background-radius: 70; -fx-border-radius: 70;" text="    Available Todos    " BorderPane.alignment="TOP_LEFT">
+               <font>
+                  <Font name="Agency FB" size="22.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
       </BorderPane>
    </center>
    <left>
