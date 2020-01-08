@@ -6,6 +6,7 @@
 package clientview;
 
 import Model.dao.implementation.TodoListDBOperations;
+import Model.dao.implementation.UserDBOperations;
 import Model.entities.TodoEntity;
 import Utility.Validation;
 import com.jfoenix.controls.JFXButton;
@@ -64,7 +65,8 @@ public class InsertTodoXMLController implements Initializable {
                 newTodo.setCreatorId(ClientView.currentUser.getId());
                 newTodo.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));
                 TodoListDBOperations.addTodo(newTodo);
-                ((Stage)mainBorderPane.getScene().getWindow()).close();                
+                ((Stage)mainBorderPane.getScene().getWindow()).close(); 
+                UserDBOperations.getAllTodos(ClientView.currentUser);      
             }
         }
     }

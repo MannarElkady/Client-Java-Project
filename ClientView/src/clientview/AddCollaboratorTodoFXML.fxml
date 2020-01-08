@@ -5,13 +5,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.AddCollaboratorTodoController">
    <center>
       <AnchorPane prefHeight="382.0" prefWidth="496.0" BorderPane.alignment="CENTER">
          <children>
             <JFXComboBox fx:id="collaborators" layoutX="140.0" layoutY="129.0" onAction="#showCollaborators" prefHeight="31.0" prefWidth="221.0" promptText="Pick a collaborator" />
-            <JFXComboBox fx:id="todoLists" layoutX="140.0" layoutY="193.0" onAction="#showTodoLists" prefHeight="31.0" prefWidth="221.0" promptText="Pick a todo" />
+            <JFXComboBox fx:id="todoLists" layoutX="140.0" layoutY="193.0" prefHeight="31.0" prefWidth="221.0" promptText="Pick a todo" />
             <JFXButton fx:id="addButton" layoutX="70.0" layoutY="275.0" onAction="#addButtonAction" prefHeight="31.0" prefWidth="140.0" style="-fx-background-color: #D7E1E9;" text="Add" textAlignment="CENTER" />
             <JFXButton fx:id="cancelButton" layoutX="291.0" layoutY="275.0" onAction="#cancelButtonAction" prefHeight="31.0" prefWidth="140.0" style="-fx-background-color: #D7E1E9;" text="Cancel" textAlignment="CENTER" />
          </children>

@@ -5,6 +5,7 @@
  */
 package clientview.authentication;
 
+import Model.RequestCreator;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -15,6 +16,8 @@ import Model.SocketConnection;
 import Model.dao.implementation.NotificationDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.NotificationEntity;
+import Model.entities.NotificationReceiversEntity;
+import Model.entities.UserEntity;
 import Utility.Validation;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -63,14 +66,15 @@ public class LoginXMLController implements Initializable {
             String username = userNameTextField.getText(), password = passwordPasswordField.getText();
             if (Validation.checkString(username) && Validation.checkString(password)) {
                 if (Validation.checkUsernameRegex(username)) {
-                    /* UserEntity loginUser= new UserEntity();
+                UserEntity loginUser= new UserEntity();
                 loginUser.setUsername(userNameTextField.getText());
                 loginUser.setPassword(passwordPasswordField.getText());
                 loginUser.setOnlineFlag(1);
                 RequestCreator newRequest = new RequestCreator("UserDBOperations","login",loginUser);
                 String newRequestJson= newRequest.getJsonObject();
-                System.out.println(newRequestJson);*/
-                UserDBOperations.login(username, password);
+                System.out.println(newRequestJson);
+                    UserDBOperations.login(username, password);
+
                 }
             }
         } else {
@@ -98,21 +102,32 @@ public class LoginXMLController implements Initializable {
             KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
             timeLine.getKeyFrames().add(kf);
             timeLine.play();
-
         } catch (IOException ex) {
             Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    
+  
       public void buttonAction(){
-        ArrayList<Object> data = new ArrayList<>();
+       ArrayList<Object> data = new ArrayList<>();
         NotificationEntity notification = new NotificationEntity();
         notification.setHeader("test Header");
         notification.setText("test Text");
         notification.setNotificationType("test Notification");
-        notification.setSenderID(2);
+        notification.setSenderID(2);        
+        NotificationReceiversEntity notificationReceiver = new NotificationReceiversEntity();
+        notificationReceiver.setReceiverID(1);
+        NotificationReceiversEntity notificationReceiver2 = new NotificationReceiversEntity();
+        notificationReceiver2.setReceiverID(3);
+         NotificationReceiversEntity notificationReceiver3 = new NotificationReceiversEntity();
+        notificationReceiver3.setReceiverID(4);        
+        ArrayList<NotificationReceiversEntity> receiversList = new ArrayList<>();
+        receiversList.add(notificationReceiver);
+        receiversList.add(notificationReceiver2);
+        receiversList.add(notificationReceiver3);
+        notification.setNotificationReceivers(receiversList);
+
         data.add(notification);
         NotificationDBOperations.sendNotification(data);
     }

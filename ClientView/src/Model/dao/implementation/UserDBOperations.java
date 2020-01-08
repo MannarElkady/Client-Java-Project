@@ -15,14 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.util.Duration;
 
 /**
  *
@@ -45,25 +40,11 @@ public class UserDBOperations {
         if (object == null || object.size() == 0) {
             System.out.println("login failed");
         } else {
-             try {                
-                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));                
-                System.out.println(((UserEntity)object.get(0)).getId());
-                ClientView.currentUser.setId(((UserEntity)object.get(0)).getId());
-                Scene scene = ClientView.mainStage.getScene();
-                root.translateYProperty().set(scene.getHeight());
-                ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
-                ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
-                scene.setRoot(root);  
-                
-                Timeline timeLine = new Timeline();
-                KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
-                KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
-                timeLine.getKeyFrames().add(kf);
-                timeLine.play();
-
-            } catch (IOException ex) {
-                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        
+            System.out.println(((UserEntity)object.get(0)).getId());
+            ClientView.currentUser = (UserEntity)object.get(0);
+            getAllTodos(ClientView.currentUser);
+            getFrinds(ClientView.currentUser);
         }
     }
 
@@ -75,13 +56,27 @@ public class UserDBOperations {
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
     }
 
-    public void registerResponse(Object object) {
-        if (object != null) {
+    public void registerResponse(ArrayList<Object> object) {
+          if (object== null|| object.isEmpty()) {
+              System.out.println("registration field");      
+          } else {
 
-            System.out.println("registered successfully");
-        } else {
-            System.out.println("error happened in registeration");
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
+                Scene scene = ClientView.mainStage.getScene();
+                root.translateYProperty().set(scene.getHeight());
+                scene.setRoot(root);
+                /*Timeline timeLine = new Timeline();
+                KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+                KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+                timeLine.getKeyFrames().add(kf);
+                timeLine.play();*/
+
+            } catch (IOException ex) {
+                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
 
     }
     
@@ -96,8 +91,67 @@ public class UserDBOperations {
         if(items.size() == 0){
             System.out.println("No Items");
         }else{
-            new MainXMLController().generateTodosUI(items);
+            try {
+                MainXMLController.setTodos(items);
+                
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));                
+                Scene scene = ClientView.mainStage.getScene();
+                //root.translateYProperty().set(scene.getHeight());
+                //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
+               // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                scene.setRoot(root);  
+                
+                /*Timeline timeLine = new Timeline();
+                KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+                KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+                timeLine.getKeyFrames().add(kf);
+                timeLine.play();*/
+                
+            } catch (IOException ex) {
+                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }
+    
+    
+      public static void getFrinds(UserEntity userID){
+        ArrayList<UserEntity> list = new ArrayList<>();
+        list.add(userID);
+        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getFrinds", list);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+    }
+    
+    public void getFrindsResonse(ArrayList<UserEntity> items){
+        
+        if(items == null || items.isEmpty()){
+        
+                        System.out.println("hi hema");
+
+        }else{
+        try {
+                MainXMLController.setFriendList(items);
+                
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));                
+                Scene scene = ClientView.mainStage.getScene();
+                //root.translateYProperty().set(scene.getHeight());
+                //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
+               // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                scene.setRoot(root);  
+                
+                /*Timeline timeLine = new Timeline();
+                KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+                KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+                timeLine.getKeyFrames().add(kf);
+                timeLine.play();*/
+                
+            } catch (IOException ex) {
+                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }
+    }
+    
+    
 
 }

@@ -5,7 +5,8 @@
  */
 package clientview;
 
-import Model.dao.implementation.TodoListDBOperations;
+import Model.dao.implementation.UserDBOperations;
+import Model.entities.ItemEntity;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
@@ -21,7 +22,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -77,23 +77,38 @@ public class TodoFormXMLController implements Initializable {
     private ImageView addNewFriend;
     @FXML
     private BorderPane rootPane;
-    TodoEntity todo;
+    
+    static TodoEntity todo= new TodoEntity();
+
     @FXML
     private JFXButton homeButton;
     
-
+    static ArrayList<Object>itemList = new ArrayList<>();
+    
+    public static void setItems(ArrayList<Object> list){
+        itemList = list;
+    }
+    public static void clearItemsList(){
+        itemList.clear();
+    }
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        todo= new TodoEntity();
+
+    public void initialize(URL url, ResourceBundle rb) {        
+        todoNameLabel.setText(todo.getTitle());
         setCollaboratorsDummy();
         setCollaboratorsPanes(test2);
         generateCollaboratorListUI();
-        TodoListDBOperations.getAllItems(todo);
+        loadItems();
+        //TodoListDBOperations.getAllItems(todo);
+
     }
-    
+    public static void setToDoData(TodoEntity todoData){
+        todo = todoData;
+    }
+
     @FXML
     private void addColaboratorEvent() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("AddCollaboratorTodoFXML.fxml"));
@@ -138,7 +153,6 @@ public class TodoFormXMLController implements Initializable {
     public void generateCollaboratorListUI() {
         ObservableList<HBox> items = FXCollections.observableArrayList(hBoxPane);
         collaboratorsList.setItems(items);
-
     }
 
     @FXML
@@ -171,20 +185,22 @@ public class TodoFormXMLController implements Initializable {
         newBorder.setCenter(newItemDescr);
 */
     }
-
+    
     @FXML
-    private void homeButtonAction(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("mainXML.fxml"));
-            Parent toHome= loader.load();
-            Stage stage = (Stage) rootPane.getScene().getWindow();
-            Scene newScene=new Scene(toHome);
-            stage.setScene(newScene);
-            stage.show();
-            
-        } catch (IOException ex) {
-            Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void homeButtonAction() throws IOException{
+        UserDBOperations.getAllTodos(ClientView.currentUser);      
+    }
+    
+    private void loadItems(){
         
+        Label itemText = null;
+        for(int i=0;i<itemList.size();i++){
+        
+            itemText = new Label(((ItemEntity)itemList.get(i)).getTitle()); 
+            vBoxPane.getChildren().add(itemText);
+            //wait).
+            
+        }
+
     }
 }

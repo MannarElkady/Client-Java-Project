@@ -1,16 +1,12 @@
 package clientview;
 
-import Model.dao.implementation.TodoListDBOperations;
-import Model.entities.AssignFriendTodoEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -23,30 +19,38 @@ public class AddCollaboratorTodoController implements Initializable{
     @FXML private JFXButton addButton;
     @FXML private JFXButton cancelButton;
     
-    ArrayList<AssignFriendTodoEntity> list;
+    static ArrayList<String> list;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         collaborators.getItems().add("Java 1.8");
         collaborators.getItems().add("Java 1.7");
         collaborators.getItems().add("Java 1.6");
         collaborators.getItems().add("Java 1.5");
-        list = new ArrayList<>();
-
+        //list = new ArrayList<>();
+       // TodoListDBOperations.assignTodoRequest(new ArrayList<String>()); 
+        //showTodoLists();
+       
+    }
+    public static void setTodos(ArrayList<String> todo){
+        list = todo;
     }
     
     @FXML private void showCollaborators(){
         System.out.println(collaborators.getSelectionModel().getSelectedItem());
     }
     
-    @FXML private void showTodoLists(){
-    
+    private void showTodoLists(){
+        System.out.println("TESTTT");
+        for(String data: list){
+            todoLists.getItems().add(data);
+        }
     }
     
     @FXML private void addButtonAction(){
         String data = (String) collaborators.getSelectionModel().getSelectedItem();
         if(data!=null){
-            list.add(new AssignFriendTodoEntity("ibrahim", 1, 2));
-            TodoListDBOperations.assignTodoRequest(list); 
+            //list.add(new AssignFriendTodoEntity("ibrahim", 1, 2));
+           
         }
     }
     
