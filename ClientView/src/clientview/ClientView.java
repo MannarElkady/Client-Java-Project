@@ -60,9 +60,9 @@ public class ClientView extends Application {
      */
     public static void main(String[] args) {
         System.out.println("test2");
+
         launch(args);
 
     }
     
-  
 }
