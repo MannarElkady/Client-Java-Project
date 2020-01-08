@@ -6,6 +6,7 @@
 package clientview;
 
 import Model.SocketConnection;
+import Model.dao.implementation.NotificationDBOperations;
 import Model.entities.UserEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -52,6 +54,10 @@ public class ClientView extends Application {
             System.exit(0);
         });
         SocketConnection.getInstance();
+        
+        ArrayList<Integer> users = new ArrayList<>();        
+        users.add(1);
+        NotificationDBOperations.receiveNotifications(users);
 }
 
     /**
