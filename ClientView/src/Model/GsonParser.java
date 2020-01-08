@@ -17,15 +17,15 @@ public class GsonParser {
 
         Gson gson = new Gson();
         Type requestType = null;
-        if (request != null  && !request.equals("null")) {
-            
+        if (request != null && !request.equals("null")) {
+
             System.out.println(request);
             switch (request.charAt(14)) {
                 case 'U':
-                    if(request.contains("getAllTodosResonse")){
+                    if (request.contains("getAllTodosResonse")) {
                         requestType = new TypeToken<RequestEntity<TodoEntity>>() {
                         }.getType();
-                    }else{
+                    } else {
                         requestType = new TypeToken<RequestEntity<UserEntity>>() {
                         }.getType();
                     }
@@ -42,13 +42,17 @@ public class GsonParser {
                     if (request.contains("assignTodoResponse")) {
                         requestType = new TypeToken<RequestEntity<Integer>>() {
                         }.getType();
-                    } else if(request.contains("getAllItemsResonse")) {
+                    } else if (request.contains("getAllItemsResonse")) {
                         requestType = new TypeToken<RequestEntity<ItemEntity>>() {
                         }.getType();
-                    }else{
+                    } else if (request.contains("getToDoCollaboratorsResonse")) {
+                        requestType = new TypeToken<RequestEntity<UserEntity>>() {
+                        }.getType();
+                    } else {
                         requestType = new TypeToken<RequestEntity<TodoEntity>>() {
                         }.getType();
                     }
+
                     break;
             }
         }

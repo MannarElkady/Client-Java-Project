@@ -45,6 +45,9 @@ public class UserDBOperations {
             ClientView.currentUser = (UserEntity)object.get(0);
             getAllTodos(ClientView.currentUser);
             getFrinds(ClientView.currentUser);
+            ClientView.currentUser.setUsername("asmaa");
+            AddFrind(ClientView.currentUser);
+            
         }
     }
 
@@ -152,6 +155,23 @@ public class UserDBOperations {
         }
     }
     
-    
+     public static void AddFrind(UserEntity user) {
+
+       ArrayList<UserEntity> list = new ArrayList<>();
+        list.add(user);
+        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "addFrind", list);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+    }
+
+    public void addFrindResponse(ArrayList<Object> object) {
+        if (object == null || object.size() == 0) {
+            System.out.println("Not Exist");
+        } else {
+                        System.out.println("Add sucssisfly");
+
+        
+          
+        }
+    }
 
 }
