@@ -32,8 +32,8 @@ public class ClientView extends Application {
     public void start(Stage stage) throws Exception {
         mainStage = stage;
         currentUser= new UserEntity();
-      Parent root = FXMLLoader.load(getClass().getResource("TodoFormXML.fxml"));
-    //  Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
+  //    Parent root = FXMLLoader.load(getClass().getResource("mainXML.fxml"));
+      Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
         String [] name= {"Ebrahim 1","Manar 2","yehia 3"};
         //MainXMLBase root =new MainXMLBase(name);
         Scene scene = new Scene(root);
