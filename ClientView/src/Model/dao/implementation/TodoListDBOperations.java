@@ -60,7 +60,7 @@ public class TodoListDBOperations {
 
     public void addTodoResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
-            System.out.println("************" + ((TodoEntity) arrayObjects.get(0)).getId());
+       //     System.out.println("************" + ((TodoEntity) arrayObjects.get(0)).getId());
             System.out.println("Todo Added  successfully");
         } else {
             System.out.println("Todo not added successfully");
@@ -138,5 +138,36 @@ public class TodoListDBOperations {
         }
     }
     
+
+    public static void updateTodo(TodoEntity todo) {
+        ArrayList<TodoEntity> list = new ArrayList<>();
+        list.add(todo);
+        RequestEntity<TodoEntity> request = new RequestEntity("TodoListDBOperations", "updateTodo", list);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+    }
+    
+    public void updateTodoResponse(ArrayList<Object> todoList){
+        if(todoList == null || todoList.size()==0){
+            System.out.println("Not updated");
+        }else{
+            System.out.println(todoList.get(0));
+        }
+    }
+    
+    public static void deleteTodo(TodoEntity todo) {
+        ArrayList<TodoEntity> list = new ArrayList<>();
+        list.add(todo);
+        RequestEntity<TodoEntity> request = new RequestEntity("TodoListDBOperations", "deleteTodo", list);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+    }
+    
+    public void deleteTodoResponse(ArrayList<Object> todoList){
+        if(todoList == null || todoList.size()==0){
+            System.out.println("Not deleted");
+        }else{
+            System.out.println("deleted");
+            System.out.println(todoList.get(0));
+        }
+    }
 }
 

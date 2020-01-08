@@ -54,6 +54,19 @@ public class NotificationDBOperations {
         }
 
     }
+    
+      public static void sendNotificationForItemAcceptance(ArrayList<Object> value) {
+
+        if (value != null) {
+            NotificationEntity notification = (NotificationEntity) value.get(0);
+
+            ArrayList<NotificationEntity> notificationsList = new ArrayList<>();
+            notificationsList.add(notification);
+            RequestEntity<Integer> request = new RequestEntity("NotificationDBOperations", "ItemAcceptNotification", notificationsList);
+            SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+        }
+
+    }
 
     public static void addNotificationResponse(ArrayList<Object> value) throws FileNotFoundException {
         if (value != null) {

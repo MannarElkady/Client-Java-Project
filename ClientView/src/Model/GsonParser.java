@@ -31,14 +31,20 @@ public class GsonParser {
                     }
                     break;
                 case 'I':
-                    requestType = new TypeToken<RequestEntity<ItemEntity>>() {
-                    }.getType();
+                    if(request.contains("deleteTodoResponse")){
+                        requestType = new TypeToken<RequestEntity<Integer>>() {
+                        }.getType();
+                    }else{
+                        requestType = new TypeToken<RequestEntity<ItemEntity>>() {
+                        }.getType();
+                    }
                     break;
                 case 'N':
                     requestType = new TypeToken<RequestEntity<NotificationEntity>>() {
                     }.getType();
                     break;
                 case 'T':
+                    //maybe there is a problem here because of integer type.
                     if (request.contains("assignTodoResponse")) {
                         requestType = new TypeToken<RequestEntity<Integer>>() {
                         }.getType();
