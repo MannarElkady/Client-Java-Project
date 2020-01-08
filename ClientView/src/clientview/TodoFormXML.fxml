@@ -14,7 +14,7 @@
 
 <BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.TodoFormXMLController">
    <top>
-      <GridPane style="-fx-background-color: #c38d9e #c38d9e #c38d9e;" BorderPane.alignment="CENTER">
+      <GridPane style="-fx-background-color: #97CAEF;" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -24,7 +24,7 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -67,19 +67,19 @@
       </GridPane>
    </top>
    <center>
-      <VBox fx:id="vBoxPane" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #D1E8E2;" BorderPane.alignment="CENTER" />
+      <VBox fx:id="vBoxPane" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </center>
    <left>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #97CAEF;" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <top>
-            <Label style="-fx-background-color: #97CAEF;" text="Online Collaborators" BorderPane.alignment="CENTER">
+            <Label text="Online Collaborators" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Agency FB" size="22.0" />
                </font>
             </Label>
          </top>
          <center>
-            <JFXListView fx:id="collaboratorsList" style="-fx-background-color: #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" BorderPane.alignment="CENTER" />
+            <JFXListView fx:id="collaboratorsList" style="-fx-background-radius: 30; -fx-border-radius: 30;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </left>
