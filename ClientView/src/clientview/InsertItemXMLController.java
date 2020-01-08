@@ -43,6 +43,7 @@ public class InsertItemXMLController implements Initializable {
     private JFXButton resetItemFormButton;
     @FXML
     private JFXTextField titleTextField;
+    @FXML
     private JFXTextArea descriptionTextArea;
     @FXML
     private JFXDatePicker dateDateField;
@@ -72,7 +73,9 @@ public class InsertItemXMLController implements Initializable {
         if (Validation.checkString(titleTextField.getText()) && (Validation.checkString(descriptionTextArea.getText()))) {
             if (dateDateField.getValue() != null) {
                 newItemEntity = new ItemEntity();
+                newItemEntity.setTodoID(TodoFormXMLController.todo.getId());
                 newItemEntity.setDescription(descriptionTextArea.getText());
+                System.out.println("\n3aaaaaaaaaaaaaaa ana manarrrrrrr"+TodoFormXMLController.todo.getId());
                 newItemEntity.setTitle(titleTextField.getText());
                 newItemEntity.setCreatorID(ClientView.currentUser.getId());
                 newItemEntity.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));

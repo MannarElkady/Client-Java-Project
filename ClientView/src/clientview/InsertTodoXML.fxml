@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXColorPicker?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -58,7 +60,10 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Todo Name" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -66,7 +71,7 @@
                   <Font name="Bernard MT Condensed" size="24.0" />
                </font>
             </Label>
-            <Label text="Deadline Date" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label text="Deadline Date" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font name="Bernard MT Condensed" size="24.0" />
                </font>
@@ -76,7 +81,34 @@
                   <Font name="Bodoni MT" size="12.0" />
                </font>
             </JFXTextField>
-            <JFXDatePicker fx:id="dateDateField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="444.0" promptText="Select a date" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <JFXDatePicker fx:id="dateDateField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="444.0" promptText="Select a date" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Label text="Assign Date" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Bernard MT Condensed" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label text="Description" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Bernard MT Condensed" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label text="Todo Color" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Bernard MT Condensed" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <JFXTextArea fx:id="descriptionTextArea" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <JFXColorPicker fx:id="colorPicker" editable="true" prefWidth="444.0" promptText="Choose Color .." style="-fx-background-color: #97CAEF;" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <JFXDatePicker fx:id="assignDate" minHeight="-Infinity" minWidth="-Infinity" onAction="#assignDateAction" prefHeight="25.0" prefWidth="444.0" promptText="Select a date" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
          </children>
          <opaqueInsets>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

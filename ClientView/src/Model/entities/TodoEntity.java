@@ -30,6 +30,19 @@ public class TodoEntity {
         this.deadlineDate = deadlineDate;
     }
 
+    public TodoEntity(int id, String title, String color, int creatorId, String status, String description, Date assignDate, Date deadlineDate) {
+        this.id = id;
+        this.title = title;
+        this.color = color;
+        this.creatorId = creatorId;
+        this.status = status;
+        this.description = description;
+        this.assignDate = assignDate;
+        this.deadlineDate = deadlineDate;
+    }
+    
+    
+
     public int getId() {
         return id;
     }

@@ -6,7 +6,12 @@
 package clientview;
 
 import Model.SocketConnection;
+
 import Model.dao.implementation.NotificationDBOperations;
+
+import Model.dao.implementation.TodoListDBOperations;
+import Model.entities.TodoEntity;
+
 import Model.entities.UserEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +20,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import java.io.IOException;
+
 import java.util.ArrayList;
+
+import java.sql.Date;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -27,23 +36,25 @@ import javafx.application.Platform;
 public class ClientView extends Application {
 
     SocketConnection object;
-    
+
     public static Stage mainStage;
     public static UserEntity currentUser;
+
     @Override
     public void start(Stage stage) throws Exception {
         mainStage = stage;
-        currentUser= new UserEntity();
-      //Parent root = FXMLLoader.load(getClass().getResource("TodoFormXML.fxml"));
-       Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
-        String [] name= {"Ebrahim 1","Manar 2","yehia 3"};
+        currentUser = new UserEntity();
+
+        //Parent root = FXMLLoader.load(getClass().getResource("TodoFormXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
+        String[] name = {"Ebrahim 1", "Manar 2", "yehia 3"};
         //MainXMLBase root =new MainXMLBase(name);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         //   stage.setResizable(false);
-       
+
         stage.show();
-        
+
         stage.setOnCloseRequest((WindowEvent event) -> {
             try {
                 SocketConnection.getInstance().closeSocketConnection();
@@ -54,20 +65,25 @@ public class ClientView extends Application {
             System.exit(0);
         });
         SocketConnection.getInstance();
+
         
         ArrayList<Integer> users = new ArrayList<>();        
         users.add(1);
         NotificationDBOperations.receiveNotifications(users);
-}
+
+
+/*        TodoEntity todo = new TodoEntity(2, "jljlk", "#1212", 1, "Done", "New description", Date.valueOf("2020-01-01"), Date.valueOf("2020-12-01"));
+        TodoListDBOperations.deleteTodo(todo);*/
+    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         System.out.println("test2");
+
         launch(args);
 
     }
-    
-  
+
 }

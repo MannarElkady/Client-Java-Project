@@ -10,7 +10,9 @@ import Model.dao.implementation.UserDBOperations;
 import Model.entities.TodoEntity;
 import Utility.Validation;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,6 +44,12 @@ public class InsertTodoXMLController implements Initializable {
     private JFXDatePicker dateDateField;
     
     private static TodoEntity newTodo; 
+    @FXML
+    private JFXTextArea descriptionTextArea;
+    @FXML
+    private JFXDatePicker assignDate;
+    @FXML
+    private JFXColorPicker colorPicker;
 
     /**
      * Initializes the controller class.
@@ -59,10 +67,14 @@ public class InsertTodoXMLController implements Initializable {
     @FXML
     private void submitNewTodoButtonAction(ActionEvent event) {
         if (Validation.checkString(titleTextField.getText())) {
-            if (dateDateField.getValue() != null) {
+            if (dateDateField.getValue() != null && assignDate.getValue() != null) {
                 newTodo = new TodoEntity();
+                newTodo.setAssignDate(java.sql.Date.valueOf(assignDate.getValue()));
                 newTodo.setTitle(titleTextField.getText());
                 newTodo.setCreatorId(ClientView.currentUser.getId());
+                System.out.println(colorPicker.getValue().toString());
+                newTodo.setColor(colorPicker.getValue().toString());
+                newTodo.setDescription(descriptionTextArea.getText());
                 newTodo.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));
                 TodoListDBOperations.addTodo(newTodo);
                 ((Stage)mainBorderPane.getScene().getWindow()).close(); 
@@ -82,6 +94,10 @@ public class InsertTodoXMLController implements Initializable {
     }
     @FXML
     private void addPaneActionESC(KeyEvent event) {
+    }
+
+    @FXML
+    private void assignDateAction(ActionEvent event) {
     }
     
 }
