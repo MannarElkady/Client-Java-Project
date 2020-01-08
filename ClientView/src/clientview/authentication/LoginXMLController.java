@@ -16,6 +16,7 @@ import Model.SocketConnection;
 import Model.dao.implementation.NotificationDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.NotificationEntity;
+import Model.entities.NotificationReceiversEntity;
 import Model.entities.UserEntity;
 import Utility.Validation;
 import com.jfoenix.controls.JFXButton;
@@ -109,12 +110,24 @@ public class LoginXMLController implements Initializable {
 
   
       public void buttonAction(){
-        ArrayList<Object> data = new ArrayList<>();
+       ArrayList<Object> data = new ArrayList<>();
         NotificationEntity notification = new NotificationEntity();
         notification.setHeader("test Header");
         notification.setText("test Text");
         notification.setNotificationType("test Notification");
-        notification.setSenderID(2);
+        notification.setSenderID(2);        
+        NotificationReceiversEntity notificationReceiver = new NotificationReceiversEntity();
+        notificationReceiver.setReceiverID(1);
+        NotificationReceiversEntity notificationReceiver2 = new NotificationReceiversEntity();
+        notificationReceiver2.setReceiverID(3);
+         NotificationReceiversEntity notificationReceiver3 = new NotificationReceiversEntity();
+        notificationReceiver3.setReceiverID(4);        
+        ArrayList<NotificationReceiversEntity> receiversList = new ArrayList<>();
+        receiversList.add(notificationReceiver);
+        receiversList.add(notificationReceiver2);
+        receiversList.add(notificationReceiver3);
+        notification.setNotificationReceivers(receiversList);
+
         data.add(notification);
         NotificationDBOperations.sendNotification(data);
     }
