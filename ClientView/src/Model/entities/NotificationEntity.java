@@ -1,8 +1,14 @@
 package Model.entities;
 
+import java.util.ArrayList;
+
 /**
  * @author Ibrahim
  */
+enum notificationTypeData {
+    itemInvitation, todoInvitation, notifyAll
+}
+
 public class NotificationEntity {
 
     private int notificationID;
@@ -10,6 +16,26 @@ public class NotificationEntity {
     private String text;
     private int senderID;
     private String notificationType;
+    private ArrayList<NotificationReceiversEntity> notificationReceivers;
+
+    public NotificationEntity() {
+    }
+
+    public NotificationEntity(String header, String text, int senderID, String notificationType, ArrayList<NotificationReceiversEntity> notificationReceivers) {
+        this.header = header;
+        this.text = text;
+        this.senderID = senderID;
+        this.notificationType = notificationType;
+        this.notificationReceivers = notificationReceivers;
+    }
+
+    public ArrayList<NotificationReceiversEntity> getNotificationReceivers() {
+        return notificationReceivers;
+    }
+
+    public void setNotificationReceivers(ArrayList<NotificationReceiversEntity> notificationReceivers) {
+        this.notificationReceivers = notificationReceivers;
+    }
 
     public int getNotificationID() {
         return notificationID;

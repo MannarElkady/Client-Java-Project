@@ -44,6 +44,7 @@ public class UserDBOperations {
             System.out.println(((UserEntity)object.get(0)).getId());
             ClientView.currentUser = (UserEntity)object.get(0);
             getAllTodos(ClientView.currentUser);
+            getFrinds(ClientView.currentUser);
         }
     }
 
@@ -112,5 +113,45 @@ public class UserDBOperations {
             
         }
     }
+    
+    
+      public static void getFrinds(UserEntity userID){
+        ArrayList<UserEntity> list = new ArrayList<>();
+        list.add(userID);
+        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getFrinds", list);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+    }
+    
+    public void getFrindsResonse(ArrayList<UserEntity> items){
+        
+        if(items == null || items.isEmpty()){
+        
+                        System.out.println("hi hema");
+
+        }else{
+        try {
+                MainXMLController.setFriendList(items);
+                
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));                
+                Scene scene = ClientView.mainStage.getScene();
+                //root.translateYProperty().set(scene.getHeight());
+                //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
+               // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                scene.setRoot(root);  
+                
+                /*Timeline timeLine = new Timeline();
+                KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+                KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+                timeLine.getKeyFrames().add(kf);
+                timeLine.play();*/
+                
+            } catch (IOException ex) {
+                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }
+    }
+    
+    
 
 }

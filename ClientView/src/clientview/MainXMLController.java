@@ -5,7 +5,9 @@
  */
 package clientview;
 
+
 import Model.MainFormHandler;
+import Model.dao.implementation.UserDBOperations;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
@@ -68,7 +70,7 @@ public class MainXMLController implements Initializable {
     public static ArrayList<Object> data;
     // for Dummy Testing
     ArrayList <TodoEntity>test=new ArrayList();
-    ArrayList <UserEntity>test2=new ArrayList();
+   public static ArrayList <UserEntity>test2=new ArrayList();
     ArrayList <HBox> hBoxPane =new ArrayList();
     HBox child=null;
     @FXML
@@ -81,10 +83,10 @@ public class MainXMLController implements Initializable {
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
-        
+              
     }
-    public void setFriendListPanes(ArrayList <UserEntity> friendList){
-        for(UserEntity useraya: friendList){
+    public void setFriendListPanes(){
+        for(UserEntity useraya: test2){
             try {
                 child = new HBox();
                 img= new Image(new FileInputStream(System.getProperty("user.dir")+"/src/clientview/resources/m.png"));
@@ -110,6 +112,8 @@ public class MainXMLController implements Initializable {
         test.add(todo);
         test.add(todo);
         test.add(todo);
+        
+
     }
     public static void setTodos(ArrayList<Object> list){
         data = list;
@@ -157,10 +161,12 @@ public class MainXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //setTodoDummy();
-        setFriendListDummy();
-        setFriendListPanes(test2);
+        //setFriendListDummy();
+        setFriendListPanes();
         generateTodosUI(new ArrayList<Object>());
         generateFriendListUI();
+      
+
     }
 
     @FXML
@@ -196,6 +202,18 @@ public class MainXMLController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void getAllTodos() {
+        UserEntity user = new UserEntity();
+        user.setId(1);
+        UserDBOperations.getAllTodos(user);
+    }
+    
+    
+    
+    public static void  setFriendList(ArrayList<UserEntity> a){         
+           test2=a;   
     }
 
 }    
