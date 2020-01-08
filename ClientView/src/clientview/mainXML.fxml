@@ -71,7 +71,7 @@
          <center>
             <BorderPane>
                <center>
-                  <JFXListView fx:id="friendListPane" showTooltip="true" style="-fx-background-color: #97CAEF;" />
+                  <JFXListView fx:id="friendListPane" showTooltip="true" />
                </center>
             </BorderPane>
          </center>

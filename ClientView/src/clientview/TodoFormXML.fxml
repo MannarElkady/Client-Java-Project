@@ -70,16 +70,16 @@
       <VBox fx:id="vBoxPane" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #D1E8E2;" BorderPane.alignment="CENTER" />
    </center>
    <left>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #97CAEF;" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <top>
-            <Label style="-fx-background-color: #97CAEF;" text="Online Collaborators" BorderPane.alignment="CENTER">
+            <Label text="Online Collaborators" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Agency FB" size="22.0" />
                </font>
             </Label>
          </top>
          <center>
-            <JFXListView fx:id="collaboratorsList" style="-fx-background-color: #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" BorderPane.alignment="CENTER" />
+            <JFXListView fx:id="collaboratorsList" style="-fx-background-radius: 30; -fx-border-radius: 30;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </left>
