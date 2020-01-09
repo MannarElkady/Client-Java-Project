@@ -26,18 +26,19 @@ public class NotificationGUIHandler implements EventHandler<Event> {
     public void handle(Event event) {
         System.out.println(((Control) event.getSource()).getId());
 
-        String buttonType="";
+        String buttonType = "";
         String buttonID = String.valueOf(((Control) event.getSource()).getId());
-        String itemNotificationType="";
+        String notificationType = "";
         if (buttonID.contains("accept")) {
-           itemNotificationType = buttonID.split("accept")[1];
-           buttonType="accept";           
-        } else if(buttonID.contains("reject")) {
-            itemNotificationType = buttonID.split("reject")[1];
-            buttonType="reject";
+            notificationType = buttonID.split("accept")[1];
+            buttonType = "accept";
+        } else if (buttonID.contains("reject")) {
+            notificationType = buttonID.split("reject")[1];
+            buttonType = "reject";
         }
         for (int i = 0; i < NotificationGUI.notificationsListForOtherClasses.size(); i++) {
-            if(itemNotificationType .equals(NotificationGUI.notificationsListForOtherClasses.get(i).getNotificationType())){
+            if (notificationType.equals(NotificationGUI.notificationsListForOtherClasses.get(i).getNotificationType())) {
+
                 ArrayList<Object> notificationList = new ArrayList<>();
                 NotificationEntity notification = NotificationGUI.notificationsListForOtherClasses.get(i);
                 ArrayList<NotificationReceiversEntity> receiversList = new ArrayList<>();
@@ -46,11 +47,19 @@ public class NotificationGUIHandler implements EventHandler<Event> {
                 receiversList.add(receiver);
                 notification.setNotificationReceivers(receiversList);
                 notificationList.add(notification);
-                NotificationDBOperations.sendNotificationForItemAcceptance(notificationList);
+                if (buttonType.equals("accept")) {
+                    if (notificationType.contains("itemInvitation")) {
+                        NotificationDBOperations.sendNotificationForItemAcceptance(notificationList);
+                    } else if (notificationType.contains("todoInvitation")) {
+                        NotificationDBOperations.sendNotificationForTodoAcceptance(notificationList);
+                    }
+                    else if (notificationType.contains("friendInvitation")){
+                    
+                    }
+                }
             }
         }
-       
-         
+
     }
 
 }
