@@ -93,7 +93,7 @@
             </JFXButton>
             <JFXButton fx:id="notificationButton" buttonType="RAISED" onAction="#notificationButtonAction" text="  " GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="80.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@resources/notification.jpg" />
                      </image>
