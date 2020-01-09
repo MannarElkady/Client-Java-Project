@@ -25,6 +25,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -101,6 +102,16 @@ public class TodoFormXMLController implements Initializable {
      public static void clearTest(){
          test2.clear();
      }
+    @FXML
+    private JFXButton editTodo;
+    @FXML
+    private ImageView addNewItem1;
+    @FXML
+    private JFXButton deleteTodo;
+    @FXML
+    private ImageView addNewItem11;
+    @FXML
+    private JFXListView<?> todoDetails;
          /**
      * Initializes the controller class.
      */
@@ -224,5 +235,13 @@ public class TodoFormXMLController implements Initializable {
      public static void  setCollaboratorList(ArrayList<UserEntity> collaborators){ 
             test2.clear();
            test2=collaborators;   
+    }
+
+    @FXML
+    private void editTodoAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void deleteTodoAction(ActionEvent event) {
     }
 }
