@@ -6,8 +6,7 @@
 package clientview;
 
 import Model.SocketConnection;
-import Model.dao.implementation.ItemDBOperations;
-import Model.entities.ItemEntity;
+import Model.dao.implementation.NotificationDBOperations;
 import Model.entities.UserEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +15,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import java.io.IOException;
-import java.sql.Date;
+
+import java.util.ArrayList;
+
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -57,8 +59,9 @@ public class ClientView extends Application {
             System.exit(0);
         });
         SocketConnection.getInstance();
-        ItemEntity todo = new ItemEntity(1, "item1", "desccccc", 1, 1, Date.valueOf("2020-01-01"));
-        ItemDBOperations.deleteItem(todo);
+        ArrayList<Integer> users = new ArrayList<>();        
+        users.add(1);
+        NotificationDBOperations.receiveNotifications(users);
     }
 
     /**

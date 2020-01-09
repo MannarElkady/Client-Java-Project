@@ -41,8 +41,11 @@ import org.controlsfx.control.Notifications;
  */
 public class NotificationGUI {
 
+    public static ArrayList<NotificationEntity> notificationsListForOtherClasses = new ArrayList<>();
     public static void loadNotificationMenu(ArrayList<NotificationEntity> notificationsList) {
 
+        notificationsListForOtherClasses.clear();
+        notificationsListForOtherClasses=notificationsList;
         Platform.runLater(new Runnable() {
 
             @Override
@@ -61,7 +64,7 @@ public class NotificationGUI {
                     VBox box = new VBox();
                     box.getChildren().add(text1);
 
-                    if (!notificationsList.get(i).getNotificationType().toLowerCase().contains("invitation")) {
+                   /* if (!notificationsList.get(i).getNotificationType().toLowerCase().contains("invitation")) {
 
                         box.setAlignment(Pos.CENTER_LEFT);
                         text1 = new Label(notificationsList.get(i).getText());
@@ -70,20 +73,23 @@ public class NotificationGUI {
                         border.setCenter(box);
                         borderPanes.add(border);
 
-                    } else {
-                        Button b1 = new Button("accept");
-                        Button b2 = new Button("reject");
-                        b1.setId("button" + (i + 1) + "accept");
-                        b2.setId("button" + (i + 1) + "reject");
-                        b1.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
-                        b2.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
-                        HBox horizontal = new HBox();
-                        horizontal.getChildren().add(b1);
-                        horizontal.getChildren().add(b2);
-                        border.setRight(horizontal);
-                        border.setLeft(text1);
-                        borderPanes.add(border);
-                    }
+                    } else {*/
+                        if (notificationsList.get(i).getNotificationType().contains("itemInvitation") || notificationsList.get(i).getNotificationType().contains("todoInvitation") ) {
+                            Button b1 = new Button("accept");
+                            Button b2 = new Button("reject");
+                            b1.setId("accept" +notificationsList.get(i).getNotificationType());
+                            b2.setId("reject" +notificationsList.get(i).getNotificationType());
+                            b1.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
+                            b2.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
+                            HBox horizontal = new HBox();
+                            horizontal.getChildren().add(b1);
+                            horizontal.getChildren().add(b2);
+                            border.setRight(horizontal);
+                            border.setLeft(text1);
+                            borderPanes.add(border);
+                        }
+
+                    //}
 
                 }
                 ObservableList<BorderPane> myObservableList = FXCollections.observableList(borderPanes);
@@ -95,7 +101,7 @@ public class NotificationGUI {
                 stage.setX(p.x - 300);
                 stage.setY(p.y + 20);
                 stage.setScene(scene);
-                stage.initModality(Modality.APPLICATION_MODAL);
+               // stage.initModality(Modality.APPLICATION_MODAL);
                 stage.show();
 
             }
@@ -109,14 +115,13 @@ public class NotificationGUI {
 
         Platform.runLater(new Runnable() {
 
-          
             @Override
             public void run() {
                 Image img = null;
                 try {
-                    img = new Image(new FileInputStream(System.getProperty("user.dir")+"/src/clientview/resources/notification_icon.jpg"));
+                    img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/notification_icon.jpg"));
                 } catch (FileNotFoundException ex) {
-                   ex.printStackTrace();
+                    ex.printStackTrace();
                 }
                 Notifications notificationBuilder = Notifications.create()
                         .title("notification received")
@@ -124,7 +129,7 @@ public class NotificationGUI {
                         .graphic(new ImageView(img))
                         .hideAfter(Duration.seconds(5))
                         .position(Pos.BOTTOM_RIGHT);
-                
+
                 notificationBuilder.darkStyle();
                 notificationBuilder.showConfirm();
             }

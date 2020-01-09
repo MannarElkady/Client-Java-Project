@@ -48,8 +48,6 @@ import javafx.stage.StageStyle;
 public class MainXMLController implements Initializable {
 
     @FXML
-    private JFXButton homeBtn;
-    @FXML
     private JFXButton addFriendBtn;
     @FXML
     private ImageView appLogo;
@@ -146,9 +144,10 @@ public class MainXMLController implements Initializable {
                 todoName.paddingProperty();
                 todoName.setPadding(new Insets(15));
                 todoName.setPrefSize(200,100);
-                todoName.setStyle("-fx-background-color:POWDERBLUE;-fx-background-radius:30;-fx-border-radius:30;");
+                todoName.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 todoName.setId(String.valueOf(todo.getId()));
                 todoName.addEventFilter(MouseEvent.MOUSE_CLICKED, new MainFormHandler());
+                todoName.setWrapText(true);
                 jMasonaryPane.getChildren().add(todoName);
         }
     }
@@ -172,16 +171,13 @@ public class MainXMLController implements Initializable {
 
     }
 
-    @FXML
-    private void homeBtnAction(ActionEvent event) {
-    }
-
+  
     @FXML
     private void addFriendBtnAction(ActionEvent event) {
         try{
-        Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddCollaboratorTodoFXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddFrindFXML.fxml"));
         Stage stage = new Stage(StageStyle.DECORATED);
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, 400, 300);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
@@ -209,7 +205,7 @@ public class MainXMLController implements Initializable {
 
     private void getAllTodos() {
         UserEntity user = new UserEntity();
-        user.setId(1);
+        user.setId(ClientView.currentUser.getId());
         UserDBOperations.getAllTodos(user);
     }
     
