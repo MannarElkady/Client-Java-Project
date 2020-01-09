@@ -29,8 +29,6 @@ public class ItemDBOperations {
        
     public void addItemResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
-            System.out.println("************" + ((ItemEntity) arrayObjects.get(0)).getTitle());
-          //  ItemEntity = (ItemEntity)arrayObjects.get(0);
             //to connect by Controller of ui
             System.out.println("Item Added  successfully");
         } else {

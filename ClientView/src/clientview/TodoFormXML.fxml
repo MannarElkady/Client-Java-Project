@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -20,6 +21,8 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -29,7 +32,7 @@
             <RowConstraints minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXButton fx:id="addItem" buttonType="RAISED" onAction="#addItemAction" text="Add New Item" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <JFXButton fx:id="addItem" buttonType="RAISED" onAction="#addItemAction" text="Add New Item" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <graphic>
                   <ImageView fx:id="addNewItem" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -63,6 +66,30 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <JFXButton fx:id="editTodo" buttonType="RAISED" onAction="#editTodoAction" text="  " GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fx:id="addNewItem1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/editTodo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="deleteTodo" buttonType="RAISED" onAction="#deleteTodoAction" text="  " GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <graphic>
+                  <ImageView fx:id="addNewItem11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </JFXButton>
          </children>
       </GridPane>
    </top>
@@ -71,15 +98,46 @@
    </center>
    <left>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <top>
-            <Label text="Online Collaborators" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="Agency FB" size="22.0" />
-               </font>
-            </Label>
-         </top>
+         <bottom>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <top>
+                  <Label text="Online Collaborators" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Agency FB" size="22.0" />
+                     </font>
+                  </Label>
+               </top>
+               <center>
+                  <JFXListView fx:id="collaboratorsList" style="-fx-background-radius: 30; -fx-border-radius: 30;" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </JFXListView>
+               </center>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+               </BorderPane.margin>
+            </BorderPane>
+         </bottom>
          <center>
-            <JFXListView fx:id="collaboratorsList" style="-fx-background-radius: 30; -fx-border-radius: 30;" BorderPane.alignment="CENTER" />
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <top>
+                  <Label text="Todo Details" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                     <font>
+                        <Font name="Agency FB" size="22.0" />
+                     </font>
+                  </Label>
+               </top>
+               <center>
+                  <JFXListView fx:id="todoDetails" style="-fx-background-radius: 30; -fx-border-radius: 30;" BorderPane.alignment="CENTER" />
+               </center>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </BorderPane>
          </center>
       </BorderPane>
    </left>
