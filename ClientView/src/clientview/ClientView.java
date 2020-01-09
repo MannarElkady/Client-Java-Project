@@ -28,6 +28,7 @@ import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -69,9 +70,9 @@ public class ClientView extends Application {
         
         ArrayList<Integer> users = new ArrayList<>();        
         users.add(1);
-        NotificationDBOperations.receiveNotifications(users);
+        //NotificationDBOperations.receiveNotifications(users);
 
-
+                
 /*        TodoEntity todo = new TodoEntity(2, "jljlk", "#1212", 1, "Done", "New description", Date.valueOf("2020-01-01"), Date.valueOf("2020-12-01"));
         TodoListDBOperations.deleteTodo(todo);*/
     }
