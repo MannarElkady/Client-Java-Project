@@ -72,7 +72,7 @@ public class InsertTodoXMLController implements Initializable {
                 newTodo.setAssignDate(java.sql.Date.valueOf(assignDate.getValue()));
                 newTodo.setTitle(titleTextField.getText());
                 newTodo.setCreatorId(ClientView.currentUser.getId());
-                System.out.println(colorPicker.getValue().toString());
+                System.out.println(colorPicker.getValue().toString().substring(4));
                 newTodo.setColor(colorPicker.getValue().toString());
                 newTodo.setDescription(descriptionTextArea.getText());
                 newTodo.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));

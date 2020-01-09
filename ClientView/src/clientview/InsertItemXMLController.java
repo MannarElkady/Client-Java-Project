@@ -27,6 +27,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import Model.dao.implementation.ItemDBOperations;
 import Model.entities.ItemEntity;
+import javafx.event.EventHandler;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -48,9 +50,11 @@ public class InsertItemXMLController implements Initializable {
     @FXML
     private JFXDatePicker dateDateField;
 
-    private ItemEntity newItemEntity=null;
+    private ItemEntity newItemEntity = null;
     @FXML
     private JFXButton backButton;
+
+    private Stage stage;
 
     /**
      * Initializes the controller class.
@@ -62,30 +66,53 @@ public class InsertItemXMLController implements Initializable {
 
     @FXML
     private void addPaneActionESC(KeyEvent event) {
-         KeyCode key = event.getCode();
-            if (key == KeyCode.ESCAPE){
-               ((Stage)mainBorderPane.getScene().getWindow()).close();
-            }
+        KeyCode key = event.getCode();
+        if (key == KeyCode.ESCAPE) {
+            ((Stage) mainBorderPane.getScene().getWindow()).close();
+        }
     }
 
     @FXML
     private void submitNewItemButtonAction(ActionEvent event) {
+        addItemEntity();
+        Stage s =((Stage) mainBorderPane.getScene().getWindow());
+        //  ((Stage) mainBorderPane.getScene().getWindow()).close();
+        s.fireEvent(new WindowEvent(s, WindowEvent.WINDOW_CLOSE_REQUEST));
+        refreshPage();
+    }
+
+    private void addItemEntity() {
         if (Validation.checkString(titleTextField.getText()) && (Validation.checkString(descriptionTextArea.getText()))) {
             if (dateDateField.getValue() != null) {
                 newItemEntity = new ItemEntity();
                 newItemEntity.setTodoID(TodoFormXMLController.todo.getId());
                 newItemEntity.setDescription(descriptionTextArea.getText());
-                System.out.println("\n3aaaaaaaaaaaaaaa ana manarrrrrrr"+TodoFormXMLController.todo.getId());
                 newItemEntity.setTitle(titleTextField.getText());
                 newItemEntity.setCreatorID(ClientView.currentUser.getId());
                 newItemEntity.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));
                 ItemDBOperations.addItem(newItemEntity);
-                ((Stage)mainBorderPane.getScene().getWindow()).close();                
             }
         }
     }
-    private ItemEntity getNewItem(){
+
+    private ItemEntity getNewItem() {
         return newItemEntity;
+    }
+
+    private void refreshPage() {
+        stage = (Stage) mainBorderPane.getScene().getWindow();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                try {
+                    // Refresh the parent window here
+                    Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
+                    Scene scene = ClientView.mainStage.getScene();
+                    scene.setRoot(root);
+                } catch (IOException ex) {
+                    Logger.getLogger(InsertItemXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 
     /*
@@ -101,8 +128,7 @@ public class InsertItemXMLController implements Initializable {
             Logger.getLogger(InsertItemXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-*/
-
+     */
     @FXML
     private void resetItemFormButtonAction(ActionEvent event) {
         titleTextField.clear();
@@ -112,7 +138,7 @@ public class InsertItemXMLController implements Initializable {
 
     @FXML
     private void backButtonAction(ActionEvent event) {
-        ((Stage)mainBorderPane.getScene().getWindow()).close();
+        ((Stage) mainBorderPane.getScene().getWindow()).close();
     }
 
 }

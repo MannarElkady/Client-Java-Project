@@ -22,7 +22,7 @@ public class Validation {
         return matcher.matches();
     }
     public static boolean checkString(String str){
-        if(!str.isEmpty() && !str.equals("")){
+        if(!(str.trim().isEmpty()) && !(str.trim().equals(""))){
             return true;
         }
         return false;
