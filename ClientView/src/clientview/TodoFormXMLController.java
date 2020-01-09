@@ -5,6 +5,7 @@
  */
 package clientview;
 
+import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.ItemEntity;
 import Model.entities.TodoEntity;
@@ -112,6 +113,8 @@ public class TodoFormXMLController implements Initializable {
     private ImageView addNewItem11;
     @FXML
     private JFXListView<?> todoDetails;
+    @FXML
+    private JFXButton notificationButton;
          /**
      * Initializes the controller class.
      */
@@ -198,12 +201,7 @@ public class TodoFormXMLController implements Initializable {
     private void homeButtonAction() throws IOException {
         UserDBOperations.getAllTodos(ClientView.currentUser);
     }
-
-    public static void appendItem(ItemEntity newItem){
-        if(itemList != null){
-            itemList.add(newItem);
-        }
-    }
+    
     private void loadItems() {
         if (itemList != null) {
             //Label itemText = null;
@@ -219,7 +217,6 @@ public class TodoFormXMLController implements Initializable {
                 itemText.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 itemText.setFont(new Font("Arial", 24));
                 itemText.setPadding(new Insets(10,10,10,10));
-               //wait).
                 itemText.textProperty().addListener(new ChangeListener<String>() {
                     @Override
                     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -243,5 +240,9 @@ public class TodoFormXMLController implements Initializable {
 
     @FXML
     private void deleteTodoAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void notificationButtonAction(ActionEvent event) {
     }
 }

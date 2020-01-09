@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -66,7 +67,11 @@ public class InsertTodoXMLController implements Initializable {
 
     @FXML
     private void submitNewTodoButtonAction(ActionEvent event) {
-        if (Validation.checkString(titleTextField.getText())) {
+       addNewTodoEntity();
+    }
+
+    private void addNewTodoEntity(){
+         if (Validation.checkString(titleTextField.getText())) {
             if (dateDateField.getValue() != null && assignDate.getValue() != null) {
                 newTodo = new TodoEntity();
                 newTodo.setAssignDate(java.sql.Date.valueOf(assignDate.getValue()));
@@ -82,7 +87,6 @@ public class InsertTodoXMLController implements Initializable {
             }
         }
     }
-
     @FXML
     private void resetTodoFormButtonAction(ActionEvent event) {
         titleTextField.clear();
@@ -94,6 +98,10 @@ public class InsertTodoXMLController implements Initializable {
     }
     @FXML
     private void addPaneActionESC(KeyEvent event) {
+        KeyCode key = event.getCode();
+        if (key == KeyCode.ESCAPE) {
+       ((Stage) mainBorderPane.getScene().getWindow()).close();
+        }
     }
 
     @FXML
