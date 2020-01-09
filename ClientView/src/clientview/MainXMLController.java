@@ -128,18 +128,14 @@ public class MainXMLController implements Initializable {
         try {
              todo = (TodoEntity)data.get(i);
             todoName = new Label(todo.getTitle());
-            System.out.println("Working Directory = " +
-              System.getProperty("user.dir"));  
+            System.out.println("Working Directory = " +System.getProperty("user.dir"));  
             img= new Image(new FileInputStream(System.getProperty("user.dir")+"/src/clientview/resources/todo.jpg"));
             imgView=new ImageView(img);
             imgView.setFitHeight(50.0);
             imgView.setFitWidth(50.0);
-            
-            
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(MainXMLBase.class.getName()).log(Level.SEVERE, null, ex);
             }
-                
                 todoName.setGraphic(imgView);
                 todoName.paddingProperty();
                 todoName.setPadding(new Insets(15));
@@ -161,12 +157,10 @@ public class MainXMLController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        //setTodoDummy();
-        //setFriendListDummy();
         setFriendListPanes();
         generateTodosUI(new ArrayList<Object>());
         generateFriendListUI();
+       
       
 
     }

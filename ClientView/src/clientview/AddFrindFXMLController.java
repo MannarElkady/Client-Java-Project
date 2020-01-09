@@ -13,11 +13,15 @@ import Utility.Validation;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  * FXML Controller class
@@ -31,17 +35,24 @@ public class AddFrindFXMLController implements Initializable {
     @FXML
     private JFXButton canclefrindbtn;
     @FXML
-    private JFXTextField frindtextfield;
-    @FXML private  BorderPane addbroderpane;
+    private TextField frindtextfield;
+    @FXML
+    private BorderPane addbroderpane;
     String frindName;
+    public static ArrayList<UserEntity> allUsers = new ArrayList();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         // TODO
+        ArrayList<String> allusers=new ArrayList<>();
+        for(int i=0;i<allUsers.size();i++)
+        {
+            allusers.add(allUsers.get(i).getUsername());
+        }
+        TextFields.bindAutoCompletion(frindtextfield,allusers);
     }
 
     @FXML
@@ -52,8 +63,7 @@ public class AddFrindFXMLController implements Initializable {
             user.setId(ClientView.currentUser.getId());
             user.setUsername(frindName);
             UserDBOperations.AddFrind(user);
-            ((Stage)addfrindbtn.getScene().getWindow()).close(); 
-
+            ((Stage) addfrindbtn.getScene().getWindow()).close();
 
         }
 
@@ -63,6 +73,11 @@ public class AddFrindFXMLController implements Initializable {
     private void cancelButtonAction() {
         Stage stage = (Stage) canclefrindbtn.getScene().getWindow();
         stage.close();
+    }
+
+    public static void setAllUSersList(ArrayList<UserEntity> users) {
+        System.out.println("size"+users.size());
+        allUsers = users;
     }
 
 }

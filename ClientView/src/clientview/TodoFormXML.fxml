@@ -35,7 +35,7 @@
          <children>
             <JFXButton fx:id="addItem" buttonType="RAISED" onAction="#addItemAction" text="New Item" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <graphic>
-                  <ImageView fx:id="addNewItem" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="addNewItem" fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@resources/add.png" />
                      </image>
@@ -52,7 +52,7 @@
             </Label>
             <JFXButton fx:id="addFriend" buttonType="RAISED" onAction="#addColaboratorEvent" text="  " textFill="#d3d3d3" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fx:id="addNewFriend" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="addNewFriend" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@resources/addFriend.png" />
                      </image>
@@ -60,7 +60,7 @@
                </graphic></JFXButton>
             <JFXButton fx:id="homeButton" buttonType="RAISED" onAction="#homeButtonAction" text="  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="80.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="65.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@resources/home.png" />
                      </image>
@@ -69,7 +69,7 @@
             </JFXButton>
             <JFXButton fx:id="editTodo" buttonType="RAISED" onAction="#editTodoAction" text="  " GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fx:id="addNewItem1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="editimg" fitHeight="45.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@resources/editTodo.png" />
                      </image>
@@ -81,7 +81,7 @@
             </JFXButton>
             <JFXButton fx:id="deleteTodo" buttonType="RAISED" onAction="#deleteTodoAction" text="  " GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fx:id="addNewItem11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="addNewItem11" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@resources/delete.png" />
                      </image>
@@ -93,7 +93,7 @@
             </JFXButton>
             <JFXButton fx:id="notificationButton" buttonType="RAISED" onAction="#notificationButtonAction" text="  " GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@resources/notification.jpg" />
                      </image>
@@ -103,9 +103,6 @@
          </children>
       </GridPane>
    </top>
-   <center>
-      <VBox fx:id="vBoxPane" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </center>
    <left>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <bottom>
@@ -151,4 +148,18 @@
          </center>
       </BorderPane>
    </left>
+   <center>
+      <BorderPane fx:id="borderZft" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <top>
+            <Label text="  " BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <center>
+            <VBox fx:id="vBoxPane" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </center>
 </BorderPane>
