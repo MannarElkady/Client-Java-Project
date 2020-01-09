@@ -188,7 +188,7 @@ public class MainXMLController implements Initializable {
 
     @FXML
     private void addTodoAction(ActionEvent event) {
-        
+        InsertTodoXMLController.isUpdate =false;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertTodoXML.fxml"));
             Parent insertItemWindow = loader.load();

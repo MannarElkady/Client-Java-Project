@@ -14,6 +14,7 @@ import Model.entities.AssignFriendTodoEntity;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import clientview.ClientView;
+import clientview.InsertTodoXMLController;
 import clientview.TodoFormXMLController;
 import java.io.IOException;
 
@@ -150,7 +151,16 @@ public class TodoListDBOperations {
         if(todoList == null || todoList.size()==0){
             System.out.println("Not updated");
         }else{
-            System.out.println(todoList.get(0));
+            InsertTodoXMLController.setTodoData((TodoEntity)todoList.get(0));
+            System.out.println("Updated");
+            Parent root;
+            try {
+                root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
+                Scene scene = ClientView.mainStage.getScene();
+                scene.setRoot(root);
+            } catch (IOException ex) {
+                Logger.getLogger(MainFormHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -166,7 +176,7 @@ public class TodoListDBOperations {
             System.out.println("Not deleted");
         }else{
             System.out.println("deleted");
-            System.out.println(todoList.get(0));
+            UserDBOperations.getAllTodos(ClientView.currentUser);
         }
     }
 }

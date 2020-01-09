@@ -53,15 +53,15 @@ public class InsertItemXMLController implements Initializable {
     private ItemEntity newItemEntity = null;
     @FXML
     private JFXButton backButton;
-
+    
     private Stage stage;
-
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }
 
     @FXML
@@ -140,5 +140,7 @@ public class InsertItemXMLController implements Initializable {
     private void backButtonAction(ActionEvent event) {
         ((Stage) mainBorderPane.getScene().getWindow()).close();
     }
+
+    
 
 }

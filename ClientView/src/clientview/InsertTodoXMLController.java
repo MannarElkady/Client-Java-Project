@@ -15,6 +15,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,13 +51,21 @@ public class InsertTodoXMLController implements Initializable {
     private JFXDatePicker assignDate;
     @FXML
     private JFXColorPicker colorPicker;
-
+    public static boolean isUpdate= false;
+    public static TodoEntity todo;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        if(isUpdate){
+            isUpdate = false;
+            submitNewTodoButton.setText("Update");
+            titleTextField.setText(todo.getTitle());
+            descriptionTextArea.setText(todo.getDescription());
+            assignDate.setValue(LocalDate.of(todo.getAssignDate().getYear()+1900,todo.getAssignDate().getMonth()+1,todo.getAssignDate().getDate()));
+            dateDateField.setValue(LocalDate.of(todo.getDeadlineDate().getYear()+1900,todo.getDeadlineDate().getMonth()+1,todo.getDeadlineDate().getDate()));
+        }
     }    
 
     @FXML
@@ -76,9 +85,14 @@ public class InsertTodoXMLController implements Initializable {
                 newTodo.setColor(colorPicker.getValue().toString());
                 newTodo.setDescription(descriptionTextArea.getText());
                 newTodo.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));
-                TodoListDBOperations.addTodo(newTodo);
                 ((Stage)mainBorderPane.getScene().getWindow()).close(); 
-                UserDBOperations.getAllTodos(ClientView.currentUser);      
+                if(submitNewTodoButton.getText().equals("Update")){
+                    newTodo.setId(todo.getId());
+                    TodoListDBOperations.updateTodo(newTodo);
+                }else{
+                    TodoListDBOperations.addTodo(newTodo);
+                    UserDBOperations.getAllTodos(ClientView.currentUser);      
+                }
             }
         }
     }
@@ -99,5 +113,7 @@ public class InsertTodoXMLController implements Initializable {
     @FXML
     private void assignDateAction(ActionEvent event) {
     }
-    
+    public static void setTodoData(TodoEntity todoData) {
+        todo = todoData;
+    }
 }

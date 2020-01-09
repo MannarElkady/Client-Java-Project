@@ -5,6 +5,7 @@
  */
 package clientview;
 
+import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.ItemEntity;
 import Model.entities.TodoEntity;
@@ -114,15 +115,8 @@ public class TodoFormXMLController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-
     public void initialize(URL url, ResourceBundle rb) {
-        todoNameLabel.setText(todo.getTitle());
-        //setCollaboratorsDummy();
-        setCollaboratorsPanes(test2);
-        generateCollaboratorListUI();
-        loadItems();
-        //TodoListDBOperations.getAllItems(todo);
-
+        updateUi();
     }
 
     public static void setToDoData(TodoEntity todoData) {
@@ -193,7 +187,7 @@ public class TodoFormXMLController implements Initializable {
     }
 
     @FXML
-    private void homeButtonAction() throws IOException {
+    private void homeButtonAction(){
         UserDBOperations.getAllTodos(ClientView.currentUser);
     }
 
@@ -237,13 +231,37 @@ public class TodoFormXMLController implements Initializable {
 
     @FXML
     private void editTodoAction(ActionEvent event) {
+         try {
+            InsertTodoXMLController.setTodoData(todo);
+            InsertTodoXMLController.isUpdate = true;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertTodoXML.fxml"));
+            Parent insertItemWindow = loader.load();
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner((Stage) rootPane.getScene().getWindow());
+            Scene dialogScene = new Scene(insertItemWindow);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        } catch (IOException ex) {
+            Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
-    private void deleteTodoAction(ActionEvent event) {
+    private void deleteTodoAction() {
+        TodoListDBOperations.deleteTodo(todo);   
     }
     
     @FXML
     private void notificationButtonAction(){
+    }
+
+    private void updateUi() {
+        todoNameLabel.setText(todo.getTitle());
+        //setCollaboratorsDummy();
+        setCollaboratorsPanes(test2);
+        generateCollaboratorListUI();
+        loadItems();
+        //TodoListDBOperations.getAllItems(todo);  
     }
 }
