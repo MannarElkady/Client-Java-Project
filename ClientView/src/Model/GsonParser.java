@@ -48,7 +48,10 @@ public class GsonParser {
                     if (request.contains("assignTodoResponse")) {
                         requestType = new TypeToken<RequestEntity<Integer>>() {
                         }.getType();
-                    } else {
+                    } else if(request.contains("getAllItemsResonse")){
+                        requestType = new TypeToken<RequestEntity<ItemEntity>>() {
+                        }.getType();
+                    }else{
                         requestType = new TypeToken<RequestEntity<TodoEntity>>() {
                         }.getType();
                     }

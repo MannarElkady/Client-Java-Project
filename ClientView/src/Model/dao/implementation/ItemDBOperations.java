@@ -11,7 +11,6 @@ import Model.entities.ItemEntity;
 import java.util.ArrayList;
 import Model.SocketConnection;
 import Model.entities.AssignFriendTodoEntity;
-import Model.entities.TodoEntity;
 
 /**
  *
@@ -66,6 +65,23 @@ public class ItemDBOperations {
             System.out.println("Item assigned  successfully");
         } else {
             System.out.println("Item not assigned successfully");
+        }
+    }
+    
+    public static void deleteItem(ItemEntity itemToUpdate) {
+        ArrayList<ItemEntity> list = new ArrayList<>();
+        list.add(itemToUpdate);
+        RequestEntity<ItemEntity> updateRequest = new RequestEntity("ItemDBOperations", "deleteItem", list);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(updateRequest));
+    }
+
+    public void deleteItemResponse(ArrayList<Object> arrayObjects) {
+        if (arrayObjects != null) {
+            //to connect by Controller of ui
+            
+            System.out.println("Item deleted  successfully");
+        } else {
+            System.out.println("Item not deleted successfully");
         }
     }
 }

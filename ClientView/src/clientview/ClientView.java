@@ -6,8 +6,8 @@
 package clientview;
 
 import Model.SocketConnection;
-import Model.dao.implementation.TodoListDBOperations;
-import Model.entities.TodoEntity;
+import Model.dao.implementation.ItemDBOperations;
+import Model.entities.ItemEntity;
 import Model.entities.UserEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -57,8 +57,8 @@ public class ClientView extends Application {
             System.exit(0);
         });
         SocketConnection.getInstance();
-        TodoEntity todo = new TodoEntity(2, "jljlk", "#1212", 1, "Done", "New description", Date.valueOf("2020-01-01"), Date.valueOf("2020-12-01"));
-        TodoListDBOperations.deleteTodo(todo);
+        ItemEntity todo = new ItemEntity(1, "item1", "desccccc", 1, 1, Date.valueOf("2020-01-01"));
+        ItemDBOperations.deleteItem(todo);
     }
 
     /**
