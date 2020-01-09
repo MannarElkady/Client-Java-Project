@@ -74,7 +74,7 @@ public class NotificationGUI {
                         borderPanes.add(border);
 
                     } else {*/
-                        if (notificationsList.get(i).getNotificationType().contains("itemInvitation")) {
+                        if (notificationsList.get(i).getNotificationType().contains("itemInvitation") || notificationsList.get(i).getNotificationType().contains("todoInvitation") ) {
                             Button b1 = new Button("accept");
                             Button b2 = new Button("reject");
                             b1.setId("accept" +notificationsList.get(i).getNotificationType());
