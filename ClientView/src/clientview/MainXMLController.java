@@ -175,9 +175,9 @@ public class MainXMLController implements Initializable {
     @FXML
     private void addFriendBtnAction(ActionEvent event) {
         try{
-        Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddCollaboratorTodoFXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddFrindFXML.fxml"));
         Stage stage = new Stage(StageStyle.DECORATED);
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, 400, 300);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();

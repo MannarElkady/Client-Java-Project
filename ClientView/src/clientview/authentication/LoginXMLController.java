@@ -110,7 +110,7 @@ public class LoginXMLController implements Initializable {
 
   
       public void buttonAction(){
-       ArrayList<Object> data = new ArrayList<>();
+        ArrayList<Object> data = new ArrayList<>();
         NotificationEntity notification = new NotificationEntity();
         notification.setHeader("test Header");
         notification.setText("test Text");

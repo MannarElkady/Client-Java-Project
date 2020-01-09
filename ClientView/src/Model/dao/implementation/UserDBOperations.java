@@ -40,9 +40,9 @@ public class UserDBOperations {
         if (object == null || object.size() == 0) {
             System.out.println("login failed");
         } else {
-        
-            System.out.println(((UserEntity)object.get(0)).getId());
-            ClientView.currentUser = (UserEntity)object.get(0);
+
+            System.out.println(((UserEntity) object.get(0)).getId());
+            ClientView.currentUser = (UserEntity) object.get(0);
             getAllTodos(ClientView.currentUser);
             getFrinds(ClientView.currentUser);
         }
@@ -57,9 +57,9 @@ public class UserDBOperations {
     }
 
     public void registerResponse(ArrayList<Object> object) {
-          if (object== null|| object.isEmpty()) {
-              System.out.println("registration field");      
-          } else {
+        if (object == null || object.isEmpty()) {
+            System.out.println("registration field");
+        } else {
 
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
@@ -77,81 +77,99 @@ public class UserDBOperations {
             }
         }
 
-
     }
-    
-    public static void getAllTodos(UserEntity userID){
+
+    public static void getAllTodos(UserEntity userID) {
         ArrayList<UserEntity> list = new ArrayList<>();
         list.add(userID);
         RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getAllTodos", list);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
     }
-    
-    public void getAllTodosResonse(ArrayList<Object> items){
-        if(items.size() == 0){
+
+    public void getAllTodosResonse(ArrayList<Object> items) {
+        if (items.size() == 0) {
             System.out.println("No Items");
-        }else{
+        } else {
             try {
                 MainXMLController.setTodos(items);
-                
-                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));                
+
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
                 Scene scene = ClientView.mainStage.getScene();
                 //root.translateYProperty().set(scene.getHeight());
                 //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
-               // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
-                scene.setRoot(root);  
-                
+                // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                scene.setRoot(root);
+
                 /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
                 timeLine.getKeyFrames().add(kf);
                 timeLine.play();*/
-                
             } catch (IOException ex) {
                 Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }
-    
-    
-      public static void getFrinds(UserEntity userID){
+
+    public static void getFrinds(UserEntity userID) {
         ArrayList<UserEntity> list = new ArrayList<>();
         list.add(userID);
         RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getFrinds", list);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
     }
-    
-    public void getFrindsResonse(ArrayList<UserEntity> items){
-        
-        if(items == null || items.isEmpty()){
-        
-                        System.out.println("hi hema");
 
-        }else{
-        try {
+    public void getFrindsResonse(ArrayList<UserEntity> items) {
+
+        if (items == null || items.isEmpty()) {
+
+            System.out.println("hi hema");
+
+        } else {
+            try {
                 MainXMLController.setFriendList(items);
-                
-                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));                
+
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
                 Scene scene = ClientView.mainStage.getScene();
                 //root.translateYProperty().set(scene.getHeight());
                 //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
-               // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
-                scene.setRoot(root);  
-                
+                // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                scene.setRoot(root);
+
                 /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
                 timeLine.getKeyFrames().add(kf);
                 timeLine.play();*/
-                
             } catch (IOException ex) {
                 Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
+
         }
     }
-    
-    
+
+    public static void AddFrind(UserEntity user) {
+
+        ArrayList<UserEntity> list = new ArrayList<>();
+        list.add(user);
+        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "addFrind", list);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+    }
+
+    public void addFrindResponse(ArrayList<Object> object) {
+        if (object == null || object.size() == 0) {
+            System.out.println("Not Exist");
+        } else {
+            try {
+                getFrinds(ClientView.currentUser);
+                System.out.println("Add Successfuly");
+                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
+                Scene scene = ClientView.mainStage.getScene();
+                scene.setRoot(root);
+            } catch (IOException ex) {
+                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
 }

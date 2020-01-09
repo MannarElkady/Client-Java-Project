@@ -17,38 +17,48 @@ public class GsonParser {
 
         Gson gson = new Gson();
         Type requestType = null;
-        if (request != null  && !request.equals("null")) {
-            
+        if (request != null && !request.equals("null")) {
+
             System.out.println(request);
             switch (request.charAt(14)) {
                 case 'U':
-                    if(request.contains("getAllTodosResonse")){
+                    if (request.contains("getAllTodosResonse")) {
                         requestType = new TypeToken<RequestEntity<TodoEntity>>() {
                         }.getType();
-                    }else{
+                    } else {
                         requestType = new TypeToken<RequestEntity<UserEntity>>() {
                         }.getType();
                     }
                     break;
                 case 'I':
-                    requestType = new TypeToken<RequestEntity<ItemEntity>>() {
-                    }.getType();
+                    if(request.contains("deleteTodoResponse")){
+                        requestType = new TypeToken<RequestEntity<Integer>>() {
+                        }.getType();
+                    }else{
+                        requestType = new TypeToken<RequestEntity<ItemEntity>>() {
+                        }.getType();
+                    }
                     break;
                 case 'N':
                     requestType = new TypeToken<RequestEntity<NotificationEntity>>() {
                     }.getType();
                     break;
                 case 'T':
+                    //maybe there is a problem here because of integer type.
                     if (request.contains("assignTodoResponse")) {
                         requestType = new TypeToken<RequestEntity<Integer>>() {
                         }.getType();
-                    } else if(request.contains("getAllItemsResonse")) {
-                        requestType = new TypeToken<RequestEntity<ItemEntity>>() {
+                    } else if (request.contains("getAllItemsResonse")) {
+                          requestType = new TypeToken<RequestEntity<ItemEntity>>() {
                         }.getType();
-                    }else{
+                    } else if (request.contains("getToDoCollaboratorsResonse")) {
+                        requestType = new TypeToken<RequestEntity<UserEntity>>() {
+                        }.getType();
+                    } else {
                         requestType = new TypeToken<RequestEntity<TodoEntity>>() {
                         }.getType();
                     }
+
                     break;
             }
         }

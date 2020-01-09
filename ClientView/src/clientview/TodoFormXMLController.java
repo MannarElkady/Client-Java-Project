@@ -9,6 +9,7 @@ import Model.dao.implementation.UserDBOperations;
 import Model.entities.ItemEntity;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
+import static clientview.MainXMLController.test2;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
@@ -70,7 +71,7 @@ public class TodoFormXMLController implements Initializable {
 
     // for Dummy Testing
     ArrayList<TodoEntity> test = new ArrayList();
-    ArrayList<UserEntity> test2 = new ArrayList();
+   static ArrayList<UserEntity> test2 = new ArrayList();
     ArrayList<HBox> hBoxPane = new ArrayList();
     HBox child = null;
 
@@ -82,9 +83,8 @@ public class TodoFormXMLController implements Initializable {
     private ImageView addNewFriend;
     @FXML
     private BorderPane rootPane;
-
-    static TodoEntity todo = new TodoEntity();
-
+    
+    public static TodoEntity todo= new TodoEntity();
     @FXML
     private JFXButton homeButton;
 
@@ -97,15 +97,18 @@ public class TodoFormXMLController implements Initializable {
     public static void clearItemsList() {
         itemList.clear();
     }
-
-    /**
+    
+     public static void clearTest(){
+         test2.clear();
+     }
+         /**
      * Initializes the controller class.
      */
     @Override
 
     public void initialize(URL url, ResourceBundle rb) {
         todoNameLabel.setText(todo.getTitle());
-        setCollaboratorsDummy();
+        //setCollaboratorsDummy();
         setCollaboratorsPanes(test2);
         generateCollaboratorListUI();
         loadItems();
@@ -217,5 +220,9 @@ public class TodoFormXMLController implements Initializable {
             }
 
         }
+    }
+     public static void  setCollaboratorList(ArrayList<UserEntity> collaborators){ 
+            test2.clear();
+           test2=collaborators;   
     }
 }
