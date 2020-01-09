@@ -13,7 +13,6 @@ public class RequestEntity<T> {
 
     public RequestEntity() {
     }
-
     public RequestEntity(String className,String operation, ArrayList<T> entity) {
         this.operation = operation;
         this.className = className;

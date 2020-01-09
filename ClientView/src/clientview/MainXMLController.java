@@ -160,6 +160,7 @@ public class MainXMLController implements Initializable {
         setFriendListPanes();
         generateTodosUI(new ArrayList<Object>());
         generateFriendListUI();
+       
       
 
     }

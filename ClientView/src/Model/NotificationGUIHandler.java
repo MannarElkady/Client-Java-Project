@@ -52,9 +52,9 @@ public class NotificationGUIHandler implements EventHandler<Event> {
                         NotificationDBOperations.sendNotificationForItemAcceptance(notificationList);
                     } else if (notificationType.contains("todoInvitation")) {
                         NotificationDBOperations.sendNotificationForTodoAcceptance(notificationList);
-                    }
+                    }                    
                     else if (notificationType.contains("friendInvitation")){
-                    
+                        NotificationDBOperations.sendNotificationForFriendInfivationAcceptance(notificationList);
                     }
                 }
             }
