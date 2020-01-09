@@ -66,7 +66,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="editTodo" buttonType="RAISED" onAction="#editTodoAction" text="  " GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <JFXButton fx:id="editTodo" buttonType="RAISED" onAction="#editTodoAction" text="  " GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fx:id="addNewItem1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
