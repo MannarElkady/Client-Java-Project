@@ -12,6 +12,8 @@ import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXNodesList;
+import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXTextField;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,10 +34,12 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -87,6 +91,8 @@ public class TodoFormXMLController implements Initializable {
     public static TodoEntity todo= new TodoEntity();
     @FXML
     private JFXButton homeButton;
+    
+    private BorderPane borderItem;
 
     static ArrayList<Object> itemList = new ArrayList<>();
 
@@ -113,6 +119,10 @@ public class TodoFormXMLController implements Initializable {
     private JFXListView<?> todoDetails;
     @FXML
     private JFXButton notificationButton;
+    
+    private JFXNodesList itemDetails;
+    @FXML
+    private BorderPane borderZft;
          /**
      * Initializes the controller class.
      */
@@ -152,6 +162,9 @@ public class TodoFormXMLController implements Initializable {
         test2.add(useraya);
     }
 
+    private void addNewGridItem(){
+        
+    }
     public void setCollaboratorsPanes(ArrayList<UserEntity> collaboratorsList) {
         for (UserEntity useraya : collaboratorsList) {
             try {
@@ -202,27 +215,43 @@ public class TodoFormXMLController implements Initializable {
     
     private void loadItems() {
         if (itemList != null) {
-            //Label itemText = null;
             for (int i = 0; i < itemList.size(); i++) {
-                final Label itemText = new Label(((ItemEntity) itemList.get(i)).getTitle());
+                ItemEntity item = (ItemEntity) itemList.get(i);
+                final Label itemText = new Label(item.getTitle());
                 if(i==0){
                     itemText.setPadding(new Insets(25,10,25,10));
                 }
                 else{
                     itemText.setPadding(new Insets(10,10,10,10));
                 }
-                System.out.println("\nYaraaaaaaaaab tdaaaaaaf"+((ItemEntity) itemList.get(i)).getTitle());
                 itemText.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 itemText.setFont(new Font("Arial", 24));
                 itemText.setPadding(new Insets(10,10,10,10));
                 itemText.textProperty().addListener(new ChangeListener<String>() {
                     @Override
                     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                        itemText.setPrefWidth(itemText.getText().length() * 16); // why 7? Totally trial number.
+                        itemText.setPrefWidth(itemText.getText().length() * 16);
                     }
                     
                 });
-                vBoxPane.getChildren().add(itemText);
+                JFXButton itemDetailsButton = new JFXButton("More Item Details?");
+                itemDetailsButton.setButtonType(JFXButton.ButtonType.RAISED);
+                itemDetailsButton.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+                Label description = new Label(item.getDescription());
+                description.setFont(new Font("Arial", 16));
+                Label deadline= new Label("Deadline Date:   "+item.getDeadlineDate().toString());
+                deadline.setFont(new Font("Arial", 16));
+                itemDetails =new JFXNodesList();
+                int descriptionLength = item.getDescription().split("\r\n|\r|\n").length;
+                itemDetails.addAnimatedNode(itemDetailsButton);
+                itemDetails.addAnimatedNode(description);
+                itemDetails.addAnimatedNode(deadline);
+                borderItem = new BorderPane();
+                borderItem.setCenter(itemText);
+                borderItem.setLayoutY(descriptionLength);
+                borderItem.setRight(itemDetails);
+                borderItem.setPadding(new Insets(10,10,10,10));
+                vBoxPane.getChildren().add(borderItem);
             }
 
         }
