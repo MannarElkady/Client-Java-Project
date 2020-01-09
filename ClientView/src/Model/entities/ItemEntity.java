@@ -14,6 +14,28 @@ public class ItemEntity {
     private int creatorID;
     private Date deadlineDate;
 
+    public ItemEntity() {
+    }
+    
+    public ItemEntity(int itemID, String title, String description, int todoID, int creatorID, Date deadlineDate) {
+        this.itemID = itemID;
+        this.title = title;
+        this.description = description;
+        this.todoID = todoID;
+        this.creatorID = creatorID;
+        this.deadlineDate = deadlineDate;
+    }
+
+    public ItemEntity(String title, String description, int todoID, int creatorID, Date deadlineDate) {
+        this.title = title;
+        this.description = description;
+        this.todoID = todoID;
+        this.creatorID = creatorID;
+        this.deadlineDate = deadlineDate;
+    }
+    
+    
+    
     public int getItemID() {
         return itemID;
     }
