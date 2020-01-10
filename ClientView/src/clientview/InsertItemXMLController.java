@@ -26,6 +26,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import Model.dao.implementation.ItemDBOperations;
+import Model.dao.implementation.TodoListDBOperations;
+import Model.dao.implementation.UserDBOperations;
 import Model.entities.ItemEntity;
 import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
@@ -53,15 +55,15 @@ public class InsertItemXMLController implements Initializable {
     private ItemEntity newItemEntity = null;
     @FXML
     private JFXButton backButton;
-
+    
     private Stage stage;
-
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }
 
     @FXML
@@ -75,10 +77,8 @@ public class InsertItemXMLController implements Initializable {
     @FXML
     private void submitNewItemButtonAction(ActionEvent event) {
         addItemEntity();
-        Stage s =((Stage) mainBorderPane.getScene().getWindow());
-        //  ((Stage) mainBorderPane.getScene().getWindow()).close();
-        s.fireEvent(new WindowEvent(s, WindowEvent.WINDOW_CLOSE_REQUEST));
         refreshPage();
+
     }
 
     private void addItemEntity() {
@@ -100,19 +100,8 @@ public class InsertItemXMLController implements Initializable {
     }
 
     private void refreshPage() {
-        stage = (Stage) mainBorderPane.getScene().getWindow();
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent we) {
-                try {
-                    // Refresh the parent window here
-                    Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
-                    Scene scene = ClientView.mainStage.getScene();
-                    scene.setRoot(root);
-                } catch (IOException ex) {
-                    Logger.getLogger(InsertItemXMLController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
+        ((Stage) mainBorderPane.getScene().getWindow()).close();
+        TodoListDBOperations.getAllItems(TodoFormXMLController.todo);
     }
 
     /*
@@ -140,5 +129,7 @@ public class InsertItemXMLController implements Initializable {
     private void backButtonAction(ActionEvent event) {
         ((Stage) mainBorderPane.getScene().getWindow()).close();
     }
+
+    
 
 }

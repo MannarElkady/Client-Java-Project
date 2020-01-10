@@ -5,12 +5,15 @@
  */
 package clientview;
 
+import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.ItemEntity;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXNodesList;
+import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXTextField;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,10 +34,12 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -86,6 +91,8 @@ public class TodoFormXMLController implements Initializable {
     public static TodoEntity todo= new TodoEntity();
     @FXML
     private JFXButton homeButton;
+    
+    private BorderPane borderItem;
 
     static ArrayList<Object> itemList = new ArrayList<>();
 
@@ -110,19 +117,18 @@ public class TodoFormXMLController implements Initializable {
     private ImageView addNewItem11;
     @FXML
     private JFXListView<?> todoDetails;
+    @FXML
+    private JFXButton notificationButton;
+    
+    private JFXNodesList itemDetails;
+    @FXML
+    private BorderPane borderZft;
          /**
      * Initializes the controller class.
      */
     @Override
-
     public void initialize(URL url, ResourceBundle rb) {
-        todoNameLabel.setText(todo.getTitle());
-        //setCollaboratorsDummy();
-        setCollaboratorsPanes(test2);
-        generateCollaboratorListUI();
-        loadItems();
-        //TodoListDBOperations.getAllItems(todo);
-
+        updateUi();
     }
 
     public static void setToDoData(TodoEntity todoData) {
@@ -149,6 +155,9 @@ public class TodoFormXMLController implements Initializable {
         test2.add(useraya);
     }
 
+    private void addNewGridItem(){
+        
+    }
     public void setCollaboratorsPanes(ArrayList<UserEntity> collaboratorsList) {
         for (UserEntity useraya : collaboratorsList) {
             try {
@@ -193,39 +202,49 @@ public class TodoFormXMLController implements Initializable {
     }
 
     @FXML
-    private void homeButtonAction() throws IOException {
+    private void homeButtonAction(){
         UserDBOperations.getAllTodos(ClientView.currentUser);
     }
-
-    public static void appendItem(ItemEntity newItem){
-        if(itemList != null){
-            itemList.add(newItem);
-        }
-    }
+    
     private void loadItems() {
         if (itemList != null) {
-            //Label itemText = null;
             for (int i = 0; i < itemList.size(); i++) {
-                final Label itemText = new Label(((ItemEntity) itemList.get(i)).getTitle());
+                ItemEntity item = (ItemEntity) itemList.get(i);
+                final Label itemText = new Label(item.getTitle());
                 if(i==0){
                     itemText.setPadding(new Insets(25,10,25,10));
                 }
                 else{
                     itemText.setPadding(new Insets(10,10,10,10));
                 }
-                System.out.println("\nYaraaaaaaaaab tdaaaaaaf"+((ItemEntity) itemList.get(i)).getTitle());
                 itemText.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 itemText.setFont(new Font("Arial", 24));
                 itemText.setPadding(new Insets(10,10,10,10));
-               //wait).
                 itemText.textProperty().addListener(new ChangeListener<String>() {
                     @Override
                     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                        itemText.setPrefWidth(itemText.getText().length() * 16); // why 7? Totally trial number.
+                        itemText.setPrefWidth(itemText.getText().length() * 16);
                     }
                     
                 });
-                vBoxPane.getChildren().add(itemText);
+                JFXButton itemDetailsButton = new JFXButton("More Item Details?");
+                itemDetailsButton.setButtonType(JFXButton.ButtonType.RAISED);
+                itemDetailsButton.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+                Label description = new Label(item.getDescription());
+                description.setFont(new Font("Arial", 16));
+                Label deadline= new Label("Deadline Date:   "+item.getDeadlineDate().toString());
+                deadline.setFont(new Font("Arial", 16));
+                itemDetails =new JFXNodesList();
+                int descriptionLength = item.getDescription().split("\r\n|\r|\n").length;
+                itemDetails.addAnimatedNode(itemDetailsButton);
+                itemDetails.addAnimatedNode(description);
+                itemDetails.addAnimatedNode(deadline);
+                borderItem = new BorderPane();
+                borderItem.setCenter(itemText);
+                borderItem.setLayoutY(descriptionLength);
+                borderItem.setRight(itemDetails);
+                borderItem.setPadding(new Insets(10,10,10,10));
+                vBoxPane.getChildren().add(borderItem);
             }
 
         }
@@ -237,13 +256,36 @@ public class TodoFormXMLController implements Initializable {
 
     @FXML
     private void editTodoAction(ActionEvent event) {
+         try {
+            InsertTodoXMLController.setTodoData(todo);
+            InsertTodoXMLController.isUpdate = true;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertTodoXML.fxml"));
+            Parent insertItemWindow = loader.load();
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner((Stage) rootPane.getScene().getWindow());
+            Scene dialogScene = new Scene(insertItemWindow);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        } catch (IOException ex) {
+            Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
-    private void deleteTodoAction(ActionEvent event) {
+    private void deleteTodoAction() {
+        TodoListDBOperations.deleteTodo(todo);   
     }
-    
     @FXML
     private void notificationButtonAction(){
+    }
+
+    private void updateUi() {
+        todoNameLabel.setText(todo.getTitle());
+        //setCollaboratorsDummy();
+        setCollaboratorsPanes(test2);
+        generateCollaboratorListUI();
+        loadItems();
+        //TodoListDBOperations.getAllItems(todo);  
     }
 }

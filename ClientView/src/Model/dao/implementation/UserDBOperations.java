@@ -66,7 +66,7 @@ public class UserDBOperations {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
                 Scene scene = ClientView.mainStage.getScene();
-                root.translateYProperty().set(scene.getHeight());
+           //     root.translateYProperty().set(scene.getHeight());
                 scene.setRoot(root);
                 /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
