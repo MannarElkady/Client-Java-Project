@@ -66,7 +66,7 @@ public class UserDBOperations {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
                 Scene scene = ClientView.mainStage.getScene();
-           //     root.translateYProperty().set(scene.getHeight());
+                //     root.translateYProperty().set(scene.getHeight());
                 scene.setRoot(root);
                 /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
@@ -89,29 +89,29 @@ public class UserDBOperations {
     }
 
     public void getAllTodosResonse(ArrayList<Object> items) {
-        if (items.size() == 0) {
+        if (items.size() == 0 || items == null) {
             System.out.println("No Items");
         } else {
-            try {
-                MainXMLController.setTodos(items);
+            MainXMLController.setTodos(items);
+        }
 
-                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
-                
-                Scene scene = ClientView.mainStage.getScene();
-                //root.translateYProperty().set(scene.getHeight());
-                //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
-                // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
-                scene.setRoot(root);
+        try {
 
-                /*Timeline timeLine = new Timeline();
+            Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
+
+            Scene scene = ClientView.mainStage.getScene();
+            //root.translateYProperty().set(scene.getHeight());
+            //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
+            // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+            scene.setRoot(root);
+
+            /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
                 timeLine.getKeyFrames().add(kf);
                 timeLine.play();*/
-            } catch (IOException ex) {
-                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+        } catch (IOException ex) {
+            Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -174,21 +174,21 @@ public class UserDBOperations {
             }
         }
     }
-    
-    
-     public static void getAllUsers(UserEntity user) {
+
+    public static void getAllUsers(UserEntity user) {
         ArrayList<UserEntity> list = new ArrayList<>();
         list.add(user);
-        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getAllUsers",list);
+        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getAllUsers", list);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
     }
-     public void getAllUsersResonse(ArrayList<UserEntity> object) {
-         System.out.println("oooo"+object.size());
+
+    public void getAllUsersResonse(ArrayList<UserEntity> object) {
+        System.out.println("oooo" + object.size());
         if (object == null || object.size() == 0) {
             System.out.println("zero of users");
-        } else {               
+        } else {
             AddFrindFXMLController.setAllUSersList(object);
-            
+
         }
     }
 

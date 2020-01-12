@@ -16,7 +16,6 @@ public class ItemEntity {
 
     public ItemEntity() {
     }
-    
     public ItemEntity(int itemID, String title, String description, int todoID, int creatorID, Date deadlineDate) {
         this.itemID = itemID;
         this.title = title;
