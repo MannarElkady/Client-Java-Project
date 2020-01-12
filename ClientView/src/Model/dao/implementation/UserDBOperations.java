@@ -96,6 +96,7 @@ public class UserDBOperations {
                 MainXMLController.setTodos(items);
 
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
+                
                 Scene scene = ClientView.mainStage.getScene();
                 //root.translateYProperty().set(scene.getHeight());
                 //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            

@@ -6,7 +6,6 @@
 package clientview;
 
 import Model.SocketConnection;
-import Model.dao.implementation.NotificationDBOperations;
 import Model.entities.UserEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +21,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.scene.image.Image;
 
 /**
  *

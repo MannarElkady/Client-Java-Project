@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Model.dao.implementation.UserDBOperations;
 import clientview.NotificationGUI;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -79,14 +80,19 @@ public class SocketConnection extends Thread {
 
                     if (replyMsg.equals("notification received")) {
                         NotificationGUI.receiveNotificationTray();
-                    } else if (replyMsg.equals("closed")) {
+                    }else if(replyMsg.equals("Update Notification")){
+                        System.out.println("Update your ui");
+                        UserDBOperations.getAllTodos(clientview.ClientView.currentUser);
+                    }else if(replyMsg.equals("Delete Notification")){
+                        System.out.println("Delete your TODO");
+                        UserDBOperations.getAllTodos(clientview.ClientView.currentUser);
+                    }else if (replyMsg.equals("closed")) {
                         System.out.println(replyMsg);
                         serverClosed = true;
-
                     } else if (replyMsg.equals("opened")) {
                         serverClosed = false;
                         System.out.println("opened");
-                    } else if (!replyMsg.equals("opened") && !replyMsg.equals("closed") && !replyMsg.equals("notification received")) {
+                    }else/* if (!replyMsg.equals("opened") && !replyMsg.equals("closed") && !replyMsg.equals("notification received"))*/ {
                         Handler.handle(replyMsg);
                     }
                 }
