@@ -34,8 +34,10 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -123,6 +125,7 @@ public class TodoFormXMLController implements Initializable {
     private JFXNodesList itemDetails;
     @FXML
     private BorderPane borderZft;
+    TitledPane itemInList;
          /**
      * Initializes the controller class.
      */
@@ -205,7 +208,53 @@ public class TodoFormXMLController implements Initializable {
     private void homeButtonAction(){
         UserDBOperations.getAllTodos(ClientView.currentUser);
     }
-    
+    /*
+    TitledPane pane1 = new TitledPane("Boats" , new Label("Show all boats available"));
+        TitledPane pane2 = new TitledPane("Cars"  , new Label("Show all cars available"));
+        TitledPane pane3 = new TitledPane("Planes", new Label("Show all planes available"));
+
+        accordion.getPanes().add(pane1);
+        accordion.getPanes().add(pane2);
+        accordion.getPanes().add(pane3);
+
+        VBox vBox = new VBox(accordion);
+        Scene scene = new Scene(vBox);
+    */
+    private void loadItems() {
+        if (itemList != null) {
+            for (int i = 0; i < itemList.size(); i++) {
+                ItemEntity item = (ItemEntity) itemList.get(i);
+                final Label itemText = new Label(item.getTitle());
+                if(i==0){
+                    itemText.setPadding(new Insets(25,10,25,10));
+                }
+                else{
+                    itemText.setPadding(new Insets(10,10,10,10));
+                }
+                itemText.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+                itemText.setFont(new Font("Arial", 24));
+                itemText.setPadding(new Insets(10,10,10,10));
+                itemText.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                        itemText.setPrefWidth(itemText.getText().length() * 16);
+                    }
+                    
+                });
+                
+                 Accordion accordion = new Accordion();
+
+                
+                Label descriptionAndDeadline = new Label(item.getDescription()+"/n Deadline Date: "+item.getDeadlineDate().toString());
+                descriptionAndDeadline.setFont(new Font("Arial", 16));
+                itemInList = new TitledPane(item.getTitle(), descriptionAndDeadline);
+                itemInList.setPadding(new Insets(10,10,10,10));
+                vBoxPane.getChildren().add(itemInList);
+            }
+
+        }
+    }
+    /*
     private void loadItems() {
         if (itemList != null) {
             for (int i = 0; i < itemList.size(); i++) {
@@ -248,7 +297,7 @@ public class TodoFormXMLController implements Initializable {
             }
 
         }
-    }
+    }*/
      public static void  setCollaboratorList(ArrayList<UserEntity> collaborators){ 
             test2.clear();
            test2=collaborators;   
