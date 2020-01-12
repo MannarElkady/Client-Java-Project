@@ -5,9 +5,8 @@
  */
 package Model.dao.implementation;
 
-import Model.GsonParser;
+import Model.Handler;
 import Model.RequestEntity;
-import Model.SocketConnection;
 import Model.entities.UserEntity;
 import clientview.AddFrindFXMLController;
 import clientview.ClientView;
@@ -26,15 +25,11 @@ import javafx.scene.Scene;
  */
 public class UserDBOperations {
 
-    public static void login(String username, String password) {
-
-        UserEntity user = new UserEntity();
+    public static void login(UserEntity user) {
         ArrayList<UserEntity> users = new ArrayList<>();
-        user.setUsername(username);
-        user.setPassword(password);
         users.add(user);
         RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "login", users);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+        Handler.sendRequestToServer(request);
     }
 
     public void loginResponse(ArrayList<Object> object) {
@@ -55,7 +50,7 @@ public class UserDBOperations {
         ArrayList<UserEntity> users = new ArrayList<>();
         users.add(user);
         RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "register", users);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+        Handler.sendRequestToServer(request);
     }
 
     public void registerResponse(ArrayList<Object> object) {
@@ -85,7 +80,7 @@ public class UserDBOperations {
         ArrayList<UserEntity> list = new ArrayList<>();
         list.add(userID);
         RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getAllTodos", list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+        Handler.sendRequestToServer(addRequest);
     }
 
     public void getAllTodosResonse(ArrayList<Object> items) {
@@ -119,7 +114,7 @@ public class UserDBOperations {
         ArrayList<UserEntity> list = new ArrayList<>();
         list.add(userID);
         RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getFrinds", list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+        Handler.sendRequestToServer(addRequest);
     }
 
     public void getFrindsResonse(ArrayList<UserEntity> items) {
@@ -156,7 +151,7 @@ public class UserDBOperations {
         ArrayList<UserEntity> list = new ArrayList<>();
         list.add(user);
         RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "addFrind", list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+        Handler.sendRequestToServer(addRequest);
     }
 
     public void addFrindResponse(ArrayList<Object> object) {
@@ -180,7 +175,7 @@ public class UserDBOperations {
         ArrayList<UserEntity> list = new ArrayList<>();
         list.add(user);
         RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getAllUsers",list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+        Handler.sendRequestToServer(addRequest);
     }
      public void getAllUsersResonse(ArrayList<UserEntity> object) {
          System.out.println("oooo"+object.size());

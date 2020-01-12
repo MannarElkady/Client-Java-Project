@@ -13,7 +13,6 @@ import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXMasonryPane;
-import com.jfoenix.controls.JFXScrollPane;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -161,8 +160,7 @@ public class MainXMLController implements Initializable {
             TodoEntity todo=null;
         try {
              todo = (TodoEntity)data.get(i);
-            todoName = new Label(todo.getTitle());
-            System.out.println("Working Directory = " +System.getProperty("user.dir"));  
+            todoName = new Label(todo.getTitle());            
             img= new Image(new FileInputStream(System.getProperty("user.dir")+"/src/clientview/resources/todo.jpg"));
             imgView=new ImageView(img);
             imgView.setFitHeight(50.0);

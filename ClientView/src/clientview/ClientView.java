@@ -28,8 +28,6 @@ import javafx.application.Platform;
  */
 public class ClientView extends Application {
 
-    SocketConnection object;
-
     public static Stage mainStage;
     public static UserEntity currentUser;
 
@@ -57,7 +55,7 @@ public class ClientView extends Application {
             Platform.exit();
             System.exit(0);
         });
-        SocketConnection.getInstance();
+      SocketConnection.getInstance();
         ArrayList<Integer> users = new ArrayList<>();        
         users.add(1);
 

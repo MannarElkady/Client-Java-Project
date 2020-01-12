@@ -5,8 +5,6 @@
  */
 package clientview.authentication;
 
-import Model.RequestCreator;
-import Model.RequestEntity;
 import Model.SocketConnection;
 import Utility.Validation;
 import Model.entities.UserEntity;

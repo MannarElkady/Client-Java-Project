@@ -18,7 +18,7 @@ import java.net.Socket;
  */
 public class SocketConnection extends Thread {
 
-    boolean checkFirstTime = true;
+    public static boolean checkFirstTime = false;
     private static SocketConnection instance = null;
     private Socket socket;
     private PrintStream printStream;
@@ -27,20 +27,27 @@ public class SocketConnection extends Thread {
     Thread th;
 
     private SocketConnection() {
-
-        try {
+        createConnection();
+    }
+    
+    public void createConnection(){
+         try {
+            if(socket==null){
             socket = new Socket("127.0.0.1", 5005);
             dataInputStream = new DataInputStream(socket.getInputStream());
             printStream = new PrintStream(socket.getOutputStream());
+            checkFirstTime = true;
+            serverClosed =false;
             th = new Thread(this);
             th.start();
+             }
         } catch (IOException e) {
            // e.printStackTrace();
            serverClosed=true;
-            checkFirstTime = false;
+           checkFirstTime = false;
         }
     }
-
+  
     public boolean isServerClosed() {
         return serverClosed;
     }
@@ -71,9 +78,7 @@ public class SocketConnection extends Thread {
     @Override
     public void run() {
         System.out.println("in run");
-
         try {
-
             while (checkFirstTime) {
                 String replyMsg = dataInputStream.readLine();
                 if (replyMsg != null) {
@@ -102,6 +107,7 @@ public class SocketConnection extends Thread {
             serverClosed = true;
 
         }
+        System.out.println("test Stream");
     }
 
 }
