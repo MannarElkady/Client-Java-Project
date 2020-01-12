@@ -34,7 +34,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -47,8 +49,10 @@ import javafx.stage.StageStyle;
  *
  * @author DELL
  */
-public class MainXMLController implements Initializable {
+public class MainXMLController extends BorderPane implements Initializable {
 
+    @FXML
+    private JFXButton homeBtn;
     @FXML
     private JFXButton addFriendBtn;
     @FXML
@@ -103,11 +107,9 @@ public class MainXMLController implements Initializable {
                 imgView.setFitWidth(10.0);
                 userLabel=new Label(useraya.getUsername());
                 userLabel.setGraphic(imgView);
-                userLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 userLabel.paddingProperty();
                 userLabel.setPrefSize(100,30);
                 child.getChildren().add(userLabel);
-                child.setStyle("-fx-background-color:POWDERBLUE;-fx-background-radius:30;-fx-border-radius:30;");
                 hBoxPane.add(child);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(MainXMLController.class.getName()).log(Level.SEVERE, null, ex);
@@ -159,37 +161,41 @@ public class MainXMLController implements Initializable {
         for(int i = 0 ;i< data.size();i++){
             TodoEntity todo=null;
         try {
-             todo = (TodoEntity)data.get(i);
+            todo = (TodoEntity)data.get(i);
             todoName = new Label(todo.getTitle());            
             img= new Image(new FileInputStream(System.getProperty("user.dir")+"/src/clientview/resources/todo.jpg"));
             imgView=new ImageView(img);
             imgView.setFitHeight(50.0);
             imgView.setFitWidth(50.0);
+            
+            
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(MainXMLBase.class.getName()).log(Level.SEVERE, null, ex);
             }
+                
                 todoName.setGraphic(imgView);
                 todoName.paddingProperty();
                 todoName.setPadding(new Insets(15));
-                todoName.setPrefSize(200,100);
-                todoName.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+                todoName.setPrefSize(100,100);
+                todoName.setStyle("-fx-background-color:POWDERBLUE");
                 todoName.setId(String.valueOf(todo.getId()));
                 todoName.addEventFilter(MouseEvent.MOUSE_CLICKED, new MainFormHandler());
-                todoName.setWrapText(true);
                 jMasonaryPane.getChildren().add(todoName);
+                
+                //yahya
+                setCenter(jMasonaryPane);
         }
     }
     
     
     public void generateFriendListUI(){
             ObservableList<HBox> items =FXCollections.observableArrayList(hBoxPane);
-            friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
             friendListPane.setItems(items);
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      //  JFXScrollPane.smoothScrolling(scrollPaneMasonary);
+            //  JFXScrollPane.smoothScrolling(scrollPaneMasonary);
         FlowCardComposite();
         setFriendListPanes();
         generateTodosUI(new ArrayList<Object>());
@@ -198,13 +204,17 @@ public class MainXMLController implements Initializable {
         stackPaneBorder.setCenter(stackPane);
     }
 
-  
     @FXML
+    private void homeBtnAction(ActionEvent event) {
+    }
+
+    @FXML
+
     private void addFriendBtnAction(ActionEvent event) {
         try{
-        Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddFrindFXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddCollaboratorTodoFXML.fxml"));
         Stage stage = new Stage(StageStyle.DECORATED);
-        Scene scene = new Scene(root, 400, 300);
+        Scene scene = new Scene(root, 600, 600);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
@@ -215,7 +225,7 @@ public class MainXMLController implements Initializable {
 
     @FXML
     private void addTodoAction(ActionEvent event) {
-        InsertTodoXMLController.isUpdate =false;
+        
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertTodoXML.fxml"));
             Parent insertItemWindow = loader.load();
@@ -232,7 +242,7 @@ public class MainXMLController implements Initializable {
 
     private void getAllTodos() {
         UserEntity user = new UserEntity();
-        user.setId(ClientView.currentUser.getId());
+        user.setId(1);
         UserDBOperations.getAllTodos(user);
     }
     
