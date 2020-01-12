@@ -31,10 +31,13 @@ public class GsonParser {
                     }
                     break;
                 case 'I':
-                    if(request.contains("deleteTodoResponse")){
+                    if (request.contains("deleteTodoResponse")) {
                         requestType = new TypeToken<RequestEntity<Integer>>() {
                         }.getType();
-                    }else{
+                    } else if (request.contains("getItemCollaboratorsResonse")) {
+                        requestType = new TypeToken<RequestEntity<UserEntity>>() {
+                        }.getType();
+                    } else {
                         requestType = new TypeToken<RequestEntity<ItemEntity>>() {
                         }.getType();
                     }
@@ -49,7 +52,7 @@ public class GsonParser {
                         requestType = new TypeToken<RequestEntity<Integer>>() {
                         }.getType();
                     } else if (request.contains("getAllItemsResonse")) {
-                          requestType = new TypeToken<RequestEntity<ItemEntity>>() {
+                        requestType = new TypeToken<RequestEntity<ItemEntity>>() {
                         }.getType();
                     } else if (request.contains("getToDoCollaboratorsResonse")) {
                         requestType = new TypeToken<RequestEntity<UserEntity>>() {

@@ -11,6 +11,7 @@ import Model.MainFormHandler;
 import Model.RequestEntity;
 import Model.SocketConnection;
 import Model.entities.AssignFriendTodoEntity;
+import Model.entities.ItemEntity;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import clientview.ClientView;
@@ -102,6 +103,9 @@ public class TodoListDBOperations {
             Logger.getLogger(MainFormHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         getTodoCollaborators(TodoFormXMLController.todo);
+        ItemEntity item=new ItemEntity();
+        item.setItemID(6);
+        ItemDBOperations.getItemCollaborators(item);
     }
     
       public static void getTodoCollaborators(TodoEntity todo) {
