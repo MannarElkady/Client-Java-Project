@@ -112,8 +112,6 @@ public class TodoFormXMLController implements Initializable {
     @FXML
     private JFXButton editTodo;
     @FXML
-    private ImageView addNewItem1;
-    @FXML
     private JFXButton deleteTodo;
     @FXML
     private ImageView addNewItem11;
@@ -126,6 +124,8 @@ public class TodoFormXMLController implements Initializable {
     @FXML
     private BorderPane borderZft;
     TitledPane itemInList;
+    @FXML
+    private ImageView editimg;
          /**
      * Initializes the controller class.
      */
@@ -208,98 +208,23 @@ public class TodoFormXMLController implements Initializable {
     private void homeButtonAction(){
         UserDBOperations.getAllTodos(ClientView.currentUser);
     }
-    /*
-    TitledPane pane1 = new TitledPane("Boats" , new Label("Show all boats available"));
-        TitledPane pane2 = new TitledPane("Cars"  , new Label("Show all cars available"));
-        TitledPane pane3 = new TitledPane("Planes", new Label("Show all planes available"));
-
-        accordion.getPanes().add(pane1);
-        accordion.getPanes().add(pane2);
-        accordion.getPanes().add(pane3);
-
-        VBox vBox = new VBox(accordion);
-        Scene scene = new Scene(vBox);
-    */
     private void loadItems() {
         if (itemList != null) {
             for (int i = 0; i < itemList.size(); i++) {
                 ItemEntity item = (ItemEntity) itemList.get(i);
-                final Label itemText = new Label(item.getTitle());
-                if(i==0){
-                    itemText.setPadding(new Insets(25,10,25,10));
-                }
-                else{
-                    itemText.setPadding(new Insets(10,10,10,10));
-                }
-                itemText.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
-                itemText.setFont(new Font("Arial", 24));
-                itemText.setPadding(new Insets(10,10,10,10));
-                itemText.textProperty().addListener(new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                        itemText.setPrefWidth(itemText.getText().length() * 16);
-                    }
-                    
-                });
-                
                  Accordion accordion = new Accordion();
-
-                
-                Label descriptionAndDeadline = new Label(item.getDescription()+"/n Deadline Date: "+item.getDeadlineDate().toString());
-                descriptionAndDeadline.setFont(new Font("Arial", 16));
+                Label descriptionAndDeadline = new Label(item.getDescription()+"\n Deadline Date:  "+item.getDeadlineDate().toString());
+                descriptionAndDeadline.setFont(new Font("Arial", 22));
                 itemInList = new TitledPane(item.getTitle(), descriptionAndDeadline);
                 itemInList.setPadding(new Insets(10,10,10,10));
-                vBoxPane.getChildren().add(itemInList);
+                itemInList.setFont(new Font("Arial", 22));
+                accordion.getPanes().add(itemInList);
+                vBoxPane.getChildren().add(accordion);
             }
-
         }
     }
-    /*
-    private void loadItems() {
-        if (itemList != null) {
-            for (int i = 0; i < itemList.size(); i++) {
-                ItemEntity item = (ItemEntity) itemList.get(i);
-                final Label itemText = new Label(item.getTitle());
-                if(i==0){
-                    itemText.setPadding(new Insets(25,10,25,10));
-                }
-                else{
-                    itemText.setPadding(new Insets(10,10,10,10));
-                }
-                itemText.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
-                itemText.setFont(new Font("Arial", 24));
-                itemText.setPadding(new Insets(10,10,10,10));
-                itemText.textProperty().addListener(new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                        itemText.setPrefWidth(itemText.getText().length() * 16);
-                    }
-                    
-                });
-                JFXButton itemDetailsButton = new JFXButton("More Item Details?");
-                itemDetailsButton.setButtonType(JFXButton.ButtonType.RAISED);
-                itemDetailsButton.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
-                Label description = new Label(item.getDescription());
-                description.setFont(new Font("Arial", 16));
-                Label deadline= new Label("Deadline Date:   "+item.getDeadlineDate().toString());
-                deadline.setFont(new Font("Arial", 16));
-                itemDetails =new JFXNodesList();
-                int descriptionLength = item.getDescription().split("\r\n|\r|\n").length;
-                itemDetails.addAnimatedNode(itemDetailsButton);
-                itemDetails.addAnimatedNode(description);
-                itemDetails.addAnimatedNode(deadline);
-                borderItem = new BorderPane();
-                borderItem.setCenter(itemText);
-                borderItem.setLayoutY(descriptionLength);
-                borderItem.setRight(itemDetails);
-                borderItem.setPadding(new Insets(10,10,10,10));
-                vBoxPane.getChildren().add(borderItem);
-            }
-
-        }
-    }*/
      public static void  setCollaboratorList(ArrayList<UserEntity> collaborators){ 
-            test2.clear();
+//            test2.clear();
            test2=collaborators;   
     }
 
