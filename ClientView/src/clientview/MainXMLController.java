@@ -13,6 +13,7 @@ import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXMasonryPane;
+import com.jfoenix.controls.JFXScrollPane;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,6 +32,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -39,6 +41,7 @@ import javafx.scene.input.MouseEvent;
 
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -78,6 +81,13 @@ public class MainXMLController extends BorderPane implements Initializable {
     HBox child=null;
     @FXML
     private BorderPane mainBorderPane;
+    @FXML
+    private ScrollPane scrollPaneMasonary;
+    @FXML
+    private StackPane stackPane;
+    @FXML
+    private BorderPane stackPaneBorder;
+    
     public void setFriendListDummy(){
         UserEntity useraya= new UserEntity();
         useraya.setUsername("Userayaa");
@@ -85,9 +95,10 @@ public class MainXMLController extends BorderPane implements Initializable {
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
-        test2.add(useraya);
-              
+        test2.add(useraya);         
     }
+    
+    
     public void setFriendListPanes(){
         for(UserEntity useraya: test2){
             try {
@@ -118,6 +129,29 @@ public class MainXMLController extends BorderPane implements Initializable {
         
 
     }
+    
+    public void FlowCardComposite() {
+	scrollPaneMasonary.setFitToHeight(true);
+	scrollPaneMasonary.setFitToWidth(true);
+	scrollPaneMasonary.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+	stackPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+	scrollPaneMasonary.setContent(jMasonaryPane);
+}
+   /* public void FlowCardComposite() {
+
+	scrollPane = new ScrollPane();
+	scrollPane.setFitToHeight(true);
+	scrollPane.setFitToWidth(true);
+	scrollPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+	StackPane stackPane = new StackPane(scrollPane);
+	stackPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+	masonryPane = new JFXMasonryPane();
+	scrollPane.setContent(masonryPane);
+	setCenter(stackPane);
+	masonryPane.setCache(false);
+	setStyle("-fx-background-color : #292929");
+}*/
+
     public static void setTodos(ArrayList<Object> list){
         data = list;
     }
@@ -165,14 +199,13 @@ public class MainXMLController extends BorderPane implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        //setTodoDummy();
-        //setFriendListDummy();
+            //  JFXScrollPane.smoothScrolling(scrollPaneMasonary);
+        FlowCardComposite();
         setFriendListPanes();
         generateTodosUI(new ArrayList<Object>());
         generateFriendListUI();
-      
-
+	jMasonaryPane.setCache(false);
+        stackPaneBorder.setCenter(stackPane);
     }
 
     @FXML

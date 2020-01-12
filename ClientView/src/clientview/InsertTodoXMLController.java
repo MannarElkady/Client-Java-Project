@@ -44,83 +44,93 @@ public class InsertTodoXMLController implements Initializable {
     private JFXTextField titleTextField;
     @FXML
     private JFXDatePicker dateDateField;
-    
-    private static TodoEntity newTodo; 
+
+    private static TodoEntity newTodo;
     @FXML
     private JFXTextArea descriptionTextArea;
     @FXML
     private JFXDatePicker assignDate;
     @FXML
     private JFXColorPicker colorPicker;
-    public static boolean isUpdate= false;
+    public static boolean isUpdate = false;
     public static TodoEntity todo;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if(isUpdate){
+        if (isUpdate) {
             isUpdate = false;
             submitNewTodoButton.setText("Update");
             titleTextField.setText(todo.getTitle());
             descriptionTextArea.setText(todo.getDescription());
-            assignDate.setValue(LocalDate.of(todo.getAssignDate().getYear()+1900,todo.getAssignDate().getMonth()+1,todo.getAssignDate().getDate()));
-            dateDateField.setValue(LocalDate.of(todo.getDeadlineDate().getYear()+1900,todo.getDeadlineDate().getMonth()+1,todo.getDeadlineDate().getDate()));
+            assignDate.setValue(LocalDate.of(todo.getAssignDate().getYear() + 1900, todo.getAssignDate().getMonth() + 1, todo.getAssignDate().getDate()));
+            dateDateField.setValue(LocalDate.of(todo.getDeadlineDate().getYear() + 1900, todo.getDeadlineDate().getMonth() + 1, todo.getDeadlineDate().getDate()));
         }
-    }    
+    }
 
     @FXML
     private void backButtonAction(ActionEvent event) {
-         ((Stage)mainBorderPane.getScene().getWindow()).close();
+        ((Stage) mainBorderPane.getScene().getWindow()).close();
     }
 
     @FXML
     private void submitNewTodoButtonAction(ActionEvent event) {
-       addNewTodoEntity();
+        addNewTodoEntity();
     }
 
-    private void addNewTodoEntity(){
-         if (Validation.checkString(titleTextField.getText())) {
+    private void addNewTodoEntity() {
+        if (Validation.checkString(titleTextField.getText())) {
             if (dateDateField.getValue() != null && assignDate.getValue() != null) {
-                newTodo = new TodoEntity();
-                newTodo.setAssignDate(java.sql.Date.valueOf(assignDate.getValue()));
-                newTodo.setTitle(titleTextField.getText());
-                newTodo.setCreatorId(ClientView.currentUser.getId());
-                System.out.println(colorPicker.getValue().toString().substring(4));
-                newTodo.setColor(colorPicker.getValue().toString());
-                newTodo.setDescription(descriptionTextArea.getText());
-                newTodo.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));
-                ((Stage)mainBorderPane.getScene().getWindow()).close(); 
-                if(submitNewTodoButton.getText().equals("Update")){
-                    newTodo.setId(todo.getId());
-                    TodoListDBOperations.updateTodo(newTodo);
-                }else{
-                    TodoListDBOperations.addTodo(newTodo);
-                    UserDBOperations.getAllTodos(ClientView.currentUser);      
+                if (Validation.checkDeadlineAssignTodo(java.sql.Date.valueOf(assignDate.getValue()), java.sql.Date.valueOf(dateDateField.getValue()))) {
+                    newTodo = new TodoEntity();
+                    newTodo.setAssignDate(java.sql.Date.valueOf(assignDate.getValue()));
+                    newTodo.setTitle(titleTextField.getText());
+                    newTodo.setCreatorId(ClientView.currentUser.getId());
+                    System.out.println(colorPicker.getValue().toString().substring(4));
+                    newTodo.setColor(colorPicker.getValue().toString());
+                    newTodo.setDescription(descriptionTextArea.getText());
+                    newTodo.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));
+                    ((Stage) mainBorderPane.getScene().getWindow()).close();
+                    if (submitNewTodoButton.getText().equals("Update")) {
+                        newTodo.setId(todo.getId());
+                        TodoListDBOperations.updateTodo(newTodo);
+                    } else {
+                        TodoListDBOperations.addTodo(newTodo);
+                        UserDBOperations.getAllTodos(ClientView.currentUser);
+                    }
                 }
             }
         }
     }
+
     @FXML
     private void resetTodoFormButtonAction(ActionEvent event) {
         titleTextField.clear();
         dateDateField.setValue(null);
+        assignDate.setValue(null);
+        descriptionTextArea.clear();
+        colorPicker.setValue(null);
+
     }
 
-    private static TodoEntity getNewTodo(){
+    private static TodoEntity getNewTodo() {
         return newTodo;
     }
+
     @FXML
     private void addPaneActionESC(KeyEvent event) {
         KeyCode key = event.getCode();
         if (key == KeyCode.ESCAPE) {
-       ((Stage) mainBorderPane.getScene().getWindow()).close();
+            ((Stage) mainBorderPane.getScene().getWindow()).close();
         }
     }
 
     @FXML
     private void assignDateAction(ActionEvent event) {
     }
+
     public static void setTodoData(TodoEntity todoData) {
         todo = todoData;
     }
