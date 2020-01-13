@@ -85,33 +85,36 @@ public class UserDBOperations {
     }
 
     public void getAllTodosResonse(ArrayList<Object> items) {
-        if (items==null|| items.size() == 0) {
+        if (items == null || items.size() == 0) {
             System.out.println("No Items");
         } else {
-            MainXMLController.setTodos(items);         
+            MainXMLController.setTodos(items);
         }
-                   
-               
 
-        try {
+        Platform.runLater(new Runnable() {
 
-            Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
+            @Override
+            public void run() {
+                try {
 
-            Scene scene = ClientView.mainStage.getScene();
-            //root.translateYProperty().set(scene.getHeight());
-            //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
-            // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
-            scene.setRoot(root);
+                    Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
 
-            /*Timeline timeLine = new Timeline();
+                    Scene scene = ClientView.mainStage.getScene();
+                    //root.translateYProperty().set(scene.getHeight());
+                    //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
+                    // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                    scene.setRoot(root);
+
+                    /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
                 timeLine.getKeyFrames().add(kf);
                 timeLine.play();*/
-        } catch (IOException ex) {
-            Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+                } catch (IOException ex) {
+                    Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 
     public static void getFrinds(UserEntity userID) {
@@ -185,7 +188,7 @@ public class UserDBOperations {
     public static void getAllUsers(UserEntity user) {
         ArrayList<UserEntity> list = new ArrayList<>();
         list.add(user);
-        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getAllUsers",list);
+        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getAllUsers", list);
         Handler.sendRequestToServer(addRequest);
     }
 
