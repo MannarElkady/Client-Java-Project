@@ -73,7 +73,7 @@ public class LoginXMLController implements Initializable {
                 RequestCreator newRequest = new RequestCreator("UserDBOperations","login",loginUser);
                 String newRequestJson= newRequest.getJsonObject();
                 System.out.println(newRequestJson);
-                    UserDBOperations.login(username, password);
+                UserDBOperations.login(username, password);
 
                 }
             }

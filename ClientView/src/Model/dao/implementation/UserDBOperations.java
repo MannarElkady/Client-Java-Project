@@ -16,9 +16,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -46,7 +50,6 @@ public class UserDBOperations {
             ClientView.currentUser = (UserEntity) object.get(0);
             getAllTodos(ClientView.currentUser);
             getFrinds(ClientView.currentUser);
-            getAllUsers(ClientView.currentUser);
         }
     }
 
@@ -66,7 +69,7 @@ public class UserDBOperations {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
                 Scene scene = ClientView.mainStage.getScene();
-           //     root.translateYProperty().set(scene.getHeight());
+                //     root.translateYProperty().set(scene.getHeight());
                 scene.setRoot(root);
                 /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
@@ -173,21 +176,57 @@ public class UserDBOperations {
             }
         }
     }
-    
-    
-     public static void getAllUsers(UserEntity user) {
+
+    public static void getAllUsers(UserEntity user) {
         ArrayList<UserEntity> list = new ArrayList<>();
         list.add(user);
-        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getAllUsers",list);
+        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getAllUsers", list);
         SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
     }
-     public void getAllUsersResonse(ArrayList<UserEntity> object) {
-         System.out.println("oooo"+object.size());
+
+    public void getAllUsersResonse(ArrayList<UserEntity> object) throws IOException {
+        System.out.println("oooo" + object.size());
         if (object == null || object.size() == 0) {
             System.out.println("zero of users");
-        } else {               
-            AddFrindFXMLController.setAllUSersList(object);
-            
+        } else {
+            Platform.runLater(new Runnable() {
+
+                @Override
+                public void run() {
+
+                    AddFrindFXMLController.setAllUSersList(object);
+                    Parent root;
+                    try {
+                        root = FXMLLoader.load(getClass().getResource("/clientview/AddFrindFXML.fxml"));
+                        Stage stage = new Stage(StageStyle.DECORATED);
+                        Scene scene = new Scene(root, 400, 300);
+                        stage.setScene(scene);
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+            });
+
+        }
+    }
+
+    public static void logout(UserEntity user) {
+        ArrayList<UserEntity> users = new ArrayList<>();
+        System.out.println("JKJJKIKI");
+        users.add(user);
+        RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "logout", users);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+    }
+
+    public void logoutResponse(ArrayList<Object> object) {
+        if (object == null || object.size() == 0) {
+            System.out.println("logout failed");
+        } else {
+
+            System.out.println("logout Ok");
         }
     }
 

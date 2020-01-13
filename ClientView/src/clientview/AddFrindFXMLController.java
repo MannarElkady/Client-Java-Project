@@ -40,19 +40,16 @@ public class AddFrindFXMLController implements Initializable {
     private BorderPane addbroderpane;
     String frindName;
     public static ArrayList<UserEntity> allUsers = new ArrayList();
+    ArrayList<String> allusers = new ArrayList<>();
+
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        ArrayList<String> allusers=new ArrayList<>();
-        for(int i=0;i<allUsers.size();i++)
-        {
-            allusers.add(allUsers.get(i).getUsername());
-        }
-        TextFields.bindAutoCompletion(frindtextfield,allusers);
+
+            intializeListofUsers();
     }
 
     @FXML
@@ -76,8 +73,18 @@ public class AddFrindFXMLController implements Initializable {
     }
 
     public static void setAllUSersList(ArrayList<UserEntity> users) {
-        System.out.println("size"+users.size());
+        System.out.println("size" + users.size());
+        allUsers.clear();
         allUsers = users;
+        
+    }
+
+    public void intializeListofUsers() {
+        for (int i = 0; i < allUsers.size(); i++) {
+            allusers.add(allUsers.get(i).getUsername());
+        }
+       TextFields.bindAutoCompletion(frindtextfield, allusers);
+
     }
 
 }
