@@ -6,8 +6,11 @@
 package clientview;
 
 import Model.dao.implementation.ItemDBOperations;
+import Model.dao.implementation.NotificationDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.ItemEntity;
+import Model.entities.NotificationEntity;
+import Model.entities.NotificationReceiversEntity;
 import Model.entities.UserEntity;
 import Utility.Validation;
 import com.jfoenix.controls.JFXButton;
@@ -62,11 +65,32 @@ public class AddFrindFXMLController implements Initializable {
             UserEntity user = new UserEntity();
             user.setId(ClientView.currentUser.getId());
             user.setUsername(frindName);
-            UserDBOperations.AddFrind(user);
+            prepareNotification();
+            //UserDBOperations.AddFrind(user);
             ((Stage) addfrindbtn.getScene().getWindow()).close();
 
         }
 
+    }
+    private void prepareNotification(){
+               
+     ArrayList<Object> data = new ArrayList<>();
+        NotificationEntity notification = new NotificationEntity();
+        notification.setHeader("friend invitation");
+        notification.setText(ClientView.currentUser.getUsername()+" invited you to be friends");
+        notification.setNotificationType("friendInvitation");
+        notification.setSenderID(ClientView.currentUser.getId());        
+        
+        NotificationReceiversEntity notificationReceiver=new NotificationReceiversEntity();
+         for(int i=0 ; i< allUsers.size();i++){
+            if(allUsers.get(i).getUsername().equals(frindtextfield.getText()))
+                 notificationReceiver.setReceiverID(allUsers.get(i).getId());
+        }                       
+        ArrayList<NotificationReceiversEntity> receiversList = new ArrayList<>();
+        receiversList.add(notificationReceiver);       
+        notification.setNotificationReceivers(receiversList);
+        data.add(notification);
+        NotificationDBOperations.sendNotification(data);
     }
 
     @FXML

@@ -58,11 +58,7 @@ public class ClientView extends Application {
             System.exit(0);
         });
         SocketConnection.getInstance();
-        ArrayList<Integer> users = new ArrayList<>();        
-        users.add(1);
-
-        //NotificationDBOperations.receiveNotifications(users);
-
+        
                 
 /*        TodoEntity todo = new TodoEntity(2, "jljlk", "#1212", 1, "Done", "New description", Date.valueOf("2020-01-01"), Date.valueOf("2020-12-01"));
         TodoListDBOperations.deleteTodo(todo);*/
