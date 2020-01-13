@@ -5,8 +5,10 @@
  */
 package Model.dao.implementation;
 
+import Model.GsonParser;
 import Model.Handler;
 import Model.RequestEntity;
+import Model.SocketConnection;
 import Model.entities.UserEntity;
 import clientview.AddFrindFXMLController;
 import clientview.ClientView;
@@ -19,6 +21,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -42,7 +47,6 @@ public class UserDBOperations {
             ClientView.currentUser = (UserEntity) object.get(0);
             getAllTodos(ClientView.currentUser);
             getFrinds(ClientView.currentUser);
-            getAllUsers(ClientView.currentUser);
         }
     }
 
@@ -103,6 +107,7 @@ public class UserDBOperations {
                     //root.translateYProperty().set(scene.getHeight());
                     //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
                     // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                    ClientView.mainStage.setResizable(true);
                     scene.setRoot(root);
 
                     /*Timeline timeLine = new Timeline();
@@ -197,8 +202,44 @@ public class UserDBOperations {
         if (object == null || object.size() == 0) {
             System.out.println("zero of users");
         } else {
-            AddFrindFXMLController.setAllUSersList(object);
+            Platform.runLater(new Runnable() {
 
+                @Override
+                public void run() {
+
+                    AddFrindFXMLController.setAllUSersList(object);
+                    Parent root;
+                    try {
+                        root = FXMLLoader.load(getClass().getResource("/clientview/AddFrindFXML.fxml"));
+                        Stage stage = new Stage(StageStyle.DECORATED);
+                        Scene scene = new Scene(root, 400, 300);
+                        stage.setScene(scene);
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+            });
+
+        }
+    }
+
+    public static void logout(UserEntity user) {
+        ArrayList<UserEntity> users = new ArrayList<>();
+        System.out.println("JKJJKIKI");
+        users.add(user);
+        RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "logout", users);
+        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+    }
+
+    public void logoutResponse(ArrayList<Object> object) {
+        if (object == null || object.size() == 0) {
+            System.out.println("logout failed");
+        } else {
+
+            System.out.println("logout Ok");
         }
     }
 

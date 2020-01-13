@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <JFXTextField fx:id="textField" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <ScrollPane fx:id="scrollPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <JFXListView fx:id="collaboratorListView" />
+         </content>
+         <padding>
+            <Insets bottom="10.0" left="5.0" right="5.0" />
+         </padding>
+      </ScrollPane>
+   </center>
+</BorderPane>
