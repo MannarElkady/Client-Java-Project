@@ -103,6 +103,7 @@ public class UserDBOperations {
                     //root.translateYProperty().set(scene.getHeight());
                     //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
                     // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                    ClientView.mainStage.setResizable(true);
                     scene.setRoot(root);
 
                     /*Timeline timeLine = new Timeline();

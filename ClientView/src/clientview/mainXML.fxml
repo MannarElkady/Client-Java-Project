@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXMasonryPane?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -16,7 +18,7 @@
 
 <BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.MainXMLController">
    <top>
-      <GridPane style="-fx-background-color: #c38d9e #c38d9e #c38d9e;" BorderPane.alignment="CENTER">
+      <GridPane style="-fx-background-color: #97CAEF;" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -67,13 +69,19 @@
             <Label style="-fx-background-color: #d3d3d3; -fx-background-radius: 70; -fx-border-radius: 70;" text="    Available Todos    " BorderPane.alignment="TOP_LEFT">
                <font>
                   <Font name="Agency FB" size="22.0" />
-               </font> 
+               </font>
+               <BorderPane.margin>
+                  <Insets left="8.0" top="8.0" />
+               </BorderPane.margin> 
             </Label>
          </top>
          <center>
             <StackPane fx:id="stackPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <ScrollPane fx:id="scrollPaneMasonary">
+                  <ScrollPane fx:id="scrollPaneMasonary" styleClass="scroll-pane">
+                      <stylesheets>
+                        <URL value="@ScrollPaneStyleSheet.css" />
+                    </stylesheets>
                      <content>
                         <JFXMasonryPane fx:id="jMasonaryPane" />
                      </content>
@@ -88,14 +96,14 @@
          <center>
             <BorderPane>
                <center>
-                  <JFXListView fx:id="friendListPane" showTooltip="true" style="-fx-background-color: #97CAEF;" />
+                  <JFXListView fx:id="friendListPane" showTooltip="true" />
                </center>
             </BorderPane>
          </center>
          <top>
             <Label text="Online Friends" BorderPane.alignment="CENTER">
                <font>
-                  <Font name="Agency FB" size="18.0" />
+                  <Font name="Agency FB Bold" size="22.0" />
                </font>
             </Label>
          </top>

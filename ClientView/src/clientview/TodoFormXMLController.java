@@ -32,6 +32,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
@@ -44,6 +45,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -74,11 +76,10 @@ public class TodoFormXMLController implements Initializable {
     private ImageView imgView = null;
     private Label todoName = null;
     private Label userLabel = null;
-
     // for Dummy Testing
     ArrayList<TodoEntity> test = new ArrayList();
-   static ArrayList<UserEntity> test2 = new ArrayList();
-    ArrayList<HBox> hBoxPane = new ArrayList();
+    static ArrayList<UserEntity> test2 = new ArrayList();
+    static ArrayList<HBox> hBoxPane = new ArrayList();
     HBox child = null;
 
     @FXML
@@ -116,16 +117,16 @@ public class TodoFormXMLController implements Initializable {
     @FXML
     private ImageView addNewItem11;
     @FXML
-    private JFXListView<?> todoDetails;
-    @FXML
     private JFXButton notificationButton;
     
-    private JFXNodesList itemDetails;
     @FXML
     private BorderPane borderZft;
     TitledPane itemInList;
     @FXML
     private ImageView editimg;
+    private Label todoDetails;
+    @FXML
+    private VBox todoDetailsLi;
          /**
      * Initializes the controller class.
      */
@@ -138,6 +139,20 @@ public class TodoFormXMLController implements Initializable {
         todo = todoData;
     }
 
+    public void fillTodoDetails() {
+            todoDetails = new Label();
+            todoDetails.setText("Assign Date: " + todo.getAssignDate()
+                    +"\nDeadline Date: " + todo.getDeadlineDate() + "\n Description: " + todo.getDescription());
+            todoDetails.setFont(new Font("Arial", 16));
+            todoDetails.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;");
+            todoDetails.setWrapText(true);
+            todoDetails.setTextFill(Color.web("#313749"));
+            todoDetails.setAlignment(Pos.CENTER);
+            todoDetailsLi.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+            todoDetailsLi.setAlignment(Pos.CENTER);
+            todoDetailsLi.getChildren().add(todoDetails);
+        
+    }
     @FXML
     private void addColaboratorEvent() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("AddCollaboratorTodoFXML.fxml"));
@@ -156,10 +171,6 @@ public class TodoFormXMLController implements Initializable {
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
-    }
-
-    private void addNewGridItem(){
-        
     }
     public void setCollaboratorsPanes(ArrayList<UserEntity> collaboratorsList) {
         for (UserEntity useraya : collaboratorsList) {
@@ -257,8 +268,9 @@ public class TodoFormXMLController implements Initializable {
     private void updateUi() {
         todoNameLabel.setText(todo.getTitle());
         //setCollaboratorsDummy();
-        setCollaboratorsPanes(test2);
-        generateCollaboratorListUI();
+    //    setCollaboratorsPanes(test2);
+    //    generateCollaboratorListUI();
+        fillTodoDetails();
         loadItems();
         //TodoListDBOperations.getAllItems(todo);  
     }
