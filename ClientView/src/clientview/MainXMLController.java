@@ -157,7 +157,7 @@ public class MainXMLController  implements Initializable {
      */
 
     public void generateTodosUI(ArrayList <Object> todoNames){
-        if (todoNames.size()!=0){
+        if (todoNames!=null && todoNames.size()!=0){
         System.out.println("TEST 2");
         for(int i = 0 ;i< data.size();i++){
             TodoEntity todo=null;
