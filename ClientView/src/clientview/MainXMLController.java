@@ -12,7 +12,6 @@ import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXMasonryPane;
-import com.jfoenix.controls.JFXScrollPane;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,7 +33,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.input.MouseEvent;
 
@@ -158,22 +156,24 @@ public class MainXMLController  implements Initializable {
     /**
      * Initializes the controller class.
      */
-    public void generateTodosUI(ArrayList<Object> todoNames) {
-        if (todoNames.size()!=0) {
-            System.out.println("TEST 2");
-            for (int i = 0; i < data.size(); i++) {
-                TodoEntity todo = null;
-                try {
-                    todo = (TodoEntity) data.get(i);
-                    todoName = new Label(todo.getTitle());
-                    System.out.println("Working Directory = " + System.getProperty("user.dir"));
-                    img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/todo.jpg"));
-                    imgView = new ImageView(img);
-                    imgView.setFitHeight(50.0);
-                    imgView.setFitWidth(50.0);
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(MainXMLBase.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
+    public void generateTodosUI(ArrayList <Object> todoNames){
+        System.out.println("TEST 2");
+        for(int i = 0 ;i< data.size();i++){
+            TodoEntity todo=null;
+        try {
+            todo = (TodoEntity)data.get(i);
+            todoName = new Label(todo.getTitle());            
+            img= new Image(new FileInputStream(System.getProperty("user.dir")+"/src/clientview/resources/todo.jpg"));
+            imgView=new ImageView(img);
+            imgView.setFitHeight(50.0);
+            imgView.setFitWidth(50.0);
+            
+            
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(MainXMLBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
                 todoName.setGraphic(imgView);
                 todoName.paddingProperty();
                 todoName.setPadding(new Insets(15));
@@ -186,7 +186,7 @@ public class MainXMLController  implements Initializable {
 
             }
         }
-    }
+    
 
     public void generateFriendListUI() {
         ObservableList<HBox> items = FXCollections.observableArrayList(hBoxPane);

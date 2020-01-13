@@ -6,12 +6,9 @@
  */
 package Model.dao.implementation;
 
-import Model.GsonParser;
-import Model.MainFormHandler;
+import Model.Handler;
 import Model.RequestEntity;
-import Model.SocketConnection;
 import Model.entities.AssignFriendTodoEntity;
-import Model.entities.ItemEntity;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import clientview.ClientView;
@@ -24,8 +21,6 @@ import java.io.IOException;
  * @author AhmedIbrahem
  */
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -38,7 +33,7 @@ public class TodoListDBOperations {
 
     public static void assignTodoRequest(ArrayList<AssignFriendTodoEntity> assignedFriendList) {
         RequestEntity<AssignFriendTodoEntity> request = new RequestEntity("TodoListDBOperations", "assignTodo", assignedFriendList);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+        Handler.sendRequestToServer(request);
     }
 
     public void assignTodoResponse(ArrayList<Object> value) {
@@ -57,7 +52,7 @@ public class TodoListDBOperations {
         ArrayList<TodoEntity> list = new ArrayList<>();
         list.add(todo);
         RequestEntity<TodoEntity> request = new RequestEntity("TodoListDBOperations", "addTodo", list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+        Handler.sendRequestToServer(request);
     }
 
     public void addTodoResponse(ArrayList<Object> arrayObjects) {
@@ -74,7 +69,7 @@ public class TodoListDBOperations {
         ArrayList<TodoEntity> list = new ArrayList<>();
         list.add(todo);
         RequestEntity<TodoEntity> addRequest = new RequestEntity("TodoListDBOperations", "getAllItems", list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+        Handler.sendRequestToServer(addRequest);
     }
 
     public void getAllItemsResonse(ArrayList<Object> items) {
@@ -100,19 +95,19 @@ public class TodoListDBOperations {
             timeLine.getKeyFrames().add(kf);
             timeLine.play();*/
         } catch (IOException ex) {
-            Logger.getLogger(MainFormHandler.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         getTodoCollaborators(TodoFormXMLController.todo);
-        ItemEntity item=new ItemEntity();
-        item.setItemID(6);
-        ItemDBOperations.getItemCollaborators(item);
+        //ItemEntity item=new ItemEntity();
+        //item.setItemID(6);
+        //ItemDBOperations.getItemCollaborators(item);
     }
     
       public static void getTodoCollaborators(TodoEntity todo) {
         ArrayList<TodoEntity> list = new ArrayList<>();
         list.add(todo);
         RequestEntity<TodoEntity> addRequest = new RequestEntity("TodoListDBOperations", "getTodoCollaborators", list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+        Handler.sendRequestToServer(addRequest);
     }
        public void getToDoCollaboratorsResonse(ArrayList<UserEntity> collabotarors) {
            //clear
@@ -139,7 +134,7 @@ public class TodoListDBOperations {
             timeLine.getKeyFrames().add(kf);
             timeLine.play();*/
         } catch (IOException ex) {
-            Logger.getLogger(MainFormHandler.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
     
@@ -148,7 +143,7 @@ public class TodoListDBOperations {
         ArrayList<TodoEntity> list = new ArrayList<>();
         list.add(todo);
         RequestEntity<TodoEntity> request = new RequestEntity("TodoListDBOperations", "updateTodo", list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+        Handler.sendRequestToServer(request);
     }
     
     public void updateTodoResponse(ArrayList<Object> todoList){
@@ -163,7 +158,7 @@ public class TodoListDBOperations {
                 Scene scene = ClientView.mainStage.getScene();
                 scene.setRoot(root);
             } catch (IOException ex) {
-                Logger.getLogger(MainFormHandler.class.getName()).log(Level.SEVERE, null, ex);
+               ex.printStackTrace();
             }
         }
     }
@@ -172,7 +167,7 @@ public class TodoListDBOperations {
         ArrayList<TodoEntity> list = new ArrayList<>();
         list.add(todo);
         RequestEntity<TodoEntity> request = new RequestEntity("TodoListDBOperations", "deleteTodo", list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+        Handler.sendRequestToServer(request);
     }
     
     public void deleteTodoResponse(ArrayList<Object> todoList){

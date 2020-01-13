@@ -5,7 +5,6 @@
  */
 package clientview.authentication;
 
-import Model.RequestCreator;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -63,26 +62,28 @@ public class LoginXMLController implements Initializable {
     @FXML
     public void loginAction() {
         if (!SocketConnection.getInstance().isServerClosed()) {
-            String username = userNameTextField.getText(), password = passwordPasswordField.getText();
-            if (Validation.checkString(username) && Validation.checkString(password)) {
-                if (Validation.checkUsernameRegex(username)) {
-                UserEntity loginUser= new UserEntity();
-                loginUser.setUsername(userNameTextField.getText());
-                loginUser.setPassword(passwordPasswordField.getText());
-                loginUser.setOnlineFlag(1);
-                RequestCreator newRequest = new RequestCreator("UserDBOperations","login",loginUser);
-                String newRequestJson= newRequest.getJsonObject();
-                System.out.println(newRequestJson);
-                    UserDBOperations.login(username, password);
-
+            try {
+                String username = userNameTextField.getText(), password = passwordPasswordField.getText();
+                if (Validation.checkString(username) && Validation.checkString(password)) {
+                    if (Validation.checkUsernameRegex(username)) {
+                        UserEntity loginUser = new UserEntity();
+                        loginUser.setUsername(userNameTextField.getText());
+                        loginUser.setPassword(passwordPasswordField.getText());
+                        loginUser.setOnlineFlag(1);
+                        UserDBOperations.login(loginUser);
+                    }
                 }
+            } catch (Exception e) {
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ERROR");
-            alert.setHeaderText(null);
-            alert.setContentText("The  server is closed!");
-            alert.showAndWait();
+            SocketConnection.getInstance().createConnection();
+            if (SocketConnection.getInstance().isServerClosed()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText(null);
+                alert.setContentText("The  server is closed!");
+                alert.showAndWait();
+            }
         }
     }
 
@@ -108,20 +109,19 @@ public class LoginXMLController implements Initializable {
 
     }
 
-  
-      public void buttonAction(){
+    public void buttonAction() {
         ArrayList<Object> data = new ArrayList<>();
         NotificationEntity notification = new NotificationEntity();
         notification.setHeader("test Header");
         notification.setText("test Text");
         notification.setNotificationType("test Notification");
-        notification.setSenderID(2);        
+        notification.setSenderID(2);
         NotificationReceiversEntity notificationReceiver = new NotificationReceiversEntity();
         notificationReceiver.setReceiverID(1);
         NotificationReceiversEntity notificationReceiver2 = new NotificationReceiversEntity();
         notificationReceiver2.setReceiverID(3);
-         NotificationReceiversEntity notificationReceiver3 = new NotificationReceiversEntity();
-        notificationReceiver3.setReceiverID(4);        
+        NotificationReceiversEntity notificationReceiver3 = new NotificationReceiversEntity();
+        notificationReceiver3.setReceiverID(4);
         ArrayList<NotificationReceiversEntity> receiversList = new ArrayList<>();
         receiversList.add(notificationReceiver);
         receiversList.add(notificationReceiver2);
