@@ -5,8 +5,10 @@
  */
 package Model.dao.implementation;
 
+import Model.GsonParser;
 import Model.Handler;
 import Model.RequestEntity;
+import Model.SocketConnection;
 import Model.entities.UserEntity;
 import clientview.AddFrindFXMLController;
 import clientview.ClientView;
@@ -92,26 +94,28 @@ public class UserDBOperations {
         } else {
             MainXMLController.setTodos(items);         
         }
-        
-           try {
+                   
                
 
-                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
-                
-                Scene scene = ClientView.mainStage.getScene();
-                //root.translateYProperty().set(scene.getHeight());
-                //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
-                // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
-                scene.setRoot(root);
+        try {
 
-                /*Timeline timeLine = new Timeline();
+            Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
+
+            Scene scene = ClientView.mainStage.getScene();
+            //root.translateYProperty().set(scene.getHeight());
+            //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
+            // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+            scene.setRoot(root);
+
+            /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
                 timeLine.getKeyFrames().add(kf);
                 timeLine.play();*/
-            } catch (IOException ex) {
-                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (IOException ex) {
+            Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public static void getFrinds(UserEntity userID) {
@@ -185,24 +189,15 @@ public class UserDBOperations {
     public static void getAllUsers(UserEntity user) {
         ArrayList<UserEntity> list = new ArrayList<>();
         list.add(user);
-<<<<<<< HEAD
-        RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getAllUsers", list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
-    }
-
-    public void getAllUsersResonse(ArrayList<UserEntity> object) throws IOException {
-=======
         RequestEntity<Integer> addRequest = new RequestEntity("UserDBOperations", "getAllUsers",list);
         Handler.sendRequestToServer(addRequest);
     }
 
     public void getAllUsersResonse(ArrayList<UserEntity> object) {
->>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
         System.out.println("oooo" + object.size());
         if (object == null || object.size() == 0) {
             System.out.println("zero of users");
         } else {
-<<<<<<< HEAD
             Platform.runLater(new Runnable() {
 
                 @Override
@@ -241,10 +236,6 @@ public class UserDBOperations {
         } else {
 
             System.out.println("logout Ok");
-=======
-            AddFrindFXMLController.setAllUSersList(object);
-
->>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
         }
     }
 

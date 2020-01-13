@@ -62,20 +62,6 @@ public class LoginXMLController implements Initializable {
     @FXML
     public void loginAction() {
         if (!SocketConnection.getInstance().isServerClosed()) {
-<<<<<<< HEAD
-            String username = userNameTextField.getText(), password = passwordPasswordField.getText();
-            if (Validation.checkString(username) && Validation.checkString(password)) {
-                if (Validation.checkUsernameRegex(username)) {
-                UserEntity loginUser= new UserEntity();
-                loginUser.setUsername(userNameTextField.getText());
-                loginUser.setPassword(passwordPasswordField.getText());
-                loginUser.setOnlineFlag(1);
-                RequestCreator newRequest = new RequestCreator("UserDBOperations","login",loginUser);
-                String newRequestJson= newRequest.getJsonObject();
-                System.out.println(newRequestJson);
-                UserDBOperations.login(username, password);
-
-=======
             try {
                 String username = userNameTextField.getText(), password = passwordPasswordField.getText();
                 if (Validation.checkString(username) && Validation.checkString(password)) {
@@ -86,7 +72,6 @@ public class LoginXMLController implements Initializable {
                         loginUser.setOnlineFlag(1);
                         UserDBOperations.login(loginUser);
                     }
->>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
                 }
             } catch (Exception e) {
             }

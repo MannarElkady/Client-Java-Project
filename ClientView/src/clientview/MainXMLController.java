@@ -52,7 +52,7 @@ import javafx.stage.WindowEvent;
  *
  * @author DELL
  */
-public class MainXMLController extends BorderPane implements Initializable {
+public class MainXMLController  implements Initializable {
 
     @FXML
     private JFXButton homeBtn;
@@ -82,42 +82,31 @@ public class MainXMLController extends BorderPane implements Initializable {
     HBox child = null;
     @FXML
     private BorderPane mainBorderPane;
-<<<<<<< HEAD
 
-    public void setFriendListDummy() {
-        UserEntity useraya = new UserEntity();
-=======
     @FXML
     private ScrollPane scrollPaneMasonary;
     @FXML
     private StackPane stackPane;
     @FXML
     private BorderPane stackPaneBorder;
-    
-    public void setFriendListDummy(){
-        UserEntity useraya= new UserEntity();
->>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
+
+
+    public void setFriendListDummy() {
+        UserEntity useraya = new UserEntity();
+
         useraya.setUsername("Userayaa");
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
-<<<<<<< HEAD
         test2.add(useraya);
 
     }
- 
+
+
 
     public void setFriendListPanes() {
         for (UserEntity useraya : test2) {
-=======
-        test2.add(useraya);         
-    }
-    
-    
-    public void setFriendListPanes(){
-        for(UserEntity useraya: test2){
->>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
             try {
                 child = new HBox();
                 img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/m.png"));
@@ -146,19 +135,16 @@ public class MainXMLController extends BorderPane implements Initializable {
         test.add(todo);
 
     }
-<<<<<<< HEAD
 
-    public static void setTodos(ArrayList<Object> list) {
-=======
-    
     public void FlowCardComposite() {
-	scrollPaneMasonary.setFitToHeight(true);
-	scrollPaneMasonary.setFitToWidth(true);
-	scrollPaneMasonary.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-	stackPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-	scrollPaneMasonary.setContent(jMasonaryPane);
-}
-   /* public void FlowCardComposite() {
+        scrollPaneMasonary.setFitToHeight(true);
+        scrollPaneMasonary.setFitToWidth(true);
+        scrollPaneMasonary.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        stackPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        scrollPaneMasonary.setContent(jMasonaryPane);
+    }
+
+    /* public void FlowCardComposite() {
 
 	scrollPane = new ScrollPane();
 	scrollPane.setFitToHeight(true);
@@ -173,17 +159,18 @@ public class MainXMLController extends BorderPane implements Initializable {
 	setStyle("-fx-background-color : #292929");
 }*/
 
-    public static void setTodos(ArrayList<Object> list){
->>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
+
+    public static void setTodos(ArrayList<Object> list) {
         data = list;
     }
 
     /**
      * Initializes the controller class.
      */
-    public void generateTodosUI(ArrayList<Object> todoNames) {
+
+
+    public void generateTodosUI(ArrayList <Object> todoNames){
         System.out.println("TEST 2");
-<<<<<<< HEAD
         for (int i = 0; i < data.size(); i++) {
             TodoEntity todo = null;
             try {
@@ -214,63 +201,27 @@ public class MainXMLController extends BorderPane implements Initializable {
         ObservableList<HBox> items = FXCollections.observableArrayList(hBoxPane);
         friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
         friendListPane.setItems(items);
-=======
-        for(int i = 0 ;i< data.size();i++){
-            TodoEntity todo=null;
-        try {
-            todo = (TodoEntity)data.get(i);
-            todoName = new Label(todo.getTitle());            
-            img= new Image(new FileInputStream(System.getProperty("user.dir")+"/src/clientview/resources/todo.jpg"));
-            imgView=new ImageView(img);
-            imgView.setFitHeight(50.0);
-            imgView.setFitWidth(50.0);
-            
-            
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(MainXMLBase.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                
-                todoName.setGraphic(imgView);
-                todoName.paddingProperty();
-                todoName.setPadding(new Insets(15));
-                todoName.setPrefSize(100,100);
-                todoName.setStyle("-fx-background-color:POWDERBLUE");
-                todoName.setId(String.valueOf(todo.getId()));
-                todoName.addEventFilter(MouseEvent.MOUSE_CLICKED, new MainFormHandler());
-                jMasonaryPane.getChildren().add(todoName);
-                
-                //yahya
-                setCenter(jMasonaryPane);
-        }
     }
+          
     
-    
-    public void generateFriendListUI(){
-            ObservableList<HBox> items =FXCollections.observableArrayList(hBoxPane);
-            friendListPane.setItems(items);
->>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
-    }
 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-            //  JFXScrollPane.smoothScrolling(scrollPaneMasonary);
         FlowCardComposite();
         setFriendListPanes();
         generateTodosUI(new ArrayList<Object>());
         generateFriendListUI();
-<<<<<<< HEAD
            ClientView.mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
                UserDBOperations.logout(ClientView.currentUser);
             }
-        });
-        
-=======
-	jMasonaryPane.setCache(false);
+        });  
+        jMasonaryPane.setCache(false);
         stackPaneBorder.setCenter(stackPane);
+        int rows = jMasonaryPane.getLimitRow();
     }
->>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
 
     @FXML
     private void homeBtnAction(ActionEvent event) {
@@ -281,42 +232,37 @@ public class MainXMLController extends BorderPane implements Initializable {
     @FXML
 
     private void addFriendBtnAction(ActionEvent event) {
-<<<<<<< HEAD
-       // try {
-            UserDBOperations.getAllUsers(ClientView.currentUser);
-            //AddFrindFXMLController f=new AddFrindFXMLController();
-//            f.intializeListofUsers();
-//            Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddFrindFXML.fxml"));
-//            Stage stage = new Stage(StageStyle.DECORATED);
-//            Scene scene = new Scene(root, 400, 300);
-//            stage.setScene(scene);
-//            stage.initModality(Modality.APPLICATION_MODAL);
-//            stage.show();
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
 
-=======
-        try{
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddFrindFXML.fxml"));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            Scene scene = new Scene(root, 400, 300);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+            
+              /*   try{
+>>>>>>> 2b34a4cb9151b7ae691a07d53ae430cb982d10bc
         Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddCollaboratorTodoFXML.fxml"));
         Stage stage = new Stage(StageStyle.DECORATED);
         Scene scene = new Scene(root, 600, 600);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
-        }catch(IOException ex){
+        }catch(IOException ex){*/
+        } catch (IOException ex) {
+
+   
             ex.printStackTrace();
         }
->>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
     }
 
     @FXML
     private void addTodoAction(ActionEvent event) {
-<<<<<<< HEAD
+
         InsertTodoXMLController.isUpdate = false;
-=======
-        
->>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertTodoXML.fxml"));
             Parent insertItemWindow = loader.load();
@@ -333,22 +279,11 @@ public class MainXMLController extends BorderPane implements Initializable {
 
     private void getAllTodos() {
         UserEntity user = new UserEntity();
-<<<<<<< HEAD
         user.setId(ClientView.currentUser.getId());
         UserDBOperations.getAllTodos(user);        
     }
 
     public static void setFriendList(ArrayList<UserEntity> a) {
         test2 = a;
-        
-=======
-        user.setId(1);
-        UserDBOperations.getAllTodos(user);
->>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
     }
-    
-  
-    
-   
-
 }
