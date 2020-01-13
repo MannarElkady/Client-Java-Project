@@ -3,21 +3,15 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import java.net.URL?>
-<?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="700.0" style="-fx-background-color: #97CAEF;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.authentication.LoginXMLController">
-    <stylesheets>
-        <URL value="@loginxml.css" />
-    </stylesheets>
+<AnchorPane id="anchorPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="700.0" styleClass="parent" stylesheets="@loginxml.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.authentication.LoginXMLController">
    <children>
-      <AnchorPane layoutX="300.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="378.0" style="-fx-background-color: #c38d9e #c38d9e #c38d9e; -fx-background-radius : 30; -fx-border-radius : 30;">
+      <AnchorPane layoutX="300.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="378.0" style="-fx-background-color: #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;">
          <children>
             <JFXTextField fx:id="userNameTextField" focusColor="#8278ea" layoutX="41.0" layoutY="132.0" prefHeight="25.0" prefWidth="283.0" promptText="Username">
                <font>
@@ -48,14 +42,5 @@
                </image>
             </ImageView>
          </children></AnchorPane>
-      <ImageView fitHeight="181.0" fitWidth="283.0" layoutX="14.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../resources/login.jpg" />
-         </image>
-         <viewport>
-            <Rectangle2D />
-         </viewport>
-      </ImageView>
-      <Button layoutX="40.0" layoutY="47.0" mnemonicParsing="false" onAction="#buttonAction" text="send" />
    </children>
 </AnchorPane>

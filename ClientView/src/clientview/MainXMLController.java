@@ -55,8 +55,6 @@ import javafx.stage.WindowEvent;
 public class MainXMLController  implements Initializable {
 
     @FXML
-    private JFXButton homeBtn;
-    @FXML
     private JFXButton addFriendBtn;
     @FXML
     private ImageView appLogo;
@@ -137,10 +135,11 @@ public class MainXMLController  implements Initializable {
     }
 
     public void FlowCardComposite() {
-        scrollPaneMasonary.setFitToHeight(true);
         scrollPaneMasonary.setFitToWidth(true);
-        scrollPaneMasonary.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        stackPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+       // scrollPaneMasonary.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+       // stackPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        scrollPaneMasonary.setPrefHeight(Double.MAX_VALUE); 
+        stackPane.setPrefHeight(Double.MAX_VALUE);
         scrollPaneMasonary.setContent(jMasonaryPane);
     }
 
@@ -170,6 +169,7 @@ public class MainXMLController  implements Initializable {
 
 
     public void generateTodosUI(ArrayList <Object> todoNames){
+        if (todoNames.size()!=0){
         System.out.println("TEST 2");
         for (int i = 0; i < data.size(); i++) {
             TodoEntity todo = null;
@@ -197,6 +197,8 @@ public class MainXMLController  implements Initializable {
         }
     }
 
+    
+    }
     public void generateFriendListUI() {
         ObservableList<HBox> items = FXCollections.observableArrayList(hBoxPane);
         friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
@@ -210,7 +212,7 @@ public class MainXMLController  implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         FlowCardComposite();
         setFriendListPanes();
-        generateTodosUI(new ArrayList<Object>());
+        generateTodosUI(data);
         generateFriendListUI();
            ClientView.mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
@@ -219,6 +221,7 @@ public class MainXMLController  implements Initializable {
             }
         });  
         jMasonaryPane.setCache(false);
+        //jMasonaryPane.setCache(false);
         stackPaneBorder.setCenter(stackPane);
         int rows = jMasonaryPane.getLimitRow();
     }
@@ -228,6 +231,7 @@ public class MainXMLController  implements Initializable {
     }
  
     
+
 
     @FXML
 
