@@ -84,6 +84,7 @@ public class InsertItemXMLController implements Initializable {
     private void addItemEntity() {
         if (Validation.checkString(titleTextField.getText()) && (Validation.checkString(descriptionTextArea.getText()))) {
             if (dateDateField.getValue() != null) {
+                if(Validation.checkDeadlineItem(java.sql.Date.valueOf(dateDateField.getValue()), TodoFormXMLController.todo.getAssignDate(), TodoFormXMLController.todo.getDeadlineDate())){
                 newItemEntity = new ItemEntity();
                 newItemEntity.setTodoID(TodoFormXMLController.todo.getId());
                 newItemEntity.setDescription(descriptionTextArea.getText());
@@ -91,6 +92,7 @@ public class InsertItemXMLController implements Initializable {
                 newItemEntity.setCreatorID(ClientView.currentUser.getId());
                 newItemEntity.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));
                 ItemDBOperations.addItem(newItemEntity);
+                }
             }
         }
     }

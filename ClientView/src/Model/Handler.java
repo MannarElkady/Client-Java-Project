@@ -6,6 +6,7 @@
 package Model;
 
 import java.util.ArrayList;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -20,5 +21,26 @@ public class Handler {
             ArrayList test = response.getEntity();
             RequestEntity returnValue = (RequestEntity) ReflectionClass.getObject(response.getClassName(), response.getOperation(), response.getEntity());
         }
+    }
+    
+    public static void sendRequestToServer(RequestEntity request){
+     if (!SocketConnection.getInstance().isServerClosed()) {
+            try {
+                SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+               
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            SocketConnection.getInstance().createConnection();
+            if (SocketConnection.getInstance().isServerClosed()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText(null);
+                alert.setContentText("The  server is closed!");
+                alert.showAndWait();
+            }
+        }
+     
     }
 }

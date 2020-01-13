@@ -68,12 +68,12 @@
          <children>
             <Label text="Todo Name" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Bernard MT Condensed" size="24.0" />
+                  <Font name="Algerian" size="18.0" />
                </font>
             </Label>
             <Label text="Deadline Date" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Bernard MT Condensed" size="24.0" />
+                  <Font name="Algerian" size="18.0" />
                </font>
             </Label>
             <JFXTextField fx:id="titleTextField" promptText="Enter Title Here..." GridPane.columnIndex="1">
@@ -84,7 +84,7 @@
             <JFXDatePicker fx:id="dateDateField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="444.0" promptText="Select a date" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <Label text="Assign Date" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Bernard MT Condensed" size="24.0" />
+                  <Font name="Algerian" size="18.0" />
                </font>
                <GridPane.margin>
                   <Insets />
@@ -92,7 +92,7 @@
             </Label>
             <Label text="Description" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Bernard MT Condensed" size="24.0" />
+                  <Font name="Algerian" size="18.0" />
                </font>
                <GridPane.margin>
                   <Insets />
@@ -100,7 +100,7 @@
             </Label>
             <Label text="Todo Color" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Bernard MT Condensed" size="24.0" />
+                  <Font name="Algerian" size="18.0" />
                </font>
                <GridPane.margin>
                   <Insets />
@@ -108,7 +108,7 @@
             </Label>
             <JFXTextArea fx:id="descriptionTextArea" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <JFXColorPicker fx:id="colorPicker" editable="true" prefWidth="444.0" promptText="Choose Color .." style="-fx-background-color: #97CAEF;" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <JFXDatePicker fx:id="assignDate" minHeight="-Infinity" minWidth="-Infinity" onAction="#assignDateAction" prefHeight="25.0" prefWidth="444.0" promptText="Select a date" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+            <JFXDatePicker fx:id="assignDate" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="444.0" promptText="Select a date" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
          </children>
          <opaqueInsets>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

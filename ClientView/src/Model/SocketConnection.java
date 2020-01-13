@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Model.dao.implementation.UserDBOperations;
 import clientview.NotificationGUI;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import java.net.Socket;
  */
 public class SocketConnection extends Thread {
 
-    boolean checkFirstTime = true;
+    public static boolean checkFirstTime = false;
     private static SocketConnection instance = null;
     private Socket socket;
     private PrintStream printStream;
@@ -26,20 +27,27 @@ public class SocketConnection extends Thread {
     Thread th;
 
     private SocketConnection() {
-
-        try {
+        createConnection();
+    }
+    
+    public void createConnection(){
+         try {
+            if(socket==null){
             socket = new Socket("127.0.0.1", 5005);
             dataInputStream = new DataInputStream(socket.getInputStream());
             printStream = new PrintStream(socket.getOutputStream());
+            checkFirstTime = true;
+            serverClosed =false;
             th = new Thread(this);
             th.start();
+             }
         } catch (IOException e) {
            // e.printStackTrace();
            serverClosed=true;
-            checkFirstTime = false;
+           checkFirstTime = false;
         }
     }
-
+  
     public boolean isServerClosed() {
         return serverClosed;
     }
@@ -70,23 +78,26 @@ public class SocketConnection extends Thread {
     @Override
     public void run() {
         System.out.println("in run");
-
         try {
-
             while (checkFirstTime) {
                 String replyMsg = dataInputStream.readLine();
                 if (replyMsg != null) {
 
                     if (replyMsg.equals("notification received")) {
                         NotificationGUI.receiveNotificationTray();
-                    } else if (replyMsg.equals("closed")) {
+                    }else if(replyMsg.equals("Update Notification")){
+                        System.out.println("Update your ui");
+                        UserDBOperations.getAllTodos(clientview.ClientView.currentUser);
+                    }else if(replyMsg.equals("Delete Notification")){
+                        System.out.println("Delete your TODO");
+                        UserDBOperations.getAllTodos(clientview.ClientView.currentUser);
+                    }else if (replyMsg.equals("closed")) {
                         System.out.println(replyMsg);
                         serverClosed = true;
-
                     } else if (replyMsg.equals("opened")) {
                         serverClosed = false;
                         System.out.println("opened");
-                    } else if (!replyMsg.equals("opened") && !replyMsg.equals("closed") && !replyMsg.equals("notification received")) {
+                    }else/* if (!replyMsg.equals("opened") && !replyMsg.equals("closed") && !replyMsg.equals("notification received"))*/ {
                         Handler.handle(replyMsg);
                     }
                 }
@@ -96,6 +107,7 @@ public class SocketConnection extends Thread {
             serverClosed = true;
 
         }
+        System.out.println("test Stream");
     }
 
 }

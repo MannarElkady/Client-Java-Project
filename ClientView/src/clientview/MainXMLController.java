@@ -33,11 +33,15 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -48,8 +52,10 @@ import javafx.stage.WindowEvent;
  *
  * @author DELL
  */
-public class MainXMLController implements Initializable {
+public class MainXMLController extends BorderPane implements Initializable {
 
+    @FXML
+    private JFXButton homeBtn;
     @FXML
     private JFXButton addFriendBtn;
     @FXML
@@ -76,14 +82,27 @@ public class MainXMLController implements Initializable {
     HBox child = null;
     @FXML
     private BorderPane mainBorderPane;
+<<<<<<< HEAD
 
     public void setFriendListDummy() {
         UserEntity useraya = new UserEntity();
+=======
+    @FXML
+    private ScrollPane scrollPaneMasonary;
+    @FXML
+    private StackPane stackPane;
+    @FXML
+    private BorderPane stackPaneBorder;
+    
+    public void setFriendListDummy(){
+        UserEntity useraya= new UserEntity();
+>>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
         useraya.setUsername("Userayaa");
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
         test2.add(useraya);
+<<<<<<< HEAD
         test2.add(useraya);
 
     }
@@ -91,6 +110,14 @@ public class MainXMLController implements Initializable {
 
     public void setFriendListPanes() {
         for (UserEntity useraya : test2) {
+=======
+        test2.add(useraya);         
+    }
+    
+    
+    public void setFriendListPanes(){
+        for(UserEntity useraya: test2){
+>>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
             try {
                 child = new HBox();
                 img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/m.png"));
@@ -99,11 +126,9 @@ public class MainXMLController implements Initializable {
                 imgView.setFitWidth(10.0);
                 userLabel = new Label(useraya.getUsername());
                 userLabel.setGraphic(imgView);
-                userLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 userLabel.paddingProperty();
                 userLabel.setPrefSize(100, 30);
                 child.getChildren().add(userLabel);
-                child.setStyle("-fx-background-color:POWDERBLUE;-fx-background-radius:30;-fx-border-radius:30;");
                 hBoxPane.add(child);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(MainXMLController.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,8 +146,35 @@ public class MainXMLController implements Initializable {
         test.add(todo);
 
     }
+<<<<<<< HEAD
 
     public static void setTodos(ArrayList<Object> list) {
+=======
+    
+    public void FlowCardComposite() {
+	scrollPaneMasonary.setFitToHeight(true);
+	scrollPaneMasonary.setFitToWidth(true);
+	scrollPaneMasonary.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+	stackPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+	scrollPaneMasonary.setContent(jMasonaryPane);
+}
+   /* public void FlowCardComposite() {
+
+	scrollPane = new ScrollPane();
+	scrollPane.setFitToHeight(true);
+	scrollPane.setFitToWidth(true);
+	scrollPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+	StackPane stackPane = new StackPane(scrollPane);
+	stackPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+	masonryPane = new JFXMasonryPane();
+	scrollPane.setContent(masonryPane);
+	setCenter(stackPane);
+	masonryPane.setCache(false);
+	setStyle("-fx-background-color : #292929");
+}*/
+
+    public static void setTodos(ArrayList<Object> list){
+>>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
         data = list;
     }
 
@@ -131,6 +183,7 @@ public class MainXMLController implements Initializable {
      */
     public void generateTodosUI(ArrayList<Object> todoNames) {
         System.out.println("TEST 2");
+<<<<<<< HEAD
         for (int i = 0; i < data.size(); i++) {
             TodoEntity todo = null;
             try {
@@ -161,13 +214,51 @@ public class MainXMLController implements Initializable {
         ObservableList<HBox> items = FXCollections.observableArrayList(hBoxPane);
         friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
         friendListPane.setItems(items);
+=======
+        for(int i = 0 ;i< data.size();i++){
+            TodoEntity todo=null;
+        try {
+            todo = (TodoEntity)data.get(i);
+            todoName = new Label(todo.getTitle());            
+            img= new Image(new FileInputStream(System.getProperty("user.dir")+"/src/clientview/resources/todo.jpg"));
+            imgView=new ImageView(img);
+            imgView.setFitHeight(50.0);
+            imgView.setFitWidth(50.0);
+            
+            
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(MainXMLBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+                todoName.setGraphic(imgView);
+                todoName.paddingProperty();
+                todoName.setPadding(new Insets(15));
+                todoName.setPrefSize(100,100);
+                todoName.setStyle("-fx-background-color:POWDERBLUE");
+                todoName.setId(String.valueOf(todo.getId()));
+                todoName.addEventFilter(MouseEvent.MOUSE_CLICKED, new MainFormHandler());
+                jMasonaryPane.getChildren().add(todoName);
+                
+                //yahya
+                setCenter(jMasonaryPane);
+        }
+    }
+    
+    
+    public void generateFriendListUI(){
+            ObservableList<HBox> items =FXCollections.observableArrayList(hBoxPane);
+            friendListPane.setItems(items);
+>>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+            //  JFXScrollPane.smoothScrolling(scrollPaneMasonary);
+        FlowCardComposite();
         setFriendListPanes();
         generateTodosUI(new ArrayList<Object>());
         generateFriendListUI();
+<<<<<<< HEAD
            ClientView.mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
@@ -175,13 +266,22 @@ public class MainXMLController implements Initializable {
             }
         });
         
+=======
+	jMasonaryPane.setCache(false);
+        stackPaneBorder.setCenter(stackPane);
+    }
+>>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
 
+    @FXML
+    private void homeBtnAction(ActionEvent event) {
     }
  
     
 
     @FXML
+
     private void addFriendBtnAction(ActionEvent event) {
+<<<<<<< HEAD
        // try {
             UserDBOperations.getAllUsers(ClientView.currentUser);
             //AddFrindFXMLController f=new AddFrindFXMLController();
@@ -196,11 +296,27 @@ public class MainXMLController implements Initializable {
 //            ex.printStackTrace();
 //        }
 
+=======
+        try{
+        Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddCollaboratorTodoFXML.fxml"));
+        Stage stage = new Stage(StageStyle.DECORATED);
+        Scene scene = new Scene(root, 600, 600);
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+>>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
     }
 
     @FXML
     private void addTodoAction(ActionEvent event) {
+<<<<<<< HEAD
         InsertTodoXMLController.isUpdate = false;
+=======
+        
+>>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertTodoXML.fxml"));
             Parent insertItemWindow = loader.load();
@@ -217,6 +333,7 @@ public class MainXMLController implements Initializable {
 
     private void getAllTodos() {
         UserEntity user = new UserEntity();
+<<<<<<< HEAD
         user.setId(ClientView.currentUser.getId());
         UserDBOperations.getAllTodos(user);        
     }
@@ -224,6 +341,10 @@ public class MainXMLController implements Initializable {
     public static void setFriendList(ArrayList<UserEntity> a) {
         test2 = a;
         
+=======
+        user.setId(1);
+        UserDBOperations.getAllTodos(user);
+>>>>>>> 95fd25d7ded07791ad7848afc2b526d0f10fcfcd
     }
     
   

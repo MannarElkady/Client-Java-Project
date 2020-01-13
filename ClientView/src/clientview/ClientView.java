@@ -6,7 +6,6 @@
 package clientview;
 
 import Model.SocketConnection;
-import Model.dao.implementation.NotificationDBOperations;
 import Model.entities.UserEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,15 +21,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.scene.image.Image;
 
 /**
  *
  * @author DELL
  */
 public class ClientView extends Application {
-
-    SocketConnection object;
 
     public static Stage mainStage;
     public static UserEntity currentUser;
@@ -64,7 +60,6 @@ public class ClientView extends Application {
         users.add(1);
 
         //NotificationDBOperations.receiveNotifications(users);
-
                 
 /*        TodoEntity todo = new TodoEntity(2, "jljlk", "#1212", 1, "Done", "New description", Date.valueOf("2020-01-01"), Date.valueOf("2020-12-01"));
         TodoListDBOperations.deleteTodo(todo);*/

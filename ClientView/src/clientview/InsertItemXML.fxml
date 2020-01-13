@@ -65,17 +65,17 @@
          <children>
             <Label text="Title" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Bernard MT Condensed" size="24.0" />
+                  <Font name="Algerian" size="18.0" />
                </font>
             </Label>
             <Label text="Description" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Bernard MT Condensed" size="24.0" />
+                  <Font name="Algerian" size="18.0" />
                </font>
             </Label>
             <Label text="Deadline Date" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Bernard MT Condensed" size="24.0" />
+                  <Font name="Algerian" size="18.0" />
                </font>
             </Label>
             <JFXTextField fx:id="titleTextField" promptText="Enter Title Here..." GridPane.columnIndex="1">

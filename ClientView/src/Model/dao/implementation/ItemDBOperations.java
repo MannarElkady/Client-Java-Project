@@ -6,22 +6,12 @@
 package Model.dao.implementation;
 
 import Model.GsonParser;
-import Model.MainFormHandler;
+import Model.Handler;
 import Model.RequestEntity;
 import Model.entities.ItemEntity;
 import java.util.ArrayList;
-import Model.SocketConnection;
 import Model.entities.AssignFriendTodoEntity;
-import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
-import clientview.ClientView;
-import clientview.TodoFormXMLController;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 
 /**
  *
@@ -34,7 +24,7 @@ public class ItemDBOperations {
         list.add(item);
         RequestEntity<ItemEntity> addRequest = new RequestEntity("ItemDBOperations", "addItem", list);
         System.out.println(GsonParser.parseToJson(addRequest));
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(addRequest));
+        Handler.sendRequestToServer(addRequest);
     }
        
     public void addItemResponse(ArrayList<Object> arrayObjects) {
@@ -50,7 +40,8 @@ public class ItemDBOperations {
         ArrayList<ItemEntity> list = new ArrayList<>();
         list.add(itemToUpdate);
         RequestEntity<ItemEntity> updateRequest = new RequestEntity("ItemDBOperations", "updateItem", list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(updateRequest));
+        Handler.sendRequestToServer(updateRequest);
+
     }
 
     public void updateItemResponse(ArrayList<Object> arrayObjects) {
@@ -65,7 +56,7 @@ public class ItemDBOperations {
     
     public static void assignItem(ArrayList<AssignFriendTodoEntity> assignedFriendList){
         RequestEntity<AssignFriendTodoEntity> request = new RequestEntity("ItemDBOperations", "assignItem", assignedFriendList);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request)); 
+        Handler.sendRequestToServer(request);
     }
     
     public void assignItemResponse(ArrayList<Object>isAssigned){
@@ -81,7 +72,7 @@ public class ItemDBOperations {
         ArrayList<ItemEntity> list = new ArrayList<>();
         list.add(itemToUpdate);
         RequestEntity<ItemEntity> updateRequest = new RequestEntity("ItemDBOperations", "deleteItem", list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(updateRequest));
+        Handler.sendRequestToServer(updateRequest);
     }
 
     public void deleteItemResponse(ArrayList<Object> arrayObjects) {
@@ -98,7 +89,7 @@ public class ItemDBOperations {
         ArrayList<ItemEntity> list = new ArrayList<>();
         list.add(itemToUpdate);
         RequestEntity<ItemEntity> updateRequest = new RequestEntity("ItemDBOperations", "getItemCollaborators", list);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(updateRequest));
+        Handler.sendRequestToServer(updateRequest);
     }
            public void getItemCollaboratorsResonse(ArrayList<UserEntity> collabotarors) {
            //clear
