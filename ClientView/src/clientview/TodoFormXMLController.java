@@ -12,8 +12,6 @@ import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXNodesList;
-import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXTextField;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -36,13 +34,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -307,6 +303,10 @@ public class TodoFormXMLController implements Initializable {
 
     private void updateUi() {
         todoNameLabel.setText(todo.getTitle());
+        if(todo.getCreatorId() != ClientView.currentUser.getId()){
+            deleteTodo.setVisible(false);
+            editTodo.setVisible(false);
+        }
         //setCollaboratorsDummy();
         //    setCollaboratorsPanes(test2);
         //    generateCollaboratorListUI();

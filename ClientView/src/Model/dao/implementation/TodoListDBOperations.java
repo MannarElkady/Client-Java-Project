@@ -12,7 +12,6 @@ import Model.entities.AssignFriendTodoEntity;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import clientview.ClientView;
-import clientview.InsertTodoXMLController;
 import clientview.TodoFormXMLController;
 import java.io.IOException;
 
@@ -150,7 +149,7 @@ public class TodoListDBOperations {
         if(todoList == null || todoList.size()==0){
             System.out.println("Not updated");
         }else{
-            InsertTodoXMLController.setTodoData((TodoEntity)todoList.get(0));
+            TodoFormXMLController.setToDoData((TodoEntity)todoList.get(0));
             System.out.println("Updated");
             Parent root;
             try {
