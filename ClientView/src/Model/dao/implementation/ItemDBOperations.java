@@ -12,6 +12,7 @@ import Model.entities.ItemEntity;
 import java.util.ArrayList;
 import Model.entities.AssignFriendTodoEntity;
 import Model.entities.UserEntity;
+import clientview.ItemCollaboratorsXMLController;
 
 /**
  *
@@ -101,7 +102,8 @@ public class ItemDBOperations {
             for(int i=0;i<collabotarors.size();i++){
                 System.out.println("ddd"+collabotarors.get(i).getUsername());
             }
-            //TodoFormXMLController.setCollaboratorList(collabotarors);
+            
+            ItemCollaboratorsXMLController.setCollaboratorsList(collabotarors);
         }
 //        Parent root;
 //        try {
