@@ -239,6 +239,7 @@ public class MainXMLController  implements Initializable {
 
 
         try {
+            UserDBOperations.getAllUsers(ClientView.currentUser);
             Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddFrindFXML.fxml"));
             Stage stage = new Stage(StageStyle.DECORATED);
             Scene scene = new Scene(root, 400, 300);
