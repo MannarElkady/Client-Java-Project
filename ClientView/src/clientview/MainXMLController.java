@@ -231,13 +231,7 @@ public class MainXMLController implements Initializable {
         generateTodosUI(data);
         //generateFriendListUI();
         generateFriendListUIWithDragAndDropFeature();
-        generateFriendListUI();
-           ClientView.mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-               UserDBOperations.logout(ClientView.currentUser);
-            }
-        });  
+        generateFriendListUI(); 
         jMasonaryPane.setCache(false);
         //jMasonaryPane.setCache(false);
         stackPaneBorder.setCenter(stackPane);

@@ -1,5 +1,6 @@
 package Model;
 
+import Model.entities.ComponentEntity;
 import Model.entities.ItemEntity;
 import Model.entities.NotificationEntity;
 import Model.entities.TodoEntity;
@@ -61,6 +62,11 @@ public class GsonParser {
                         requestType = new TypeToken<RequestEntity<TodoEntity>>() {
                         }.getType();
                     }
+
+                    break;
+                case 'C':
+                    requestType = new TypeToken<RequestEntity<ComponentEntity>>() {
+                    }.getType();
 
                     break;
             }
