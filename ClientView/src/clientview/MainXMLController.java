@@ -207,9 +207,7 @@ public class MainXMLController  implements Initializable {
         int rows = jMasonaryPane.getLimitRow();
     }
 
-
     @FXML
-
     private void addFriendBtnAction(ActionEvent event) {
 
         try {
@@ -249,13 +247,13 @@ public class MainXMLController  implements Initializable {
             Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+/*
     private void getAllTodos() {
         UserEntity user = new UserEntity();
         user.setId(1);
         UserDBOperations.getAllTodos(user);
     }
-
+*/
     public static void setFriendList(ArrayList<UserEntity> a) {
         test2 = a;
     }

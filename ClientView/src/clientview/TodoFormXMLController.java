@@ -81,7 +81,8 @@ public class TodoFormXMLController implements Initializable {
     static ArrayList<UserEntity> test2 = new ArrayList();
     static ArrayList<HBox> hBoxPane = new ArrayList();
     HBox child = null;
-
+    private Accordion accordion;
+    private Label descriptionAndDeadline;
     @FXML
     private JFXListView<HBox> collaboratorsList;
     @FXML
@@ -90,11 +91,11 @@ public class TodoFormXMLController implements Initializable {
     private ImageView addNewFriend;
     @FXML
     private BorderPane rootPane;
-    
-    public static TodoEntity todo= new TodoEntity();
+
+    public static TodoEntity todo = new TodoEntity();
     @FXML
     private JFXButton homeButton;
-    
+
     private BorderPane borderItem;
 
     static ArrayList<Object> itemList = new ArrayList<>();
@@ -106,10 +107,10 @@ public class TodoFormXMLController implements Initializable {
     public static void clearItemsList() {
         itemList.clear();
     }
-    
-     public static void clearTest(){
-         test2.clear();
-     }
+
+    public static void clearTest() {
+        test2.clear();
+    }
     @FXML
     private JFXButton editTodo;
     @FXML
@@ -118,7 +119,8 @@ public class TodoFormXMLController implements Initializable {
     private ImageView addNewItem11;
     @FXML
     private JFXButton notificationButton;
-    
+    private JFXButton showItem;
+    private JFXButton showItemCollaborators;
     @FXML
     private BorderPane borderZft;
     TitledPane itemInList;
@@ -127,7 +129,9 @@ public class TodoFormXMLController implements Initializable {
     private Label todoDetails;
     @FXML
     private VBox todoDetailsLi;
-         /**
+    private VBox vbox;
+
+    /**
      * Initializes the controller class.
      */
     @Override
@@ -140,19 +144,19 @@ public class TodoFormXMLController implements Initializable {
     }
 
     public void fillTodoDetails() {
-            todoDetails = new Label();
-            todoDetails.setText("Assign Date: " + todo.getAssignDate()
-                    +"\nDeadline Date: " + todo.getDeadlineDate() + "\n Description: " + todo.getDescription());
-            todoDetails.setFont(new Font("Arial", 16));
-            todoDetails.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;");
-            todoDetails.setWrapText(true);
-            todoDetails.setTextFill(Color.web("#313749"));
-            todoDetails.setAlignment(Pos.CENTER);
-            todoDetailsLi.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
-            todoDetailsLi.setAlignment(Pos.CENTER);
-            todoDetailsLi.getChildren().add(todoDetails);
-        
+        todoDetails = new Label();
+        todoDetails.setText("Assign Date: " + todo.getAssignDate()
+                + "\nDeadline Date: " + todo.getDeadlineDate() + "\n Description: " + todo.getDescription());
+        todoDetails.setFont(new Font("Arial", 16));
+        todoDetails.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;");
+        todoDetails.setWrapText(true);
+        todoDetails.setTextFill(Color.web("#313749"));
+        todoDetails.setAlignment(Pos.CENTER);
+        todoDetailsLi.setAlignment(Pos.CENTER);
+        todoDetailsLi.getChildren().add(todoDetails);
+
     }
+
     @FXML
     private void addColaboratorEvent() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("AddCollaboratorTodoFXML.fxml"));
@@ -172,6 +176,7 @@ public class TodoFormXMLController implements Initializable {
         test2.add(useraya);
         test2.add(useraya);
     }
+
     public void setCollaboratorsPanes(ArrayList<UserEntity> collaboratorsList) {
         for (UserEntity useraya : collaboratorsList) {
             try {
@@ -216,32 +221,62 @@ public class TodoFormXMLController implements Initializable {
     }
 
     @FXML
-    private void homeButtonAction(){
+    private void homeButtonAction() {
         UserDBOperations.getAllTodos(ClientView.currentUser);
     }
+
     private void loadItems() {
         if (itemList != null) {
             for (int i = 0; i < itemList.size(); i++) {
                 ItemEntity item = (ItemEntity) itemList.get(i);
-                 Accordion accordion = new Accordion();
-                Label descriptionAndDeadline = new Label(item.getDescription()+"\n Deadline Date:  "+item.getDeadlineDate().toString());
+                accordion = new Accordion();
+                vbox = new VBox();
+                descriptionAndDeadline = new Label("Item Description: " + item.getDescription() + "\nDeadline Date:  " + item.getDeadlineDate().toString());
                 descriptionAndDeadline.setFont(new Font("Arial", 22));
-                itemInList = new TitledPane(item.getTitle(), descriptionAndDeadline);
-                itemInList.setPadding(new Insets(10,10,10,10));
+                descriptionAndDeadline.setAlignment(Pos.CENTER);
+                descriptionAndDeadline.setPadding(new Insets(5, 5, 5, 5));
+                descriptionAndDeadline.setWrapText(true);
+                showItem = new JFXButton("Show Tasks..");
+                showItem.setButtonType(JFXButton.ButtonType.RAISED);
+                showItem.setFont(new Font("Arial", 18));
+                showItem.setAlignment(Pos.CENTER);
+                showItem.setPadding(new Insets(10, 5, 5, 5));
+                showItem.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
+                showItemCollaborators = new JFXButton("Show Collaborators..");
+                showItemCollaborators.setPadding(new Insets(0, 5, 5, 5));
+                showItemCollaborators.setAlignment(Pos.CENTER);
+                showItemCollaborators.setFont(new Font("Arial", 18));
+                showItemCollaborators.setButtonType(JFXButton.ButtonType.RAISED);
+                showItemCollaborators.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
+                vbox.getChildren().add(descriptionAndDeadline);
+                vbox.getChildren().add(showItem);
+                vbox.getChildren().add(showItemCollaborators);
+                vbox.setAlignment(Pos.CENTER);
+                itemInList = new TitledPane(item.getTitle(), vbox);
+                itemInList.setPadding(new Insets(0, 5, 5, 5));
                 itemInList.setFont(new Font("Arial", 22));
                 accordion.getPanes().add(itemInList);
+                accordion.expandedPaneProperty().addListener(new ChangeListener<TitledPane>() {
+                    public void changed(ObservableValue<? extends TitledPane> ov,
+                            TitledPane old_val, TitledPane new_val) {
+                        if (new_val != null) {
+                            accordion.getExpandedPane();
+                        }
+                    }
+                });
                 vBoxPane.getChildren().add(accordion);
             }
         }
     }
-     public static void  setCollaboratorList(ArrayList<UserEntity> collaborators){ 
+
+    public static void setCollaboratorList(ArrayList<UserEntity> collaborators) {
 //            test2.clear();
-           test2=collaborators;   
+        test2 = collaborators;
     }
 
     @FXML
     private void editTodoAction(ActionEvent event) {
-         try {
+        try {
             InsertTodoXMLController.setTodoData(todo);
             InsertTodoXMLController.isUpdate = true;
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertTodoXML.fxml"));
@@ -257,23 +292,27 @@ public class TodoFormXMLController implements Initializable {
         }
     }
 
+    private void setSelectedItem() {
+        // accordion.get
+    }
+
     @FXML
     private void deleteTodoAction() {
-        TodoListDBOperations.deleteTodo(todo);   
+        TodoListDBOperations.deleteTodo(todo);
     }
+
     @FXML
-    private void notificationButtonAction(){
+    private void notificationButtonAction() {
     }
 
     private void updateUi() {
         todoNameLabel.setText(todo.getTitle());
         //setCollaboratorsDummy();
-    //    setCollaboratorsPanes(test2);
-    //    generateCollaboratorListUI();
+        //    setCollaboratorsPanes(test2);
+        //    generateCollaboratorListUI();
         fillTodoDetails();
         loadItems();
         //TodoListDBOperations.getAllItems(todo);  
     }
-    
-  
+
 }

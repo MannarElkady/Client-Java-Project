@@ -31,10 +31,6 @@ public class MainFormHandler implements EventHandler<Event> {
         }
         TodoFormXMLController.setToDoData(((TodoEntity)MainXMLController.data.get(toDoIndex)));
         TodoListDBOperations.getAllItems(((TodoEntity)MainXMLController.data.get(toDoIndex)));
-        
-        
-        
-
     }
 
 }
