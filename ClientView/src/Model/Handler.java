@@ -40,6 +40,9 @@ public class Handler {
                 alert.setContentText("The  server is closed!");
                 alert.showAndWait();
             }
+            else{
+                SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+            }
         }
      
     }
