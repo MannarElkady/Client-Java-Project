@@ -23,16 +23,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.util.Duration;
 import clientview.ClientView;
 
 /**
@@ -94,15 +89,15 @@ public class LoginXMLController implements Initializable {
 
             Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/RegisterXML.fxml"));
             Scene scene = ClientView.mainStage.getScene();
-            root.translateYProperty().set(scene.getHeight());
-            ClientView.mainStage.setWidth(629);
-            ClientView.mainStage.setHeight(637);
+            //root.translateYProperty().set(scene.getHeight());
+            //ClientView.mainStage.setWidth(629);
+            //ClientView.mainStage.setHeight(637);
             scene.setRoot(root);
-            Timeline timeLine = new Timeline();
-            KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
-            KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
-            timeLine.getKeyFrames().add(kf);
-            timeLine.play();
+//            Timeline timeLine = new Timeline();
+//            KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+//            KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+//            timeLine.getKeyFrames().add(kf);
+//            timeLine.play();
         } catch (IOException ex) {
             Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
         }

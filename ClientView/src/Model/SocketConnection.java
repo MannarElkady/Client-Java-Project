@@ -29,25 +29,25 @@ public class SocketConnection extends Thread {
     private SocketConnection() {
         createConnection();
     }
-    
-    public void createConnection(){
-         try {
-            if(socket==null){
-            socket = new Socket("127.0.0.1", 5005);
-            dataInputStream = new DataInputStream(socket.getInputStream());
-            printStream = new PrintStream(socket.getOutputStream());
-            checkFirstTime = true;
-            serverClosed =false;
-            th = new Thread(this);
-            th.start();
-             }
+
+    public void createConnection() {
+        try {
+            if (socket == null) {
+                socket = new Socket("127.0.0.1", 5005);
+                dataInputStream = new DataInputStream(socket.getInputStream());
+                printStream = new PrintStream(socket.getOutputStream());
+                checkFirstTime = true;
+                serverClosed = false;
+                th = new Thread(this);
+                th.start();
+            }
         } catch (IOException e) {
-           // e.printStackTrace();
-           serverClosed=true;
-           checkFirstTime = false;
+            // e.printStackTrace();
+            serverClosed = true;
+            checkFirstTime = false;
         }
     }
-  
+
     public boolean isServerClosed() {
         return serverClosed;
     }
@@ -71,6 +71,7 @@ public class SocketConnection extends Thread {
             socket.close();
         }
     }
+
     public PrintStream getPrintStreamInstance() {
         return printStream;
     }
@@ -85,19 +86,19 @@ public class SocketConnection extends Thread {
 
                     if (replyMsg.equals("notification received")) {
                         NotificationGUI.receiveNotificationTray();
-                    }else if(replyMsg.equals("Update Notification")){
+                    } else if (replyMsg.equals("Update Notification")) {
                         System.out.println("Update your ui");
                         UserDBOperations.getAllTodos(clientview.ClientView.currentUser);
-                    }else if(replyMsg.equals("Delete Notification")){
+                    } else if (replyMsg.equals("Delete Notification")) {
                         System.out.println("Delete your TODO");
                         UserDBOperations.getAllTodos(clientview.ClientView.currentUser);
-                    }else if (replyMsg.equals("closed")) {
+                    } else if (replyMsg.equals("closed")) {
                         System.out.println(replyMsg);
                         serverClosed = true;
                     } else if (replyMsg.equals("opened")) {
                         serverClosed = false;
                         System.out.println("opened");
-                    }else/* if (!replyMsg.equals("opened") && !replyMsg.equals("closed") && !replyMsg.equals("notification received"))*/ {
+                    } else/* if (!replyMsg.equals("opened") && !replyMsg.equals("closed") && !replyMsg.equals("notification received"))*/ {
                         Handler.handle(replyMsg);
                     }
                 }
