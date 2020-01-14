@@ -10,7 +10,7 @@ and open the template in the editor.
     Author     : DELL
 */
 .parent{
-    -fx-background-image: url("/clientview/authentication/im.jpg");
-     -fx-background-size: 40% 100%;
+    -fx-background-image: url("/clientview/authentication/image.jpg");
+     -fx-background-size: 50% 50%;
 }
 
