@@ -5,6 +5,8 @@
  */
 package clientview;
 
+import Model.CollaboratorsListActionListener;
+import Model.TodoSelectedItemHandler;
 import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.ItemEntity;
@@ -26,6 +28,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -95,18 +98,6 @@ public class TodoFormXMLController implements Initializable {
     private BorderPane borderItem;
 
     static ArrayList<Object> itemList = new ArrayList<>();
-
-    public static void setItems(ArrayList<Object> list) {
-        itemList = list;
-    }
-
-    public static void clearItemsList() {
-        itemList.clear();
-    }
-
-    public static void clearTest() {
-        test2.clear();
-    }
     @FXML
     private JFXButton editTodo;
     @FXML
@@ -126,7 +117,7 @@ public class TodoFormXMLController implements Initializable {
     @FXML
     private VBox todoDetailsLi;
     private VBox vbox;
-
+    public static ItemEntity itemSelected= new ItemEntity();
     /**
      * Initializes the controller class.
      */
@@ -135,6 +126,17 @@ public class TodoFormXMLController implements Initializable {
         updateUi();
     }
 
+     public static void setItems(ArrayList<Object> list) {
+        itemList = list;
+    }
+
+    public static void clearItemsList() {
+        itemList.clear();
+    }
+
+    public static void clearTest() {
+        test2.clear();
+    }
     public static void setToDoData(TodoEntity todoData) {
         todo = todoData;
     }
@@ -184,7 +186,6 @@ public class TodoFormXMLController implements Initializable {
                 userLabel = new Label(useraya.getUsername());
                 userLabel.setGraphic(imgView);
                 userLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
-                userLabel.paddingProperty();
                 userLabel.setPrefSize(100, 30);
                 child.getChildren().add(userLabel);
                 hBoxPane.add(child);
@@ -230,43 +231,36 @@ public class TodoFormXMLController implements Initializable {
                 descriptionAndDeadline = new Label("Item Description: " + item.getDescription() + "\nDeadline Date:  " + item.getDeadlineDate().toString());
                 descriptionAndDeadline.setFont(new Font("Arial", 22));
                 descriptionAndDeadline.setAlignment(Pos.CENTER);
-                descriptionAndDeadline.setPadding(new Insets(5, 5, 5, 5));
                 descriptionAndDeadline.setWrapText(true);
-                showItem = new JFXButton("Show Tasks..");
+                showItem = new JFXButton("Show Tasks");
                 showItem.setButtonType(JFXButton.ButtonType.RAISED);
                 showItem.setFont(new Font("Arial", 18));
                 showItem.setAlignment(Pos.CENTER);
-                showItem.setPadding(new Insets(10, 5, 5, 5));
                 showItem.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
-                showItemCollaborators = new JFXButton("Show Collaborators..");
-                showItemCollaborators.setPadding(new Insets(0, 5, 5, 5));
+                showItemCollaborators = new JFXButton("Show Collaborators");
                 showItemCollaborators.setAlignment(Pos.CENTER);
                 showItemCollaborators.setFont(new Font("Arial", 18));
                 showItemCollaborators.setButtonType(JFXButton.ButtonType.RAISED);
                 showItemCollaborators.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
+                showItemCollaborators.setOnAction(new CollaboratorsListActionListener());
                 vbox.getChildren().add(descriptionAndDeadline);
                 vbox.getChildren().add(showItem);
                 vbox.getChildren().add(showItemCollaborators);
+                vbox.setSpacing(10);
                 vbox.setAlignment(Pos.CENTER);
                 itemInList = new TitledPane(item.getTitle(), vbox);
                 itemInList.setPadding(new Insets(0, 5, 5, 5));
                 itemInList.setFont(new Font("Arial", 22));
+                itemInList.setId(String.valueOf(item.getItemID()));
+                itemInList.expandedProperty().addListener(new TodoSelectedItemHandler(itemInList));
                 accordion.getPanes().add(itemInList);
-                accordion.expandedPaneProperty().addListener(new ChangeListener<TitledPane>() {
-                    public void changed(ObservableValue<? extends TitledPane> ov,
-                            TitledPane old_val, TitledPane new_val) {
-                        if (new_val != null) {
-                            accordion.getExpandedPane();
-                        }
-                    }
-                });
+                
+         //       accordion.getExpandedPane().setExpanded(false);
                 vBoxPane.getChildren().add(accordion);
-            }
         }
     }
-
+    }
     public static void setCollaboratorList(ArrayList<UserEntity> collaborators) {
-//            test2.clear();
         test2 = collaborators;
     }
 
@@ -286,10 +280,6 @@ public class TodoFormXMLController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    private void setSelectedItem() {
-        // accordion.get
     }
 
     @FXML
