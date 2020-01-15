@@ -1,20 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
+import clientview.TodoFormXMLController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.TitledPane;
 /**
  *
  * @author DELL
  */
-//public class TodoSelectedItemHandler implements ChangeListener<TitledPane>(){
-//    @Override
-//    public void changed(ObservableValue<? extends TitledPane> ov,TitledPane old_val, TitledPane new_val){
-//                         if (new_val != null) {
-//                             label.setText(accordion.getExpandedPane().getText()
-//                                     + ".jpg");
-//                         }
-//                     }
-//}
+public class TodoSelectedItemHandler implements ChangeListener<Boolean> {
+    TitledPane itemList;
+    int itemId = -1;
+    public TodoSelectedItemHandler(TitledPane itemList){
+        this.itemList=itemList;
+    }
+    @Override
+    public void changed(ObservableValue<? extends Boolean> obs, Boolean wasExpanded, Boolean isNowExpanded) {
+        if (isNowExpanded) {
+            itemId=Integer.parseInt(itemList.getId());
+            System.out.println("\n************" + itemList.getText()+"\n************" + Integer.parseInt(itemList.getId()));
+            TodoFormXMLController.itemSelected.setItemID(itemId);
+        }
+    }
+}
+
