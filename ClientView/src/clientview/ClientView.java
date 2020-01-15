@@ -47,10 +47,9 @@ public class ClientView extends Application {
 
         stage.setOnCloseRequest((WindowEvent event) -> {
             try {
-                SocketConnection.getInstance().closeSocketConnection();
                 UserDBOperations.logout(ClientView.currentUser);
-
-                
+                SocketConnection.getInstance().closeSocketConnection();
+                UserDBOperations.logout(ClientView.currentUser);   
             } catch (IOException ex) {
                 Logger.getLogger(ClientView.class.getName()).log(Level.SEVERE, null, ex);
             }
