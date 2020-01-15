@@ -1,11 +1,9 @@
 package Model;
 
-import Model.dao.implementation.ItemDBOperations;
 import clientview.TodoFormXMLController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TitledPane;
-
 /**
  *
  * @author DELL
@@ -26,3 +24,4 @@ public class TodoSelectedItemHandler implements ChangeListener<Boolean> {
         }
     }
 }
+
