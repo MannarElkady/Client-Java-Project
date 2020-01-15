@@ -34,6 +34,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
@@ -53,7 +54,7 @@ import javafx.stage.StageStyle;
  * @author DELL
  */
 public class TodoFormXMLController implements Initializable {
-
+    Button tasks;
     @FXML
     private Label todoNameLabel;
     @FXML
@@ -315,4 +316,19 @@ public class TodoFormXMLController implements Initializable {
         //TodoListDBOperations.getAllItems(todo);  
     }
 
+    
+    public void showTasks(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/clientview/ItemTasksFXML.fxml"));
+            Parent itemTasks = loader.load();
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner((Stage) rootPane.getScene().getWindow());
+            Scene dialogScene = new Scene(itemTasks);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
