@@ -10,6 +10,7 @@ import Model.Handler;
 import Model.RequestEntity;
 import Model.SocketConnection;
 import Model.entities.UserEntity;
+import clientview.AddCollaboratorTodoController;
 import clientview.AddFrindFXMLController;
 import clientview.ClientView;
 import clientview.MainXMLController;
@@ -46,6 +47,7 @@ public class UserDBOperations {
             System.out.println(((UserEntity) object.get(0)).getId());
             ClientView.currentUser = (UserEntity) object.get(0);
             getAllTodos(ClientView.currentUser);
+            AddCollaboratorTodoController.isAddCollaborator = false;
             getFrinds(ClientView.currentUser);
         }
     }
@@ -136,32 +138,58 @@ public class UserDBOperations {
             System.out.println("hi hema");
 
         } else {
+            if (AddCollaboratorTodoController.isAddCollaborator == false) {
+                System.out.println("Hiiiiii  from add" + AddCollaboratorTodoController.isAddCollaborator);
 
-            Platform.runLater(new Runnable() {
+                Platform.runLater(new Runnable() {
 
-                @Override
-                public void run() {
-                    try {
+                    @Override
+                    public void run() {
+                        try {
 
-                        MainXMLController.setFriendList(items);
+                            MainXMLController.setFriendList(items);
+                            Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
+                            Scene scene = ClientView.mainStage.getScene();
+                            //root.translateYProperty().set(scene.getHeight());
+                            //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
+                            // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                            scene.setRoot(root);
 
-                        Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
-                        Scene scene = ClientView.mainStage.getScene();
-                        //root.translateYProperty().set(scene.getHeight());
-                        //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
-                        // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
-                        scene.setRoot(root);
-
-                        /*Timeline timeLine = new Timeline();
+                            /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
                 timeLine.getKeyFrames().add(kf);
                 timeLine.play();*/
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            });
+                });
+
+            }
+            if (AddCollaboratorTodoController.isAddCollaborator == true) {
+                System.out.println("Hiiiiii from main" + AddCollaboratorTodoController.isAddCollaborator);
+
+                Platform.runLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        AddCollaboratorTodoController.setTodoFriendList(items);
+
+                        try {
+                            Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddCollaboratorTodoFXML.fxml"));
+                            Stage stage = new Stage(StageStyle.DECORATED);
+                            stage.initModality(Modality.APPLICATION_MODAL);
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+
+            }
 
         }
     }
