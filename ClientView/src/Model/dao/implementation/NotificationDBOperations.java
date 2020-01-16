@@ -9,9 +9,22 @@ import Model.Handler;
 import Model.RequestEntity;
 import Model.entities.NotificationEntity;
 import Model.entities.UserEntity;
+import clientview.ClientView;
+import clientview.MainXMLController;
 import java.util.ArrayList;
 import clientview.NotificationGUI;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Observable;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 /**
  *
@@ -32,13 +45,14 @@ public class NotificationDBOperations {
 
     public static void receiveNotificationsResponse(ArrayList<Object> value) {
 
+         ArrayList<NotificationEntity> notificationsList = null;
         if (value != null) {
-            ArrayList<NotificationEntity> notificationsList = new ArrayList<>();
+             notificationsList = new ArrayList<>();
             for (int i = 0; i < value.size(); i++) {
                 notificationsList.add((NotificationEntity) value.get(i));
-            }
-            NotificationGUI.loadNotificationMenu(notificationsList);
+            }                                  
         }
+         NotificationGUI.loadNotificationMenu(notificationsList);
     }
 
     public static void sendNotification(ArrayList<Object> value) {
@@ -97,6 +111,7 @@ public class NotificationDBOperations {
         if (value != null) {
             NotificationGUI.receiveNotificationTray();
         }
+        //when recieve notification tray
     }
     
     public static void sendRejectionNotification(ArrayList<Object> value){
