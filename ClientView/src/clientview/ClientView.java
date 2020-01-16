@@ -66,7 +66,6 @@ public class ClientView extends Application {
                 
 /* TodoEntity todo = new TodoEntity(2, "jljlk", "#1212", 1, "Done", "New description", Date.valueOf("2020-01-01"), Date.valueOf("2020-12-01"));
         TodoListDBOperations.deleteTodo(todo);*/
-       
     }
 
     /**
