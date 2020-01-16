@@ -21,6 +21,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -41,6 +43,10 @@ public class UserDBOperations {
     public void loginResponse(ArrayList<Object> object) {
         if (object == null || object.size() == 0) {
             System.out.println("login failed");
+            Alert a = new Alert(AlertType.ERROR);
+            a.setTitle("Error");
+            a.setContentText("Already Signed in or Wrong Username and Password");
+            a.showAndWait();
         } else {
 
             System.out.println(((UserEntity) object.get(0)).getId());
