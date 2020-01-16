@@ -6,6 +6,7 @@
 package clientview;
 
 import Model.MainFormHandler;
+import Model.NotificationGUIHandler;
 import Model.dao.implementation.NotificationDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.NotificationEntity;
@@ -15,6 +16,8 @@ import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXMasonryPane;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,13 +37,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -49,10 +56,12 @@ import javafx.scene.input.Dragboard;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -77,6 +86,12 @@ public class MainXMLController implements Initializable {
     @FXML
     private JFXMasonryPane jMasonaryPane;
 
+    @FXML
+    ImageView notificationButton;
+    @FXML
+    MenuItem notificationItem;
+    public static ArrayList<NotificationEntity> notificationsListForOtherClasses = new ArrayList<>();        
+    
     private Image img = null;
     private ImageView imgView = null;
     //private Label todoName = null;
@@ -98,11 +113,21 @@ public class MainXMLController implements Initializable {
     @FXML
     private BorderPane stackPaneBorder;
 
+    @FXML
+    private JFXListView<BorderPane> listView;
 
+    static ArrayList<NotificationEntity> notificationListData = new ArrayList<>();
+    
+    
     ArrayList<String> friendsList = new ArrayList();
     private ObjectProperty<ListCell<String>> dragSource = new SimpleObjectProperty<>();
 
 
+    public static void setnotificationListData(ArrayList<NotificationEntity> notifications){
+        notificationListData.clear();
+        notificationListData=notifications;
+        
+    }
     public void setFriendListDummy() {
         UserEntity useraya = new UserEntity();
 
@@ -181,7 +206,7 @@ public class MainXMLController implements Initializable {
      * Initializes the controller class.
      */
     public void generateTodosUI(ArrayList<Object> todoNames) {
-        if (todoNames.size() != 0) {
+        if (todoNames!=null && todoNames.size() != 0) {
             System.out.println("TEST 2");
             for (int i = 0; i < data.size(); i++) {
                 Label todoName = null;
@@ -229,12 +254,18 @@ public class MainXMLController implements Initializable {
         generateTodosUI(data);
         //generateFriendListUI();
         generateFriendListUIWithDragAndDropFeature();
-        generateFriendListUI();
+        generateFriendListUI();           
+
         jMasonaryPane.setCache(false);
         //jMasonaryPane.setCache(false);
         stackPaneBorder.setCenter(stackPane);
         int rows = jMasonaryPane.getLimitRow();
+
+        prpareNotificationMenu();        
+        //viewNotificationList();
+        //loadNotificationMenu(notificationListData);
     }
+     
     @FXML
     private void addFriendBtnAction(ActionEvent event) {
         try {
@@ -390,5 +421,93 @@ public class MainXMLController implements Initializable {
         });
 
     }
+     
+     private void prpareNotificationMenu(){
+          /*try {
+            Image img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/notification_icon.jpg"));
+            ImageView imgView = new ImageView(img);
+            imgView.setFitHeight(50);
+            imgView.setFitWidth(50);
+            menuButton.setGraphic(imgView);
+
+            Platform.runLater(()
+                    -> {
+                // hide the arrow of menuButton
+                menuButton.lookup(".arrow").setStyle("-fx-background-insets: 0; -fx-padding: 0; -fx-shape: null;");
+                // hide the arraw-button pane, to remove unnecessary padding
+                menuButton.lookup(".arrow-button").setStyle("-fx-padding: 0");
+            });
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }*/
+     
+     }
+     
+     public static void setNotificationsList(ArrayList<NotificationEntity> notificationsList){
+     
+         //loadNotificationMenu(notificationsList);
+     }
+     
+      @FXML
+    private void viewNotificationList() {
+   
+         ArrayList<Integer> users = new ArrayList<>();
+        users.add(ClientView.currentUser.getId());
+        NotificationDBOperations.receiveNotifications(users);
+    }          
+    private void loadNotificationMenu(ArrayList<NotificationEntity> notificationsList) {
+
+        notificationsListForOtherClasses.clear();
+        notificationsListForOtherClasses=notificationsList;
+      
+                Label text1;
+                
+                ArrayList<BorderPane> borderPanes = new ArrayList<BorderPane>();
+
+                for (int i = 0; i < notificationsList.size(); i++) {
+                    text1 = new Label(notificationsList.get(i).getHeader());
+                    BorderPane border = new BorderPane();
+                    VBox box = new VBox();
+                    box.getChildren().add(text1);
+
+                    if (!notificationsList.get(i).getNotificationType().toLowerCase().contains("invitation")) {
+
+                        box.setAlignment(Pos.CENTER_LEFT);
+                        text1 = new Label(notificationsList.get(i).getText());
+                        box.getChildren().add(text1);
+
+                        border.setCenter(box);
+                        borderPanes.add(border);
+
+                    } else {
+                        if (notificationsList.get(i).getNotificationType().contains("itemInvitation") || notificationsList.get(i).getNotificationType().contains("todoInvitation") || notificationsList.get(i).getNotificationType().contains("friendInvitation") ) {
+                            Button b1 = new Button("accept");
+                            Button b2 = new Button("reject");
+                            b1.setId("accept" +notificationsList.get(i).getNotificationType());
+                            b2.setId("reject" +notificationsList.get(i).getNotificationType());
+                            b1.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
+                            b2.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
+                            HBox horizontal = new HBox();
+                            horizontal.getChildren().add(b1);
+                            horizontal.getChildren().add(b2);
+                            border.setRight(horizontal);
+                            border.setLeft(text1);
+                            borderPanes.add(border);
+                        }
+
+                    //}
+
+                }
+                ObservableList<BorderPane> myObservableList = FXCollections.observableList(borderPanes);
+
+                listView.setItems(myObservableList);                 
+                listView.setPrefSize(600, 300);
+                //menuButton.getItems().add(new MenuItem("",parentPane));
+                //listView.getItems().add(myObservableList);
+            } 
+        
+    }
+
 }
+
 

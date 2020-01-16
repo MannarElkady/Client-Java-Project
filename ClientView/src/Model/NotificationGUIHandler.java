@@ -59,10 +59,12 @@ public class NotificationGUIHandler implements EventHandler<Event> {
 
                 if (buttonType.equals("reject")) {
                     NotificationDBOperations.sendRejectionNotification(notificationList);
-                }
-
+                }                 
             }
 
         }
+         ArrayList<Integer> users = new ArrayList<>();
+        users.add(ClientView.currentUser.getId());
+        NotificationDBOperations.receiveNotifications(users);
     }
 }

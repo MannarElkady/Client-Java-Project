@@ -6,6 +6,7 @@
 package clientview;
 
 import Model.SocketConnection;
+import Model.dao.implementation.UserDBOperations;
 import Model.dao.implementation.ComponentDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.ComponentEntity;
@@ -53,6 +54,7 @@ public class ClientView extends Application {
             } catch (IOException ex) {
                 Logger.getLogger(ClientView.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             Platform.exit();
             System.exit(0);
         });
