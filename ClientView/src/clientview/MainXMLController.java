@@ -33,7 +33,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -66,7 +65,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -257,21 +255,21 @@ public class MainXMLController implements Initializable {
         //generateFriendListUI();
         generateFriendListUIWithDragAndDropFeature();
         generateFriendListUI();           
+
         jMasonaryPane.setCache(false);
         //jMasonaryPane.setCache(false);
         stackPaneBorder.setCenter(stackPane);
         int rows = jMasonaryPane.getLimitRow();
+
         prpareNotificationMenu();        
         //viewNotificationList();
         //loadNotificationMenu(notificationListData);
     }
      
     @FXML
-
     private void addFriendBtnAction(ActionEvent event) {
-
-
         try {
+            UserDBOperations.getAllUsers(ClientView.currentUser);
             Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddFrindFXML.fxml"));
             Stage stage = new Stage(StageStyle.DECORATED);
             Scene scene = new Scene(root, 400, 300);
@@ -302,13 +300,13 @@ public class MainXMLController implements Initializable {
             Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+/*
     private void getAllTodos() {
         UserEntity user = new UserEntity();
         user.setId(ClientView.currentUser.getId());
         UserDBOperations.getAllTodos(user);        
     }
-
+*/
     public static void setFriendList(ArrayList<UserEntity> a) {
         test2 = a;
     }

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#addPaneActionESC" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #97CAEF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.InsertItemXMLController">
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#addPaneActionESC" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.InsertItemXMLController">
    <top>
       <GridPane style="-fx-background-color: #c38d9e #c38d9e #c38d9e; -fx-border-radius: 30; -fx-background-radius: 30;" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -52,7 +52,7 @@
       </GridPane>
    </top>
    <center>
-      <GridPane style="-fx-background-color: #97CAEF;" BorderPane.alignment="CENTER">
+      <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -63,17 +63,17 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Title" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label text="Title" textFill="#22689a" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="Algerian" size="18.0" />
                </font>
             </Label>
-            <Label text="Description" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label text="Description" textFill="#22689a" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font name="Algerian" size="18.0" />
                </font>
             </Label>
-            <Label text="Deadline Date" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Label text="Deadline Date" textFill="#22689a" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="Algerian" size="18.0" />
                </font>
