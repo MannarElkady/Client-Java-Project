@@ -36,7 +36,7 @@
                   <Font name="Times New Roman Bold" size="18.0" />
                </font>
             </JFXButton>
-            <ImageView fitHeight="91.0" fitWidth="130.0" layoutX="29.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="91.0" fitWidth="130.0" layoutX="29.0" layoutY="21.0"  preserveRatio="true">
                <image>
                   <Image url="@../resources/todo.jpg" />
                </image>

@@ -110,7 +110,7 @@
             </BorderPane>
          </center>
          <top>
-            <Label text="Online Friends" BorderPane.alignment="CENTER">
+            <Label text="Friends" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Agency FB Bold" size="22.0" />
                </font>
