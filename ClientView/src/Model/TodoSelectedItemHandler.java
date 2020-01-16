@@ -8,6 +8,7 @@ import javafx.scene.control.TitledPane;
  *
  * @author DELL
  */
+
 public class TodoSelectedItemHandler implements ChangeListener<Boolean> {
     TitledPane itemList;
     int itemId = -1;

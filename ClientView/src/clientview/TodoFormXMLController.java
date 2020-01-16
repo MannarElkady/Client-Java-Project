@@ -57,6 +57,7 @@ import javafx.stage.StageStyle;
  * @author DELL
  */
 public class TodoFormXMLController implements Initializable {
+
     Button tasks;
     @FXML
     private Label todoNameLabel;
@@ -118,7 +119,8 @@ public class TodoFormXMLController implements Initializable {
     @FXML
     private VBox todoDetailsLi;
     private VBox vbox;
-    public static ItemEntity itemSelected= new ItemEntity();
+    public static ItemEntity itemSelected = new ItemEntity();
+
     /**
      * Initializes the controller class.
      */
@@ -127,7 +129,7 @@ public class TodoFormXMLController implements Initializable {
         updateUi();
     }
 
-     public static void setItems(ArrayList<Object> list) {
+    public static void setItems(ArrayList<Object> list) {
         itemList = list;
     }
 
@@ -138,6 +140,7 @@ public class TodoFormXMLController implements Initializable {
     public static void clearTest() {
         test2.clear();
     }
+
     public static void setToDoData(TodoEntity todoData) {
         todo = todoData;
     }
@@ -158,12 +161,14 @@ public class TodoFormXMLController implements Initializable {
 
     @FXML
     private void addColaboratorEvent() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("AddCollaboratorTodoFXML.fxml"));
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+       AddCollaboratorTodoController.isAddCollaborator=true;
+        UserDBOperations.getFrinds(ClientView.currentUser);
+//        Parent root = FXMLLoader.load(getClass().getResource("AddCollaboratorTodoFXML.fxml"));
+//        Stage stage = new Stage(StageStyle.DECORATED);
+//        stage.initModality(Modality.APPLICATION_MODAL);
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
     }
 
     public void setCollaboratorsDummy() {
@@ -255,12 +260,13 @@ public class TodoFormXMLController implements Initializable {
                 itemInList.setId(String.valueOf(item.getItemID()));
                 itemInList.expandedProperty().addListener(new TodoSelectedItemHandler(itemInList));
                 accordion.getPanes().add(itemInList);
-                
-         //       accordion.getExpandedPane().setExpanded(false);
+
+                //       accordion.getExpandedPane().setExpanded(false);
                 vBoxPane.getChildren().add(accordion);
+            }
         }
     }
-    }
+
     public static void setCollaboratorList(ArrayList<UserEntity> collaborators) {
         test2 = collaborators;
     }
@@ -294,7 +300,7 @@ public class TodoFormXMLController implements Initializable {
 
     private void updateUi() {
         todoNameLabel.setText(todo.getTitle());
-        if(todo.getCreatorId() != ClientView.currentUser.getId()){
+        if (todo.getCreatorId() != ClientView.currentUser.getId()) {
             deleteTodo.setVisible(false);
             editTodo.setVisible(false);
         }
@@ -306,8 +312,7 @@ public class TodoFormXMLController implements Initializable {
         //TodoListDBOperations.getAllItems(todo);  
     }
 
-    
-    public void showTasks(){
+    public void showTasks() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/clientview/ItemTasksFXML.fxml"));
             Parent itemTasks = loader.load();
