@@ -6,6 +6,7 @@
 package clientview;
 
 import Model.SocketConnection;
+import Model.dao.implementation.UserDBOperations;
 import Model.entities.UserEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -44,10 +45,12 @@ public class ClientView extends Application {
 
         stage.setOnCloseRequest((WindowEvent event) -> {
             try {
+                UserDBOperations.logout(ClientView.currentUser);
                 SocketConnection.getInstance().closeSocketConnection();
             } catch (IOException ex) {
                 Logger.getLogger(ClientView.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             Platform.exit();
             System.exit(0);
         });

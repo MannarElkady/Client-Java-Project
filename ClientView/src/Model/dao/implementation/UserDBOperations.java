@@ -95,11 +95,13 @@ public class UserDBOperations {
             MainXMLController.setTodos(items);
         }
 
+        
+        
         Platform.runLater(new Runnable() {
 
             @Override
             public void run() {
-                try {
+                try {                                        
 
                     Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
 
@@ -231,7 +233,7 @@ public class UserDBOperations {
         System.out.println("JKJJKIKI");
         users.add(user);
         RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "logout", users);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+        Handler.sendRequestToServer(request);
     }
 
     public void logoutResponse(ArrayList<Object> object) {

@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,68 +43,95 @@ import org.controlsfx.control.Notifications;
 public class NotificationGUI {
 
     public static ArrayList<NotificationEntity> notificationsListForOtherClasses = new ArrayList<>();
+
     public static void loadNotificationMenu(ArrayList<NotificationEntity> notificationsList) {
 
         notificationsListForOtherClasses.clear();
-        notificationsListForOtherClasses=notificationsList;
+        notificationsListForOtherClasses = notificationsList;
         Platform.runLater(new Runnable() {
 
             @Override
             public void run() {
                 VBox root = new VBox();
-                Stage stage = new Stage(StageStyle.DECORATED);
+                Stage stage = new Stage(StageStyle.UNDECORATED);
                 AnchorPane pane = new AnchorPane();
                 JFXListView<BorderPane> parentPane = new JFXListView<BorderPane>();
+                parentPane.setId("listView");
                 Label text1;
 
                 ArrayList<BorderPane> borderPanes = new ArrayList<BorderPane>();
 
-                for (int i = 0; i < notificationsList.size(); i++) {
-                    text1 = new Label(notificationsList.get(i).getHeader());
-                    BorderPane border = new BorderPane();
-                    VBox box = new VBox();
-                    box.getChildren().add(text1);
-
-                   /* if (!notificationsList.get(i).getNotificationType().toLowerCase().contains("invitation")) {
-
-                        box.setAlignment(Pos.CENTER_LEFT);
-                        text1 = new Label(notificationsList.get(i).getText());
+                if (notificationsList != null) {
+                    for (int i = 0; i < notificationsList.size(); i++) {
+                        text1 = new Label(notificationsList.get(i).getHeader());
+                        BorderPane border = new BorderPane();
+                        VBox box = new VBox();
                         box.getChildren().add(text1);
 
-                        border.setCenter(box);
-                        borderPanes.add(border);
+                        if (!notificationsList.get(i).getNotificationType().toLowerCase().contains("invitation")) {
 
-                    } else {*/
-                        if (notificationsList.get(i).getNotificationType().contains("itemInvitation") || notificationsList.get(i).getNotificationType().contains("todoInvitation") || notificationsList.get(i).getNotificationType().contains("friendInvitation") ) {
-                            Button b1 = new Button("accept");
-                            Button b2 = new Button("reject");
-                            b1.setId("accept" +notificationsList.get(i).getNotificationType());
-                            b2.setId("reject" +notificationsList.get(i).getNotificationType());
-                            b1.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
-                            b2.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
-                            HBox horizontal = new HBox();
-                            horizontal.getChildren().add(b1);
-                            horizontal.getChildren().add(b2);
-                            border.setRight(horizontal);
-                            border.setLeft(text1);
+                            box.setAlignment(Pos.CENTER_LEFT);
+                            text1 = new Label(notificationsList.get(i).getText());
+                            box.getChildren().add(text1);
+
+                            border.setCenter(box);
                             borderPanes.add(border);
+
+                        } else {
+                            if (notificationsList.get(i).getNotificationType().contains("itemInvitation") || notificationsList.get(i).getNotificationType().contains("todoInvitation") || notificationsList.get(i).getNotificationType().contains("friendInvitation")) {
+                                Button b1 = new Button("accept");
+                                Button b2 = new Button("reject");
+                                b1.setId("accept" + notificationsList.get(i).getNotificationType());
+                                b2.setId("reject" + notificationsList.get(i).getNotificationType());
+                                b1.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
+                                b2.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
+                                HBox horizontal = new HBox();
+                                horizontal.getChildren().add(b1);
+                                horizontal.getChildren().add(b2);
+                                border.setRight(horizontal);
+                                border.setLeft(text1);
+                                borderPanes.add(border);
+                            }
+
+                            //}
                         }
 
-                    //}
-
+                    }
+                }
+                if (notificationsList == null) {
+                    text1 = new Label("test");
+                    BorderPane border = new BorderPane();
+                  
+                    border.getChildren().add(text1);
+                    borderPanes.add(border);
                 }
                 ObservableList<BorderPane> myObservableList = FXCollections.observableList(borderPanes);
 
                 parentPane.setItems(myObservableList);
 
-                Scene scene = new Scene(parentPane, 600, 600);
-                Point p = MouseInfo.getPointerInfo().getLocation();
-                stage.setX(p.x - 300);
-                stage.setY(p.y + 20);
-                stage.setScene(scene);
-               // stage.initModality(Modality.APPLICATION_MODAL);
-                stage.show();
+                root.getChildren().add(parentPane);
+                Scene scene = new Scene(root, 500, 300);
+                //Point p = MouseInfo.getPointerInfo().getLocation();
+                Node notificationIcon = ClientView.mainStage.getScene().lookup("#notificationButton");
+                if (ClientView.mainStage.getX() - notificationIcon.getLayoutX() - 250 <= 0) {
+                    stage.setX(ClientView.mainStage.getX() + notificationIcon.getLayoutX() + 450);
+                }
 
+                if (ClientView.mainStage.getX() + notificationIcon.getLayoutX() + 250 >= ClientView.mainStage.getWidth() && ClientView.mainStage.getWidth() >= 1024) {
+                    stage.setX(ClientView.mainStage.getX() + notificationIcon.getLayoutX() - 450);
+                } else {
+                    stage.setX(ClientView.mainStage.getX() + notificationIcon.getLayoutX() - 250);
+                }
+
+                stage.setY(ClientView.mainStage.getY() + notificationIcon.getLayoutY() + 100);
+                stage.setScene(scene);
+                //stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+                stage.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+                    if (!isNowFocused) {
+                        stage.hide();
+                    }
+                });
             }
         });
 
