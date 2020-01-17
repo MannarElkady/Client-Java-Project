@@ -5,10 +5,8 @@
  */
 package Model;
 
-import Model.dao.implementation.ItemDBOperations;
 import Model.entities.ItemEntity;
 import clientview.InsertItemXMLController;
-import clientview.TodoFormXMLController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,27 +23,25 @@ import javafx.stage.Stage;
  *
  * @author DELL
  */
-public class ItemUpdatingActionListener implements EventHandler<ActionEvent> {
-    Stage stage;
-    ItemEntity item;
-    public ItemUpdatingActionListener(Stage s, ItemEntity i){
-        stage=s;
-        item=i;
+public class ItemAddingCollaboratorActionListener implements EventHandler<ActionEvent> {
+    private Parent root;
+    private Stage stage;
+    
+    public ItemAddingCollaboratorActionListener(Stage s){
+        stage = s;
     }
     @Override
     public void handle(ActionEvent event) {
-            Platform.runLater(new Runnable() {
+        Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    InsertItemXMLController.isUpdate=true;
-                    InsertItemXMLController.setItemToUpdate(item);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/clientview/InsertItemXML.fxml"));
-                    Parent insertItemWindow = loader.load();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/clientview/ItemAddCollaboratorXML.fxml"));
+                    root = loader.load();
                     final Stage dialog = new Stage();
                     dialog.initModality(Modality.APPLICATION_MODAL);
                     dialog.initOwner(stage);
-                    Scene dialogScene = new Scene(insertItemWindow);
+                    Scene dialogScene = new Scene(root);
                     dialog.setScene(dialogScene);
                     dialog.show();
                 } catch (IOException ex) {
@@ -53,5 +49,6 @@ public class ItemUpdatingActionListener implements EventHandler<ActionEvent> {
                 }
             }
             });
-        }
     }
+    
+}
