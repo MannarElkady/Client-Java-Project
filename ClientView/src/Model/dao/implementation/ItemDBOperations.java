@@ -52,7 +52,6 @@ public class ItemDBOperations {
         list.add(itemToUpdate);
         RequestEntity<ItemEntity> updateRequest = new RequestEntity("ItemDBOperations", "updateItem", list);
         Handler.sendRequestToServer(updateRequest);
-
     }
 
     public void updateItemResponse(ArrayList<Object> arrayObjects) {

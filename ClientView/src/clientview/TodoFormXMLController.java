@@ -6,6 +6,7 @@
 package clientview;
 
 import Model.CollaboratorsListActionListener;
+import Model.ItemUpdatingActionListener;
 import Model.TodoSelectedItemHandler;
 import Model.dao.implementation.ComponentDBOperations;
 import Model.dao.implementation.TodoListDBOperations;
@@ -49,7 +50,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -109,6 +109,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     private JFXButton notificationButton;
     private JFXButton showItem;
     private JFXButton showItemCollaborators;
+    private JFXButton editItemDetails;
     @FXML
     private BorderPane borderZft;
     TitledPane itemInList;
@@ -118,7 +119,10 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     @FXML
     private VBox todoDetailsLi;
     private VBox vbox;
-    public static ItemEntity itemSelected= new ItemEntity();
+    public static ItemEntity itemSelected = new ItemEntity();
+   // public Stage stage= (Stage) rootPane.getScene().getWindow();
+    public Stage stage= ClientView.mainStage;
+
     /**
      * Initializes the controller class.
      */
@@ -127,7 +131,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
         updateUi();
     }
 
-     public static void setItems(ArrayList<Object> list) {
+    public static void setItems(ArrayList<Object> list) {
         itemList = list;
     }
 
@@ -138,6 +142,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     public static void clearTest() {
         test2.clear();
     }
+
     public static void setToDoData(TodoEntity todoData) {
         todo = todoData;
     }
@@ -158,12 +163,14 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     @FXML
     private void addColaboratorEvent() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("AddCollaboratorTodoFXML.fxml"));
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+       AddCollaboratorTodoController.isAddCollaborator=true;
+        UserDBOperations.getFrinds(ClientView.currentUser);
+//        Parent root = FXMLLoader.load(getClass().getResource("AddCollaboratorTodoFXML.fxml"));
+//        Stage stage = new Stage(StageStyle.DECORATED);
+//        stage.initModality(Modality.APPLICATION_MODAL);
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
     }
 
     public void setCollaboratorsDummy() {
@@ -224,9 +231,9 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     private void loadItems() {
         if (itemList != null) {
+            accordion = new Accordion();
             for (int i = 0; i < itemList.size(); i++) {
                 ItemEntity item = (ItemEntity) itemList.get(i);
-                accordion = new Accordion();
                 vbox = new VBox();
                 descriptionAndDeadline = new Label("Item Description: " + item.getDescription() + "\nDeadline Date:  " + item.getDeadlineDate().toString());
                 descriptionAndDeadline.setFont(new Font("Arial", 22));
@@ -244,9 +251,16 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 showItemCollaborators.setButtonType(JFXButton.ButtonType.RAISED);
                 showItemCollaborators.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
                 showItemCollaborators.setOnAction(new CollaboratorsListActionListener());
+                editItemDetails = new JFXButton("Edit Item");
+                editItemDetails.setAlignment(Pos.CENTER);
+                editItemDetails.setFont(new Font("Arial", 18));
+                editItemDetails.setButtonType(JFXButton.ButtonType.RAISED);
+                editItemDetails.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
+                editItemDetails.setOnAction(new ItemUpdatingActionListener(stage,item));
                 vbox.getChildren().add(descriptionAndDeadline);
                 vbox.getChildren().add(showItem);
                 vbox.getChildren().add(showItemCollaborators);
+                vbox.getChildren().add(editItemDetails);
                 vbox.setSpacing(10);
                 vbox.setAlignment(Pos.CENTER);
                 itemInList = new TitledPane(item.getTitle(), vbox);
@@ -255,12 +269,11 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 itemInList.setId(String.valueOf(item.getItemID()));
                 itemInList.expandedProperty().addListener(new TodoSelectedItemHandler(itemInList));
                 accordion.getPanes().add(itemInList);
-                
-         //       accordion.getExpandedPane().setExpanded(false);
-                vBoxPane.getChildren().add(accordion);
+            }
+            vBoxPane.getChildren().add(accordion);
         }
     }
-    }
+
     public static void setCollaboratorList(ArrayList<UserEntity> collaborators) {
         test2 = collaborators;
     }
@@ -294,7 +307,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     private void updateUi() {
         todoNameLabel.setText(todo.getTitle());
-        if(todo.getCreatorId() != ClientView.currentUser.getId()){
+        if (todo.getCreatorId() != ClientView.currentUser.getId()) {
             deleteTodo.setVisible(false);
             editTodo.setVisible(false);
         }

@@ -10,6 +10,7 @@ import Model.Handler;
 import Model.RequestEntity;
 import Model.SocketConnection;
 import Model.entities.UserEntity;
+import clientview.AddCollaboratorTodoController;
 import clientview.AddFrindFXMLController;
 import clientview.ClientView;
 import clientview.MainXMLController;
@@ -21,6 +22,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -41,11 +44,22 @@ public class UserDBOperations {
     public void loginResponse(ArrayList<Object> object) {
         if (object == null || object.size() == 0) {
             System.out.println("login failed");
-        } else {
 
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Already in Use or Wrong username/password");
+                    alert.showAndWait();
+                }
+            });
+        } else {
             System.out.println(((UserEntity) object.get(0)).getId());
             ClientView.currentUser = (UserEntity) object.get(0);
             getAllTodos(ClientView.currentUser);
+            AddCollaboratorTodoController.isAddCollaborator = false;
             getFrinds(ClientView.currentUser);
         }
     }
@@ -60,7 +74,17 @@ public class UserDBOperations {
 
     public void registerResponse(ArrayList<Object> object) {
         if (object == null || object.isEmpty()) {
-            System.out.println("registration field");
+            System.out.println("registration failed");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Registration failed, Account Already Existed");
+                    alert.showAndWait();
+                }
+            });
         } else {
 
             try {
@@ -136,32 +160,58 @@ public class UserDBOperations {
             System.out.println("hi hema");
 
         } else {
+            if (AddCollaboratorTodoController.isAddCollaborator == false) {
+                System.out.println("Hiiiiii  from add" + AddCollaboratorTodoController.isAddCollaborator);
 
-            Platform.runLater(new Runnable() {
+                Platform.runLater(new Runnable() {
 
-                @Override
-                public void run() {
-                    try {
+                    @Override
+                    public void run() {
+                        try {
 
-                        MainXMLController.setFriendList(items);
+                            MainXMLController.setFriendList(items);
+                            Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
+                            Scene scene = ClientView.mainStage.getScene();
+                            //root.translateYProperty().set(scene.getHeight());
+                            //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
+                            // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
+                            scene.setRoot(root);
 
-                        Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
-                        Scene scene = ClientView.mainStage.getScene();
-                        //root.translateYProperty().set(scene.getHeight());
-                        //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
-                        // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
-                        scene.setRoot(root);
-
-                        /*Timeline timeLine = new Timeline();
+                            /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
                 timeLine.getKeyFrames().add(kf);
                 timeLine.play();*/
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            });
+                });
+
+            }
+            if (AddCollaboratorTodoController.isAddCollaborator == true) {
+                System.out.println("Hiiiiii from main" + AddCollaboratorTodoController.isAddCollaborator);
+
+                Platform.runLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        AddCollaboratorTodoController.setTodoFriendList(items);
+
+                        try {
+                            Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddCollaboratorTodoFXML.fxml"));
+                            Stage stage = new Stage(StageStyle.DECORATED);
+                            stage.initModality(Modality.APPLICATION_MODAL);
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+
+            }
 
         }
     }
@@ -231,7 +281,7 @@ public class UserDBOperations {
         System.out.println("JKJJKIKI");
         users.add(user);
         RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "logout", users);
-        SocketConnection.getInstance().getPrintStreamInstance().println(GsonParser.parseToJson(request));
+        Handler.sendRequestToServer(request);
     }
 
     public void logoutResponse(ArrayList<Object> object) {

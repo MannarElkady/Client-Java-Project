@@ -41,9 +41,11 @@ public class ClientView extends Application {
             } catch (IOException ex) {
                 Logger.getLogger(ClientView.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             Platform.exit();
             System.exit(0);
         });
+        SocketConnection.getInstance();
     }
 
     /**
