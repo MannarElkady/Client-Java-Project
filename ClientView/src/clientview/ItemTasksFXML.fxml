@@ -5,14 +5,13 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="520.0" prefWidth="636.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.ItemTasksFXMLController">
+<BorderPane fx:id="rootBorderPane" onMouseDragged="#handleDragEvent" onMousePressed="#handleMousePressedEvent" prefHeight="520.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.ItemTasksFXMLController">
    <center>
       <TabPane prefHeight="424.0" prefWidth="636.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -25,7 +24,7 @@
                               <Insets bottom="20.0" left="5.0" top="10.0" />
                            </BorderPane.margin>
                            <right>
-                              <JFXButton fx:id="addNotes" buttonType="RAISED" onAction="#addNotesAction" style="-fx-background-color: #c38d9e #c38d9e #c38d9e; -fx-background-radius: 30; -fx-border-radius: 30;" text="Add" BorderPane.alignment="CENTER">
+                              <JFXButton fx:id="addNotes" buttonType="RAISED" onAction="#addNotesAction" style="-fx-background-color: #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" text="Add" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="Bodoni MT" size="23.0" />
                                  </font>
@@ -62,7 +61,7 @@
                               <Insets bottom="20.0" left="5.0" top="10.0" />
                            </BorderPane.margin>
                            <right>
-                              <JFXButton fx:id="addTasks" buttonType="RAISED" onAction="#addTasksAction" style="-fx-background-color: #c38d9e #c38d9e #c38d9e; -fx-background-radius: 30; -fx-border-radius: 30;" text="Add" BorderPane.alignment="CENTER">
+                              <JFXButton fx:id="addTasks" buttonType="RAISED" onAction="#addTasksAction" style="-fx-background-color: #97CAEF #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" text="Add" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="Bodoni MT" size="23.0" />
                                  </font>
@@ -81,14 +80,10 @@
                         </BorderPane>
                      </top>
                      <center>
-                        <ScrollPane BorderPane.alignment="CENTER">
-                           <content>
-                              <VBox fx:id="tasksVBox" prefHeight="309.0" prefWidth="636.0" />
-                           </content>
+                        <JFXListView fx:id="tasksListView" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
-                              <Insets left="10.0" />
-                           </BorderPane.margin>
-                        </ScrollPane>
+                              <Insets bottom="3.0" left="10.0" right="3.0" />
+                           </BorderPane.margin></JFXListView>
                      </center>
                   </BorderPane>
                </content>
@@ -113,4 +108,29 @@
          </center>
       </BorderPane>
    </top>
+   <bottom>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="finishBtn" buttonType="RAISED" onAction="#finishBtnAction" style="-fx-background-color: #97CAEF #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" text="Finish">
+               <font>
+                  <Font name="Bodoni MT" size="23.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="240.0" top="20.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton fx:id="cancelBtn" buttonType="RAISED" onAction="#cancelBtnAction" style="-fx-background-color: #97CAEF #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" text="Cancel">
+               <font>
+                  <Font name="Bodoni MT" size="23.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" top="20.0" />
+               </HBox.margin>
+            </JFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
 </BorderPane>
