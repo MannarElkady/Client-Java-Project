@@ -99,7 +99,6 @@ public class InsertItemXMLController implements Initializable {
         }
         refreshPage();
     }
-    
     private void UpdateItemEntity(){
         if (Validation.checkString(titleTextField.getText()) && (Validation.checkString(descriptionTextArea.getText()))) {
             if (dateDateField.getValue() != null) {
