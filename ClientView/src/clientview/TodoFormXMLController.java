@@ -195,7 +195,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 imgView.setFitWidth(10.0);
                 userLabel = new Label(useraya.getUsername());
                 userLabel.setGraphic(imgView);
-                userLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+              //  userLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 userLabel.setPrefSize(100, 30);
                 child.getChildren().add(userLabel);
                 hBoxPane.add(child);

@@ -240,7 +240,7 @@ public class MainXMLController implements Initializable {
 
     public void generateFriendListUI() {
         ObservableList<HBox> items = FXCollections.observableArrayList(hBoxPane);
-        friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+        //friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
         //friendListPane.setItems(items);
 
     }
@@ -369,7 +369,7 @@ public class MainXMLController implements Initializable {
             @Override
             public void run() {
                 //ObservableList<HBox> items = FXCollections.observableArrayList(hBoxPane);
-                friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+               // friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 //friendListPane.setItems(items);
                 for (int i = 0; i < friendsList.size(); i++) {
                     friendListPane.getItems().add(friendsList.get(i));
