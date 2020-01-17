@@ -9,33 +9,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchorPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="698.0" styleClass="parent" stylesheets="@loginxml.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.authentication.LoginXMLController">
+<AnchorPane id="anchorPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="700.0" styleClass="parent" stylesheets="@loginxml.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.authentication.LoginXMLController">
    <children>
-      <AnchorPane layoutX="160.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="378.0" style="-fx-background-color: #b55e7d; -fx-background-radius: 30; -fx-border-radius: 30; -fx-translate-z: 1.5;">
+      <AnchorPane layoutX="300.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="378.0" style="-fx-background-color: #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;">
          <children>
+
             <JFXTextField fx:id="userNameTextField" focusColor="WHITE" layoutX="41.0" layoutY="161.0" prefHeight="25.0" prefWidth="283.0" promptText="Username" style="-fx-prompt-text-fill: #ffffff; -fx-text-inner-color: #ffffff;" unFocusColor="WHITE">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font></JFXTextField>
-            <JFXPasswordField fx:id="passwordPasswordField" focusColor="WHITE" layoutX="41.0" layoutY="218.0" prefHeight="25.0" prefWidth="283.0" promptText="Password" style="-fx-prompt-text-fill: #ffffff; -fx-text-inner-color: #ffffff;" unFocusColor="WHITE">
+            <JFXPasswordField fx:id="passwordPasswordField" focusColor="#8278ea" layoutX="41.0" layoutY="218.0" prefHeight="25.0" prefWidth="283.0" promptText="Password">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font></JFXPasswordField>
-            <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="41.0" layoutY="301.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loginAction" prefHeight="36.0" prefWidth="297.0" style="-fx-background-color: #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" text="Login" textAlignment="CENTER">
+            <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="41.0" layoutY="301.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loginAction" prefHeight="36.0" prefWidth="297.0" style="-fx-background-color: #b55e7d;-fx-background-radius : 30; -fx-border-radius : 30;" text="Login" textAlignment="CENTER" textFill="#ebebeb">
                <font>
                   <Font name="Times New Roman Bold" size="18.0" />
                </font>
             </JFXButton>
-            <Label layoutX="120.0" layoutY="40.0" prefHeight="53.0" prefWidth="148.0" text="   Sign In" textAlignment="CENTER" textFill="#f2f2f2">
+            <Label layoutX="130.0" layoutY="40.0" prefHeight="53.0" prefWidth="148.0" text="   Sign In" textAlignment="CENTER">
                <font>
                   <Font name="Agency FB Bold" size="36.0" />
                </font>
             </Label>
-            <JFXButton fx:id="signUpButton" buttonType="RAISED" layoutX="41.0" layoutY="356.0" onAction="#signUpAction" prefHeight="36.0" prefWidth="297.0" style="-fx-background-color: #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" text="Sign Up" textAlignment="CENTER">
+            <JFXButton fx:id="signUpButton" buttonType="RAISED" layoutX="41.0" layoutY="356.0" onAction="#signUpAction" prefHeight="36.0" prefWidth="297.0" style="-fx-background-color: #b55e7d; -fx-background-radius : 30; -fx-border-radius : 30;" text="Sign Up" textAlignment="CENTER" textFill="#ebebeb">
                <font>
                   <Font name="Times New Roman Bold" size="18.0" />
                </font>
             </JFXButton>
+
             <ImageView fitHeight="91.0" fitWidth="130.0" layoutX="29.0" layoutY="21.0" preserveRatio="true">
                <image>
                   <Image url="@../resources/todo.jpg" />
