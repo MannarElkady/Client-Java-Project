@@ -77,6 +77,7 @@ public class InsertItemXMLController implements Initializable {
         descriptionTextArea.setText(itemToUpdate.getDescription());
         dateDateField.setValue(itemToUpdate.getDeadlineDate().toLocalDate());
         submitNewItemButton.setText("Update");
+        resetItemFormButton.setDisable(true);
         isUpdate=false;
     }
 
