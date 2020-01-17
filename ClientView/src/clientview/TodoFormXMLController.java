@@ -6,6 +6,7 @@
 package clientview;
 
 import Model.CollaboratorsListActionListener;
+import Model.ItemUpdatingActionListener;
 import Model.TodoSelectedItemHandler;
 import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
@@ -23,12 +24,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -49,7 +47,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -110,6 +107,7 @@ public class TodoFormXMLController implements Initializable {
     private JFXButton notificationButton;
     private JFXButton showItem;
     private JFXButton showItemCollaborators;
+    private JFXButton editItemDetails;
     @FXML
     private BorderPane borderZft;
     TitledPane itemInList;
@@ -120,6 +118,8 @@ public class TodoFormXMLController implements Initializable {
     private VBox todoDetailsLi;
     private VBox vbox;
     public static ItemEntity itemSelected = new ItemEntity();
+   // public Stage stage= (Stage) rootPane.getScene().getWindow();
+    public Stage stage= ClientView.mainStage;
 
     /**
      * Initializes the controller class.
@@ -230,9 +230,9 @@ public class TodoFormXMLController implements Initializable {
 
     private void loadItems() {
         if (itemList != null) {
+            accordion = new Accordion();
             for (int i = 0; i < itemList.size(); i++) {
                 ItemEntity item = (ItemEntity) itemList.get(i);
-                accordion = new Accordion();
                 vbox = new VBox();
                 descriptionAndDeadline = new Label("Item Description: " + item.getDescription() + "\nDeadline Date:  " + item.getDeadlineDate().toString());
                 descriptionAndDeadline.setFont(new Font("Arial", 22));
@@ -249,9 +249,16 @@ public class TodoFormXMLController implements Initializable {
                 showItemCollaborators.setButtonType(JFXButton.ButtonType.RAISED);
                 showItemCollaborators.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
                 showItemCollaborators.setOnAction(new CollaboratorsListActionListener());
+                editItemDetails = new JFXButton("Edit Item");
+                editItemDetails.setAlignment(Pos.CENTER);
+                editItemDetails.setFont(new Font("Arial", 18));
+                editItemDetails.setButtonType(JFXButton.ButtonType.RAISED);
+                editItemDetails.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
+                editItemDetails.setOnAction(new ItemUpdatingActionListener(stage,item));
                 vbox.getChildren().add(descriptionAndDeadline);
                 vbox.getChildren().add(showItem);
                 vbox.getChildren().add(showItemCollaborators);
+                vbox.getChildren().add(editItemDetails);
                 vbox.setSpacing(10);
                 vbox.setAlignment(Pos.CENTER);
                 itemInList = new TitledPane(item.getTitle(), vbox);
@@ -260,10 +267,8 @@ public class TodoFormXMLController implements Initializable {
                 itemInList.setId(String.valueOf(item.getItemID()));
                 itemInList.expandedProperty().addListener(new TodoSelectedItemHandler(itemInList));
                 accordion.getPanes().add(itemInList);
-
-                //       accordion.getExpandedPane().setExpanded(false);
-                vBoxPane.getChildren().add(accordion);
             }
+            vBoxPane.getChildren().add(accordion);
         }
     }
 

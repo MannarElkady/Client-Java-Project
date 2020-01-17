@@ -5,6 +5,7 @@
  */
 package clientview;
 
+import Model.ItemUpdatingActionListener;
 import Utility.Validation;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
@@ -29,6 +30,7 @@ import Model.dao.implementation.ItemDBOperations;
 import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.ItemEntity;
+import java.time.ZoneId;
 import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
 
@@ -55,15 +57,27 @@ public class InsertItemXMLController implements Initializable {
     private ItemEntity newItemEntity = null;
     @FXML
     private JFXButton backButton;
-    
+    private static ItemEntity itemToUpdate;
     private Stage stage;
-    
+    public static boolean isUpdate=false;
     /**
      * Initializes the controller class.
      */
+    public static void setItemToUpdate(ItemEntity item){
+        itemToUpdate=item;
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        if(isUpdate){
+            loadItemToUpdate();
+        }
+    }
+    public void loadItemToUpdate(){
+        titleTextField.setText(itemToUpdate.getTitle());
+        descriptionTextArea.setText(itemToUpdate.getDescription());
+        dateDateField.setValue(itemToUpdate.getDeadlineDate().toLocalDate());
+        submitNewItemButton.setText("Update");
+        isUpdate=false;
     }
 
     @FXML
@@ -76,11 +90,28 @@ public class InsertItemXMLController implements Initializable {
 
     @FXML
     private void submitNewItemButtonAction(ActionEvent event) {
-        addItemEntity();
+        String checkType= submitNewItemButton.getText();
+        if(checkType.equals("Add")){
+            addItemEntity();
+        }
+        else if(checkType.equals("Update")){
+            UpdateItemEntity();
+        }
         refreshPage();
-
     }
-
+    
+    private void UpdateItemEntity(){
+        if (Validation.checkString(titleTextField.getText()) && (Validation.checkString(descriptionTextArea.getText()))) {
+            if (dateDateField.getValue() != null) {
+                if(Validation.checkDeadlineItem(java.sql.Date.valueOf(dateDateField.getValue()), TodoFormXMLController.todo.getAssignDate(), TodoFormXMLController.todo.getDeadlineDate())){
+                itemToUpdate.setDescription(descriptionTextArea.getText());
+                itemToUpdate.setTitle(titleTextField.getText());
+                itemToUpdate.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));
+                ItemDBOperations.updateItem(itemToUpdate);
+                }
+            }
+        }
+    }
     private void addItemEntity() {
         if (Validation.checkString(titleTextField.getText()) && (Validation.checkString(descriptionTextArea.getText()))) {
             if (dateDateField.getValue() != null) {
@@ -129,6 +160,7 @@ public class InsertItemXMLController implements Initializable {
 
     @FXML
     private void backButtonAction(ActionEvent event) {
+        itemToUpdate=null;
         ((Stage) mainBorderPane.getScene().getWindow()).close();
     }
 
