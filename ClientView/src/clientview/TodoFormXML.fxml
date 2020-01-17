@@ -36,7 +36,7 @@
          <children>
             <JFXButton fx:id="addItem" buttonType="RAISED" onAction="#addItemAction" text="New Item" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <graphic>
-                  <ImageView fx:id="addNewItem" fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="addNewItem" fitHeight="55.0" fitWidth="60.0" preserveRatio="true">
                      <image>
                         <Image url="@resources/add.png" />
                      </image>

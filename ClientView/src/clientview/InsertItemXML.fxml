@@ -35,7 +35,7 @@
             <JFXButton fx:id="backButton" alignment="CENTER" blendMode="LIGHTEN" buttonType="RAISED" onAction="#backButtonAction" text="  " textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                
                 <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="100.0" preserveRatio="true">
                      <image>
                         <Image url="@resources/return.png" />
                      </image>

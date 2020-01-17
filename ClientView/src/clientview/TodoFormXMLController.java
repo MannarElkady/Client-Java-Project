@@ -196,7 +196,7 @@ public class TodoFormXMLController implements Initializable {
                 child.getChildren().add(userLabel);
                 hBoxPane.add(child);
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(MainXMLController.class.getName()).log(Level.SEVERE, null, ex);
+             ex.printStackTrace();
             }
         }
     }
@@ -305,8 +305,8 @@ public class TodoFormXMLController implements Initializable {
             editTodo.setVisible(false);
         }
         //setCollaboratorsDummy();
-        //    setCollaboratorsPanes(test2);
-        //    generateCollaboratorListUI();
+        setCollaboratorsPanes(test2);
+        generateCollaboratorListUI();
         fillTodoDetails();
         loadItems();
         //TodoListDBOperations.getAllItems(todo);  

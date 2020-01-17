@@ -45,8 +45,9 @@ public class NotificationGUI {
     public static ArrayList<NotificationEntity> notificationsListForOtherClasses = new ArrayList<>();
 
     public static void loadNotificationMenu(ArrayList<NotificationEntity> notificationsList) {
-
-        notificationsListForOtherClasses.clear();
+        if (notificationsList != null) {
+            notificationsListForOtherClasses.clear();
+        }
         notificationsListForOtherClasses = notificationsList;
         Platform.runLater(new Runnable() {
 
@@ -101,7 +102,7 @@ public class NotificationGUI {
                 if (notificationsList == null) {
                     text1 = new Label("test");
                     BorderPane border = new BorderPane();
-                  
+
                     border.getChildren().add(text1);
                     borderPanes.add(border);
                 }
@@ -112,7 +113,16 @@ public class NotificationGUI {
                 root.getChildren().add(parentPane);
                 Scene scene = new Scene(root, 500, 300);
                 //Point p = MouseInfo.getPointerInfo().getLocation();
-                Node notificationIcon = ClientView.mainStage.getScene().lookup("#notificationButton");
+                  ImageView notificationIcon =(ImageView) ClientView.mainStage.getScene().lookup("#notificationButton");
+                  Image img = null;
+                try {
+                    img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/notification_received.jpg"));
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                if(notificationIcon!=null){
+                    notificationIcon.setImage(img);
+                }                
                 if (ClientView.mainStage.getX() - notificationIcon.getLayoutX() - 250 <= 0) {
                     stage.setX(ClientView.mainStage.getX() + notificationIcon.getLayoutX() + 450);
                 }
@@ -160,6 +170,16 @@ public class NotificationGUI {
 
                 notificationBuilder.darkStyle();
                 notificationBuilder.showConfirm();
+                
+                ImageView notificationIcon =(ImageView) ClientView.mainStage.getScene().lookup("#notificationButton");
+                try {
+                    img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/notification_received.jpg"));
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                if(notificationIcon!=null){
+                    notificationIcon.setImage(img);
+                }
             }
         });
 

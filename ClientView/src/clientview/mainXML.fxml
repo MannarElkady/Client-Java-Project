@@ -36,19 +36,19 @@
          <children>
             <JFXButton fx:id="addFriendBtn" onAction="#addFriendBtnAction" text="  " GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="50.0" preserveRatio="true">
                      <image>
                         <Image url="@resources/addFriend.png" />
                      </image>
                   </ImageView>
                </graphic></JFXButton>
-            <ImageView fx:id="appLogo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <ImageView fx:id="appLogo" fitHeight="100.0" fitWidth="200.0" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
                   <Image url="@resources/appLogo.png" />
                </image></ImageView>
             <JFXButton fx:id="addTodo" buttonType="RAISED" onAction="#addTodoAction" text="New Todo" textFill="#070101" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="50.0" preserveRatio="true">
                      <image>
                         <Image url="@resources/add.png" />
                      </image>
@@ -57,13 +57,13 @@
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font></JFXButton>
-            <ImageView fx:id="userImg" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <ImageView fx:id="userImg" fitHeight="50.0" fitWidth="50.0" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
                   <Image url="@resources/m.png" />
                </image></ImageView>
-            <ImageView fx:id="notificationButton" fitHeight="57.0" fitWidth="64.0" onMouseClicked="#viewNotificationList" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1">
+            <ImageView fx:id="notificationButton" fitHeight="57.0" fitWidth="64.0" onMouseClicked="#viewNotificationList" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1">
                <image>
-                  <Image url="@resources/notification_icon.jpg" />
+                  <Image url="@resources/notification.jpg" />
                </image>
                <GridPane.margin>
                   <Insets left="15.0" />
