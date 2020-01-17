@@ -9,8 +9,10 @@ import Model.CollaboratorsListActionListener;
 import Model.ItemDeletingActionListener;
 import Model.ItemUpdatingActionListener;
 import Model.TodoSelectedItemHandler;
+import Model.dao.implementation.ComponentDBOperations;
 import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
+import Model.entities.ComponentEntity;
 import Model.entities.ItemEntity;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
@@ -28,6 +30,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -54,8 +57,7 @@ import javafx.stage.Stage;
  *
  * @author DELL
  */
-public class TodoFormXMLController implements Initializable {
-
+public class TodoFormXMLController implements Initializable, EventHandler<ActionEvent> {
     Button tasks;
     @FXML
     private Label todoNameLabel;
@@ -222,7 +224,6 @@ public class TodoFormXMLController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @FXML
@@ -244,6 +245,7 @@ public class TodoFormXMLController implements Initializable {
                 showItem.setButtonType(JFXButton.ButtonType.RAISED);
                 showItem.setFont(new Font("Arial", 18));
                 showItem.setAlignment(Pos.CENTER);
+                showItem.setOnAction(this);
                 showItem.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
                 showItemCollaborators = new JFXButton("Show Collaborators");
                 showItemCollaborators.setAlignment(Pos.CENTER);
@@ -326,18 +328,9 @@ public class TodoFormXMLController implements Initializable {
         //TodoListDBOperations.getAllItems(todo);  
     }
 
-    public void showTasks() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/clientview/ItemTasksFXML.fxml"));
-            Parent itemTasks = loader.load();
-            final Stage dialog = new Stage();
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.initOwner((Stage) rootPane.getScene().getWindow());
-            Scene dialogScene = new Scene(itemTasks);
-            dialog.setScene(dialogScene);
-            dialog.show();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    @Override
+    public void handle(ActionEvent event) {
+        ComponentEntity componentEntity= new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(),null,null,0);
+        ComponentDBOperations.retrieveAllComponent(componentEntity);
     }
 }
