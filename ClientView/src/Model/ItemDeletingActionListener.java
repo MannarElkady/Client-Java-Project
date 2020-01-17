@@ -16,9 +16,8 @@ import javafx.event.EventHandler;
  */
 public class ItemDeletingActionListener implements EventHandler<ActionEvent> {
     private ItemEntity itemToDelete;
-    public ItemDeletingActionListener(int itemId){
-        itemToDelete=new ItemEntity();
-        itemToDelete.setItemID(itemId);
+    public ItemDeletingActionListener(ItemEntity item){
+        itemToDelete= item;
     }
     @Override
     public void handle(ActionEvent event) {

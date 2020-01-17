@@ -130,6 +130,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ClientView.whichScreen = todo.getId()+"";
         updateUi();
         setCollaboratorsPanes();
         generateCollaboratorListUI();
@@ -269,12 +270,14 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 deleteItem.setFont(new Font("Arial", 18));
                 deleteItem.setButtonType(JFXButton.ButtonType.RAISED);
                 deleteItem.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
-                deleteItem.setOnAction(new ItemDeletingActionListener(item.getItemID()));
+                deleteItem.setOnAction(new ItemDeletingActionListener(item));
                 vbox.getChildren().add(descriptionAndDeadline);
                 vbox.getChildren().add(showItem);
                 vbox.getChildren().add(showItemCollaborators);
-                vbox.getChildren().add(editItemDetails);
-                vbox.getChildren().add(deleteItem);
+                if(item.getCreatorID() == ClientView.currentUser.getId()){
+                    vbox.getChildren().add(editItemDetails);
+                    vbox.getChildren().add(deleteItem);
+                }
                 vbox.setSpacing(10);
                 vbox.setAlignment(Pos.CENTER);
                 itemInList = new TitledPane(item.getTitle(), vbox);
@@ -329,7 +332,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
             editTodo.setVisible(false);
         }
         //setCollaboratorsDummy();
-        setCollaboratorsPanes(test2);
+        setCollaboratorsPanes();
         generateCollaboratorListUI();
         fillTodoDetails();
         loadItems();
