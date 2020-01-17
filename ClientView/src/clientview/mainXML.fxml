@@ -63,7 +63,7 @@
                </image></ImageView>
             <ImageView fx:id="notificationButton" fitHeight="57.0" fitWidth="64.0" onMouseClicked="#viewNotificationList" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1">
                <image>
-                  <Image url="@resources/notification_icon.jpg" />
+                  <Image url="@resources/notification.jpg" />
                </image>
                <GridPane.margin>
                   <Insets left="15.0" />

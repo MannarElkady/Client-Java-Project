@@ -61,7 +61,7 @@ public class ItemCollaboratorsXMLController implements Initializable {
             collaboratorNameLabel = new Label(useraya.getUsername());
             collaboratorNameLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
             collaboratorNameLabel.setFont(new Font("Arial", 18));
-            collaboratorNameLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;");
+            collaboratorNameLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color:#256f9a;");
             collaboratorNameLabel.setWrapText(true);
             hchild.getChildren().add(collaboratorNameLabel);
             hBoxPane.add(hchild);
