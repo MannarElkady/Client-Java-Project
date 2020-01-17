@@ -127,6 +127,9 @@ public class TodoFormXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         updateUi();
+        setCollaboratorsPanes();
+        generateCollaboratorListUI();
+
     }
 
     public static void setItems(ArrayList<Object> list) {
@@ -181,9 +184,11 @@ public class TodoFormXMLController implements Initializable {
         test2.add(useraya);
     }
 
-    public void setCollaboratorsPanes(ArrayList<UserEntity> collaboratorsList) {
-        for (UserEntity useraya : collaboratorsList) {
+    public void setCollaboratorsPanes() {
+        hBoxPane.clear();
+        for (UserEntity useraya : test2) {
             try {
+                System.out.println("g"+test2.size());
                 child = new HBox();
                 img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/m.png"));
                 imgView = new ImageView(img);
@@ -268,7 +273,10 @@ public class TodoFormXMLController implements Initializable {
     }
 
     public static void setCollaboratorList(ArrayList<UserEntity> collaborators) {
+        test2.clear();
         test2 = collaborators;
+        System.out.println("testtest"+test2);
+
     }
 
     @FXML

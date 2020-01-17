@@ -93,8 +93,9 @@ public class AddCollaboratorTodoController implements Initializable {
         ArrayList<Object> data = new ArrayList<>();
         NotificationEntity notification = new NotificationEntity();
         notification.setHeader("Add Colaborator Invetation");
-        notification.setText(ClientView.currentUser.getUsername() + " invited you to be collaborator in item");
-        notification.setNotificationType("collaborator invite");
+        notification.setText(ClientView.currentUser.getUsername() + " invited you to be collaborator in TODO");
+        System.out.println("tototo IS "+TodoFormXMLController.todo.getId());
+        notification.setNotificationType("todoInvitation"+TodoFormXMLController.todo.getId());
         notification.setSenderID(ClientView.currentUser.getId());
 
         NotificationReceiversEntity notificationReceiver = new NotificationReceiversEntity();
