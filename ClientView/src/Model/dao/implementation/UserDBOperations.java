@@ -22,6 +22,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -42,8 +44,18 @@ public class UserDBOperations {
     public void loginResponse(ArrayList<Object> object) {
         if (object == null || object.size() == 0) {
             System.out.println("login failed");
-        } else {
 
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Already in Use or Wrong username/password");
+                    alert.showAndWait();
+                }
+            });
+        } else {
             System.out.println(((UserEntity) object.get(0)).getId());
             ClientView.currentUser = (UserEntity) object.get(0);
             getAllTodos(ClientView.currentUser);
@@ -62,7 +74,17 @@ public class UserDBOperations {
 
     public void registerResponse(ArrayList<Object> object) {
         if (object == null || object.isEmpty()) {
-            System.out.println("registration field");
+            System.out.println("registration failed");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Registration failed, Account Already Existed");
+                    alert.showAndWait();
+                }
+            });
         } else {
 
             try {
@@ -97,13 +119,11 @@ public class UserDBOperations {
             MainXMLController.setTodos(items);
         }
 
-        
-        
         Platform.runLater(new Runnable() {
 
             @Override
             public void run() {
-                try {                                        
+                try {
 
                     Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
 

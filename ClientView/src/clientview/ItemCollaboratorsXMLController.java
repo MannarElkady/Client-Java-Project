@@ -51,9 +51,11 @@ public class ItemCollaboratorsXMLController implements Initializable {
      * Initializes the controller class.
      */
     public static void setCollaboratorsList(ArrayList<UserEntity> arrayList) {
+        collaborators.clear();
         collaborators = arrayList;
     }
     public void setCollaboratorsListView(ArrayList<UserEntity> collaboratorsList) {
+        if(collaboratorsList!=null && collaboratorsList.size() >0){
         for (UserEntity useraya : collaboratorsList) {
             hchild = new HBox();
             collaboratorNameLabel = new Label(useraya.getUsername());
@@ -63,6 +65,7 @@ public class ItemCollaboratorsXMLController implements Initializable {
             collaboratorNameLabel.setWrapText(true);
             hchild.getChildren().add(collaboratorNameLabel);
             hBoxPane.add(hchild);
+        }
         }
     }
     public void generateCollaboratorListUI() {

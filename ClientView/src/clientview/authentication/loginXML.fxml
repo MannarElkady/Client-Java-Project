@@ -13,7 +13,8 @@
    <children>
       <AnchorPane layoutX="300.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="378.0" style="-fx-background-color: #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;">
          <children>
-            <JFXTextField fx:id="userNameTextField" focusColor="#8278ea" layoutX="41.0" layoutY="132.0" prefHeight="25.0" prefWidth="283.0" promptText="Username">
+
+            <JFXTextField fx:id="userNameTextField" focusColor="WHITE" layoutX="41.0" layoutY="161.0" prefHeight="25.0" prefWidth="283.0" promptText="Username" style="-fx-prompt-text-fill: #ffffff; -fx-text-inner-color: #ffffff;" unFocusColor="WHITE">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font></JFXTextField>
@@ -36,7 +37,8 @@
                   <Font name="Times New Roman Bold" size="18.0" />
                </font>
             </JFXButton>
-            <ImageView fitHeight="91.0" fitWidth="130.0" layoutX="29.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+
+            <ImageView fitHeight="91.0" fitWidth="130.0" layoutX="29.0" layoutY="21.0" preserveRatio="true">
                <image>
                   <Image url="@../resources/todo.jpg" />
                </image>
