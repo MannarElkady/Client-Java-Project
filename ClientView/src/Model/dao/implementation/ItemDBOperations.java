@@ -12,7 +12,9 @@ import Model.entities.ItemEntity;
 import java.util.ArrayList;
 import Model.entities.AssignFriendTodoEntity;
 import Model.entities.UserEntity;
+import clientview.ClientView;
 import clientview.ItemCollaboratorsXMLController;
+import clientview.TodoFormXMLController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +54,6 @@ public class ItemDBOperations {
         list.add(itemToUpdate);
         RequestEntity<ItemEntity> updateRequest = new RequestEntity("ItemDBOperations", "updateItem", list);
         Handler.sendRequestToServer(updateRequest);
-
     }
 
     public void updateItemResponse(ArrayList<Object> arrayObjects) {
@@ -88,9 +89,8 @@ public class ItemDBOperations {
 
     public void deleteItemResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
-            //to connect by Controller of ui
-            
-            System.out.println("Item deleted  successfully");
+                TodoListDBOperations.getAllItems(TodoFormXMLController.todo);
+                System.out.println("Item deleted  successfully");
         } else {
             System.out.println("Item not deleted successfully");
         }

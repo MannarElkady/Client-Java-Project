@@ -22,6 +22,12 @@ public class ComponentEntity {
         this.componentText = componentText;
         this.finishedFlag = finishedFlag;
     }
+    
+    public ComponentEntity(int itemId, String componentType, String componentText) {
+        this.itemId = itemId;
+        this.componentType = componentType;
+        this.componentText = componentText;
+    }
 
     public ComponentEntity(int componentId, int itemId, String componentType, String componentText, int finishedFlag) {
         this.componentId = componentId;

@@ -20,6 +20,7 @@ import java.io.IOException;
  * @author AhmedIbrahem
  */
 import java.util.ArrayList;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -118,9 +119,14 @@ public class TodoListDBOperations {
             System.out.println("co"+collabotarors.size());
             TodoFormXMLController.setCollaboratorList(collabotarors);
         }
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
+        
+       
+            Platform.runLater(new Runnable() {
+
+            @Override
+            public void run() {
+                 try {            
+            Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
             Scene scene = ClientView.mainStage.getScene();
             //root.translateYProperty().set(scene.getHeight());
             //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());
@@ -135,6 +141,8 @@ public class TodoListDBOperations {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+             }
+                     });
     }
     
 

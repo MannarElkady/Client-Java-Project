@@ -11,6 +11,8 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,6 +33,15 @@ public class SocketConnection extends Thread {
     }
 
     public void createConnection() {
+
+        try {
+            if (socket!=null && socket.isConnected()) {
+                socket.close();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(SocketConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        socket = null;
         try {
             if (socket == null) {
                 socket = new Socket("127.0.0.1", 5005);
@@ -41,6 +52,7 @@ public class SocketConnection extends Thread {
                 th = new Thread(this);
                 th.start();
             }
+
         } catch (IOException e) {
             // e.printStackTrace();
             serverClosed = true;

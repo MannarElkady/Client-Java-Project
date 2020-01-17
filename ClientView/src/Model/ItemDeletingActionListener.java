@@ -6,21 +6,22 @@
 package Model;
 
 import Model.dao.implementation.ItemDBOperations;
-import clientview.TodoFormXMLController;
+import Model.entities.ItemEntity;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Parent;
 
 /**
  *
  * @author DELL
  */
-public class CollaboratorsListActionListener implements EventHandler<ActionEvent> {
-
-    Parent root;
-
+public class ItemDeletingActionListener implements EventHandler<ActionEvent> {
+    private ItemEntity itemToDelete;
+    public ItemDeletingActionListener(int itemId){
+        itemToDelete=new ItemEntity();
+        itemToDelete.setItemID(itemId);
+    }
     @Override
     public void handle(ActionEvent event) {
-        ItemDBOperations.getItemCollaborators(TodoFormXMLController.itemSelected);
+        ItemDBOperations.deleteItem(itemToDelete);
     }
 }
