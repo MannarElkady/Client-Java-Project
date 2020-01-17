@@ -121,7 +121,7 @@ public class TodoListDBOperations {
         }
         
        
-             Platform.runLater(new Runnable() {
+            Platform.runLater(new Runnable() {
 
             @Override
             public void run() {

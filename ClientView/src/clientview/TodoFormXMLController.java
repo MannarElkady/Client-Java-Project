@@ -6,6 +6,7 @@
 package clientview;
 
 import Model.CollaboratorsListActionListener;
+import Model.ItemDeletingActionListener;
 import Model.ItemUpdatingActionListener;
 import Model.TodoSelectedItemHandler;
 import Model.dao.implementation.TodoListDBOperations;
@@ -108,6 +109,7 @@ public class TodoFormXMLController implements Initializable {
     private JFXButton showItem;
     private JFXButton showItemCollaborators;
     private JFXButton editItemDetails;
+    private JFXButton deleteItem;
     @FXML
     private BorderPane borderZft;
     TitledPane itemInList;
@@ -249,16 +251,23 @@ public class TodoFormXMLController implements Initializable {
                 showItemCollaborators.setButtonType(JFXButton.ButtonType.RAISED);
                 showItemCollaborators.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
                 showItemCollaborators.setOnAction(new CollaboratorsListActionListener());
-                editItemDetails = new JFXButton("Edit Item");
+                editItemDetails = new JFXButton("Edit");
                 editItemDetails.setAlignment(Pos.CENTER);
                 editItemDetails.setFont(new Font("Arial", 18));
                 editItemDetails.setButtonType(JFXButton.ButtonType.RAISED);
                 editItemDetails.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
                 editItemDetails.setOnAction(new ItemUpdatingActionListener(stage,item));
+                deleteItem = new JFXButton("Delete");
+                deleteItem.setAlignment(Pos.CENTER);
+                deleteItem.setFont(new Font("Arial", 18));
+                deleteItem.setButtonType(JFXButton.ButtonType.RAISED);
+                deleteItem.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
+                deleteItem.setOnAction(new ItemDeletingActionListener(item.getItemID()));
                 vbox.getChildren().add(descriptionAndDeadline);
                 vbox.getChildren().add(showItem);
                 vbox.getChildren().add(showItemCollaborators);
                 vbox.getChildren().add(editItemDetails);
+                vbox.getChildren().add(deleteItem);
                 vbox.setSpacing(10);
                 vbox.setAlignment(Pos.CENTER);
                 itemInList = new TitledPane(item.getTitle(), vbox);
