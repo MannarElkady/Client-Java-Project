@@ -16,11 +16,11 @@
 
             <JFXTextField fx:id="userNameTextField" focusColor="WHITE" layoutX="41.0" layoutY="161.0" prefHeight="25.0" prefWidth="283.0" promptText="Username" style="-fx-prompt-text-fill: #ffffff; -fx-text-inner-color: #ffffff;" unFocusColor="WHITE">
                <font>
-                  <Font name="Times New Roman" size="14.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font></JFXTextField>
             <JFXPasswordField fx:id="passwordPasswordField" focusColor="#8278ea" layoutX="41.0" layoutY="218.0" prefHeight="25.0" prefWidth="283.0" promptText="Password" style="-fx-text-inner-color: #ffffff; -fx-prompt-text-fill: #ffffff;">
                <font>
-                  <Font name="Times New Roman" size="14.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font></JFXPasswordField>
             <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="41.0" layoutY="301.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loginAction" prefHeight="36.0" prefWidth="297.0" style="-fx-background-color: #b55e7d;-fx-background-radius : 30; -fx-border-radius : 30;" text="Login" textAlignment="CENTER" textFill="#ebebeb">
                <font>

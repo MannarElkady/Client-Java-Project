@@ -6,6 +6,7 @@
 package clientview;
 
 import Model.CollaboratorsListActionListener;
+import Model.ItemAddingCollaboratorActionListener;
 import Model.ItemDeletingActionListener;
 import Model.ItemUpdatingActionListener;
 import Model.TodoSelectedItemHandler;
@@ -79,7 +80,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     private Label userLabel = null;
     // for Dummy Testing
     ArrayList<TodoEntity> test = new ArrayList();
-    static ArrayList<UserEntity> test2 = new ArrayList();
+    static ArrayList<UserEntity> todoCollaborators = new ArrayList();
     static ArrayList<HBox> hBoxPane = new ArrayList();
     HBox child = null;
     private Accordion accordion;
@@ -112,6 +113,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     private JFXButton showItemCollaborators;
     private JFXButton editItemDetails;
     private JFXButton deleteItem;
+    private JFXButton addItemCollaborator;
     @FXML
     private BorderPane borderZft;
     TitledPane itemInList;
@@ -145,7 +147,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     }
 
     public static void clearTest() {
-        test2.clear();
+        todoCollaborators.clear();
     }
 
     public static void setToDoData(TodoEntity todoData) {
@@ -181,18 +183,18 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     public void setCollaboratorsDummy() {
         UserEntity useraya = new UserEntity();
         useraya.setUsername("colaborayaa");
-        test2.add(useraya);
-        test2.add(useraya);
-        test2.add(useraya);
-        test2.add(useraya);
-        test2.add(useraya);
+        todoCollaborators.add(useraya);
+        todoCollaborators.add(useraya);
+        todoCollaborators.add(useraya);
+        todoCollaborators.add(useraya);
+        todoCollaborators.add(useraya);
     }
 
     public void setCollaboratorsPanes() {
         hBoxPane.clear();
-        for (UserEntity useraya : test2) {
+        for (UserEntity useraya : todoCollaborators) {
             try {
-                System.out.println("g"+test2.size());
+                System.out.println("g"+todoCollaborators.size());
                 child = new HBox();
                 img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/m.png"));
                 imgView = new ImageView(img);
@@ -252,6 +254,12 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 showItem.setAlignment(Pos.CENTER);
                 showItem.setOnAction(this);
                 showItem.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
+                addItemCollaborator = new JFXButton("Add Collaborators");
+                addItemCollaborator.setAlignment(Pos.CENTER);
+                addItemCollaborator.setFont(new Font("Arial", 18));
+                addItemCollaborator.setButtonType(JFXButton.ButtonType.RAISED);
+                addItemCollaborator.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
+                addItemCollaborator.setOnAction(new ItemAddingCollaboratorActionListener(stage));
                 showItemCollaborators = new JFXButton("Show Collaborators");
                 showItemCollaborators.setAlignment(Pos.CENTER);
                 showItemCollaborators.setFont(new Font("Arial", 18));
@@ -272,6 +280,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 deleteItem.setOnAction(new ItemDeletingActionListener(item.getItemID()));
                 vbox.getChildren().add(descriptionAndDeadline);
                 vbox.getChildren().add(showItem);
+                vbox.getChildren().add(addItemCollaborator);
                 vbox.getChildren().add(showItemCollaborators);
                 vbox.getChildren().add(editItemDetails);
                 vbox.getChildren().add(deleteItem);
@@ -289,12 +298,14 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     }
 
     public static void setCollaboratorList(ArrayList<UserEntity> collaborators) {
-        test2.clear();
-        test2 = collaborators;
-        System.out.println("testtest"+test2);
+        todoCollaborators.clear();
+        todoCollaborators = collaborators;
+        System.out.println("testtest"+todoCollaborators);
 
     }
-
+    public static ArrayList<UserEntity> getCollaboratorList(){
+        return todoCollaborators;
+    }
     @FXML
     private void editTodoAction(ActionEvent event) {
         try {
@@ -329,7 +340,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
             editTodo.setVisible(false);
         }
         //setCollaboratorsDummy();
-        setCollaboratorsPanes(test2);
+        setCollaboratorsPanes();
         generateCollaboratorListUI();
         fillTodoDetails();
         loadItems();
