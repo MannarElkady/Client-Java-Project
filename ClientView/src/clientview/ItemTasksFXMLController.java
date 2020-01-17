@@ -72,7 +72,6 @@ public class ItemTasksFXMLController implements Initializable, ChangeListener<Bo
         newTasksList = new ArrayList<>();
         modifiedList = new ArrayList<>();
         showComponents(); 
-       
     }    
     
     private void updateProgressBar(){
@@ -131,6 +130,7 @@ public class ItemTasksFXMLController implements Initializable, ChangeListener<Bo
     private void finishBtnAction() {
         pushToDatabase();
         updateDatabase();
+        ((Stage) finishBtn.getScene().getWindow()).close();
     }
 
     @FXML
@@ -186,24 +186,25 @@ public class ItemTasksFXMLController implements Initializable, ChangeListener<Bo
     }
 
     private void showComponents() {
-        for(int i = 0 ;i<componentsList.size();i++){
-            ComponentEntity component = (ComponentEntity) componentsList.get(i);
-            if(component.getComponentType().equals(COMPONENT_TYPE_NOTE)){
-                Label noteLabel = new Label(component.getComponentText());
-                noteLabel.setWrapText(true);
-                notesListView.getItems().add(noteLabel);
-            }else{
-                CheckBox taskCheckBox = new CheckBox(component.getComponentText());
-                taskCheckBox.setId(""+component.getComponentId());
-                taskCheckBox.setSelected((component.getFinishedFlag() != 0));
-                taskCheckBox.selectedProperty().addListener(this);
-                tasksListView.getItems().add(taskCheckBox);
-                tasksList.add(taskCheckBox);
-                updateProgressBar();
+        if(componentsList!=null){
+            for(int i = 0 ;i<componentsList.size();i++){
+                ComponentEntity component = (ComponentEntity) componentsList.get(i);
+                if(component.getComponentType().equals(COMPONENT_TYPE_NOTE)){
+                    Label noteLabel = new Label(component.getComponentText());
+                    noteLabel.setWrapText(true);
+                    notesListView.getItems().add(noteLabel);
+                }else{
+                    CheckBox taskCheckBox = new CheckBox(component.getComponentText());
+                    taskCheckBox.setId(""+component.getComponentId());
+                    taskCheckBox.setSelected((component.getFinishedFlag() != 0));
+                    taskCheckBox.selectedProperty().addListener(this);
+                    tasksListView.getItems().add(taskCheckBox);
+                    tasksList.add(taskCheckBox);
+                    updateProgressBar();
+                }
             }
-        }
-        componentsList.clear();
-               
+            componentsList.clear();
+        }else componentsList = new ArrayList<>();
     }
 
     private void updateDatabase() {
