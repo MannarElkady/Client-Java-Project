@@ -67,6 +67,7 @@ public class ItemTasksFXMLController implements Initializable, ChangeListener<Bo
        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ClientView.whichScreen = TodoFormXMLController.itemSelected.getItemID() + "";
         notesList = new ArrayList<>();
         tasksList = new ArrayList<>();
         newTasksList = new ArrayList<>();

@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -50,12 +51,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -63,6 +66,7 @@ import javafx.stage.Stage;
  * @author DELL
  */
 public class TodoFormXMLController implements Initializable, EventHandler<ActionEvent> {
+
     Button tasks;
     @FXML
     private Label todoNameLabel;
@@ -132,9 +136,10 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     @FXML
     private VBox todoDetailsLi;
     private VBox vbox;
+    private GridPane itemButtonsGrid;
     public static ItemEntity itemSelected = new ItemEntity();
-   // public Stage stage= (Stage) rootPane.getScene().getWindow();
-    public Stage stage= ClientView.mainStage;
+    // public Stage stage= (Stage) rootPane.getScene().getWindow();
+    public Stage stage = ClientView.mainStage;
 
     /**
      * Initializes the controller class.
@@ -143,8 +148,6 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     public void initialize(URL url, ResourceBundle rb) {
         ClientView.whichScreen = todo.getId()+"";
         updateUi();
-        setCollaboratorsPanes();
-        generateCollaboratorListUI();
 
     }
 
@@ -181,7 +184,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     @FXML
     private void addColaboratorEvent() throws IOException {
-       AddCollaboratorTodoController.isAddCollaborator=true;
+        AddCollaboratorTodoController.isAddCollaborator = true;
         UserDBOperations.getFrinds(ClientView.currentUser);
 //        Parent root = FXMLLoader.load(getClass().getResource("AddCollaboratorTodoFXML.fxml"));
 //        Stage stage = new Stage(StageStyle.DECORATED);
@@ -205,7 +208,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
         hBoxPane.clear();
         for (UserEntity user : usersList) {
             try {
-                System.out.println("g"+usersList.size());
+      System.out.println("g"+usersList.size());
                 child = new HBox();
                 if(user.getOnlineFlag() == 1)
                     img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/online.png"));
@@ -227,7 +230,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 }
                 hBoxPane.add(child);
             } catch (FileNotFoundException ex) {
-             ex.printStackTrace();
+                ex.printStackTrace();
             }
         }
     }
@@ -263,62 +266,49 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
             accordion = new Accordion();
             for (int i = 0; i < itemList.size(); i++) {
                 ItemEntity item = (ItemEntity) itemList.get(i);
-                vbox = new VBox();
+               // vbox = new VBox();
+                itemButtonsGrid = new GridPane();
                 descriptionAndDeadline = new Label("Item Description: " + item.getDescription() + "\nDeadline Date:  " + item.getDeadlineDate().toString());
-                descriptionAndDeadline.setFont(new Font("Arial", 22));
-                descriptionAndDeadline.setAlignment(Pos.CENTER);
+                descriptionAndDeadline.setFont(new Font("Arial", 14));
+                descriptionAndDeadline.setAlignment(Pos.TOP_LEFT);
                 descriptionAndDeadline.setWrapText(true);
-                showItem = new JFXButton("Show Tasks");
-                showItem.setButtonType(JFXButton.ButtonType.RAISED);
-                showItem.setFont(new Font("Arial", 18));
-                showItem.setAlignment(Pos.CENTER);
-                showItem.setOnAction(this);
-                showItem.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
-                addItemCollaborator = new JFXButton("Add Collaborators");
-                addItemCollaborator.setAlignment(Pos.CENTER);
-                addItemCollaborator.setFont(new Font("Arial", 18));
-                addItemCollaborator.setButtonType(JFXButton.ButtonType.RAISED);
-                addItemCollaborator.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
-                addItemCollaborator.setOnAction(new ItemAddingCollaboratorActionListener(stage));
-                showItemCollaborators = new JFXButton("Show Collaborators");
-                showItemCollaborators.setAlignment(Pos.CENTER);
-                showItemCollaborators.setFont(new Font("Arial", 18));
-                showItemCollaborators.setButtonType(JFXButton.ButtonType.RAISED);
-                showItemCollaborators.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
-                showItemCollaborators.setOnAction(new CollaboratorsListActionListener());
-                editItemDetails = new JFXButton("Edit");
-                editItemDetails.setAlignment(Pos.CENTER);
-                editItemDetails.setFont(new Font("Arial", 18));
-                editItemDetails.setButtonType(JFXButton.ButtonType.RAISED);
-                editItemDetails.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
-                editItemDetails.setOnAction(new ItemUpdatingActionListener(stage,item));
-                deleteItem = new JFXButton("Delete");
-                deleteItem.setAlignment(Pos.CENTER);
-                deleteItem.setFont(new Font("Arial", 18));
-                deleteItem.setButtonType(JFXButton.ButtonType.RAISED);
-                deleteItem.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
-                deleteItem.setOnAction(new ItemDeletingActionListener(item));
-                vbox.getChildren().add(descriptionAndDeadline);
-                vbox.getChildren().add(showItem);
-                vbox.getChildren().add(addItemCollaborator);
-                vbox.getChildren().add(showItemCollaborators);
+                showItem = new JFXButton("Tasks");
+                generateItemButtonUi(showItem,this);
+                addItemCollaborator = new JFXButton("Collaborator +");
+                generateItemButtonUi(addItemCollaborator,new ItemAddingCollaboratorActionListener(stage));
+                showItemCollaborators = new JFXButton("Collaborators");
+                generateItemButtonUi(showItemCollaborators,new CollaboratorsListActionListener());
+                editItemDetails= new JFXButton("Edit");
+                generateItemButtonUi(editItemDetails,new ItemUpdatingActionListener(stage,item));
+                deleteItem= new JFXButton("Delete");
+                generateItemButtonUi(deleteItem,new ItemDeletingActionListener(item));
+                itemButtonsGrid.add(descriptionAndDeadline, 0, 0,5,1);
+                itemButtonsGrid.add(showItem, 0, 1);
+                itemButtonsGrid.add(addItemCollaborator, 1, 1);
+                itemButtonsGrid.add(showItemCollaborators, 2, 1);
                 if(item.getCreatorID() == ClientView.currentUser.getId()){
-                    vbox.getChildren().add(editItemDetails);
-                    vbox.getChildren().add(deleteItem);
+                    itemButtonsGrid.add(editItemDetails, 3, 1);
+                    itemButtonsGrid.add(deleteItem, 4, 1);
                 }
-                vbox.setSpacing(10);
-                vbox.setAlignment(Pos.CENTER);
-                itemInList = new TitledPane(item.getTitle(), vbox);
-                itemInList.setPadding(new Insets(0, 5, 5, 5));
-                itemInList.setFont(new Font("Arial", 22));
-                itemInList.setId(String.valueOf(item.getItemID()));
+                itemInList = new TitledPane(item.getTitle(), itemButtonsGrid);
+                itemInList.setPadding(new Insets(5, 5, 5, 5));
+                itemInList.setFont(new Font("Arial", 18));
                 itemInList.expandedProperty().addListener(new TodoSelectedItemHandler(itemInList));
                 accordion.getPanes().add(itemInList);
             }
             vBoxPane.getChildren().add(accordion);
         }
     }
-
+    
+    public void generateItemButtonUi(JFXButton button,EventHandler<ActionEvent> event){
+        button.setButtonType(JFXButton.ButtonType.RAISED);
+        button.setFont(new Font("Arial", 12));
+        button.setAlignment(Pos.CENTER);
+        button.setOnAction(event);
+        button.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
+        button.setWrapText(true);
+        
+    }
     public static void setCollaboratorList(ArrayList<UserEntity> collaborators) {
         usersList.clear();
         usersList = collaborators;
@@ -387,7 +377,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     @Override
     public void handle(ActionEvent event) {
-        ComponentEntity componentEntity= new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(),null,null,0);
+        ComponentEntity componentEntity = new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(), null, null, 0);
         ComponentDBOperations.retrieveAllComponent(componentEntity);
     }
 }

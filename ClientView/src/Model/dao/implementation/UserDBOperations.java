@@ -5,10 +5,8 @@
  */
 package Model.dao.implementation;
 
-import Model.GsonParser;
 import Model.Handler;
 import Model.RequestEntity;
-import Model.SocketConnection;
 import Model.entities.UserEntity;
 import clientview.AddCollaboratorTodoController;
 import clientview.AddFrindFXMLController;
@@ -23,7 +21,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -51,7 +48,7 @@ public class UserDBOperations {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("ERROR");
                     alert.setHeaderText(null);
-                    alert.setContentText("Already in Use or Wrong username/password");
+                    alert.setContentText("Wrong username/password");
                     alert.showAndWait();
                 }
             });

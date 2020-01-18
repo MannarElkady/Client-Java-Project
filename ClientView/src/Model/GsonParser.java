@@ -69,9 +69,9 @@ public class GsonParser {
 
                     break;
                 case 'C':
-                    requestType = new TypeToken<RequestEntity<ComponentEntity>>() {
-                    }.getType();
-
+                        requestType = new TypeToken<RequestEntity<ComponentEntity>>() {
+                        }.getType();
+                  
                     break;
             }
         }

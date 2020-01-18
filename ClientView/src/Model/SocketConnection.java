@@ -5,8 +5,10 @@
  */
 package Model;
 
+import Model.dao.implementation.ComponentDBOperations;
 import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
+import Model.entities.ComponentEntity;
 import Model.entities.TodoEntity;
 import clientview.NotificationGUI;
 import java.io.DataInputStream;
@@ -110,6 +112,14 @@ public class SocketConnection extends Thread {
                             TodoEntity todo = new TodoEntity();
                             todo.setId(Integer.parseInt(todoId));
                             TodoListDBOperations.getAllItems(todo);
+                        }
+                    }else if(replyMsg.contains("Task Notification")){
+                        System.out.println("Task Notification");
+                        String itemId = replyMsg.split("\\+")[1];
+                        if(clientview.ClientView.whichScreen.equals(itemId)){
+                            ComponentEntity component = new ComponentEntity();
+                            component.setItemId(Integer.parseInt(itemId));
+                            ComponentDBOperations.retrieveAllComponent(component);
                         }
                     }else if (replyMsg.equals("closed")) {
                         System.out.println(replyMsg);
