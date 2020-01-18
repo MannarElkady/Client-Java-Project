@@ -20,6 +20,7 @@ import javafx.application.Platform;
  */
 public class ClientView extends Application {
 
+    public static String whichScreen="ClientView";
     public static Stage mainStage;
     public static UserEntity currentUser;
 

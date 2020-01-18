@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -45,7 +46,7 @@ public class ItemCollaboratorsXMLController implements Initializable {
     private static ArrayList<UserEntity> collaborators = new ArrayList();
     private HBox hchild;
     private Label collaboratorNameLabel;
-    private static ArrayList<HBox> hBoxPane = new ArrayList();
+    private ArrayList<HBox> hBoxPane = new ArrayList();
 
     /**
      * Initializes the controller class.
@@ -54,18 +55,19 @@ public class ItemCollaboratorsXMLController implements Initializable {
         collaborators.clear();
         collaborators = arrayList;
     }
+    
     public void setCollaboratorsListView(ArrayList<UserEntity> collaboratorsList) {
         if(collaboratorsList!=null && collaboratorsList.size() >0){
-        for (UserEntity useraya : collaboratorsList) {
-            hchild = new HBox();
-            collaboratorNameLabel = new Label(useraya.getUsername());
-            collaboratorNameLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
-            collaboratorNameLabel.setFont(new Font("Arial", 18));
-            collaboratorNameLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;");
-            collaboratorNameLabel.setWrapText(true);
-            hchild.getChildren().add(collaboratorNameLabel);
-            hBoxPane.add(hchild);
-        }
+            for (UserEntity useraya : collaboratorsList) {
+                hchild = new HBox();
+                collaboratorNameLabel = new Label(useraya.getUsername());
+                collaboratorNameLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+                collaboratorNameLabel.setFont(new Font("Arial", 18));
+                collaboratorNameLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;");
+                collaboratorNameLabel.setWrapText(true);
+                hchild.getChildren().add(collaboratorNameLabel);
+                hBoxPane.add(hchild);
+            }
         }
     }
     public void generateCollaboratorListUI() {

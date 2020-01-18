@@ -16,8 +16,6 @@ import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXMasonryPane;
-import java.awt.MouseInfo;
-import java.awt.Point;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -46,7 +44,6 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -56,7 +53,6 @@ import javafx.scene.input.Dragboard;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -240,7 +236,7 @@ public class MainXMLController implements Initializable {
 
     public void generateFriendListUI() {
         ObservableList<HBox> items = FXCollections.observableArrayList(hBoxPane);
-        friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+        //friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
         //friendListPane.setItems(items);
 
     }
@@ -255,7 +251,7 @@ public class MainXMLController implements Initializable {
         //generateFriendListUI();
         generateFriendListUIWithDragAndDropFeature();
         generateFriendListUI();           
-
+        ClientView.whichScreen = "MainController";
         jMasonaryPane.setCache(false);
         //jMasonaryPane.setCache(false);
         stackPaneBorder.setCenter(stackPane);
@@ -369,7 +365,7 @@ public class MainXMLController implements Initializable {
             @Override
             public void run() {
                 //ObservableList<HBox> items = FXCollections.observableArrayList(hBoxPane);
-                friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+               // friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 //friendListPane.setItems(items);
                 for (int i = 0; i < friendsList.size(); i++) {
                     friendListPane.getItems().add(friendsList.get(i));
