@@ -5,7 +5,9 @@
  */
 package Model;
 
+import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
+import Model.entities.TodoEntity;
 import clientview.NotificationGUI;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -101,10 +103,15 @@ public class SocketConnection extends Thread {
                     } else if (replyMsg.equals("Update Notification")) {
                         System.out.println("Update your ui");
                         UserDBOperations.getAllTodos(clientview.ClientView.currentUser);
-                    } else if (replyMsg.equals("Delete Notification")) {
-                        System.out.println("Delete your TODO");
-                        UserDBOperations.getAllTodos(clientview.ClientView.currentUser);
-                    } else if (replyMsg.equals("closed")) {
+                    }else if(replyMsg.contains("Item Notification")){
+                        System.out.println("Item added!");
+                        String todoId = replyMsg.split("\\+")[1];
+                        if(clientview.ClientView.whichScreen.equals(todoId)){
+                            TodoEntity todo = new TodoEntity();
+                            todo.setId(Integer.parseInt(todoId));
+                            TodoListDBOperations.getAllItems(todo);
+                        }
+                    }else if (replyMsg.equals("closed")) {
                         System.out.println(replyMsg);
                         serverClosed = true;
                     } else if (replyMsg.equals("opened")) {

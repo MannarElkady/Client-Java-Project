@@ -5,16 +5,19 @@
  */
 package clientview;
 
+import Model.CollaboratorHandler;
 import Model.CollaboratorsListActionListener;
 import Model.ItemAddingCollaboratorActionListener;
 import Model.ItemDeletingActionListener;
 import Model.ItemUpdatingActionListener;
+import Model.MainFormHandler;
 import Model.TodoSelectedItemHandler;
 import Model.dao.implementation.ComponentDBOperations;
 import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.ComponentEntity;
 import Model.entities.ItemEntity;
+import Model.entities.TodoCollaboratorEntity;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
@@ -45,6 +48,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -70,6 +74,8 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     @FXML
     private JFXButton addItem;
 
+    @FXML
+    private ImageView leaveTodo;
     JFXButton submit;
     BorderPane newBorder;
     boolean flagPressed = false;
@@ -81,7 +87,10 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     private Label userLabel = null;
     // for Dummy Testing
     ArrayList<TodoEntity> test = new ArrayList();
+    public static ArrayList<UserEntity> usersList = new ArrayList();
+
     static ArrayList<UserEntity> todoCollaborators = new ArrayList();
+
     static ArrayList<HBox> hBoxPane = new ArrayList();
     HBox child = null;
     private Accordion accordion;
@@ -134,6 +143,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ClientView.whichScreen = todo.getId()+"";
         updateUi();
         setCollaboratorsPanes();
         generateCollaboratorListUI();
@@ -149,6 +159,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     }
 
     public static void clearTest() {
+        usersList.clear();
         todoCollaborators.clear();
     }
 
@@ -183,30 +194,39 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     }
 
     public void setCollaboratorsDummy() {
-        UserEntity useraya = new UserEntity();
-        useraya.setUsername("colaborayaa");
-        todoCollaborators.add(useraya);
-        todoCollaborators.add(useraya);
-        todoCollaborators.add(useraya);
-        todoCollaborators.add(useraya);
-        todoCollaborators.add(useraya);
+        UserEntity user = new UserEntity();
+        user.setUsername("colaborayaa");
+        usersList.add(user);
+        usersList.add(user);
+        usersList.add(user);
+        usersList.add(user);
+        usersList.add(user);
     }
 
     public void setCollaboratorsPanes() {
         hBoxPane.clear();
-        for (UserEntity useraya : todoCollaborators) {
+        for (UserEntity user : usersList) {
             try {
-                System.out.println("g"+todoCollaborators.size());
+                System.out.println("g"+usersList.size());
                 child = new HBox();
-                img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/m.png"));
+                if(user.getOnlineFlag() == 1)
+                    img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/online.png"));
+                else
+                    img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/offline.png"));
                 imgView = new ImageView(img);
                 imgView.setFitHeight(10.0);
                 imgView.setFitWidth(10.0);
-                userLabel = new Label(useraya.getUsername());
+                userLabel = new Label(user.getUsername());
                 userLabel.setGraphic(imgView);
               //  userLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 userLabel.setPrefSize(100, 30);
                 child.getChildren().add(userLabel);
+                if (todo.getCreatorId() == ClientView.currentUser.getId()){
+                    Button removeCollaboratrButton = new Button("-");
+                    removeCollaboratrButton.setId(""+user.getId());                    
+                    removeCollaboratrButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new CollaboratorHandler());
+                    child.getChildren().add(removeCollaboratrButton);
+                }
                 hBoxPane.add(child);
             } catch (FileNotFoundException ex) {
              ex.printStackTrace();
@@ -284,14 +304,12 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 deleteItem.setFont(new Font("Arial", 12));
                 deleteItem.setButtonType(JFXButton.ButtonType.RAISED);
                 deleteItem.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
-                deleteItem.setOnAction(new ItemDeletingActionListener(item.getItemID()));
+                deleteItem.setOnAction(new ItemDeletingActionListener(item));
                 deleteItem.setWrapText(true);
                 itemButtonsGrid.add(descriptionAndDeadline, 0, 0,5,1);
                 itemButtonsGrid.add(showItem, 0, 1);
                 itemButtonsGrid.add(addItemCollaborator, 1, 1);
                 itemButtonsGrid.add(showItemCollaborators, 2, 1);
-                itemButtonsGrid.add(editItemDetails, 3, 1);
-                itemButtonsGrid.add(deleteItem, 4, 1);
               //  vbox.getChildren().add(descriptionAndDeadline);
                // vbox.getChildren().add(showItem);
                // vbox.getChildren().add(addItemCollaborator);
@@ -300,6 +318,15 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 //vbox.getChildren().add(deleteItem);
               //  vbox.setSpacing(10);
               //  vbox.setAlignment(Pos.CENTER);
+            //    vbox.getChildren().add(showItemCollaborators);
+                if(item.getCreatorID() == ClientView.currentUser.getId()){
+                   // vbox.getChildren().add(editItemDetails);
+                   // vbox.getChildren().add(deleteItem);
+                    itemButtonsGrid.add(editItemDetails, 3, 1);
+                    itemButtonsGrid.add(deleteItem, 4, 1);
+                }
+           //     vbox.setSpacing(10);
+           //     vbox.setAlignment(Pos.CENTER);
                 itemInList = new TitledPane(item.getTitle(), itemButtonsGrid);
                 itemInList.setPadding(new Insets(5, 5, 5, 5));
                 itemInList.setFont(new Font("Arial", 18));
@@ -312,9 +339,14 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     }
 
     public static void setCollaboratorList(ArrayList<UserEntity> collaborators) {
+        usersList.clear();
+        usersList = collaborators;
+        System.out.println("testtest"+usersList);
+
         todoCollaborators.clear();
         todoCollaborators = collaborators;
         System.out.println("testtest"+todoCollaborators);
+
 
     }
     public static ArrayList<UserEntity> getCollaboratorList(){
@@ -347,11 +379,22 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     private void notificationButtonAction() {
     }
 
+    
+     @FXML
+    private void leaveTodoAction() {
+         TodoCollaboratorEntity todoCollaborator = new TodoCollaboratorEntity(todo.getId(), ClientView.currentUser.getId());
+        TodoListDBOperations.removeCollaborator(todoCollaborator);
+    }
+
+    
     private void updateUi() {
         todoNameLabel.setText(todo.getTitle());
         if (todo.getCreatorId() != ClientView.currentUser.getId()) {
             deleteTodo.setVisible(false);
             editTodo.setVisible(false);
+        }
+        else{
+            leaveTodo.setVisible(false);
         }
         //setCollaboratorsDummy();
         setCollaboratorsPanes();
