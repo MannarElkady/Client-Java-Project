@@ -8,8 +8,6 @@ package clientview;
 import Model.NotificationGUIHandler;
 import Model.entities.NotificationEntity;
 import com.jfoenix.controls.JFXListView;
-import java.awt.MouseInfo;
-import java.awt.Point;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javafx.collections.FXCollections;
@@ -22,13 +20,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -45,7 +39,7 @@ public class NotificationGUI {
     public static ArrayList<NotificationEntity> notificationsListForOtherClasses = new ArrayList<>();
 
     public static void loadNotificationMenu(ArrayList<NotificationEntity> notificationsList) {
-        if (notificationsList != null) {
+        if (notificationsListForOtherClasses != null) {
             notificationsListForOtherClasses.clear();
         }
         notificationsListForOtherClasses = notificationsList;

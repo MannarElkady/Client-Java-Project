@@ -16,7 +16,6 @@ import javafx.scene.Parent;
  * @author DELL
  */
 public class CollaboratorsListActionListener implements EventHandler<ActionEvent> {
-
     Parent root;
 
     @Override

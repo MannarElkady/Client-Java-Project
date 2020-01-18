@@ -53,7 +53,7 @@ public class TodoStatisticsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        CollaboratorNumber.setText("" + TodoFormXMLController.test2.size());
+        CollaboratorNumber.setText("" + TodoFormXMLController.todoCollaborators.size());
         ItemNumber.setText("" + TodoFormXMLController.itemList.size());
         TasksNumber.setText(""+componentList.size());
         createChart();

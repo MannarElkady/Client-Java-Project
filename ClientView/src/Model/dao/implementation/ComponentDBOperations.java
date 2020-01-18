@@ -33,6 +33,7 @@ import javafx.stage.StageStyle;
 public class ComponentDBOperations {
 
     public static void addComponent(ArrayList<Object> componentsList) {
+        Stage dialog = null; 
         RequestEntity<ComponentEntity> addRequest = new RequestEntity("ComponentDBOperations", "addComponent", componentsList);
         System.out.println(GsonParser.parseToJson(addRequest));
         Handler.sendRequestToServer(addRequest);
