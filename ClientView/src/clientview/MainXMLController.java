@@ -86,8 +86,8 @@ public class MainXMLController implements Initializable {
     ImageView notificationButton;
     @FXML
     MenuItem notificationItem;
-    public static ArrayList<NotificationEntity> notificationsListForOtherClasses = new ArrayList<>();        
-    
+    public static ArrayList<NotificationEntity> notificationsListForOtherClasses = new ArrayList<>();
+
     private Image img = null;
     private ImageView imgView = null;
     //private Label todoName = null;
@@ -113,17 +113,16 @@ public class MainXMLController implements Initializable {
     private JFXListView<BorderPane> listView;
 
     static ArrayList<NotificationEntity> notificationListData = new ArrayList<>();
-    
-    
+
     ArrayList<String> friendsList = new ArrayList();
     private ObjectProperty<ListCell<String>> dragSource = new SimpleObjectProperty<>();
 
-
-    public static void setnotificationListData(ArrayList<NotificationEntity> notifications){
+    public static void setnotificationListData(ArrayList<NotificationEntity> notifications) {
         notificationListData.clear();
-        notificationListData=notifications;
-        
+        notificationListData = notifications;
+
     }
+
     public void setFriendListDummy() {
         UserEntity useraya = new UserEntity();
 
@@ -135,8 +134,6 @@ public class MainXMLController implements Initializable {
         test2.add(useraya);
 
     }
-
-
 
     public void setFriendListPanes() {
         for (UserEntity useraya : test2) {
@@ -193,7 +190,6 @@ public class MainXMLController implements Initializable {
 	masonryPane.setCache(false);
 	setStyle("-fx-background-color : #292929");
 }*/
-
     public static void setTodos(ArrayList<Object> list) {
         data = list;
     }
@@ -202,7 +198,7 @@ public class MainXMLController implements Initializable {
      * Initializes the controller class.
      */
     public void generateTodosUI(ArrayList<Object> todoNames) {
-        if (todoNames!=null && todoNames.size() != 0) {
+        if (todoNames != null && todoNames.size() != 0) {
             for (int i = 0; i < data.size(); i++) {
                 Label todoName = null;
                 TodoEntity todo = null;
@@ -238,9 +234,7 @@ public class MainXMLController implements Initializable {
         //friendListPane.setItems(items);
 
     }
-    
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         FlowCardComposite();
@@ -248,32 +242,22 @@ public class MainXMLController implements Initializable {
         generateTodosUI(data);
         //generateFriendListUI();
         generateFriendListUIWithDragAndDropFeature();
-        generateFriendListUI();           
+        generateFriendListUI();
         ClientView.whichScreen = "MainController";
         jMasonaryPane.setCache(false);
         //jMasonaryPane.setCache(false);
         stackPaneBorder.setCenter(stackPane);
         int rows = jMasonaryPane.getLimitRow();
 
-        prpareNotificationMenu();        
+        prpareNotificationMenu();
         //viewNotificationList();
         //loadNotificationMenu(notificationListData);
     }
-     
+
     @FXML
     private void addFriendBtnAction(ActionEvent event) {
-        try {
-            UserDBOperations.getAllUsers(ClientView.currentUser);
-            Parent root = FXMLLoader.load(getClass().getResource("/clientview/AddFrindFXML.fxml"));
-            Stage stage = new Stage(StageStyle.DECORATED);
-            Scene scene = new Scene(root, 400, 300);
-            stage.setScene(scene);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
-        } catch (IOException ex) {
- 
-            ex.printStackTrace();
-        }
+        UserDBOperations.getAllUsers(ClientView.currentUser);
+
     }
 
     @FXML
@@ -294,13 +278,14 @@ public class MainXMLController implements Initializable {
             Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-/*
+
+    /*
     private void getAllTodos() {
         UserEntity user = new UserEntity();
         user.setId(ClientView.currentUser.getId());
         UserDBOperations.getAllTodos(user);        
     }
-*/
+     */
     public static void setFriendList(ArrayList<UserEntity> a) {
         test2 = a;
     }
@@ -352,23 +337,23 @@ public class MainXMLController implements Initializable {
             if (result.get() == buttonYes) {
                 prepareNotification(todoName.getText(), todoName.getId());
 
-            } 
+            }
         });
     }
-    
-     private void generateFriendListUIWithDragAndDropFeature() {
+
+    private void generateFriendListUIWithDragAndDropFeature() {
 
         Platform.runLater(new Runnable() {
 
             @Override
             public void run() {
                 //ObservableList<HBox> items = FXCollections.observableArrayList(hBoxPane);
-               // friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+                // friendListPane.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 //friendListPane.setItems(items);
                 for (int i = 0; i < friendsList.size(); i++) {
                     friendListPane.getItems().add(friendsList.get(i));
                 }
-                
+
                 friendListPane.setCellFactory(lv -> {
                     ListCell<String> cell = new ListCell<String>() {
                         @Override
@@ -415,9 +400,9 @@ public class MainXMLController implements Initializable {
         });
 
     }
-     
-     private void prpareNotificationMenu(){
-          /*try {
+
+    private void prpareNotificationMenu() {
+        /*try {
             Image img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/notification_icon.jpg"));
             ImageView imgView = new ImageView(img);
             imgView.setFitHeight(50);
@@ -434,74 +419,72 @@ public class MainXMLController implements Initializable {
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }*/
-     
-     }
-     
-     public static void setNotificationsList(ArrayList<NotificationEntity> notificationsList){
-     
-         //loadNotificationMenu(notificationsList);
-     }
-     
-      @FXML
+
+    }
+
+    public static void setNotificationsList(ArrayList<NotificationEntity> notificationsList) {
+
+        //loadNotificationMenu(notificationsList);
+    }
+
+    @FXML
     private void viewNotificationList() {
-   
-         ArrayList<Integer> users = new ArrayList<>();
+
+        ArrayList<Integer> users = new ArrayList<>();
         users.add(ClientView.currentUser.getId());
         NotificationDBOperations.receiveNotifications(users);
-    }          
+    }
+
     private void loadNotificationMenu(ArrayList<NotificationEntity> notificationsList) {
 
         notificationsListForOtherClasses.clear();
-        notificationsListForOtherClasses=notificationsList;
-      
-                Label text1;
-                
-                ArrayList<BorderPane> borderPanes = new ArrayList<BorderPane>();
+        notificationsListForOtherClasses = notificationsList;
 
-                for (int i = 0; i < notificationsList.size(); i++) {
-                    text1 = new Label(notificationsList.get(i).getHeader());
-                    BorderPane border = new BorderPane();
-                    VBox box = new VBox();
-                    box.getChildren().add(text1);
+        Label text1;
 
-                    if (!notificationsList.get(i).getNotificationType().toLowerCase().contains("invitation")) {
+        ArrayList<BorderPane> borderPanes = new ArrayList<BorderPane>();
 
-                        box.setAlignment(Pos.CENTER_LEFT);
-                        text1 = new Label(notificationsList.get(i).getText());
-                        box.getChildren().add(text1);
+        for (int i = 0; i < notificationsList.size(); i++) {
+            text1 = new Label(notificationsList.get(i).getHeader());
+            BorderPane border = new BorderPane();
+            VBox box = new VBox();
+            box.getChildren().add(text1);
 
-                        border.setCenter(box);
-                        borderPanes.add(border);
+            if (!notificationsList.get(i).getNotificationType().toLowerCase().contains("invitation")) {
 
-                    } else {
-                        if (notificationsList.get(i).getNotificationType().contains("itemInvitation") || notificationsList.get(i).getNotificationType().contains("todoInvitation") || notificationsList.get(i).getNotificationType().contains("friendInvitation") ) {
-                            Button b1 = new Button("accept");
-                            Button b2 = new Button("reject");
-                            b1.setId("accept" +notificationsList.get(i).getNotificationType());
-                            b2.setId("reject" +notificationsList.get(i).getNotificationType());
-                            b1.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
-                            b2.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
-                            HBox horizontal = new HBox();
-                            horizontal.getChildren().add(b1);
-                            horizontal.getChildren().add(b2);
-                            border.setRight(horizontal);
-                            border.setLeft(text1);
-                            borderPanes.add(border);
-                        }
+                box.setAlignment(Pos.CENTER_LEFT);
+                text1 = new Label(notificationsList.get(i).getText());
+                box.getChildren().add(text1);
 
-                    //}
+                border.setCenter(box);
+                borderPanes.add(border);
 
+            } else {
+                if (notificationsList.get(i).getNotificationType().contains("itemInvitation") || notificationsList.get(i).getNotificationType().contains("todoInvitation") || notificationsList.get(i).getNotificationType().contains("friendInvitation")) {
+                    Button b1 = new Button("accept");
+                    Button b2 = new Button("reject");
+                    b1.setId("accept" + notificationsList.get(i).getNotificationType());
+                    b2.setId("reject" + notificationsList.get(i).getNotificationType());
+                    b1.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
+                    b2.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
+                    HBox horizontal = new HBox();
+                    horizontal.getChildren().add(b1);
+                    horizontal.getChildren().add(b2);
+                    border.setRight(horizontal);
+                    border.setLeft(text1);
+                    borderPanes.add(border);
                 }
-                ObservableList<BorderPane> myObservableList = FXCollections.observableList(borderPanes);
 
-                listView.setItems(myObservableList);                 
-                listView.setPrefSize(600, 300);
-                //menuButton.getItems().add(new MenuItem("",parentPane));
-                //listView.getItems().add(myObservableList);
-            } 
-        
+                //}
+            }
+            ObservableList<BorderPane> myObservableList = FXCollections.observableList(borderPanes);
+
+            listView.setItems(myObservableList);
+            listView.setPrefSize(600, 300);
+            //menuButton.getItems().add(new MenuItem("",parentPane));
+            //listView.getItems().add(myObservableList);
+        }
+
     }
 
 }
-
-

@@ -25,6 +25,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -41,9 +42,25 @@ public class TodoListDBOperations {
         if (value != null) {
             int data = (int) value.get(0);
             if (data > 0) {
-                System.out.println("user assigned");
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("User Assign");
+                        alert.setContentText("User Assign Succsessfuly");
+                        alert.showAndWait();
+                    }
+                });
             } else {
-                System.out.println("user not assigned");
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("User Assign");
+                        alert.setContentText("User Not Assigned ");
+                        alert.showAndWait();
+                    }
+                });
             }
         }
     }
@@ -59,9 +76,27 @@ public class TodoListDBOperations {
     public void addTodoResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
             //     System.out.println("************" + ((TodoEntity) arrayObjects.get(0)).getId());
-            System.out.println("Todo Added  successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Todo information");
+                    alert.setHeaderText(null);
+                    alert.setContentText(((TodoEntity) arrayObjects.get(0)).getTitle() + "Todo Added Successfuly");
+                    alert.showAndWait();
+                }
+            });
         } else {
-            System.out.println("Todo not added successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Todo information");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Todo  Not Added ");
+                    alert.showAndWait();
+                }
+            });
         }
 
     }
@@ -76,7 +111,6 @@ public class TodoListDBOperations {
     public void getAllItemsResonse(ArrayList<Object> items) {
         TodoFormXMLController.clearItemsList();
         if (items == null || items.size() == 0) {
-            System.out.println("No Items");
         } else {
             TodoFormXMLController.setItems(items);
 
@@ -165,10 +199,26 @@ public class TodoListDBOperations {
 
     public void updateTodoResponse(ArrayList<Object> todoList) {
         if (todoList == null || todoList.size() == 0) {
-            System.out.println("Not updated");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Todo Update");
+                    alert.setContentText("Todo   Not Updated ");
+                    alert.showAndWait();
+                }
+            });
         } else {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Todo Update");
+                    alert.setContentText("Todo  Updated Successfully");
+                    alert.showAndWait();
+                }
+            });
             TodoFormXMLController.setToDoData((TodoEntity) todoList.get(0));
-            System.out.println("Updated");
             Parent root;
             try {
                 ClientView.mainStage.setWidth(885);
@@ -192,10 +242,27 @@ public class TodoListDBOperations {
 
     public void deleteTodoResponse(ArrayList<Object> todoList) {
         if (todoList == null || todoList.size() == 0) {
-            System.out.println("Not deleted");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Todo Deleted");
+                    alert.setContentText("Todo  Deleted Successfully");
+                    alert.showAndWait();
+                }
+            });
         } else {
-            System.out.println("deleted");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Todo Deleted");
+                    alert.setContentText("Todo Not  Deleted ");
+                    alert.showAndWait();
+                }
+            });
             UserDBOperations.getAllTodos(ClientView.currentUser);
+
         }
     }
 
@@ -208,10 +275,25 @@ public class TodoListDBOperations {
 
     public void removeCollaboratorResponse(ArrayList<Object> value) {
         if (value == null || value.size() == 0) {
-            System.out.println("Not deleted");
-
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Collaborator Remove");
+                    alert.setContentText("Collaborator  Not Removed");
+                    alert.showAndWait();
+                }
+            });
         } else {
-            System.out.println("deleted Successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Collaborator Remove");
+                    alert.setContentText("Collaborator Removed Succsessfuly");
+                    alert.showAndWait();
+                }
+            });
             TodoFormXMLController.todo = null;
         }
     }

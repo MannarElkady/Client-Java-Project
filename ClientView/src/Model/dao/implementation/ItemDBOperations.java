@@ -44,9 +44,25 @@ public class ItemDBOperations {
     public void addItemResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
             //to connect by Controller of ui
-            System.out.println("Item Added  successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Add Item");
+                    alert.setContentText("Item Added Succsessfuly");
+                    alert.showAndWait();
+                }
+            });
         } else {
-            System.out.println("Item not added successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Add Item");
+                    alert.setContentText("Item  Not Added ");
+                    alert.showAndWait();
+                }
+            });
         }
     }
 
@@ -60,10 +76,26 @@ public class ItemDBOperations {
     public void updateItemResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
             //to connect by Controller of ui
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Update Item");
+                    alert.setContentText("Item Updated Succsessfuly");
+                    alert.showAndWait();
+                }
+            });
 
-            System.out.println("Item Updated  successfully");
         } else {
-            System.out.println("Item not updated successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Update Item");
+                    alert.setContentText("Item Not Updated ");
+                    alert.showAndWait();
+                }
+            });
         }
     }
 
@@ -75,9 +107,25 @@ public class ItemDBOperations {
     public void assignItemResponse(ArrayList<Object> isAssigned) {
         if (isAssigned != null) {
             //to connect by Controller of ui
-            System.out.println("Item assigned  successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Assign Item to user");
+                    alert.setContentText("Item Assigned Succsessfuly");
+                    alert.showAndWait();
+                }
+            });
         } else {
-            System.out.println("Item not assigned successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Assign Item to user");
+                    alert.setContentText("Item  Not Assigned ");
+                    alert.showAndWait();
+                }
+            });
         }
     }
 
@@ -91,9 +139,25 @@ public class ItemDBOperations {
     public void deleteItemResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
             TodoListDBOperations.getAllItems(TodoFormXMLController.todo);
-            System.out.println("Item deleted  successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Delete Item");
+                    alert.setContentText("Item Deleted Succsessfuly");
+                    alert.showAndWait();
+                }
+            });
         } else {
-            System.out.println("Item not deleted successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Delete Item ");
+                    alert.setContentText("Item Not Deleted ");
+                    alert.showAndWait();
+                }
+            });
         }
     }
 
