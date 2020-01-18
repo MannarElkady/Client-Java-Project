@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -57,6 +58,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -64,6 +66,7 @@ import javafx.stage.Stage;
  * @author DELL
  */
 public class TodoFormXMLController implements Initializable, EventHandler<ActionEvent> {
+
     Button tasks;
     @FXML
     private Label todoNameLabel;
@@ -135,8 +138,8 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     private VBox vbox;
     private GridPane itemButtonsGrid;
     public static ItemEntity itemSelected = new ItemEntity();
-   // public Stage stage= (Stage) rootPane.getScene().getWindow();
-    public Stage stage= ClientView.mainStage;
+    // public Stage stage= (Stage) rootPane.getScene().getWindow();
+    public Stage stage = ClientView.mainStage;
 
     /**
      * Initializes the controller class.
@@ -145,8 +148,6 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     public void initialize(URL url, ResourceBundle rb) {
         ClientView.whichScreen = todo.getId()+"";
         updateUi();
-        setCollaboratorsPanes();
-        generateCollaboratorListUI();
 
     }
 
@@ -183,7 +184,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     @FXML
     private void addColaboratorEvent() throws IOException {
-       AddCollaboratorTodoController.isAddCollaborator=true;
+        AddCollaboratorTodoController.isAddCollaborator = true;
         UserDBOperations.getFrinds(ClientView.currentUser);
 //        Parent root = FXMLLoader.load(getClass().getResource("AddCollaboratorTodoFXML.fxml"));
 //        Stage stage = new Stage(StageStyle.DECORATED);
@@ -207,7 +208,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
         hBoxPane.clear();
         for (UserEntity user : usersList) {
             try {
-                System.out.println("g"+usersList.size());
+      System.out.println("g"+usersList.size());
                 child = new HBox();
                 if(user.getOnlineFlag() == 1)
                     img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/online.png"));
@@ -229,7 +230,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 }
                 hBoxPane.add(child);
             } catch (FileNotFoundException ex) {
-             ex.printStackTrace();
+                ex.printStackTrace();
             }
         }
     }
@@ -292,7 +293,6 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 itemInList = new TitledPane(item.getTitle(), itemButtonsGrid);
                 itemInList.setPadding(new Insets(5, 5, 5, 5));
                 itemInList.setFont(new Font("Arial", 18));
-                itemInList.setId(String.valueOf(item.getItemID()));
                 itemInList.expandedProperty().addListener(new TodoSelectedItemHandler(itemInList));
                 accordion.getPanes().add(itemInList);
             }
@@ -377,7 +377,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     @Override
     public void handle(ActionEvent event) {
-        ComponentEntity componentEntity= new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(),null,null,0);
+        ComponentEntity componentEntity = new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(), null, null, 0);
         ComponentDBOperations.retrieveAllComponent(componentEntity);
     }
 }

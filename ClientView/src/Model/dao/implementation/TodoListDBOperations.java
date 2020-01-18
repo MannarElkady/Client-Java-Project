@@ -211,8 +211,14 @@ public class TodoListDBOperations {
             System.out.println("Not deleted");
 
         } else {
-            System.out.println("deleted Successfully");
-            TodoFormXMLController.todo = null;
+            
+            if(TodoFormXMLController.todo.getCreatorId() == ((UserEntity)value.get(0)).getId() &&ClientView.currentUser.getId() == ((UserEntity)value.get(0)).getId() && ClientView.whichScreen.equals(""+TodoFormXMLController.todo.getId())){                
+                getAllItems(TodoFormXMLController.todo);
+            }
+            else
+                TodoFormXMLController.todo=null;
+            System.out.println("removed Successfully");
+            
         }
     }
 }

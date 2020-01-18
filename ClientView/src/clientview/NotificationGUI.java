@@ -108,15 +108,7 @@ public class NotificationGUI {
                 Scene scene = new Scene(root, 500, 300);
                 //Point p = MouseInfo.getPointerInfo().getLocation();
                   ImageView notificationIcon =(ImageView) ClientView.mainStage.getScene().lookup("#notificationButton");
-                  Image img = null;
-                try {
-                    img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/notification_received.jpg"));
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-                if(notificationIcon!=null){
-                    notificationIcon.setImage(img);
-                }                
+                               
                 if (ClientView.mainStage.getX() - notificationIcon.getLayoutX() - 250 <= 0) {
                     stage.setX(ClientView.mainStage.getX() + notificationIcon.getLayoutX() + 450);
                 }
