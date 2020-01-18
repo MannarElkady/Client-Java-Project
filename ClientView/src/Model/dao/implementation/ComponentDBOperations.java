@@ -26,7 +26,7 @@ import javafx.stage.StageStyle;
  * @author AhmedIbrahem
  */
 public class ComponentDBOperations {
-
+    Stage dialog = null; 
     public static void addComponent(ArrayList<Object> componentsList) {                                     
         RequestEntity<ComponentEntity> addRequest = new RequestEntity("ComponentDBOperations", "addComponent", componentsList);
         System.out.println(GsonParser.parseToJson(addRequest));
@@ -86,9 +86,12 @@ public class ComponentDBOperations {
         }
         Platform.runLater(()->{
             try {
+            if(dialog!=null){
+                dialog.close();
+            }
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/clientview/ItemTasksFXML.fxml"));
             Parent itemTasks = loader.load();
-            final Stage dialog = new Stage();
+            dialog = new Stage();
             dialog.initStyle(StageStyle.UNDECORATED);
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.initOwner((Stage) ClientView.mainStage.getScene().getWindow());
