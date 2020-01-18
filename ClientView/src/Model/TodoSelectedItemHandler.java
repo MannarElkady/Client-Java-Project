@@ -1,5 +1,6 @@
 package Model;
 
+import Model.dao.implementation.ItemDBOperations;
 import clientview.TodoFormXMLController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,6 +22,9 @@ public class TodoSelectedItemHandler implements ChangeListener<Boolean> {
             itemId=Integer.parseInt(itemList.getId());
             System.out.println("\n************" + itemList.getText()+"\n************" + Integer.parseInt(itemList.getId()));
             TodoFormXMLController.itemSelected.setItemID(itemId);
+           // ItemCollaboratorsXMLController.setCollaboratorsList(null);
+            ItemDBOperations.getItemCollaborators(TodoFormXMLController.itemSelected);
+            System.out.println("\n---------------------- hey\n"+TodoFormXMLController.itemSelected.getItemID());
         }
     }
 }

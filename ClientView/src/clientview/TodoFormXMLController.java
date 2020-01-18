@@ -10,7 +10,6 @@ import Model.CollaboratorsListActionListener;
 import Model.ItemAddingCollaboratorActionListener;
 import Model.ItemDeletingActionListener;
 import Model.ItemUpdatingActionListener;
-import Model.MainFormHandler;
 import Model.TodoSelectedItemHandler;
 import Model.dao.implementation.ComponentDBOperations;
 import Model.dao.implementation.TodoListDBOperations;
@@ -176,12 +175,14 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
         todoDetails = new Label();
         todoDetails.setText("Assign Date: " + todo.getAssignDate()
                 + "\nDeadline Date: " + todo.getDeadlineDate() + "\n Description: " + todo.getDescription());
-        todoDetails.setFont(new Font("Arial", 16));
-        todoDetails.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;");
+        todoDetails.setFont(new Font("Open Sans", 16));
+        todoDetails.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold; -fx-background-color:#ffffffff");
         todoDetails.setWrapText(true);
         todoDetails.setTextFill(Color.web("#313749"));
         todoDetails.setAlignment(Pos.CENTER);
         todoDetailsLi.setAlignment(Pos.CENTER);
+        todoDetailsLi.setPadding(new Insets(10,10,10,10));
+        todoDetailsLi.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold; -fx-background-color:#ffffffff");
         todoDetailsLi.getChildren().add(todoDetails);
 
     }
@@ -274,7 +275,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 // vbox = new VBox();
                 itemButtonsGrid = new GridPane();
                 descriptionAndDeadline = new Label("Item Description: " + item.getDescription() + "\nDeadline Date:  " + item.getDeadlineDate().toString());
-                descriptionAndDeadline.setFont(new Font("Arial", 14));
+                descriptionAndDeadline.setFont(new Font("Open Sans", 14));
                 descriptionAndDeadline.setAlignment(Pos.TOP_LEFT);
                 descriptionAndDeadline.setWrapText(true);
                 showItem = new JFXButton("Tasks");
@@ -297,7 +298,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 }
                 itemInList = new TitledPane(item.getTitle(), itemButtonsGrid);
                 itemInList.setPadding(new Insets(5, 5, 5, 5));
-                itemInList.setFont(new Font("Arial", 18));
+                itemInList.setFont(new Font("Open Sans", 18));
                 itemInList.expandedProperty().addListener(new TodoSelectedItemHandler(itemInList));
                 accordion.getPanes().add(itemInList);
             }
@@ -307,7 +308,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     public void generateItemButtonUi(JFXButton button, EventHandler<ActionEvent> event) {
         button.setButtonType(JFXButton.ButtonType.RAISED);
-        button.setFont(new Font("Arial", 12));
+        button.setFont(new Font("Open Sans", 12));
         button.setAlignment(Pos.CENTER);
         button.setOnAction(event);
         button.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
@@ -376,6 +377,10 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     private void updateUi() {
         todoNameLabel.setText(todo.getTitle());
+        borderZft.setStyle("-fx-background-color:#"+todo.getColor().substring(2));
+        borderZft.setPadding(new Insets(5,5,5,5));
+        todoNameLabel.setFont(new Font("Open Sans",24));
+        todoNameLabel.setStyle("-fx-font-weight: bold;");
         if (todo.getCreatorId() != ClientView.currentUser.getId()) {
             deleteTodo.setVisible(false);
             editTodo.setVisible(false);

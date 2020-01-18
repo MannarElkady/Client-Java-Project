@@ -12,11 +12,11 @@
          <children>
             <JFXButton fx:id="canclefrindbtn" buttonType="RAISED" layoutX="260.0" layoutY="189.0" onAction="#cancelButtonAction" style="-fx-background-color: #c38d9e #c38d9e #c38d9e; -fx-background-radius: 30; -fx-border-radius: 30;" text="Cancel">
                <font>
-                  <Font name="Bodoni MT" size="24.0" />
+                  <Font name="Open Sans" size="24.0" />
                </font></JFXButton>
             <JFXButton fx:id="addfrindbtn" buttonType="RAISED" layoutX="60.0" layoutY="183.0" onAction="#addButtonAction" style="-fx-background-color: #c38d9e #c38d9e #c38d9e; -fx-border-radius: 30; -fx-background-radius: 30;" text="Add">
                <font>
-                  <Font name="Bodoni MT" size="24.0" />
+                  <Font name="Open Sans" size="24.0" />
                </font></JFXButton>
             <TextField fx:id="frindtextfield" layoutX="32.0" layoutY="91.0" prefHeight="25.0" prefWidth="342.0" style="-fx-background-color: #eac8a4;" />
          </children>

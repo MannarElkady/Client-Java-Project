@@ -166,6 +166,8 @@ public class UserDBOperations {
 
                             ClientView.mainStage.setWidth(885);
                             ClientView.mainStage.setHeight(720);
+                             /*ClientView.mainStage.setWidth(885);
+                            ClientView.mainStage.setHeight(720);*/
                             MainXMLController.setFriendList(items);
                             Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
                             Scene scene = ClientView.mainStage.getScene();

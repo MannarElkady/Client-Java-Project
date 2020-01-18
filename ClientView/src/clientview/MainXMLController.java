@@ -430,7 +430,17 @@ public class MainXMLController implements Initializable {
     @FXML
     private void viewNotificationList() {
 
-        ArrayList<Integer> users = new ArrayList<>();
+        ArrayList<Integer> users = new ArrayList<>();   
+        ImageView notificationIcon =(ImageView) ClientView.mainStage.getScene().lookup("#notificationButton");
+        try {
+            img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/notification.jpg"));
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        if(notificationIcon!=null){
+            notificationIcon.setImage(img);
+        }
+
         users.add(ClientView.currentUser.getId());
         NotificationDBOperations.receiveNotifications(users);
     }
