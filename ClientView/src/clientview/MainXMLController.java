@@ -207,7 +207,6 @@ public class MainXMLController implements Initializable {
      */
     public void generateTodosUI(ArrayList<Object> todoNames) {
         if (todoNames!=null && todoNames.size() != 0) {
-            System.out.println("TEST 2");
             for (int i = 0; i < data.size(); i++) {
                 Label todoName = null;
                 TodoEntity todo = null;
@@ -218,14 +217,13 @@ public class MainXMLController implements Initializable {
                     imgView = new ImageView(img);
                     imgView.setFitHeight(50.0);
                     imgView.setFitWidth(50.0);
-
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(MainXMLBase.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 todoName.setGraphic(imgView);
                 todoName.paddingProperty();
                 todoName.setPadding(new Insets(15));
-                todoName.setPrefSize(200, 100);
+                todoName.setPrefSize(100, 100);
                 todoName.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 todoName.setWrapText(true);
                 todoName.setId(String.valueOf(todo.getId()));

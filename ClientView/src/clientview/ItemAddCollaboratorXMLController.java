@@ -24,7 +24,7 @@ import javafx.scene.layout.BorderPane;
  */
 public class ItemAddCollaboratorXMLController implements Initializable {
     
-    private static ArrayList<UserEntity> itemCollaborators=TodoFormXMLController.getCollaboratorList();
+    private ArrayList<UserEntity> itemCollaborators=TodoFormXMLController.getCollaboratorList();
 
     @FXML
     private BorderPane mainBorderPane;
@@ -38,7 +38,7 @@ public class ItemAddCollaboratorXMLController implements Initializable {
     private void showAllCollaborators(){
         ArrayList<String> usernames=new ArrayList();
         if(itemCollaborators !=null){
-            for(int i=0; i<itemCollaborators.size();i++){   
+            for(int i=0; i<itemCollaborators.size();i++){
                 usernames.add(itemCollaborators.get(i).getUsername());
             }
             itemCollaboratorsComboBox.setItems(FXCollections.observableArrayList(usernames));
