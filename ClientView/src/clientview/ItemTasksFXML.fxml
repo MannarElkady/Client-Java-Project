@@ -34,7 +34,7 @@
                               </JFXButton>
                            </right>
                            <center>
-                              <JFXTextField fx:id="notesTextField" BorderPane.alignment="CENTER">
+                              <JFXTextField fx:id="notesTextField" opacity="0.78" promptText="Write a note..." BorderPane.alignment="CENTER">
                                  <BorderPane.margin>
                                     <Insets left="5.0" />
                                  </BorderPane.margin>
@@ -71,7 +71,7 @@
                               </JFXButton>
                            </right>
                            <center>
-                              <JFXTextField fx:id="tasksTextField" BorderPane.alignment="CENTER">
+                              <JFXTextField fx:id="tasksTextField" opacity="0.8" promptText="Write an Item's task" BorderPane.alignment="CENTER">
                                  <BorderPane.margin>
                                     <Insets left="5.0" />
                                  </BorderPane.margin>
@@ -100,10 +100,13 @@
             <Insets top="20.0" />
          </BorderPane.margin>
          <center>
-            <ProgressBar fx:id="prograssbar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="493.0" progress="0.0">
+            <ProgressBar fx:id="prograssbar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.91" prefHeight="50.0" prefWidth="493.0" progress="0.0">
                <BorderPane.margin>
                   <Insets left="30.0" right="30.0" />
                </BorderPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </ProgressBar>
          </center>
       </BorderPane>
