@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBorderPane" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #97CAEF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.ItemAddCollaboratorXMLController">
+<BorderPane fx:id="mainBorderPane" prefHeight="295.0" prefWidth="283.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientview.ItemAddCollaboratorXMLController">
    <top>
-      <JFXComboBox fx:id="itemCollaboratorsComboBox" opacity="0.78" promptText="Select Collaborator to add.." BorderPane.alignment="CENTER">
+      <JFXComboBox fx:id="itemCollaboratorsComboBox" opacity="0.78" promptText="Select Collaborator to add.." style="-jfx-focus-color: #97CAEF;" BorderPane.alignment="CENTER">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </JFXComboBox>
    </top>
    <bottom>
-      <JFXButton fx:id="addCollaboratorButton" buttonType="RAISED" defaultButton="true" lineSpacing="5.0" minWidth="200.0" onAction="#addCollaboratorButtonAction" prefHeight="32.0" prefWidth="469.0" style="-fx-background-color: #c38d9e #c38d9e #c38d9e; -fx-background-radius: 30; -fx-border-radius: 30;" text="Add" BorderPane.alignment="CENTER">
+      <JFXButton fx:id="addCollaboratorButton" buttonType="RAISED" defaultButton="true" lineSpacing="5.0" minWidth="200.0" onAction="#addCollaboratorButtonAction" prefHeight="32.0" prefWidth="469.0" style="-fx-background-color: #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" text="Add" BorderPane.alignment="CENTER">
          <font>
             <Font name="Bodoni MT Black" size="18.0" />
          </font>
