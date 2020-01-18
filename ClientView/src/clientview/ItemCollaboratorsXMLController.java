@@ -5,27 +5,16 @@
  */
 package clientview;
 
-import Model.dao.implementation.ItemDBOperations;
 import Model.entities.UserEntity;
-import static clientview.TodoFormXMLController.hBoxPane;
 import com.jfoenix.controls.JFXListView;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -43,7 +32,7 @@ public class ItemCollaboratorsXMLController implements Initializable {
     private Label collaboratorLabel;
     @FXML
     private JFXListView<HBox> collaboratorListView;
-    private static ArrayList<UserEntity> collaborators = new ArrayList();
+    private static ArrayList<UserEntity> Itemcollaborators = new ArrayList();
     private HBox hchild;
     private Label collaboratorNameLabel;
     private ArrayList<HBox> hBoxPane = new ArrayList();
@@ -51,9 +40,12 @@ public class ItemCollaboratorsXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    public static void setCollaboratorsList(ArrayList<UserEntity> arrayList) {
-        collaborators.clear();
-        collaborators = arrayList;
+    public static void setItemAssignedCollaboratorsList(ArrayList<UserEntity> arrayList) {
+        Itemcollaborators.clear();
+        Itemcollaborators = arrayList;
+    }
+    public static ArrayList<UserEntity> getItemAssignedCollaborators(){
+        return Itemcollaborators;
     }
     
     public void setCollaboratorsListView(ArrayList<UserEntity> collaboratorsList) {
@@ -77,7 +69,7 @@ public class ItemCollaboratorsXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        setCollaboratorsListView(collaborators);
+        setCollaboratorsListView(Itemcollaborators);
         generateCollaboratorListUI();
     }
 

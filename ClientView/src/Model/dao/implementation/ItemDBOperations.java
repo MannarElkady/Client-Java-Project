@@ -109,8 +109,8 @@ public class ItemDBOperations {
         // TodoFormXMLController.clearTest();
         if (collabotarors == null || collabotarors.size() == 0) {
             System.out.println("no user in this item");
-            Platform.runLater(new Runnable() {
-
+            ItemCollaboratorsXMLController.setItemAssignedCollaboratorsList(collabotarors);
+            /*Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -119,17 +119,15 @@ public class ItemDBOperations {
                     alert.setContentText("No Collaborators Assigned to this Item");
                     alert.show();
                 }
-            });
+            });*/
         } else {
             System.out.println("\nCollaborators Size: " + collabotarors.size());
             for (int i = 0; i < collabotarors.size(); i++) {
                 System.out.println("Colllaborators for this items are\n" + collabotarors.get(i).getUsername());
             }
 
-            ItemCollaboratorsXMLController.setCollaboratorsList(collabotarors);
-
-            Platform.runLater(new Runnable() {
-
+            ItemCollaboratorsXMLController.setItemAssignedCollaboratorsList(collabotarors);
+         /*   Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -143,7 +141,7 @@ public class ItemDBOperations {
                         Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-            });
+            });*/
         }
     }
 }

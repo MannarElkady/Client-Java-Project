@@ -24,8 +24,8 @@ import javafx.scene.layout.BorderPane;
  */
 public class ItemAddCollaboratorXMLController implements Initializable {
     
-    private ArrayList<UserEntity> itemCollaborators=TodoFormXMLController.getCollaboratorList();
-
+    private ArrayList<UserEntity> todoCollaborators=TodoFormXMLController.getCollaboratorList();
+    private ArrayList<UserEntity> currentCollaborators = ItemCollaboratorsXMLController.getItemAssignedCollaborators();
     @FXML
     private BorderPane mainBorderPane;
     @FXML
@@ -35,19 +35,37 @@ public class ItemAddCollaboratorXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    private void showAllCollaborators(){
+    private void showSuggestedCollaborators(){
         ArrayList<String> usernames=new ArrayList();
-        if(itemCollaborators !=null){
-            for(int i=0; i<itemCollaborators.size();i++){
-                usernames.add(itemCollaborators.get(i).getUsername());
+        if(todoCollaborators !=null){
+            for(int i=0; i<todoCollaborators.size();i++){
+                UserEntity collaboratorya= todoCollaborators.get(i);
+                //!isAssignedUser(collaboratorya)
+            //    System.out.println("\n**********Yalahwiiiiii\n"+"for collaborator "+collaboratorya.getUsername()+isAssignedUser(collaboratorya));
+                if(!(collaboratorya.getUsername().equals(ClientView.currentUser.getUsername()))&&!isAssignedUser(collaboratorya)){
+                    usernames.add(collaboratorya.getUsername());
+                }
             }
             itemCollaboratorsComboBox.setItems(FXCollections.observableArrayList(usernames));
         }
     }
+    private Boolean isAssignedUser(UserEntity user){
+        if(currentCollaborators!=null){
+        for(int i=0; i<currentCollaborators.size();i++){
+                if((currentCollaborators.get(i).getId()==user.getId())){
+                    System.out.println("\n********Assigned\n"+"for collaborator "+currentCollaborators.get(i)+" is equal"+user.getUsername());
+                    return true;
+                }
+          //  System.out.println("\n********Testttttt "+currentCollaborators.get(i).getUsername());   
+            }
+        }
+        return false;
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        showAllCollaborators();
+        System.out.println("/n after function");
+        showSuggestedCollaborators();
         
     }    
 
