@@ -100,7 +100,7 @@
             <Insets top="20.0" />
          </BorderPane.margin>
          <center>
-            <ProgressBar fx:id="prograssbar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.91" prefHeight="50.0" prefWidth="493.0" progress="0.0">
+            <ProgressBar fx:id="prograssbar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.91" prefHeight="50.0" prefWidth="493.0" progress="0.0" style="-fx-background-color: #97CAEF;">
                <BorderPane.margin>
                   <Insets left="30.0" right="30.0" />
                </BorderPane.margin>
