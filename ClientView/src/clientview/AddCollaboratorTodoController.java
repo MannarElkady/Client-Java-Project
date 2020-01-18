@@ -77,8 +77,8 @@ public class AddCollaboratorTodoController implements Initializable {
         userlist.clear();
         userlist = a;
         for (int i = 0; i < userlist.size(); i++) {
-            for (int j = 0; j < TodoFormXMLController.test2.size(); j++) {
-                if (userlist.get(i).getId() == TodoFormXMLController.test2.get(j).getId()) {
+            for (int j = 0; j < TodoFormXMLController.usersList.size(); j++) {
+                if (userlist.get(i).getId() == TodoFormXMLController.usersList.get(j).getId()) {
                     userlist.remove(i);
                 }
 

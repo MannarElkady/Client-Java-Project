@@ -5,15 +5,18 @@
  */
 package clientview;
 
+import Model.CollaboratorHandler;
 import Model.CollaboratorsListActionListener;
 import Model.ItemDeletingActionListener;
 import Model.ItemUpdatingActionListener;
+import Model.MainFormHandler;
 import Model.TodoSelectedItemHandler;
 import Model.dao.implementation.ComponentDBOperations;
 import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.ComponentEntity;
 import Model.entities.ItemEntity;
+import Model.entities.TodoCollaboratorEntity;
 import Model.entities.TodoEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
@@ -44,6 +47,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -68,6 +72,8 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     @FXML
     private JFXButton addItem;
 
+    @FXML
+    private ImageView leaveTodo;
     JFXButton submit;
     BorderPane newBorder;
     boolean flagPressed = false;
@@ -79,7 +85,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     private Label userLabel = null;
     // for Dummy Testing
     ArrayList<TodoEntity> test = new ArrayList();
-    static ArrayList<UserEntity> test2 = new ArrayList();
+    public static ArrayList<UserEntity> usersList = new ArrayList();
     static ArrayList<HBox> hBoxPane = new ArrayList();
     HBox child = null;
     private Accordion accordion;
@@ -145,7 +151,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     }
 
     public static void clearTest() {
-        test2.clear();
+        usersList.clear();
     }
 
     public static void setToDoData(TodoEntity todoData) {
@@ -179,30 +185,39 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     }
 
     public void setCollaboratorsDummy() {
-        UserEntity useraya = new UserEntity();
-        useraya.setUsername("colaborayaa");
-        test2.add(useraya);
-        test2.add(useraya);
-        test2.add(useraya);
-        test2.add(useraya);
-        test2.add(useraya);
+        UserEntity user = new UserEntity();
+        user.setUsername("colaborayaa");
+        usersList.add(user);
+        usersList.add(user);
+        usersList.add(user);
+        usersList.add(user);
+        usersList.add(user);
     }
 
     public void setCollaboratorsPanes() {
         hBoxPane.clear();
-        for (UserEntity useraya : test2) {
+        for (UserEntity user : usersList) {
             try {
-                System.out.println("g"+test2.size());
+                System.out.println("g"+usersList.size());
                 child = new HBox();
-                img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/m.png"));
+                if(user.getOnlineFlag() == 1)
+                    img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/online.png"));
+                else
+                    img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/offline.png"));
                 imgView = new ImageView(img);
                 imgView.setFitHeight(10.0);
                 imgView.setFitWidth(10.0);
-                userLabel = new Label(useraya.getUsername());
+                userLabel = new Label(user.getUsername());
                 userLabel.setGraphic(imgView);
                 userLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
                 userLabel.setPrefSize(100, 30);
                 child.getChildren().add(userLabel);
+                if (todo.getCreatorId() == ClientView.currentUser.getId()){
+                    Button removeCollaboratrButton = new Button("-");
+                    removeCollaboratrButton.setId(""+user.getId());                    
+                    removeCollaboratrButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new CollaboratorHandler());
+                    child.getChildren().add(removeCollaboratrButton);
+                }
                 hBoxPane.add(child);
             } catch (FileNotFoundException ex) {
              ex.printStackTrace();
@@ -289,9 +304,9 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     }
 
     public static void setCollaboratorList(ArrayList<UserEntity> collaborators) {
-        test2.clear();
-        test2 = collaborators;
-        System.out.println("testtest"+test2);
+        usersList.clear();
+        usersList = collaborators;
+        System.out.println("testtest"+usersList);
 
     }
 
@@ -322,14 +337,25 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     private void notificationButtonAction() {
     }
 
+    
+     @FXML
+    private void leaveTodoAction() {
+         TodoCollaboratorEntity todoCollaborator = new TodoCollaboratorEntity(todo.getId(), ClientView.currentUser.getId());
+        TodoListDBOperations.removeCollaborator(todoCollaborator);
+    }
+
+    
     private void updateUi() {
         todoNameLabel.setText(todo.getTitle());
         if (todo.getCreatorId() != ClientView.currentUser.getId()) {
             deleteTodo.setVisible(false);
             editTodo.setVisible(false);
         }
+        else{
+            leaveTodo.setVisible(false);
+        }
         //setCollaboratorsDummy();
-        setCollaboratorsPanes(test2);
+        setCollaboratorsPanes();
         generateCollaboratorListUI();
         fillTodoDetails();
         loadItems();

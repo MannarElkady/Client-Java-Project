@@ -115,6 +115,7 @@ public class UserDBOperations {
     public void getAllTodosResonse(ArrayList<Object> items) {
         if (items == null || items.size() == 0) {
             System.out.println("No Items");
+            MainXMLController.setTodos(null);
         } else {
             MainXMLController.setTodos(items);
         }
@@ -125,6 +126,9 @@ public class UserDBOperations {
             public void run() {
                 try {
 
+                    
+                     ClientView.mainStage.setWidth(885);
+                    ClientView.mainStage.setHeight(720);
                     Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
 
                     Scene scene = ClientView.mainStage.getScene();
@@ -133,7 +137,8 @@ public class UserDBOperations {
                     // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
                     ClientView.mainStage.setResizable(true);
                     scene.setRoot(root);
-
+                                                
+                   
                     /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
@@ -169,6 +174,8 @@ public class UserDBOperations {
                     public void run() {
                         try {
 
+                             ClientView.mainStage.setWidth(885);
+                            ClientView.mainStage.setHeight(720);
                             MainXMLController.setFriendList(items);
                             Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
                             Scene scene = ClientView.mainStage.getScene();
@@ -177,6 +184,7 @@ public class UserDBOperations {
                             // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
                             scene.setRoot(root);
 
+                            
                             /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
@@ -229,11 +237,14 @@ public class UserDBOperations {
             System.out.println("Not Exist");
         } else {
             try {
+                ClientView.mainStage.setWidth(885);
+                ClientView.mainStage.setHeight(720);
                 getFrinds(ClientView.currentUser);
                 System.out.println("Add Successfuly");
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
                 Scene scene = ClientView.mainStage.getScene();
                 scene.setRoot(root);
+                
             } catch (IOException ex) {
                 Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
             }
