@@ -58,7 +58,11 @@ public class GsonParser {
                     } else if (request.contains("getToDoCollaboratorsResonse")) {
                         requestType = new TypeToken<RequestEntity<UserEntity>>() {
                         }.getType();
-                    } else {
+                    } else if(request.contains("removeCollaboratorResponse")){ 
+                         requestType = new TypeToken<RequestEntity<UserEntity>>() {
+                        }.getType();
+                    }
+                    else {
                         requestType = new TypeToken<RequestEntity<TodoEntity>>() {
                         }.getType();
                     }
