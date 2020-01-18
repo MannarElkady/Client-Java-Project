@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,6 +52,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -58,6 +60,7 @@ import javafx.stage.Stage;
  * @author DELL
  */
 public class TodoFormXMLController implements Initializable, EventHandler<ActionEvent> {
+
     Button tasks;
     @FXML
     private Label todoNameLabel;
@@ -122,8 +125,8 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     private VBox todoDetailsLi;
     private VBox vbox;
     public static ItemEntity itemSelected = new ItemEntity();
-   // public Stage stage= (Stage) rootPane.getScene().getWindow();
-    public Stage stage= ClientView.mainStage;
+    // public Stage stage= (Stage) rootPane.getScene().getWindow();
+    public Stage stage = ClientView.mainStage;
 
     /**
      * Initializes the controller class.
@@ -131,8 +134,6 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         updateUi();
-        setCollaboratorsPanes();
-        generateCollaboratorListUI();
 
     }
 
@@ -168,7 +169,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     @FXML
     private void addColaboratorEvent() throws IOException {
-       AddCollaboratorTodoController.isAddCollaborator=true;
+        AddCollaboratorTodoController.isAddCollaborator = true;
         UserDBOperations.getFrinds(ClientView.currentUser);
 //        Parent root = FXMLLoader.load(getClass().getResource("AddCollaboratorTodoFXML.fxml"));
 //        Stage stage = new Stage(StageStyle.DECORATED);
@@ -192,7 +193,6 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
         hBoxPane.clear();
         for (UserEntity useraya : test2) {
             try {
-                System.out.println("g"+test2.size());
                 child = new HBox();
                 img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/m.png"));
                 imgView = new ImageView(img);
@@ -205,7 +205,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 child.getChildren().add(userLabel);
                 hBoxPane.add(child);
             } catch (FileNotFoundException ex) {
-             ex.printStackTrace();
+                ex.printStackTrace();
             }
         }
     }
@@ -263,7 +263,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 editItemDetails.setFont(new Font("Arial", 18));
                 editItemDetails.setButtonType(JFXButton.ButtonType.RAISED);
                 editItemDetails.setStyle("-fx-background-radius:30;-fx-border-radius:30;-fx-font-weight: bold;-fx-background-color: #ffffff;");
-                editItemDetails.setOnAction(new ItemUpdatingActionListener(stage,item));
+                editItemDetails.setOnAction(new ItemUpdatingActionListener(stage, item));
                 deleteItem = new JFXButton("Delete");
                 deleteItem.setAlignment(Pos.CENTER);
                 deleteItem.setFont(new Font("Arial", 18));
@@ -291,7 +291,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     public static void setCollaboratorList(ArrayList<UserEntity> collaborators) {
         test2.clear();
         test2 = collaborators;
-        System.out.println("testtest"+test2);
+        System.out.println("testtest" + test2);
 
     }
 
@@ -329,7 +329,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
             editTodo.setVisible(false);
         }
         //setCollaboratorsDummy();
-        setCollaboratorsPanes(test2);
+        setCollaboratorsPanes();
         generateCollaboratorListUI();
         fillTodoDetails();
         loadItems();
@@ -338,7 +338,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     @Override
     public void handle(ActionEvent event) {
-        ComponentEntity componentEntity= new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(),null,null,0);
+        ComponentEntity componentEntity = new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(), null, null, 0);
         ComponentDBOperations.retrieveAllComponent(componentEntity);
     }
 }
