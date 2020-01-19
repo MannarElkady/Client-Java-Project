@@ -414,8 +414,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
         setCollaboratorsPanes();
         generateCollaboratorListUI();
         fillTodoDetails();
-        loadItems();
-        //TodoListDBOperations.getAllItems(todo);  
+        loadItems();  
     }
 
     @Override

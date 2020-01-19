@@ -161,12 +161,14 @@ public class ItemTasksFXMLController implements Initializable, ChangeListener<Bo
     }
     
     private void pushToDatabase(){
-        for(int i = 0 ; i < newTasksList.size() ;i++){
-            ComponentEntity component = new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(), COMPONENT_TYPE_CHECKBOX, newTasksList.get(i).getText(), newTasksList.get(i).isSelected()? 1 : 0);
-            componentsList.add(component);
+        if(newTasksList!= null && newTasksList.size()!=0){
+            for(int i = 0 ; i < newTasksList.size() ;i++){
+                ComponentEntity component = new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(), COMPONENT_TYPE_CHECKBOX, newTasksList.get(i).getText(), newTasksList.get(i).isSelected()? 1 : 0);
+                componentsList.add(component);
+            }
+            ComponentDBOperations.addComponent(componentsList);
+            componentsList.clear();
         }
-        ComponentDBOperations.addComponent(componentsList);
-        componentsList.clear();
 //        ((Stage) finishBtn.getScene().getWindow()).close();
     }
     
@@ -209,10 +211,12 @@ public class ItemTasksFXMLController implements Initializable, ChangeListener<Bo
     }
 
     private void updateDatabase() {
-        for(int i = 0 ; i < tasksList.size() ;i++){
-            ComponentEntity component = new ComponentEntity(Integer.parseInt(tasksList.get(i).getId()), TodoFormXMLController.itemSelected.getItemID(),COMPONENT_TYPE_CHECKBOX, tasksList.get(i).getText(), tasksList.get(i).isSelected()? 1 : 0); 
-            modifiedList.add(component);
+        if(tasksList!= null && tasksList.size()!=0){
+            for(int i = 0 ; i < tasksList.size() ;i++){
+                ComponentEntity component = new ComponentEntity(Integer.parseInt(tasksList.get(i).getId()), TodoFormXMLController.itemSelected.getItemID(),COMPONENT_TYPE_CHECKBOX, tasksList.get(i).getText(), tasksList.get(i).isSelected()? 1 : 0); 
+                modifiedList.add(component);
+            }
+            ComponentDBOperations.updateComponent(modifiedList);
         }
-        ComponentDBOperations.updateComponent(modifiedList);
     }
 }
