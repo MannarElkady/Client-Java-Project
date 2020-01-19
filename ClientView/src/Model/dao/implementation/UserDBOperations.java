@@ -124,8 +124,8 @@ public class UserDBOperations {
                 try {
                     Stage s = new Stage();
                     ClientView.mainStage.sizeToScene();
-                    ClientView.mainStage.setMinHeight(600);
-                    ClientView.mainStage.setMinWidth(750);
+                    ClientView.mainStage.setMinHeight(400);
+                    ClientView.mainStage.setMinWidth(600);
                     Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
                     Scene scene = ClientView.mainStage.getScene();
                     ClientView.mainStage.setResizable(true);

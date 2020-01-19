@@ -143,6 +143,8 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     public static ItemEntity itemSelected = new ItemEntity();
     // public Stage stage= (Stage) rootPane.getScene().getWindow();
     public Stage stage = ClientView.mainStage;
+    @FXML
+    private JFXButton showTodoStatisticsButton;
 
     /**
      * Initializes the controller class.
@@ -406,5 +408,13 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     public void handle(ActionEvent event) {
         ComponentEntity componentEntity = new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(), null, null, 0);
         ComponentDBOperations.retrieveAllComponent(componentEntity);
+    }
+
+    @FXML
+    private void showTodoStatisticsButtonAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void showTodoStatisticsButtonAction(ActionEvent event) {
     }
 }
