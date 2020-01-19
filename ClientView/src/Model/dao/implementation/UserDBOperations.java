@@ -85,6 +85,8 @@ public class UserDBOperations {
 
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
+                ClientView.mainStage.setWidth(700);
+                ClientView.mainStage.setHeight(480);
                 Scene scene = ClientView.mainStage.getScene();
                 //     root.translateYProperty().set(scene.getHeight());
                 scene.setRoot(root);
@@ -120,15 +122,12 @@ public class UserDBOperations {
             @Override
             public void run() {
                 try {
-
-                    ClientView.mainStage.setWidth(885);
-                    ClientView.mainStage.setHeight(720);
+                    Stage s = new Stage();
+                    ClientView.mainStage.sizeToScene();
+                    ClientView.mainStage.setMinHeight(400);
+                    ClientView.mainStage.setMinWidth(600);
                     Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
-
                     Scene scene = ClientView.mainStage.getScene();
-                    //root.translateYProperty().set(scene.getHeight());
-                    //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
-                    // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
                     ClientView.mainStage.setResizable(true);
                     scene.setRoot(root);
 
@@ -166,7 +165,7 @@ public class UserDBOperations {
 
                             ClientView.mainStage.setWidth(885);
                             ClientView.mainStage.setHeight(720);
-                             /*ClientView.mainStage.setWidth(885);
+                            /*ClientView.mainStage.setWidth(885);
                             ClientView.mainStage.setHeight(720);*/
                             MainXMLController.setFriendList(items);
                             Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));

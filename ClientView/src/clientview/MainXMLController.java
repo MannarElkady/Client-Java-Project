@@ -85,7 +85,6 @@ public class MainXMLController implements Initializable {
 
     @FXML
     ImageView notificationButton;
-    @FXML
     MenuItem notificationItem;
     public static ArrayList<NotificationEntity> notificationsListForOtherClasses = new ArrayList<>();
 
@@ -110,7 +109,6 @@ public class MainXMLController implements Initializable {
     @FXML
     private BorderPane stackPaneBorder;
 
-    @FXML
     private JFXListView<BorderPane> listView;
 
     @FXML
@@ -127,6 +125,10 @@ public class MainXMLController implements Initializable {
         notificationListData = notifications;
 
     }
+    @FXML
+    private JFXButton showStatisticsButton;
+    @FXML
+    private JFXButton removeFriendButton;
 
     public void setFriendListDummy() {
         UserEntity useraya = new UserEntity();
@@ -522,12 +524,29 @@ public class MainXMLController implements Initializable {
         }
 
     }
-   
-          
-    
+
     @FXML
     private void createUserMenu(){           
          new UserMenuGUI(); // create uesr menu
+    }
+    @FXML
+    private void showStatisticsButtonAction(ActionEvent event) {
+             try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("UserStatisticsFXML.fxml"));
+            Parent insertItemWindow = loader.load();
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner((Stage) mainBorderPane.getScene().getWindow());
+            Scene dialogScene = new Scene(insertItemWindow);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        } catch (IOException ex) {
+            Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void removeFriendButtonAction(ActionEvent event) {
 
     }
 

@@ -9,6 +9,7 @@ import Model.CollaboratorHandler;
 import Model.CollaboratorsListActionListener;
 import Model.ItemAddingCollaboratorActionListener;
 import Model.ItemDeletingActionListener;
+import Model.ItemExitingActionListener;
 import Model.ItemUpdatingActionListener;
 import Model.TodoSelectedItemHandler;
 import Model.dao.implementation.ComponentDBOperations;
@@ -31,7 +32,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -61,7 +61,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -129,6 +128,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     private JFXButton showItemCollaborators;
     private JFXButton editItemDetails;
     private JFXButton deleteItem;
+    private JFXButton exitItem;
     private JFXButton addItemCollaborator;
     @FXML
     private BorderPane borderZft;
@@ -143,6 +143,8 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     public static ItemEntity itemSelected = new ItemEntity();
     // public Stage stage= (Stage) rootPane.getScene().getWindow();
     public Stage stage = ClientView.mainStage;
+    @FXML
+    private JFXButton showTodoStatisticsButton;
 
     /**
      * Initializes the controller class.
@@ -215,26 +217,28 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
             try {
                 System.out.println("g" + usersList.size());
                 child = new HBox();
-                if (user.getOnlineFlag() == 1) {
-                    img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/online.png"));
-                } else {
-                    img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/offline.png"));
+                if(user.getId()!=ClientView.currentUser.getId()){
+                    if (user.getOnlineFlag() == 1) {
+                        img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/online.png"));
+                    } else {
+                        img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/offline.png"));
+                    }
+                    imgView = new ImageView(img);
+                    imgView.setFitHeight(10.0);
+                    imgView.setFitWidth(10.0);
+                    userLabel = new Label(user.getUsername());
+                    userLabel.setGraphic(imgView);
+                    //  userLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
+                    userLabel.setPrefSize(100, 30);
+                    child.getChildren().add(userLabel);           
+                    if (todo.getCreatorId() == ClientView.currentUser.getId()) {
+                        Button removeCollaboratrButton = new Button("-");
+                        removeCollaboratrButton.setId("" + user.getId());
+                        removeCollaboratrButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new CollaboratorHandler());
+                        child.getChildren().add(removeCollaboratrButton);
+                    }
+                    hBoxPane.add(child);
                 }
-                imgView = new ImageView(img);
-                imgView.setFitHeight(10.0);
-                imgView.setFitWidth(10.0);
-                userLabel = new Label(user.getUsername());
-                userLabel.setGraphic(imgView);
-                //  userLabel.setStyle("-fx-background-radius:30;-fx-border-radius:30;");
-                userLabel.setPrefSize(100, 30);
-                child.getChildren().add(userLabel);
-                if (todo.getCreatorId() == ClientView.currentUser.getId()) {
-                    Button removeCollaboratrButton = new Button("-");
-                    removeCollaboratrButton.setId("" + user.getId());
-                    removeCollaboratrButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new CollaboratorHandler());
-                    child.getChildren().add(removeCollaboratrButton);
-                }
-                hBoxPane.add(child);
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             }
@@ -288,13 +292,17 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 generateItemButtonUi(editItemDetails, new ItemUpdatingActionListener(stage, item));
                 deleteItem = new JFXButton("Delete");
                 generateItemButtonUi(deleteItem, new ItemDeletingActionListener(item));
+                exitItem = new JFXButton("Exit");
+                generateItemButtonUi(exitItem, new ItemExitingActionListener(item));
                 itemButtonsGrid.add(descriptionAndDeadline, 0, 0, 5, 1);
-                itemButtonsGrid.add(showItem, 0, 1);
-                itemButtonsGrid.add(addItemCollaborator, 1, 1);
+                itemButtonsGrid.add(showItem, 0, 1);            
                 itemButtonsGrid.add(showItemCollaborators, 2, 1);
                 if (item.getCreatorID() == ClientView.currentUser.getId()) {
                     itemButtonsGrid.add(editItemDetails, 3, 1);
                     itemButtonsGrid.add(deleteItem, 4, 1);
+                    itemButtonsGrid.add(addItemCollaborator, 1, 1);
+                }else{
+                    itemButtonsGrid.add(exitItem,5, 1);
                 }
                 itemInList = new TitledPane(item.getTitle(), itemButtonsGrid);
                 itemInList.setPadding(new Insets(5, 5, 5, 5));
@@ -402,5 +410,10 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     public void handle(ActionEvent event) {
         ComponentEntity componentEntity = new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(), null, null, 0);
         ComponentDBOperations.retrieveAllComponent(componentEntity);
+    }
+
+    @FXML
+    private void showTodoStatisticsButtonAction() {
+        ComponentDBOperations.getAllCheckBoxComponent(todo);        
     }
 }
