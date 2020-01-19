@@ -124,8 +124,8 @@ public class UserDBOperations {
                 try {
 
                     
-                     ClientView.mainStage.setWidth(885);
-                    ClientView.mainStage.setHeight(720);
+                    /*ClientView.mainStage.setWidth(885);
+                    ClientView.mainStage.setHeight(720);*/
                     Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
 
                     Scene scene = ClientView.mainStage.getScene();
@@ -234,8 +234,8 @@ public class UserDBOperations {
             System.out.println("Not Exist");
         } else {
             try {
-                ClientView.mainStage.setWidth(885);
-                ClientView.mainStage.setHeight(720);
+                /*ClientView.mainStage.setWidth(885);
+                ClientView.mainStage.setHeight(720);*/
                 getFrinds(ClientView.currentUser);
                 System.out.println("Add Successfuly");
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
