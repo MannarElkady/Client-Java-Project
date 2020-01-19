@@ -285,7 +285,6 @@ public class UserDBOperations {
 
     public static void logout(UserEntity user) {
         ArrayList<UserEntity> users = new ArrayList<>();
-        System.out.println("JKJJKIKI");
         users.add(user);
         RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "logout", users);
         Handler.sendRequestToServer(request);
