@@ -107,7 +107,7 @@
                   <Image url="@resources/exit2.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="showTodoStatisticsButton" buttonType="RAISED" onAction="#showTodoStatisticsButtonAction" text="  " GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <JFXButton buttonType="RAISED" text="  " GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="50.0" onDragDetected="#showTodoStatisticsButtonAction" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -172,7 +172,7 @@
                   </VBox>
                </center>
                <bottom>
-                  <JFXButton buttonType="RAISED" style="-fx-background-color: #97CAEF; -fx-border-radius: 30; -fx-background-radius: 30;" text="Show Statistics" BorderPane.alignment="CENTER">
+                  <JFXButton fx:id="showTodoStatistics" buttonType="RAISED" onAction="#showTodoStatisticsButtonAction" style="-fx-background-color: #97CAEF; -fx-border-radius: 30; -fx-background-radius: 30;" text="Show Statistics" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets bottom="5.0" top="5.0" />
                      </BorderPane.margin>
