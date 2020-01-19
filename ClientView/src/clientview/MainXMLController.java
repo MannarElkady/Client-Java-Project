@@ -487,14 +487,11 @@ public class MainXMLController implements Initializable {
                     borderPanes.add(border);
                 }
 
-                //}
             }
             ObservableList<BorderPane> myObservableList = FXCollections.observableList(borderPanes);
 
             listView.setItems(myObservableList);
             listView.setPrefSize(600, 300);
-            //menuButton.getItems().add(new MenuItem("",parentPane));
-            //listView.getItems().add(myObservableList);
         }
 
     }

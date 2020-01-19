@@ -304,6 +304,8 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 }else{
                     itemButtonsGrid.add(exitItem,5, 1);
                 }
+                itemButtonsGrid.setHgap(10); 
+                itemButtonsGrid.setVgap(10); 
                 itemInList = new TitledPane(item.getTitle(), itemButtonsGrid);
                 itemInList.setPadding(new Insets(5, 5, 5, 5));
                 itemInList.setId(String.valueOf(item.getItemID()));

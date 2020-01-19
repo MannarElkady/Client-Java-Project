@@ -150,10 +150,6 @@ public class InsertTodoXMLController implements Initializable {
         }
     }
 
-    @FXML
-    private void assignDateAction(ActionEvent event) {
-    }
-
     public static void setTodoData(TodoEntity todoData) {
         todo = todoData;
     }
