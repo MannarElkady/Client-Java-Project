@@ -22,6 +22,7 @@ public class TodoSelectedItemHandler implements ChangeListener<Boolean> {
             itemId=Integer.parseInt(itemList.getId());
             System.out.println("\n************" + itemList.getText()+"\n************" + Integer.parseInt(itemList.getId()));
             TodoFormXMLController.itemSelected.setItemID(itemId);
+            TodoFormXMLController.itemSelected.setTitle(itemList.getText());
            // ItemCollaboratorsXMLController.setCollaboratorsList(null);
             ItemDBOperations.getItemCollaborators(TodoFormXMLController.itemSelected);
             System.out.println("\n---------------------- hey\n"+TodoFormXMLController.itemSelected.getItemID());

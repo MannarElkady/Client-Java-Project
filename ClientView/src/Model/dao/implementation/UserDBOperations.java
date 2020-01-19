@@ -235,8 +235,8 @@ public class UserDBOperations {
             });
         } else {
             try {
-                ClientView.mainStage.setWidth(885);
-                ClientView.mainStage.setHeight(720);
+                /*ClientView.mainStage.setWidth(885);
+                ClientView.mainStage.setHeight(720);*/
                 getFrinds(ClientView.currentUser);
                 System.out.println("Add Successfuly");
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));

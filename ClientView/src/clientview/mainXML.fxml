@@ -61,17 +61,19 @@
                <GridPane.margin>
                   <Insets />
                </GridPane.margin></JFXButton>
-            <ImageView fx:id="userImg" fitHeight="50.0" fitWidth="50.0" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <image>
-                  <Image url="@resources/m.png" />
-               </image></ImageView>
-            <ImageView fx:id="notificationButton" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#viewNotificationList" preserveRatio="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <ImageView fx:id="notificationButton" fitHeight="57.0" fitWidth="64.0" onMouseClicked="#viewNotificationList" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
+
                <image>
                   <Image url="@resources/notification.jpg" />
                </image>
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
+            </ImageView>
+            <ImageView fx:id="userMenu" fitHeight="47.0" fitWidth="59.0" onMouseClicked="#createUserMenu" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@resources/m.png" />
+               </image>
             </ImageView>
             <JFXButton fx:id="showStatisticsButton" buttonType="RAISED" onAction="#showStatisticsButtonAction" text=" " GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
@@ -99,6 +101,8 @@
                   <Font name="Open Sans" size="22.0" />
                </font>
                <BorderPane.margin>
+                  <Insets left="8.0" />
+
                   <Insets top="8.0" />
                </BorderPane.margin> 
             </Label>
@@ -146,7 +150,9 @@
                </font>
             </Label>
             <JFXListView fx:id="friendListPane" prefHeight="200.0" showTooltip="true" GridPane.rowIndex="1" />
+
             <JFXButton fx:id="removeFriendButton" buttonType="RAISED" onAction="#removeFriendButtonAction" style="-fx-background-color: #97CAEF; -fx-border-radius: 30; -fx-background-radius: 30;" text="Remove Friend" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+
                <GridPane.margin>
                   <Insets top="10.0" />
                </GridPane.margin>
