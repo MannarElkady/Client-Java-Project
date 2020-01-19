@@ -13,6 +13,7 @@ import Model.ItemExitingActionListener;
 import Model.ItemUpdatingActionListener;
 import Model.TodoSelectedItemHandler;
 import Model.dao.implementation.ComponentDBOperations;
+import Model.dao.implementation.NotificationDBOperations;
 import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.ComponentEntity;
@@ -126,7 +127,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     @FXML
     private ImageView addNewItem11;
     @FXML
-    private JFXButton notificationButton;
+    private ImageView notificationButton;
     private JFXButton showItem;
     private JFXButton showItemCollaborators;
     private JFXButton editItemDetails;
@@ -374,6 +375,19 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     @FXML
     private void notificationButtonAction() {
+         ArrayList<Integer> users = new ArrayList<>();   
+        ImageView notificationIcon =(ImageView) ClientView.mainStage.getScene().lookup("#notificationButton");
+        try {
+            img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/notification.jpg"));
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        if(notificationIcon!=null){
+            notificationIcon.setImage(img);
+        }
+
+        users.add(ClientView.currentUser.getId());
+        NotificationDBOperations.receiveNotifications(users);
     }
 
     @FXML
