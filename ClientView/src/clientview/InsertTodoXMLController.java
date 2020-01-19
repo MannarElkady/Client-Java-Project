@@ -9,6 +9,7 @@ import Model.dao.implementation.TodoListDBOperations;
 import Model.dao.implementation.UserDBOperations;
 import Model.entities.TodoEntity;
 import Utility.Validation;
+import static clientview.TodoFormXMLController.todo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXDatePicker;
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -101,7 +103,28 @@ public class InsertTodoXMLController implements Initializable {
                         UserDBOperations.getAllTodos(ClientView.currentUser);
                     }
                 }
+                else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Can't Submit");
+                    alert.setHeaderText("Date duration ERROR");
+                    alert.setContentText("Deadline date can't be Before Assign Date..\n Please make sure you enter the correct duration");
+                    alert.show();
+                }
             }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Come On ?");
+                alert.setHeaderText("Are You Kidding me?");
+                alert.setContentText("Is it Possible To have a TODO List with no Duration !?");
+                alert.show();
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Can't Submit");
+            alert.setHeaderText("No Title Entered");
+            alert.setContentText("Title can't be Empty..");
+            alert.show();
         }
     }
 
