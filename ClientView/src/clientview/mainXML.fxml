@@ -57,7 +57,7 @@
                <font>
                   <Font name="Open Sans" size="14.0" />
                </font></JFXButton>
-            <ImageView fx:id="userImg" fitHeight="50.0" fitWidth="50.0" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <ImageView fx:id="userImg" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#showStatistics" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
                   <Image url="@resources/m.png" />
                </image></ImageView>
