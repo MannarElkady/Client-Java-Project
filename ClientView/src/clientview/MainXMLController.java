@@ -496,8 +496,11 @@ public class MainXMLController implements Initializable {
         }
 
     }
-     public void showStatistics() {
-          try {
+   
+
+    @FXML
+    private void showStatisticsButtonAction(ActionEvent event) {
+             try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UserStatisticsFXML.fxml"));
             Parent insertItemWindow = loader.load();
             final Stage dialog = new Stage();
@@ -509,11 +512,6 @@ public class MainXMLController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
-    }
-
-    @FXML
-    private void showStatisticsButtonAction(ActionEvent event) {
     }
 
 }
