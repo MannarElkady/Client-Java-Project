@@ -84,7 +84,6 @@ public class MainXMLController implements Initializable {
 
     @FXML
     ImageView notificationButton;
-    @FXML
     MenuItem notificationItem;
     public static ArrayList<NotificationEntity> notificationsListForOtherClasses = new ArrayList<>();
 
@@ -109,7 +108,6 @@ public class MainXMLController implements Initializable {
     @FXML
     private BorderPane stackPaneBorder;
 
-    @FXML
     private JFXListView<BorderPane> listView;
 
     static ArrayList<NotificationEntity> notificationListData = new ArrayList<>();
@@ -122,6 +120,8 @@ public class MainXMLController implements Initializable {
         notificationListData = notifications;
 
     }
+    @FXML
+    private JFXButton showStatisticsButton;
 
     public void setFriendListDummy() {
         UserEntity useraya = new UserEntity();
@@ -510,6 +510,10 @@ public class MainXMLController implements Initializable {
             Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
          
+    }
+
+    @FXML
+    private void showStatisticsButtonAction(ActionEvent event) {
     }
 
 }
