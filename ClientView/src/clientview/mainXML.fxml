@@ -146,7 +146,7 @@
                </font>
             </Label>
             <JFXListView fx:id="friendListPane" prefHeight="200.0" showTooltip="true" GridPane.rowIndex="1" />
-            <JFXButton buttonType="RAISED" style="-fx-background-color: #97CAEF; -fx-border-radius: 30; -fx-background-radius: 30;" text="Remove Friend" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <JFXButton fx:id="removeFriendButton" buttonType="RAISED" onAction="#removeFriendButtonAction" style="-fx-background-color: #97CAEF; -fx-border-radius: 30; -fx-background-radius: 30;" text="Remove Friend" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets top="10.0" />
                </GridPane.margin>
