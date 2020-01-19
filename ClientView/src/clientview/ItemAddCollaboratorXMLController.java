@@ -5,6 +5,7 @@
  */
 package clientview;
 
+import Model.dao.implementation.NotificationDBOperations;
 import Model.entities.NotificationEntity;
 import Model.entities.NotificationReceiversEntity;
 import Model.entities.UserEntity;
@@ -13,10 +14,12 @@ import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -75,32 +78,36 @@ public class ItemAddCollaboratorXMLController implements Initializable {
 
     
     @FXML
-    private void addCollaboratorButtonAction() {
-         String value = itemCollaboratorsComboBox.getValue();
-        System.out.println("value = "+value);
+    private void addCollaboratorButtonAction() { 
+        if(!itemCollaboratorsComboBox.getValue().equals(""))        
+            prepareNotification();
         
     }
     
-       private void prepareNotification(String todoName, String todoID) {
+       private void prepareNotification() {
 
         ArrayList<Object> data = new ArrayList<>();
         NotificationEntity notification = new NotificationEntity();
         notification.setHeader("Item Assign invitation");
-        notification.setText(ClientView.currentUser.getUsername() + " invited you to be collaborator on item " + TodoFormXMLController.itemSelected.getTitle());
+        notification.setText(ClientView.currentUser.getUsername() + " invited you to be collaborator on item " + TodoFormXMLController.itemSelected.getTitle()+" on todo "+TodoFormXMLController.todo.getTitle());
         notification.setNotificationType("itemInvitation" + TodoFormXMLController.itemSelected.getItemID());
         notification.setSenderID(ClientView.currentUser.getId());
-       
-                /*    NotificationReceiversEntity notificationReceiver = new NotificationReceiversEntity();
-                for (int i = 0; i < test2.size(); i++) {
-                if (test2.get(i).getUsername().equals(dragSource.get().getItem())) {
-                notificationReceiver.setReceiverID(test2.get(i).getId());
-                }
-                }
-                ArrayList<NotificationReceiversEntity> receiversList = new ArrayList<>();
-                receiversList.add(notificationReceiver);
-                notification.setNotificationReceivers(receiversList);
-                data.add(notification);
-                NotificationDBOperations.sendNotification(data);*/;
+        boolean checkData=false;
+        NotificationReceiversEntity notificationReceiver = new NotificationReceiversEntity();
+            for (int i = 0; i < todoCollaborators.size(); i++) {
+                if (todoCollaborators.get(i).getUsername().equals(itemCollaboratorsComboBox.getValue()) && !itemCollaboratorsComboBox.getValue().equals(ClientView.currentUser.getUsername())) {
+                    notificationReceiver.setReceiverID(todoCollaborators.get(i).getId());
+                    checkData=true;
+            }
+        }
+        if(checkData){
+            ArrayList<NotificationReceiversEntity> receiversList = new ArrayList<>();
+            receiversList.add(notificationReceiver);
+            notification.setNotificationReceivers(receiversList);
+            data.add(notification);
+            NotificationDBOperations.sendNotification(data);
+                                   
+        }
     }
     
 }

@@ -58,13 +58,14 @@ public class NotificationGUI {
 
                 if (notificationsList != null) {
                     for (int i = 0; i < notificationsList.size(); i++) {
-                        text1 = new Label(notificationsList.get(i).getHeader());
-                        BorderPane border = new BorderPane();
-                        VBox box = new VBox();
-                        box.getChildren().add(text1);
+                       
 
                         if (!notificationsList.get(i).getNotificationType().toLowerCase().contains("invitation")) {
 
+                             text1 = new Label(notificationsList.get(i).getHeader());
+                            BorderPane border = new BorderPane();
+                            VBox box = new VBox();
+                            box.getChildren().add(text1);
                             box.setAlignment(Pos.CENTER_LEFT);
                             text1 = new Label(notificationsList.get(i).getText());
                             box.getChildren().add(text1);
@@ -73,19 +74,23 @@ public class NotificationGUI {
                             borderPanes.add(border);
 
                         } else {
-                            if (notificationsList.get(i).getNotificationType().contains("itemInvitation") || notificationsList.get(i).getNotificationType().contains("todoInvitation") || notificationsList.get(i).getNotificationType().contains("friendInvitation")) {
-                                Button b1 = new Button("accept");
-                                Button b2 = new Button("reject");
-                                b1.setId("accept" + notificationsList.get(i).getNotificationType());
-                                b2.setId("reject" + notificationsList.get(i).getNotificationType());
-                                b1.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
-                                b2.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
-                                HBox horizontal = new HBox();
-                                horizontal.getChildren().add(b1);
-                                horizontal.getChildren().add(b2);
-                                border.setRight(horizontal);
-                                border.setLeft(text1);
-                                borderPanes.add(border);
+                            if (notificationsList.get(i).getNotificationType().contains("itemInvitation") || notificationsList.get(i).getNotificationType().contains("todoInvitation") || notificationsList.get(i).getNotificationType().contains("friendInvitation")) {                           
+                            text1 = new Label(notificationsList.get(i).getText());
+                            BorderPane border = new BorderPane();
+                            VBox box = new VBox();
+                            box.getChildren().add(text1);
+                            Button b1 = new Button("accept");
+                            Button b2 = new Button("reject");
+                            b1.setId("accept" + notificationsList.get(i).getNotificationType());
+                            b2.setId("reject" + notificationsList.get(i).getNotificationType());
+                            b1.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
+                            b2.addEventFilter(MouseEvent.MOUSE_CLICKED, new NotificationGUIHandler());
+                            HBox horizontal = new HBox();
+                            horizontal.getChildren().add(b1);
+                            horizontal.getChildren().add(b2);
+                            border.setRight(horizontal);
+                            border.setLeft(text1);
+                            borderPanes.add(border);
                             }
 
                             //}
@@ -106,7 +111,6 @@ public class NotificationGUI {
 
                 root.getChildren().add(parentPane);
                 Scene scene = new Scene(root, 500, 300);
-                //Point p = MouseInfo.getPointerInfo().getLocation();
                   ImageView notificationIcon =(ImageView) ClientView.mainStage.getScene().lookup("#notificationButton");
                                
                 if (ClientView.mainStage.getX() - notificationIcon.getLayoutX() - 250 <= 0) {
