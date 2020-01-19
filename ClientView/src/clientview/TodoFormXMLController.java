@@ -411,10 +411,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     }
 
     @FXML
-    private void showTodoStatisticsButtonAction(MouseEvent event) {
-    }
-
-    @FXML
-    private void showTodoStatisticsButtonAction(ActionEvent event) {
+    private void showTodoStatisticsButtonAction() {
+        ComponentDBOperations.getAllCheckBoxComponent(todo);        
     }
 }

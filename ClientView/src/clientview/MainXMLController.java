@@ -498,9 +498,22 @@ public class MainXMLController implements Initializable {
         }
 
     }
+   
 
     @FXML
     private void showStatisticsButtonAction(ActionEvent event) {
+             try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("UserStatisticsFXML.fxml"));
+            Parent insertItemWindow = loader.load();
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner((Stage) mainBorderPane.getScene().getWindow());
+            Scene dialogScene = new Scene(insertItemWindow);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        } catch (IOException ex) {
+            Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
