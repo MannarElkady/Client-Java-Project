@@ -11,21 +11,12 @@ import Model.RequestEntity;
 import Model.entities.ItemEntity;
 import java.util.ArrayList;
 import Model.entities.AssignFriendTodoEntity;
+import Model.entities.UserAssignedToItem;
 import Model.entities.UserEntity;
-import clientview.ClientView;
 import clientview.ItemCollaboratorsXMLController;
 import clientview.TodoFormXMLController;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  *
@@ -206,6 +197,22 @@ public class ItemDBOperations {
                     }
                 }
             });*/
+        }
+    }
+    
+    public static void exitFromAnITem(UserAssignedToItem user){
+        ArrayList<UserAssignedToItem> list = new ArrayList<>();
+        list.add(user);
+        RequestEntity<UserAssignedToItem> updateRequest = new RequestEntity("ItemDBOperations", "exitCollaboratorFromItem", list);
+        Handler.sendRequestToServer(updateRequest);
+    }
+    
+    public void exitFromAnItemResponse(ArrayList<UserAssignedToItem> users){
+        if(users!=null && users.size()!=0){
+            System.out.println("User exit successfully");
+            TodoListDBOperations.getAllItems(TodoFormXMLController.todo);
+        }else{
+            System.out.println("User couldn't exit from the item!");
         }
     }
 }

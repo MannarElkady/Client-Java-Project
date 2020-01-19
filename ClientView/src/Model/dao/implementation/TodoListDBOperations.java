@@ -11,6 +11,7 @@ import Model.RequestEntity;
 import Model.entities.AssignFriendTodoEntity;
 import Model.entities.TodoCollaboratorEntity;
 import Model.entities.TodoEntity;
+import Model.entities.UserAssignedToItem;
 import Model.entities.UserEntity;
 import clientview.ClientView;
 import clientview.TodoFormXMLController;
@@ -113,37 +114,9 @@ public class TodoListDBOperations {
         if (items == null || items.size() == 0) {
         } else {
             TodoFormXMLController.setItems(items);
-
         }
-
-        Platform.runLater(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    ClientView.mainStage.setWidth(885);
-                    ClientView.mainStage.setHeight(720);
-                    Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
-                    Scene scene = ClientView.mainStage.getScene();
-                    //root.translateYProperty().set(scene.getHeight());
-                    //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());
-                    //ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
-                    scene.setRoot(root);
-
-                    /*Timeline timeLine = new Timeline();
-            KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
-            KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
-            timeLine.getKeyFrames().add(kf);
-            timeLine.play();*/
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-                getTodoCollaborators(TodoFormXMLController.todo);
-            }
-        });
-        //ItemEntity item=new ItemEntity();
-        //item.setItemID(6);
-        //ItemDBOperations.getItemCollaborators(item);
+        getTodoCollaborators(TodoFormXMLController.todo);
+        gotAllItemsCollaborators(TodoFormXMLController.todo);
     }
 
     public static void getTodoCollaborators(TodoEntity todo) {
@@ -155,7 +128,7 @@ public class TodoListDBOperations {
 
     public void getToDoCollaboratorsResonse(ArrayList<UserEntity> collabotarors) {
         //clear
-        TodoFormXMLController.clearTest();
+        TodoFormXMLController.clearCollaboratorList();
         if (collabotarors == null || collabotarors.size() == 0) {
             System.out.println("No Items");
         } else {
@@ -173,16 +146,7 @@ public class TodoListDBOperations {
                     ClientView.mainStage.setHeight(720);
                     Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
                     Scene scene = ClientView.mainStage.getScene();
-                    //root.translateYProperty().set(scene.getHeight());
-                    //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());
-                    //ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
                     scene.setRoot(root);
-
-                    /*Timeline timeLine = new Timeline();
-            KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
-            KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
-            timeLine.getKeyFrames().add(kf);
-            timeLine.play();*/
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -302,5 +266,34 @@ public class TodoListDBOperations {
                 }
             });
         }
+    }
+    
+    public static void gotAllItemsCollaborators(TodoEntity todo) {
+        ArrayList<TodoEntity> list = new ArrayList<>();
+        list.add(todo);
+        RequestEntity<TodoEntity> addRequest = new RequestEntity("TodoListDBOperations", "gotAllItemsCollaborators", list);
+        Handler.sendRequestToServer(addRequest);
+    }
+
+    public void gotAllItemsCollaboratorsResponse(ArrayList<UserAssignedToItem> collabotarors) {
+        //clear
+        TodoFormXMLController.clearCollaboratorsList();
+        if (collabotarors == null || collabotarors.size() == 0) {
+            System.out.println("No Collaborators Assigned to items");
+        } else {
+            System.out.println("retrieved collaborators successfully!");
+            TodoFormXMLController.setItemsCollaborators(collabotarors);
+        }
+        Platform.runLater(()->{
+                try {
+                    ClientView.mainStage.setWidth(885);
+                    ClientView.mainStage.setHeight(720);
+                    Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
+                    Scene scene = ClientView.mainStage.getScene();
+                    scene.setRoot(root);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
     }
 }

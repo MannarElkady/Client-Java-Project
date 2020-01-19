@@ -19,6 +19,7 @@ import Model.entities.ComponentEntity;
 import Model.entities.ItemEntity;
 import Model.entities.TodoCollaboratorEntity;
 import Model.entities.TodoEntity;
+import Model.entities.UserAssignedToItem;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
@@ -110,6 +111,8 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     private BorderPane rootPane;
 
     public static TodoEntity todo = new TodoEntity();
+    public static ArrayList<UserAssignedToItem> usersAssignedToItem = new ArrayList<>();
+    
     @FXML
     private JFXButton homeButton;
 
@@ -162,7 +165,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
         itemList.clear();
     }
 
-    public static void clearTest() {
+    public static void clearCollaboratorList() {
         usersList.clear();
         todoCollaborators.clear();
     }
@@ -197,16 +200,6 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 //        Scene scene = new Scene(root);
 //        stage.setScene(scene);
 //        stage.show();
-    }
-
-    public void setCollaboratorsDummy() {
-        UserEntity user = new UserEntity();
-        user.setUsername("colaborayaa");
-        usersList.add(user);
-        usersList.add(user);
-        usersList.add(user);
-        usersList.add(user);
-        usersList.add(user);
     }
 
     public void setCollaboratorsPanes() {
@@ -290,8 +283,6 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 generateItemButtonUi(editItemDetails, new ItemUpdatingActionListener(stage, item));
                 deleteItem = new JFXButton("Delete");
                 generateItemButtonUi(deleteItem, new ItemDeletingActionListener(item));
-                exitItem = new JFXButton("Exit");
-                generateItemButtonUi(exitItem, new ItemExitingActionListener(item));
                 itemButtonsGrid.add(descriptionAndDeadline, 0, 0, 5, 1);
                 itemButtonsGrid.add(showItem, 0, 1);            
                 itemButtonsGrid.add(showItemCollaborators, 2, 1);
@@ -299,8 +290,15 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                     itemButtonsGrid.add(editItemDetails, 3, 1);
                     itemButtonsGrid.add(deleteItem, 4, 1);
                     itemButtonsGrid.add(addItemCollaborator, 1, 1);
-                }else{
-                    itemButtonsGrid.add(exitItem,5, 1);
+                }
+                if(usersAssignedToItem!=null){
+                    for(int j =0 ;j<usersAssignedToItem.size();j++){
+                        if(ClientView.currentUser.getId() == usersAssignedToItem.get(j).getId() && item.getItemID() == usersAssignedToItem.get(j).getItemId()){
+                            exitItem = new JFXButton("Exit");
+                            generateItemButtonUi(exitItem, new ItemExitingActionListener(usersAssignedToItem.get(j)));
+                            itemButtonsGrid.add(exitItem,5, 1);
+                        }
+                    }
                 }
                 itemInList = new TitledPane(item.getTitle(), itemButtonsGrid);
                 itemInList.setPadding(new Insets(5, 5, 5, 5));
@@ -406,5 +404,13 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     public void handle(ActionEvent event) {
         ComponentEntity componentEntity = new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(), null, null, 0);
         ComponentDBOperations.retrieveAllComponent(componentEntity);
+    }
+    
+    public static void clearCollaboratorsList(){
+        usersAssignedToItem.clear();
+    }
+    
+    public static void setItemsCollaborators(ArrayList<UserAssignedToItem> users){
+        usersAssignedToItem = users;
     }
 }
