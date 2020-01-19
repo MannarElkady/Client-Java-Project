@@ -56,7 +56,10 @@
                </graphic>
                <font>
                   <Font name="Open Sans" size="14.0" />
-               </font></JFXButton>
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></JFXButton>
             <ImageView fx:id="userImg" fitHeight="50.0" fitWidth="50.0" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
                   <Image url="@resources/m.png" />
@@ -70,6 +73,9 @@
                </GridPane.margin>
             </ImageView>
          </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
       </GridPane>
    </top>
    <center>
@@ -94,28 +100,48 @@
                      <content>
                         <JFXMasonryPane fx:id="jMasonaryPane" />
                      </content>
+                     <StackPane.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </StackPane.margin>
                   </ScrollPane>
                </children>
             </StackPane>
          </center>
+         <BorderPane.margin>
+            <Insets left="5.0" />
+         </BorderPane.margin>
       </BorderPane>
    </center>
    <left>
-      <BorderPane BorderPane.alignment="CENTER">
-         <center>
-            <BorderPane>
-               <center>
-                  <JFXListView fx:id="friendListPane" showTooltip="true" />
-               </center>
-            </BorderPane>
-         </center>
-         <top>
-            <Label text="Friends" BorderPane.alignment="CENTER">
+      <GridPane BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="5.0" />
+         </BorderPane.margin>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="30.0" minHeight="30.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="100.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Friends" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <font>
                   <Font name="Open Sans" size="22.0" />
                </font>
             </Label>
-         </top>
-      </BorderPane>
+            <JFXListView fx:id="friendListPane" prefHeight="200.0" showTooltip="true" GridPane.rowIndex="1" />
+            <JFXButton buttonType="RAISED" style="-fx-background-color: #97CAEF; -fx-border-radius: 30; -fx-background-radius: 30;" text="Remove Friend" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </GridPane>
    </left>
 </BorderPane>
