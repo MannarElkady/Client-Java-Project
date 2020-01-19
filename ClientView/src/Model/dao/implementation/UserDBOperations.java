@@ -85,6 +85,8 @@ public class UserDBOperations {
 
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
+                ClientView.mainStage.setWidth(700);
+                ClientView.mainStage.setHeight(480);
                 Scene scene = ClientView.mainStage.getScene();
                 //     root.translateYProperty().set(scene.getHeight());
                 scene.setRoot(root);

@@ -27,6 +27,7 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
@@ -48,7 +49,7 @@
                </image></ImageView>
             <JFXButton fx:id="addTodo" buttonType="RAISED" onAction="#addTodoAction" text="New Todo" textFill="#070101" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" preserveRatio="true">
+                  <ImageView fitHeight="60.0" fitWidth="60.0" preserveRatio="true">
                      <image>
                         <Image url="@resources/add.png" />
                      </image>
@@ -64,14 +65,26 @@
                <image>
                   <Image url="@resources/m.png" />
                </image></ImageView>
-            <ImageView fx:id="notificationButton" fitHeight="57.0" fitWidth="64.0" onMouseClicked="#viewNotificationList" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1">
+            <ImageView fx:id="notificationButton" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#viewNotificationList" preserveRatio="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
                   <Image url="@resources/notification.jpg" />
                </image>
                <GridPane.margin>
-                  <Insets left="15.0" />
+                  <Insets />
                </GridPane.margin>
             </ImageView>
+            <JFXButton fx:id="showStatisticsButton" buttonType="RAISED" onAction="#showStatisticsButtonAction" text=" " GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#viewNotificationList" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/statistics.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" />
@@ -81,12 +94,12 @@
    <center>
       <BorderPane fx:id="stackPaneBorder" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <top>
-            <Label style="-fx-background-color: #d3d3d3; -fx-background-radius: 70; -fx-border-radius: 70;" text="    Available Todos    " BorderPane.alignment="TOP_LEFT">
+            <Label style="-fx-background-color: #d3d3d3; -fx-background-radius: 70; -fx-border-radius: 70;" text="    Available Todos    " BorderPane.alignment="CENTER">
                <font>
                   <Font name="Open Sans" size="22.0" />
                </font>
                <BorderPane.margin>
-                  <Insets left="8.0" top="8.0" />
+                  <Insets top="8.0" />
                </BorderPane.margin> 
             </Label>
          </top>
