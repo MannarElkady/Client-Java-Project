@@ -42,26 +42,10 @@ public class ComponentDBOperations {
 
     public void addComponentResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Add Component");
-                    alert.setContentText("Component Added Succsessfuly");
-                    alert.showAndWait();
-                }
-            });
+           
         } else {
 
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Add Component");
-                    alert.setContentText("Component  Not Added ");
-                    alert.showAndWait();
-                }
-            });
+
         }
     }
 
@@ -73,25 +57,9 @@ public class ComponentDBOperations {
 
     public void updateComponentResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null && arrayObjects.size() != 0) {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Update Component");
-                    alert.setContentText("Component Updated Succsessfuly");
-                    alert.showAndWait();
-                }
-            });
+ 
         } else {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Update Component");
-                    alert.setContentText("Component Not Updated ");
-                    alert.showAndWait();
-                }
-            });
+   
         }
     }
 
