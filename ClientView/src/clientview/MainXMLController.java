@@ -122,6 +122,8 @@ public class MainXMLController implements Initializable {
     }
     @FXML
     private JFXButton showStatisticsButton;
+    @FXML
+    private JFXButton removeFriendButton;
 
     public void setFriendListDummy() {
         UserEntity useraya = new UserEntity();
@@ -499,6 +501,10 @@ public class MainXMLController implements Initializable {
 
     @FXML
     private void showStatisticsButtonAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void removeFriendButtonAction(ActionEvent event) {
     }
 
 }
