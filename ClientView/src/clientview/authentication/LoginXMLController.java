@@ -84,7 +84,6 @@ public class LoginXMLController implements Initializable {
 
     @FXML
     private void signUpAction(ActionEvent event) {
-
         try {
 
             Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/RegisterXML.fxml"));

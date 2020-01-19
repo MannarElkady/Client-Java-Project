@@ -84,7 +84,6 @@ public class AddCollaboratorTodoController implements Initializable {
             }
         }
     }
-
     private void prepareNotification() {
 
         ArrayList<Object> data = new ArrayList<>();

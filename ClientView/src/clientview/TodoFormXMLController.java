@@ -146,6 +146,8 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     public static ItemEntity itemSelected = new ItemEntity();
     // public Stage stage= (Stage) rootPane.getScene().getWindow();
     public Stage stage = ClientView.mainStage;
+    @FXML
+    private JFXButton showTodoStatisticsButton;
 
     /**
      * Initializes the controller class.
@@ -382,7 +384,9 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
 
     private void updateUi() {
         todoNameLabel.setText(todo.getTitle());
-        borderZft.setStyle("-fx-background-color:#"+todo.getColor().substring(2));
+        if(todo.getColor()!=null){
+            borderZft.setStyle("-fx-background-color:#"+todo.getColor().substring(2));
+        }
         borderZft.setPadding(new Insets(5,5,5,5));
         todoNameLabel.setFont(new Font("Open Sans",24));
         todoNameLabel.setStyle("-fx-font-weight: bold;");
@@ -412,5 +416,10 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
     
     public static void setItemsCollaborators(ArrayList<UserAssignedToItem> users){
         usersAssignedToItem = users;
+    }
+    
+    @FXML
+    private void showTodoStatisticsButtonAction() {
+        ComponentDBOperations.getAllCheckBoxComponent(todo);        
     }
 }

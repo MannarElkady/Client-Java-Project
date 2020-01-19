@@ -44,6 +44,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -68,7 +69,7 @@ import javafx.stage.StageStyle;
  * @author DELL
  */
 public class MainXMLController implements Initializable {
-
+    
     @FXML
     private JFXButton addFriendBtn;
     @FXML
@@ -84,7 +85,6 @@ public class MainXMLController implements Initializable {
 
     @FXML
     ImageView notificationButton;
-    @FXML
     MenuItem notificationItem;
     public static ArrayList<NotificationEntity> notificationsListForOtherClasses = new ArrayList<>();
 
@@ -109,9 +109,12 @@ public class MainXMLController implements Initializable {
     @FXML
     private BorderPane stackPaneBorder;
 
-    @FXML
     private JFXListView<BorderPane> listView;
 
+    @FXML
+    private Label usernameLabel;
+    @FXML
+    private MenuButton userMenuButton;
     static ArrayList<NotificationEntity> notificationListData = new ArrayList<>();
 
     ArrayList<String> friendsList = new ArrayList();
@@ -122,6 +125,10 @@ public class MainXMLController implements Initializable {
         notificationListData = notifications;
 
     }
+    @FXML
+    private JFXButton showStatisticsButton;
+    @FXML
+    private JFXButton removeFriendButton;
 
     public void setFriendListDummy() {
         UserEntity useraya = new UserEntity();
@@ -248,7 +255,7 @@ public class MainXMLController implements Initializable {
         //jMasonaryPane.setCache(false);
         stackPaneBorder.setCenter(stackPane);
         int rows = jMasonaryPane.getLimitRow();
-
+        
         prpareNotificationMenu();
         //viewNotificationList();
         //loadNotificationMenu(notificationListData);
@@ -445,6 +452,27 @@ public class MainXMLController implements Initializable {
         NotificationDBOperations.receiveNotifications(users);
     }
 
+    @FXML
+    private void removeFriendAction(){
+    
+          Platform.runLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        try {    
+                        Parent root = FXMLLoader.load(getClass().getResource("/clientview/removeFriendsXML.fxml"));
+                        Stage stage = new Stage(StageStyle.DECORATED);
+                        Scene scene = new Scene(root, 400, 300);
+                        stage.setScene(scene);
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.show();                
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+        
+    }
     private void loadNotificationMenu(ArrayList<NotificationEntity> notificationsList) {
 
         notificationsListForOtherClasses.clear();
@@ -494,6 +522,31 @@ public class MainXMLController implements Initializable {
             //menuButton.getItems().add(new MenuItem("",parentPane));
             //listView.getItems().add(myObservableList);
         }
+
+    }
+
+    @FXML
+    private void createUserMenu(){           
+         new UserMenuGUI(); // create uesr menu
+    }
+    @FXML
+    private void showStatisticsButtonAction(ActionEvent event) {
+             try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("UserStatisticsFXML.fxml"));
+            Parent insertItemWindow = loader.load();
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner((Stage) mainBorderPane.getScene().getWindow());
+            Scene dialogScene = new Scene(insertItemWindow);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        } catch (IOException ex) {
+            Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void removeFriendButtonAction(ActionEvent event) {
 
     }
 

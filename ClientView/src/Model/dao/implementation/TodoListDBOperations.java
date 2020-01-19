@@ -250,7 +250,7 @@ public class TodoListDBOperations {
             });
         } else {
 
-            TodoFormXMLController.todo = null;
+//            TodoFormXMLController.todo = null;
             if (TodoFormXMLController.todo.getCreatorId() == ((UserEntity) value.get(0)).getId() && ClientView.currentUser.getId() == ((UserEntity) value.get(0)).getId() && ClientView.whichScreen.equals("" + TodoFormXMLController.todo.getId())) {
                 getAllItems(TodoFormXMLController.todo);
             } else {

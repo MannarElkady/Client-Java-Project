@@ -32,6 +32,7 @@ import Model.dao.implementation.UserDBOperations;
 import Model.entities.ItemEntity;
 import java.time.ZoneId;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.stage.WindowEvent;
 
 /**
@@ -113,7 +114,7 @@ public class InsertItemXMLController implements Initializable {
         }
     }
     private void addItemEntity() {
-        if (Validation.checkString(titleTextField.getText()) && (Validation.checkString(descriptionTextArea.getText()))) {
+        if (Validation.checkString(titleTextField.getText())) {
             if (dateDateField.getValue() != null) {
                 if(Validation.checkDeadlineItem(java.sql.Date.valueOf(dateDateField.getValue()), TodoFormXMLController.todo.getAssignDate(), TodoFormXMLController.todo.getDeadlineDate())){
                 newItemEntity = new ItemEntity();
@@ -124,7 +125,28 @@ public class InsertItemXMLController implements Initializable {
                 newItemEntity.setDeadlineDate(java.sql.Date.valueOf(dateDateField.getValue()));
                 ItemDBOperations.addItem(newItemEntity);
                 }
+                else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Can't Submit");
+                    alert.setHeaderText("Date duration ERROR");
+                    alert.setContentText("Please make sure that item deadline is within Todo Duration");
+                    alert.show();
+                }
             }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Come On ?");
+                alert.setHeaderText("Are You Kidding me?");
+                alert.setContentText("To avoid procrastination you should determine a Deadline date");
+                alert.show();
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Can't Submit");
+            alert.setHeaderText("No Title Entered");
+            alert.setContentText("Title can't be Empty..");
+            alert.show();
         }
     }
 
