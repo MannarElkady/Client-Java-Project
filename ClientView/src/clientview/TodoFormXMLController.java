@@ -407,4 +407,10 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
         ComponentEntity componentEntity = new ComponentEntity(TodoFormXMLController.itemSelected.getItemID(), null, null, 0);
         ComponentDBOperations.retrieveAllComponent(componentEntity);
     }
+    
+    @FXML
+    private void showTodoStatisticsButtonAction() {
+        ComponentDBOperations.getAllCheckBoxComponent(todo);
+        
+    }
 }
