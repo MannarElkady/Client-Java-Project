@@ -34,17 +34,19 @@ public class Validation {
     public static boolean checkDeadlineItem(Date taskDate, Date todoASsign, Date todoDeadline) {
         if(taskDate.after(todoASsign) && taskDate.before(todoDeadline)) {
             return true;
-        } else {
-            return false;
+        } else if(todoDeadline.equals(todoASsign) &&todoDeadline.equals(taskDate)) {
+            return true;
         }
+        return false;
     }
 
     public static boolean checkDeadlineAssignTodo(Date todoASsign, Date todoDeadline) {
         if(todoDeadline.after(todoASsign)) {
             return true;
-        } else {
-            return false;
+        } else if(todoDeadline.equals(todoASsign)){
+            return true;
         }
+        return false;
     }
     public static boolean checkUsernameRegex(String username) {
         String regex = "[a-zA-Z0-9\\._\\-]{5,}";
