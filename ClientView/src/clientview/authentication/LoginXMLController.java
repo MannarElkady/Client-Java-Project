@@ -88,7 +88,11 @@ public class LoginXMLController implements Initializable {
         try {
 
             Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/RegisterXML.fxml"));
+            ClientView.mainStage.setWidth(650);
+            ClientView.mainStage.setHeight(640);
             Scene scene = ClientView.mainStage.getScene();
+            //scene.setWidth(555);
+            //scene.setHeight(534);
             scene.setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);

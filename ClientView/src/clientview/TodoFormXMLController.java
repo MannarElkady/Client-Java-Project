@@ -298,6 +298,7 @@ public class TodoFormXMLController implements Initializable, EventHandler<Action
                 }
                 itemInList = new TitledPane(item.getTitle(), itemButtonsGrid);
                 itemInList.setPadding(new Insets(5, 5, 5, 5));
+                itemInList.setId(String.valueOf(item.getItemID()));
                 itemInList.setFont(new Font("Open Sans", 18));
                 itemInList.expandedProperty().addListener(new TodoSelectedItemHandler(itemInList));
                 accordion.getPanes().add(itemInList);
