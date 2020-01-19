@@ -92,15 +92,11 @@
                   <Font name="Open Sans" size="12.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="notificationButton" buttonType="RAISED" onAction="#notificationButtonAction" text="  " GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <graphic>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@resources/notification.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
+            <ImageView fx:id="notificationButton" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#notificationButtonAction" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@resources/notification.jpg" />
+               </image>
+            </ImageView>
             <ImageView fx:id="leaveTodo" fitHeight="55.0" fitWidth="63.0" onMouseClicked="#leaveTodoAction" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
                   <Image url="@resources/exit2.png" />
