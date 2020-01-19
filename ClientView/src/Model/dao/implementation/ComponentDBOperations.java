@@ -22,6 +22,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -33,7 +34,7 @@ import javafx.stage.StageStyle;
 public class ComponentDBOperations {
 
     public static void addComponent(ArrayList<Object> componentsList) {
-        Stage dialog = null; 
+        Stage dialog = null;
         RequestEntity<ComponentEntity> addRequest = new RequestEntity("ComponentDBOperations", "addComponent", componentsList);
         System.out.println(GsonParser.parseToJson(addRequest));
         Handler.sendRequestToServer(addRequest);
@@ -41,9 +42,26 @@ public class ComponentDBOperations {
 
     public void addComponentResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
-            System.out.println("Componetet Added  successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Add Component");
+                    alert.setContentText("Component Added Succsessfuly");
+                    alert.showAndWait();
+                }
+            });
         } else {
-            System.out.println("Compenedntd  not added successfully" + arrayObjects.size());
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Add Component");
+                    alert.setContentText("Component  Not Added ");
+                    alert.showAndWait();
+                }
+            });
         }
     }
 
@@ -55,9 +73,25 @@ public class ComponentDBOperations {
 
     public void updateComponentResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null && arrayObjects.size() != 0) {
-            System.out.println("Component Updated successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Update Component");
+                    alert.setContentText("Component Updated Succsessfuly");
+                    alert.showAndWait();
+                }
+            });
         } else {
-            System.out.println("Component not updated");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Update Component");
+                    alert.setContentText("Component Not Updated ");
+                    alert.showAndWait();
+                }
+            });
         }
     }
 
@@ -71,9 +105,25 @@ public class ComponentDBOperations {
 
     public void deleteComponentResponse(ArrayList<Object> arrayObjects) {
         if (arrayObjects != null) {
-            System.out.println("Item Deleted   successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Delete Component");
+                    alert.setContentText("Component Deleted Succsessfuly");
+                    alert.showAndWait();
+                }
+            });
         } else {
-            System.out.println("Item not added successfully");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Delete Component");
+                    alert.setContentText("Component Not Deleted ");
+                    alert.showAndWait();
+                }
+            });
         }
     }
 
@@ -123,7 +173,7 @@ public class ComponentDBOperations {
         if (arrayObjects != null && arrayObjects.size() != 0) {
             System.out.println("You have the component successfully");
             TodoStatisticsController.setComponentList(arrayObjects);
-              Platform.runLater(() -> {
+            Platform.runLater(() -> {
                 try {
                     Parent root;
                     root = FXMLLoader.load(getClass().getResource("/clientview/TodoStatistics.fxml"));
@@ -141,7 +191,7 @@ public class ComponentDBOperations {
         } else {
             System.out.println("Zero components");
         }
-       
+
     }
 
 }
