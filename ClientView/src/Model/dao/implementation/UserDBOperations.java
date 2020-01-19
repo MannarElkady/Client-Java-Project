@@ -71,7 +71,6 @@ public class UserDBOperations {
 
     public void registerResponse(ArrayList<Object> object) {
         if (object == null || object.isEmpty()) {
-            System.out.println("registration failed");
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -111,7 +110,6 @@ public class UserDBOperations {
 
     public void getAllTodosResonse(ArrayList<Object> items) {
         if (items == null || items.size() == 0) {
-            System.out.println("No Items");
             MainXMLController.setTodos(null);
         } else {
             MainXMLController.setTodos(items);
@@ -123,9 +121,8 @@ public class UserDBOperations {
             public void run() {
                 try {
 
-                    
-                    /*ClientView.mainStage.setWidth(885);
-                    ClientView.mainStage.setHeight(720);*/
+                    ClientView.mainStage.setWidth(885);
+                    ClientView.mainStage.setHeight(720);
                     Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
 
                     Scene scene = ClientView.mainStage.getScene();
@@ -134,8 +131,7 @@ public class UserDBOperations {
                     // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
                     ClientView.mainStage.setResizable(true);
                     scene.setRoot(root);
-                                                
-                   
+
                     /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
@@ -159,11 +155,8 @@ public class UserDBOperations {
 
         if (items == null || items.isEmpty()) {
 
-            System.out.println("hi hema");
-
         } else {
             if (AddCollaboratorTodoController.isAddCollaborator == false) {
-                System.out.println("Hiiiiii  from add" + AddCollaboratorTodoController.isAddCollaborator);
 
                 Platform.runLater(new Runnable() {
 
@@ -171,6 +164,8 @@ public class UserDBOperations {
                     public void run() {
                         try {
 
+                            ClientView.mainStage.setWidth(885);
+                            ClientView.mainStage.setHeight(720);
                              /*ClientView.mainStage.setWidth(885);
                             ClientView.mainStage.setHeight(720);*/
                             MainXMLController.setFriendList(items);
@@ -181,7 +176,6 @@ public class UserDBOperations {
                             // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
                             scene.setRoot(root);
 
-                            
                             /*Timeline timeLine = new Timeline();
                 KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
                 KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
@@ -195,7 +189,6 @@ public class UserDBOperations {
 
             }
             if (AddCollaboratorTodoController.isAddCollaborator == true) {
-                System.out.println("Hiiiiii from main" + AddCollaboratorTodoController.isAddCollaborator);
 
                 Platform.runLater(new Runnable() {
 
@@ -231,7 +224,16 @@ public class UserDBOperations {
 
     public void addFrindResponse(ArrayList<Object> object) {
         if (object == null || object.size() == 0) {
-            System.out.println("Not Exist");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText(null);
+                    alert.setContentText("this user is not Exist");
+                    alert.showAndWait();
+                }
+            });
         } else {
             try {
                 /*ClientView.mainStage.setWidth(885);
@@ -241,7 +243,7 @@ public class UserDBOperations {
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
                 Scene scene = ClientView.mainStage.getScene();
                 scene.setRoot(root);
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -256,12 +258,9 @@ public class UserDBOperations {
     }
 
     public void getAllUsersResonse(ArrayList<UserEntity> object) {
-        System.out.println("oooo" + object.size());
         if (object == null || object.size() == 0) {
-            System.out.println("zero of users");
         } else {
             Platform.runLater(new Runnable() {
-
                 @Override
                 public void run() {
 

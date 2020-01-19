@@ -17,7 +17,7 @@
    <bottom>
       <JFXButton fx:id="addCollaboratorButton" buttonType="RAISED" defaultButton="true" lineSpacing="5.0" minWidth="200.0" onAction="#addCollaboratorButtonAction" prefHeight="32.0" prefWidth="469.0" style="-fx-background-color: #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" text="Add" BorderPane.alignment="CENTER">
          <font>
-            <Font name="Bodoni MT Black" size="18.0" />
+            <Font name="Open Sansk" size="18.0" />
          </font>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

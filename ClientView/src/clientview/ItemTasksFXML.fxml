@@ -26,7 +26,7 @@
                            <right>
                               <JFXButton fx:id="addNotes" buttonType="RAISED" onAction="#addNotesAction" style="-fx-background-color: #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" text="Add" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font name="Bodoni MT" size="23.0" />
+                                    <Font name="Open Sans" size="23.0" />
                                  </font>
                                  <BorderPane.margin>
                                     <Insets left="10.0" right="5.0" />
@@ -63,7 +63,7 @@
                            <right>
                               <JFXButton fx:id="addTasks" buttonType="RAISED" onAction="#addTasksAction" style="-fx-background-color: #97CAEF #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" text="Add" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font name="Bodoni MT" size="23.0" />
+                                    <Font name="Open Sans" size="23.0" />
                                  </font>
                                  <BorderPane.margin>
                                     <Insets left="10.0" right="5.0" />
@@ -116,7 +116,7 @@
          <children>
             <JFXButton fx:id="finishBtn" buttonType="RAISED" onAction="#finishBtnAction" style="-fx-background-color: #97CAEF #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" text="Finish">
                <font>
-                  <Font name="Bodoni MT" size="23.0" />
+                  <Font name="Open Sans" size="23.0" />
                </font>
                <HBox.margin>
                   <Insets left="240.0" top="20.0" />
@@ -124,7 +124,7 @@
             </JFXButton>
             <JFXButton fx:id="cancelBtn" buttonType="RAISED" onAction="#cancelBtnAction" style="-fx-background-color: #97CAEF #97CAEF; -fx-background-radius: 30; -fx-border-radius: 30;" text="Cancel">
                <font>
-                  <Font name="Bodoni MT" size="23.0" />
+                  <Font name="Open Sans" size="23.0" />
                </font>
                <HBox.margin>
                   <Insets left="10.0" top="20.0" />

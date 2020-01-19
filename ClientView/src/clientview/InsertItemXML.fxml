@@ -29,7 +29,7 @@
          <children>
             <Label text="Insert New Item" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Blackadder ITC" size="36.0" />
+                  <Font name="Open Sans" size="26.0" />
                </font>
             </Label>
             <JFXButton fx:id="backButton" alignment="CENTER" blendMode="LIGHTEN" buttonType="RAISED" onAction="#backButtonAction" text="  " textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
@@ -65,27 +65,27 @@
          <children>
             <Label text="Title" textFill="#22689a" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Algerian" size="18.0" />
+                  <Font name="Open Sans" size="18.0" />
                </font>
             </Label>
             <Label text="Description" textFill="#22689a" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Algerian" size="18.0" />
+                  <Font name="Open Sans" size="18.0" />
                </font>
             </Label>
             <Label text="Deadline Date" textFill="#22689a" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Algerian" size="18.0" />
+                  <Font name="Open Sans" size="18.0" />
                </font>
             </Label>
             <JFXTextField fx:id="titleTextField" promptText="Enter Title Here..." GridPane.columnIndex="1">
                <font>
-                  <Font name="Bodoni MT" size="12.0" />
+                  <Font name="Open Sans" size="12.0" />
                </font>
             </JFXTextField>
             <JFXTextArea fx:id="descriptionTextArea" promptText="Enter Item Description Here..." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Bodoni MT" size="12.0" />
+                  <Font name="Open Sans" size="12.0" />
                </font>
             </JFXTextArea>
             <JFXDatePicker fx:id="dateDateField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="444.0" promptText="Select a date" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
@@ -108,12 +108,12 @@
          <children>
             <JFXButton fx:id="submitNewItemButton" buttonType="RAISED" onAction="#submitNewItemButtonAction" style="-fx-background-color: #c38d9e #c38d9e #c38d9e; -fx-background-radius: 30; -fx-border-radius: 30;" text="Add" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Bodoni MT Bold Italic" size="24.0" />
+                  <Font name="Open Sans" size="24.0" />
                </font>
             </JFXButton>
             <JFXButton fx:id="resetItemFormButton" buttonType="RAISED" onAction="#resetItemFormButtonAction" style="-fx-background-color: #c38d9e #c38d9e #c38d9e; -fx-background-radius: 30; -fx-border-radius: 30;" text="Reset" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Bodoni MT Bold Italic" size="24.0" />
+                  <Font name="Open Sans" size="24.0" />
                </font>
             </JFXButton>
          </children>
