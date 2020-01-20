@@ -162,7 +162,7 @@ public class UserDBOperations {
                     @Override
                     public void run() {
                         try {
-
+                            
                             ClientView.mainStage.setWidth(885);
                             ClientView.mainStage.setHeight(720);
                             /*ClientView.mainStage.setWidth(885);
