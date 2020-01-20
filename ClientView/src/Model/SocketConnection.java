@@ -48,7 +48,7 @@ public class SocketConnection extends Thread {
         socket = null;
         try {
             if (socket == null) {
-                socket = new Socket("127.0.0.1", 5005);
+                socket = new Socket("192.168.43.154", 5005);
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 printStream = new PrintStream(socket.getOutputStream());
                 checkFirstTime = true;
