@@ -162,7 +162,7 @@ public class UserDBOperations {
                     @Override
                     public void run() {
                         try {
-                            
+
                             ClientView.mainStage.setWidth(885);
                             ClientView.mainStage.setHeight(720);
                             /*ClientView.mainStage.setWidth(885);
@@ -234,19 +234,24 @@ public class UserDBOperations {
                 }
             });
         } else {
-            try {
-                /*ClientView.mainStage.setWidth(885);
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        /*ClientView.mainStage.setWidth(885);
                 ClientView.mainStage.setHeight(720);*/
-                getFrinds(ClientView.currentUser);
-                System.out.println("Add Successfuly");
-                Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
-                Scene scene = ClientView.mainStage.getScene();
-                scene.setRoot(root);
-
-            } catch (IOException ex) {
-                Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                        getFrinds(ClientView.currentUser);
+                        System.out.println("Add Successfuly");
+                        Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
+                        Scene scene = ClientView.mainStage.getScene();
+                        scene.setRoot(root);
+                    } catch (IOException ex) {
+                        Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
         }
+
     }
 
     public static void getAllUsers(UserEntity user) {
