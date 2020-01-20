@@ -159,6 +159,7 @@ public class UserDBOperations {
         if (items == null || items.isEmpty()) {
 
         } else {
+            MainXMLController.setFriendList(items);
             AddCollaboratorTodoController.setTodoFriendList(items);
 
         }
