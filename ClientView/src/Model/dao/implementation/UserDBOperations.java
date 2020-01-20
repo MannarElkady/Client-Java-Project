@@ -7,11 +7,14 @@ package Model.dao.implementation;
 
 import Model.Handler;
 import Model.RequestEntity;
+import static Model.dao.implementation.TodoListDBOperations.getAllItems;
+import Model.entities.FriendsEntity;
 import Model.entities.UserEntity;
 import clientview.AddCollaboratorTodoController;
 import clientview.AddFrindFXMLController;
 import clientview.ClientView;
 import clientview.MainXMLController;
+import clientview.TodoFormXMLController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -295,6 +298,30 @@ public class UserDBOperations {
         } else {
 
             System.out.println("logout Ok");
+        }
+    }
+    
+    public static void removeFriend(int currentUserID , int friendID){
+        ArrayList<FriendsEntity> friendEntityList = new ArrayList<>();
+        FriendsEntity friendEntity = new FriendsEntity(currentUserID, friendID);
+        RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "removeFriend", friendEntityList);
+        Handler.sendRequestToServer(request);
+    }
+
+    public void removeFriendResponse(ArrayList<Object> object){       
+         if (object == null || object.size() == 0) {
+             Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Error in deleting this friend");
+                    alert.showAndWait();
+                }
+            });
+        } else {
+             UserDBOperations.getAllTodos(ClientView.currentUser);            
         }
     }
 

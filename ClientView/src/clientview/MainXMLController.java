@@ -453,8 +453,8 @@ public class MainXMLController implements Initializable {
     }
 
     @FXML
-    private void removeFriendAction(){
-    
+    private void removeFriendButtonAction(){
+        System.out.println("yesy");
           Platform.runLater(new Runnable() {
 
                     @Override
@@ -544,10 +544,6 @@ public class MainXMLController implements Initializable {
             Logger.getLogger(TodoFormXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    @FXML
-    private void removeFriendButtonAction(ActionEvent event) {
-
-    }
+  
 
 }

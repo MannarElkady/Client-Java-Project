@@ -1,6 +1,7 @@
 package Model;
 
 import Model.entities.ComponentEntity;
+import Model.entities.FriendsEntity;
 import Model.entities.ItemEntity;
 import Model.entities.NotificationEntity;
 import Model.entities.TodoEntity;
@@ -23,7 +24,11 @@ public class GsonParser {
             System.out.println(request);
             switch (request.charAt(14)) {
                 case 'U':
-                    if (request.contains("getAllTodosResonse")) {
+                    if(request.contains("removeFriendResponse")){
+                      requestType = new TypeToken<RequestEntity<FriendsEntity>>() {
+                        }.getType();
+                    }
+                    else if (request.contains("getAllTodosResonse")) {
                         requestType = new TypeToken<RequestEntity<TodoEntity>>() {
                         }.getType();
                     } else {
@@ -70,6 +75,12 @@ public class GsonParser {
                     break;
                 case 'C':
                         requestType = new TypeToken<RequestEntity<ComponentEntity>>() {
+                        }.getType();
+                  
+                    break;
+                    
+                    case 'F':
+                        requestType = new TypeToken<RequestEntity<FriendsEntity>>() {
                         }.getType();
                   
                     break;

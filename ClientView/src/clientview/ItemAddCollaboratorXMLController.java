@@ -81,7 +81,18 @@ public class ItemAddCollaboratorXMLController implements Initializable {
     private void addCollaboratorButtonAction() { 
         if(!itemCollaboratorsComboBox.getValue().equals(""))        
             prepareNotification();
-        
+        else{
+             Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Info");
+                    alert.setHeaderText(null);
+                    alert.setContentText("You must enter the value before continue");
+                    alert.showAndWait();
+                }
+            });
+        }
     }
     
        private void prepareNotification() {

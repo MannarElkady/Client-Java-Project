@@ -11,14 +11,24 @@ import Model.entities.NotificationReceiversEntity;
 import Model.entities.UserEntity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -34,6 +44,8 @@ public class removeFriendXMLController implements Initializable {
     private JFXComboBox<String> itemCollaboratorsComboBox;
     @FXML
     private JFXButton addCollaboratorButton;
+    @FXML
+    private JFXButton removeFriendButton;
     /**
      * Initializes the controller class.
      */
@@ -62,33 +74,21 @@ public class removeFriendXMLController implements Initializable {
     }    
 
     
-    @FXML
-    private void addCollaboratorButtonAction() {
-         String value = itemCollaboratorsComboBox.getValue();
-        System.out.println("value = "+value);
-        
-    }
-    
-       private void prepareNotification(String todoName, String todoID) {
 
-        ArrayList<Object> data = new ArrayList<>();
-        NotificationEntity notification = new NotificationEntity();
-        notification.setHeader("Item Assign invitation");
-        notification.setText(ClientView.currentUser.getUsername() + " invited you to be collaborator on item " + TodoFormXMLController.itemSelected.getTitle());
-        notification.setNotificationType("itemInvitation" + TodoFormXMLController.itemSelected.getItemID());
-        notification.setSenderID(ClientView.currentUser.getId());
-       
-                /*    NotificationReceiversEntity notificationReceiver = new NotificationReceiversEntity();
-                for (int i = 0; i < test2.size(); i++) {
-                if (test2.get(i).getUsername().equals(dragSource.get().getItem())) {
-                notificationReceiver.setReceiverID(test2.get(i).getId());
-                }
-                }
-                ArrayList<NotificationReceiversEntity> receiversList = new ArrayList<>();
-                receiversList.add(notificationReceiver);
-                notification.setNotificationReceivers(receiversList);
-                data.add(notification);
-                NotificationDBOperations.sendNotification(data);*/;
-    }
     
+    @FXML
+    private void  removeFriendButtonAction(){
+        if(!itemCollaboratorsComboBox.getValue().equals("")){
+           if(todoCollaborators !=null){
+            for(int i=0; i<todoCollaborators.size();i++){
+                UserEntity collaborator= todoCollaborators.get(i);                
+                if(collaborator.getUsername().equals(itemCollaboratorsComboBox.getValue())){
+                    UserDBOperations.removeFriend(ClientView.currentUser.getId(),collaborator.getId());
+                }
+            }
+            ((Stage) removeFriendButton.getScene().getWindow()).close();
+           //removeFriendButton
+        }
+        }
+    }
 }
