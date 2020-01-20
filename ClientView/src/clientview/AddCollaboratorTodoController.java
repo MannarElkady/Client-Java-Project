@@ -75,7 +75,7 @@ public class AddCollaboratorTodoController implements Initializable {
     }
 
     public static void setTodoFriendList(ArrayList<UserEntity> a) {
-        userlist.clear();
+        /*userlist.clear();
         userlist = a;
         for (int i = 0; i < userlist.size(); i++) {
             for (int j = 0; j < TodoFormXMLController.todoCollaborators.size(); j++) {
@@ -83,7 +83,7 @@ public class AddCollaboratorTodoController implements Initializable {
                     userlist.remove(i);
                 }
             }
-        }
+        }*/
     }
     private void prepareNotification() {
 
