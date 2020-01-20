@@ -145,6 +145,7 @@ public class TodoListDBOperations {
                     ClientView.mainStage.sizeToScene();
                     ClientView.mainStage.setMinWidth(785);
                     ClientView.mainStage.setMinHeight(500);
+                    ClientView.mainStage.setResizable(true);
                     Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
                     Scene scene = ClientView.mainStage.getScene();
                     scene.setRoot(root);
@@ -188,6 +189,7 @@ public class TodoListDBOperations {
                         ClientView.mainStage.sizeToScene();
                         ClientView.mainStage.setMinWidth(785);
                         ClientView.mainStage.setMinHeight(500);
+                        ClientView.mainStage.setResizable(true);
                         root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
                         Scene scene = ClientView.mainStage.getScene();
                         scene.setRoot(root);
@@ -281,8 +283,10 @@ public class TodoListDBOperations {
         }
         Platform.runLater(()->{
                 try {
-                    ClientView.mainStage.setWidth(885);
-                    ClientView.mainStage.setHeight(720);
+                    ClientView.mainStage.sizeToScene();
+                        ClientView.mainStage.setMinHeight(500);
+                        ClientView.mainStage.setMinWidth(700);
+                        ClientView.mainStage.setResizable(true);
                     Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
                     Scene scene = ClientView.mainStage.getScene();
                     scene.setRoot(root);

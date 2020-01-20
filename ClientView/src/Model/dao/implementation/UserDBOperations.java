@@ -191,27 +191,13 @@ public class UserDBOperations {
                 @Override
                 public void run() {
                     try {
-
-                        //ClientView.mainStage.setWidth(885);
-                        //ClientView.mainStage.setHeight(720);
                          ClientView.mainStage.sizeToScene();
                         ClientView.mainStage.setMinHeight(400);
                        ClientView.mainStage.setMinWidth(600);
-                        /*ClientView.mainStage.setWidth(885);
-                            ClientView.mainStage.setHeight(720);*/
-                        //MainXMLController.setFriendList(items);
+                        ClientView.mainStage.setResizable(true);
                         Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
                         Scene scene = ClientView.mainStage.getScene();
-                        //root.translateYProperty().set(scene.getHeight());
-                        //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());            
-                        // ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
                         scene.setRoot(root);
-
-                        /*Timeline timeLine = new Timeline();
-                KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
-                KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
-                timeLine.getKeyFrames().add(kf);
-                timeLine.play();*/
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -247,13 +233,12 @@ public class UserDBOperations {
                 @Override
                 public void run() {
                     try {
-                        /*ClientView.mainStage.setWidth(885);
-                ClientView.mainStage.setHeight(720);*/
                         getFrinds(ClientView.currentUser);
                         System.out.println("Add Successfuly");
                         ClientView.mainStage.sizeToScene();
                         ClientView.mainStage.setMinHeight(400);
                         ClientView.mainStage.setMinWidth(600);
+                        ClientView.mainStage.setResizable(true);
                         Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
                         Scene scene = ClientView.mainStage.getScene();
                         scene.setRoot(root);
