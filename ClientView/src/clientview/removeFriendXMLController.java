@@ -65,9 +65,7 @@ public class removeFriendXMLController implements Initializable {
     }   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        
-        System.out.println("/n after function");
+        // TODO        
         showSuggestedCollaborators();
         
         
