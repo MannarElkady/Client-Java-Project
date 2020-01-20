@@ -259,16 +259,7 @@ public class TodoListDBOperations {
                 getAllItems(TodoFormXMLController.todo);
             } else {
                 TodoFormXMLController.todo = null;
-            }
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Collaborator Remove");
-                    alert.setContentText("Collaborator Removed Succsessfuly");
-                    alert.showAndWait();
-                }
-            });
+            }            
         }
     }
     

@@ -80,8 +80,13 @@ public class UserMenuGUI implements EventHandler<ActionEvent> {
 
         UserDBOperations.logout(ClientView.currentUser);
           try {
+              
+                ClientView.mainStage.setWidth(700);
+                ClientView.mainStage.setHeight(480);
+                ClientView.mainStage.setResizable(false);
                 Parent root = FXMLLoader.load(getClass().getResource("/clientview/authentication/loginXML.fxml"));
                 Scene scene = ClientView.mainStage.getScene();
+                
                 scene.setRoot(root);            
                 dialog.hide();
             } catch (IOException ex) {
