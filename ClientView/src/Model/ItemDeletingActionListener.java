@@ -6,9 +6,7 @@
 package Model;
 
 import Model.dao.implementation.ItemDBOperations;
-import Model.dao.implementation.TodoListDBOperations;
 import Model.entities.ItemEntity;
-import static clientview.TodoFormXMLController.todo;
 import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,7 +25,7 @@ public class ItemDeletingActionListener implements EventHandler<ActionEvent> {
     }
     @Override
     public void handle(ActionEvent event) {
-           Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("confirmation");
         alert.setContentText("Do you want to Delete  " + itemToDelete.getTitle().toUpperCase());
         ButtonType buttonYes = new ButtonType("Delete");
@@ -36,8 +34,7 @@ public class ItemDeletingActionListener implements EventHandler<ActionEvent> {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonYes) {
-        ItemDBOperations.deleteItem(itemToDelete);
-
+            ItemDBOperations.deleteItem(itemToDelete);
         }
     }
 }

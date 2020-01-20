@@ -5,6 +5,7 @@ import Model.entities.FriendsEntity;
 import Model.entities.ItemEntity;
 import Model.entities.NotificationEntity;
 import Model.entities.TodoEntity;
+import Model.entities.UserAssignedToItem;
 import Model.entities.UserEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -43,7 +44,10 @@ public class GsonParser {
                     } else if (request.contains("getItemCollaboratorsResonse")) {
                         requestType = new TypeToken<RequestEntity<UserEntity>>() {
                         }.getType();
-                    } else {
+                    }else if(request.contains("exitCollaboratorFromItem")){
+                        requestType = new TypeToken<RequestEntity<UserAssignedToItem>>() {
+                        }.getType();
+                    }else {
                         requestType = new TypeToken<RequestEntity<ItemEntity>>() {
                         }.getType();
                     }
@@ -64,10 +68,12 @@ public class GsonParser {
                         requestType = new TypeToken<RequestEntity<UserEntity>>() {
                         }.getType();
                     } else if(request.contains("removeCollaboratorResponse")){ 
-                         requestType = new TypeToken<RequestEntity<UserEntity>>() {
+                        requestType = new TypeToken<RequestEntity<UserEntity>>() {
                         }.getType();
-                    }
-                    else {
+                    }else if(request.contains("gotAllItemsCollaboratorsResponse")){
+                        requestType = new TypeToken<RequestEntity<UserAssignedToItem>>() {
+                        }.getType();
+                    }else {
                         requestType = new TypeToken<RequestEntity<TodoEntity>>() {
                         }.getType();
                     }

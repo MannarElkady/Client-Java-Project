@@ -77,7 +77,7 @@ public class TodoStatisticsController implements Initializable {
         // Create a StackedBarChart
         StackedBarChart<String, Number> barChart = new StackedBarChart<String, Number>(xAxis, yAxis);
         XYChart.Series<String, Number> dataSeries2 = new XYChart.Series<String, Number>();
-        dataSeries2.setName("UnCompleteTasks");
+        dataSeries2.setName("Tasks");
         for (int i = 0; i < TodoFormXMLController.itemList.size(); i++) {
             counter = 0;
             e = new ItemEntity();
@@ -93,8 +93,6 @@ public class TodoStatisticsController implements Initializable {
             }
             System.out.println("count" + counter);
             dataSeries2.getData().add(new XYChart.Data<String, Number>(e.getTitle(), counter));
-
-            barChart.setTitle("Some Programming Languages");
 
             // Add Series to StackedBarChart.
         }

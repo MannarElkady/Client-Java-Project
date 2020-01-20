@@ -37,6 +37,9 @@ public class Validation {
         } else if(todoDeadline.equals(todoASsign) &&todoDeadline.equals(taskDate)) {
             return true;
         }
+        else if(todoASsign.equals(taskDate)||todoDeadline.equals(taskDate)){
+            return true;
+        }
         return false;
     }
 
