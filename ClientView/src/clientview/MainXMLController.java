@@ -161,7 +161,7 @@ public class MainXMLController implements Initializable {
                 Logger.getLogger(MainXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-                    test2.clear();
+                //    test2.clear();
 
         
     }

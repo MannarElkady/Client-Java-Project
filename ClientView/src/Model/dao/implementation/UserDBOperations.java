@@ -120,30 +120,30 @@ public class UserDBOperations {
             MainXMLController.setTodos(items);
         }
 
-        Platform.runLater(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    Stage s = new Stage();
-                    ClientView.mainStage.sizeToScene();
-                    ClientView.mainStage.setMinHeight(400);
-                    ClientView.mainStage.setMinWidth(600);
-                    Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
-                    Scene scene = ClientView.mainStage.getScene();
-                    ClientView.mainStage.setResizable(true);
-                    scene.setRoot(root);
-
-                    /*Timeline timeLine = new Timeline();
-                KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
-                KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
-                timeLine.getKeyFrames().add(kf);
-                timeLine.play();*/
-                } catch (IOException ex) {
-                    Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
+//        Platform.runLater(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                try {
+//                    Stage s = new Stage();
+//                    ClientView.mainStage.sizeToScene();
+//                    ClientView.mainStage.setMinHeight(400);
+//                    ClientView.mainStage.setMinWidth(600);
+//                    Parent root = FXMLLoader.load(getClass().getResource("/clientview/mainXML.fxml"));
+//                    Scene scene = ClientView.mainStage.getScene();
+//                    ClientView.mainStage.setResizable(true);
+//                    scene.setRoot(root);
+//
+//                    /*Timeline timeLine = new Timeline();
+//                KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+//                KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+//                timeLine.getKeyFrames().add(kf);
+//                timeLine.play();*/
+//                } catch (IOException ex) {
+//                    Logger.getLogger(UserDBOperations.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        });
         getFrinds(ClientView.currentUser);
     }
 
@@ -161,7 +161,8 @@ public class UserDBOperations {
         } else {
             AddCollaboratorTodoController.setTodoFriendList(items);
 
-            if (AddCollaboratorTodoController.isAddCollaborator == false) {
+        }
+         if (AddCollaboratorTodoController.isAddCollaborator == false) {
 
                 Platform.runLater(new Runnable() {
 
@@ -215,8 +216,6 @@ public class UserDBOperations {
                 });
 
             }
-
-        }
     }
 
     public static void AddFrind(UserEntity user) {
