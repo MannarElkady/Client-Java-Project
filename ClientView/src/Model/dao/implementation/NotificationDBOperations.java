@@ -25,6 +25,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -111,7 +112,18 @@ public class NotificationDBOperations {
         if (value != null) {
             NotificationGUI.receiveNotificationTray();
         }
-        //when recieve notification tray
+        else{
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Response");
+                    alert.setHeaderText(null);
+                    alert.setContentText("please wait for friend response");
+                    alert.showAndWait();
+                }
+            });
+        }
     }
     
     public static void sendRejectionNotification(ArrayList<Object> value){

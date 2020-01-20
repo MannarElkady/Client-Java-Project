@@ -144,6 +144,7 @@ public class UserDBOperations {
                 }
             }
         });
+        getFrinds(ClientView.currentUser);
     }
 
     public static void getFrinds(UserEntity userID) {
@@ -309,7 +310,8 @@ public class UserDBOperations {
     public static void removeFriend(int currentUserID , int friendID){
         ArrayList<FriendsEntity> friendEntityList = new ArrayList<>();
         FriendsEntity friendEntity = new FriendsEntity(currentUserID, friendID);
-        RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "removeFriend", friendEntityList);
+        friendEntityList.add(friendEntity);
+        RequestEntity<FriendsEntity> request = new RequestEntity("UserDBOperations", "removeFriend", friendEntityList);
         Handler.sendRequestToServer(request);
     }
 
