@@ -115,40 +115,8 @@ public class TodoListDBOperations {
         } else {
             TodoFormXMLController.setItems(items);
         }
-//<<<<<<< HEAD
-        
-//=======
-//
-        Platform.runLater(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    ClientView.mainStage.sizeToScene();
-                    ClientView.mainStage.setMinHeight(785);
-                    ClientView.mainStage.setMinHeight(500);
-                    Parent root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
-                    Scene scene = ClientView.mainStage.getScene();
-                    //root.translateYProperty().set(scene.getHeight());
-                    //ClientView.mainStage.setWidth(ClientView.mainStage.getScene().getWidth());
-                    //ClientView.mainStage.setHeight(ClientView.mainStage.getScene().getHeight());
-                    scene.setRoot(root);
-
-                    /*Timeline timeLine = new Timeline();
-            KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
-            KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
-            timeLine.getKeyFrames().add(kf);
-            timeLine.play();*/
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            getTodoCollaborators(TodoFormXMLController.todo);
-            gotAllItemsCollaborators(TodoFormXMLController.todo);            }
-        });
-//        //ItemEntity item=new ItemEntity();
-//        //item.setItemID(6);
-//        //ItemDBOperations.getItemCollaborators(item);
-//>>>>>>> 630651b5d9dce9b617fec48fbe4f9a7ac43643d6
+        getTodoCollaborators(TodoFormXMLController.todo);
+        getAllItemsCollaborators(TodoFormXMLController.todo);
     }
 
     public static void getTodoCollaborators(TodoEntity todo) {
@@ -302,10 +270,10 @@ public class TodoListDBOperations {
         }
     }
     
-    public static void gotAllItemsCollaborators(TodoEntity todo) {
+    public static void getAllItemsCollaborators(TodoEntity todo) {
         ArrayList<TodoEntity> list = new ArrayList<>();
         list.add(todo);
-        RequestEntity<TodoEntity> addRequest = new RequestEntity("TodoListDBOperations", "gotAllItemsCollaborators", list);
+        RequestEntity<TodoEntity> addRequest = new RequestEntity("TodoListDBOperations", "getAllItemsCollaborators", list);
         Handler.sendRequestToServer(addRequest);
     }
 
