@@ -211,6 +211,7 @@ public class TodoListDBOperations {
                 }
             });
         } else {
+
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -218,21 +219,22 @@ public class TodoListDBOperations {
                     alert.setTitle("Todo Update");
                     alert.setContentText("Todo  Updated Successfully");
                     alert.showAndWait();
+                    try {
+                        TodoFormXMLController.setToDoData((TodoEntity) todoList.get(0));
+                        Parent root;
+                        ClientView.mainStage.sizeToScene();
+                        ClientView.mainStage.setMinWidth(785);
+                        ClientView.mainStage.setMinHeight(500);
+                        root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
+                        Scene scene = ClientView.mainStage.getScene();
+                        scene.setRoot(root);
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             });
-            TodoFormXMLController.setToDoData((TodoEntity) todoList.get(0));
-            Parent root;
-            try {
-                ClientView.mainStage.sizeToScene();
-                ClientView.mainStage.setMinWidth(785);
-                ClientView.mainStage.setMinHeight(500);
-                root = FXMLLoader.load(getClass().getResource("/clientview/TodoFormXML.fxml"));
-                Scene scene = ClientView.mainStage.getScene();
-                scene.setRoot(root);
 
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
         }
     }
 

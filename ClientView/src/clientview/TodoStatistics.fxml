@@ -12,6 +12,6 @@
       <Label layoutX="10.0" layoutY="56.0" prefHeight="23.0" prefWidth="134.0" text="Number of Collaborator" />
       <Label fx:id="TasksNumber" layoutX="144.0" layoutY="123.0" prefHeight="17.0" prefWidth="87.0" />
       <Label layoutX="10.0" layoutY="120.0" prefHeight="23.0" prefWidth="134.0" text="Number of Tasks" />
-      <VBox fx:id="statistcs" layoutX="61.0" layoutY="159.0" prefHeight="227.0" prefWidth="477.0" />
+      <VBox fx:id="statistcs" layoutX="15.0" layoutY="145.0" prefHeight="241.0" prefWidth="523.0" />
    </children>
 </Pane>

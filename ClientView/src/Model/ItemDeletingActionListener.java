@@ -27,7 +27,7 @@ public class ItemDeletingActionListener implements EventHandler<ActionEvent> {
     }
     @Override
     public void handle(ActionEvent event) {
-           Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("confirmation");
         alert.setContentText("Do you want to Delete  " + itemToDelete.getTitle().toUpperCase());
         ButtonType buttonYes = new ButtonType("Delete");
