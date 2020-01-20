@@ -71,6 +71,7 @@ public class AddCollaboratorTodoController implements Initializable {
     private void cancelButtonAction() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+        
     }
 
     public static void setTodoFriendList(ArrayList<UserEntity> a) {
