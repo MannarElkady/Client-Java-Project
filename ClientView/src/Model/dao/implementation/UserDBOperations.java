@@ -158,6 +158,8 @@ public class UserDBOperations {
         if (items == null || items.isEmpty()) {
 
         } else {
+            AddCollaboratorTodoController.setTodoFriendList(items);
+
             if (AddCollaboratorTodoController.isAddCollaborator == false) {
 
                 Platform.runLater(new Runnable() {
@@ -305,17 +307,17 @@ public class UserDBOperations {
             System.out.println("logout Ok");
         }
     }
-    
-    public static void removeFriend(int currentUserID , int friendID){
+
+    public static void removeFriend(int currentUserID, int friendID) {
         ArrayList<FriendsEntity> friendEntityList = new ArrayList<>();
         FriendsEntity friendEntity = new FriendsEntity(currentUserID, friendID);
         RequestEntity<UserEntity> request = new RequestEntity("UserDBOperations", "removeFriend", friendEntityList);
         Handler.sendRequestToServer(request);
     }
 
-    public void removeFriendResponse(ArrayList<Object> object){       
-         if (object == null || object.size() == 0) {
-             Platform.runLater(new Runnable() {
+    public void removeFriendResponse(ArrayList<Object> object) {
+        if (object == null || object.size() == 0) {
+            Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -326,7 +328,7 @@ public class UserDBOperations {
                 }
             });
         } else {
-             UserDBOperations.getAllTodos(ClientView.currentUser);            
+            UserDBOperations.getAllTodos(ClientView.currentUser);
         }
     }
 

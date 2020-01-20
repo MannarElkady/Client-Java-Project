@@ -144,7 +144,7 @@ public class MainXMLController implements Initializable {
 
     public void setFriendListPanes() {
         for (UserEntity useraya : test2) {
-            try {
+            try {             
                 child = new HBox();
                 img = new Image(new FileInputStream(System.getProperty("user.dir") + "/src/clientview/resources/m.png"));
                 imgView = new ImageView(img);
@@ -161,6 +161,9 @@ public class MainXMLController implements Initializable {
                 Logger.getLogger(MainXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+                    test2.clear();
+
+        
     }
 
     public void setTodoDummy() {
@@ -294,6 +297,7 @@ public class MainXMLController implements Initializable {
     }
      */
     public static void setFriendList(ArrayList<UserEntity> a) {
+        test2.clear();
         test2 = a;
     }
 
